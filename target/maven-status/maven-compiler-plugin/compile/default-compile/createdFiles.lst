@@ -1,7 +1,0 @@
-com\hpe\caf\languagedetection\LanguageDetectorException.class
-com\hpe\caf\languagedetection\Language.class
-com\hpe\caf\languagedetection\LanguageDetectorStatus.class
-com\hpe\caf\languagedetection\LanguageDetectorResult.class
-com\hpe\caf\languagedetection\LanguageDetectorSettings.class
-com\hpe\caf\languagedetection\LanguageDetector.class
-com\hpe\caf\languagedetection\LanguageDetectorProvider.class
