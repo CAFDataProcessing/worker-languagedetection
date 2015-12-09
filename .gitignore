@@ -1,0 +1,6 @@
+pom - Copy.xml
+*.iml
+**/dependency-reduced-pom.xml
+**/*.bak
+**/target/
+/target/
