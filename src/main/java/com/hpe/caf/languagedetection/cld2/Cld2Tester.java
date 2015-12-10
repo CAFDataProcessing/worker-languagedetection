@@ -41,36 +41,16 @@ public class Cld2Tester {
 
         /** setup bytes from text, and arrays which are passed by reference **/
         InputStream stream = new ByteArrayInputStream(textEnMa.getBytes());
+//        InputStream stream = null;
 
-//        LanguageDetectorSettings settings = new LanguageDetectorSettings(true, true, "", "", "");
-//        LanguageDetectorSettings settings = new LanguageDetectorSettings(true, true, "null", ""+Cld2Encoding.UNKNOWN_ENCODING, ""+Cld2Language.UNKNOWN_LANGUAGE);
-//        LanguageDetectorSettings settings = new LanguageDetectorSettings(true, true, "mi,en", ""+Cld2Encoding.UTF8, ""+Cld2Language.ENGLISH);
-//        LanguageDetectorSettings settings = new LanguageDetectorSettings(false, true, "mi,en", ""+Cld2Encoding.UTF8, ""+Cld2Language.ENGLISH);
-//        LanguageDetectorSettings settings = new LanguageDetectorSettings(false, true, "mi,en");
-        LanguageDetectorSettings settings = new LanguageDetectorSettings(true, true);
-//        settings.setDetectMultipleLanguages(true);
-//        settings.setHints("","","");
+        LanguageDetectorSettings settings = new LanguageDetectorSettings("TAMIL BI", true,"en", "it");
+//        LanguageDetectorSettings settings = new LanguageDetectorSettings(true,"en", "it");
 
         LanguageDetectorProvider provider = new Cld2DetectorProvider();
         LanguageDetector detector = provider.getLanguageDetector();
 
         LanguageDetectorResult result = detector.detectLanguage(stream, settings);
 
-//        int x;
-//        if(!result.isReliable())
-//            x = 0;
-//        else
-//            x = 1;
-
-
-//        Tika tika = new Tika();
-////        try(InputStream stream = )
-//
-//        LanguageIdentifier li = new LanguageIdentifier(textMix);
-//        li.getLanguage();
-//        li.isReasonablyCertain();
-
-//        Cld2Language lang = (Cld2Language)r.language3[0];
     }
 
 }

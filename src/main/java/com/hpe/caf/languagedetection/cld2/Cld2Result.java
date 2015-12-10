@@ -3,25 +3,13 @@ package com.hpe.caf.languagedetection.cld2;
 import java.util.ArrayList;
 
 /**
- * Created by smitcona on 03/12/2015.
- * // Inputs: text and text_length
- * //  Code skips HTML tags and expands HTML entities, unless
- * //  is_plain_text is true
- * // Outputs:
- * //  language3 is an array of the top 3 languages or UNKNOWN_LANGUAGE
- * //  percent3 is an array of the text percentages 0..100 of the top 3 languages
- * //  text_bytes is the amount of non-tag/letters-only text found
- * //  is_reliable set true if the returned Language is some amount more
- * //   probable then the second-best Language. Calculation is a complex function
- * //   of the length of the text and the different-script runs of text.
- * // Return value: the most likely Language for the majority of the input text
- * //  Length 0 input returns UNKNOWN_LANGUAGE. Very short indeterminate text
- * //  defaults to ENGLISH.
+ * Main result class of the Cld2 implementation of the language detector.
  */
 public class Cld2Result {
 
-
-    /** if isPlainText = false, detector will skip html tags, etc **/
+    /**
+     * plain text will be true for CAF
+     */
     private boolean isPlainText;
 
 
@@ -63,65 +51,83 @@ public class Cld2Result {
     private int flags;
 
 
-    /** arrays for output languages and percent confidence **/
+    /**
+     * array for the top 3 languages output by the detector
+     */
     private int[] language3;
+
+
+    /**
+     * array for the top 3 languages' percent confidences of being correct
+     */
     private int[] percent3;
 
 
-    /** output number of non-tag/letters-only text found **/
+    /**
+     * output number of non-tag/letters-only text found
+     */
     private int[] textBytes;
 
 
-    /** is_reliable set true if the returned Language is some amount more
+    /**
+     * is_reliable set true if the returned Language is some amount more
      * probable than the second-best Language. Calculation is a complex function
-     * of the length of the text and the different-script runs of text.**/
+     * of the length of the text and the different-script runs of text.
+     */
     private boolean[] isReliable;
 
 
-    /** The hints for detector **/
+    /**
+     * detector hint, such as "en" "en,it", ENGLISH
+     */
     private String tld_hint;
+
+
+    /**
+     * encoding hint, is from an encoding detector applied to an input
+     */
     private int encoding_hint;
+
+
+    /**
+     * integer values from Cld2Language. For CAF we will pass in tld_hint
+     */
     private int language_hint;
 
 
-    /** ArrayList of strings for language codes **/
+    /**
+     * Array containing the ISO 639-1 codes for the top three languages detected
+     */
     private String[] languageCodes;
+
+
+    /**
+     * array containing the full names for the top three languages detected e.g. "English" "French"
+     */
     private String[] languageNames;
 
 
-    public Cld2Result(boolean isPlainText, int flags){
-        this.isPlainText = isPlainText;
-        this.flags = flags;
+    /**
+     * constructor setting up default values.
+     * plaintext will be true for CAF
+     * flags default set to 0
+     * if there are no hints:
+     * tld_hint is required to be null,
+     * encoding_hint is required to be the integer value of UNKNOWN_ENCODING
+     * language_hint is required to be the integer value of UNKNOWN_LANGUAGE
+     */
+    public Cld2Result(){
+        this.isPlainText = true;
+        this.flags = 0;
         language3  = new int[3];
         percent3  = new int[3];
         textBytes  = new int[1];
         isReliable  = new boolean[1];
-        tld_hint = null;//what is tldhint and how many characters should it have?
-        encoding_hint = Cld2Encoding.UNKNOWN_ENCODING;
+        tld_hint = null;
+        encoding_hint = Cld2Encoding.UNKNOWN_ENCODING.getValue();
         language_hint = Cld2Language.UNKNOWN_LANGUAGE;
         languageCodes = new String[3];
         languageNames = new String[3];
-    }
-
-
-    public Cld2Result(){
-        this(true, 0);
-    }
-
-
-    public Cld2Result(String tld_hint, String encoding_hint, String language_hint){
-        this();
-        this.tld_hint = tld_hint;
-        this.encoding_hint = Integer.parseInt(encoding_hint);
-        this.language_hint = Integer.parseInt(language_hint);
-    }
-
-
-    public Cld2Result(boolean isPlainText, int flags, String tld_hint, int encoding_hint, int language_hint){
-        this(isPlainText,flags);
-        this.tld_hint = tld_hint;
-        this.encoding_hint = encoding_hint;
-        this.language_hint = language_hint;
     }
 
 
@@ -159,79 +165,99 @@ public class Cld2Result {
         return isPlainText;
     }
 
+
     public void setIsPlainText(boolean plainText) {
         isPlainText = plainText;
     }
+
 
     public int getFlags() {
         return flags;
     }
 
+
     public void setFlags(int flags) {
         this.flags = flags;
     }
+
 
     public int[] getLanguage3() {
         return language3;
     }
 
+
     public void setLanguage3(int[] language3) {
         this.language3 = language3;
     }
+
 
     public int[] getPercent3() {
         return percent3;
     }
 
+
     public void setPercent3(int[] percent3) {
         this.percent3 = percent3;
     }
+
 
     public int[] getTextBytes() {
         return textBytes;
     }
 
+
     public void setTextBytes(int[] textBytes) {
         this.textBytes = textBytes;
     }
+
 
     public boolean[] isReliable() {
         return isReliable;
     }
 
+
     public void setIsReliable(boolean[] isReliable) {
         this.isReliable = isReliable;
     }
+
 
     public String getTld_hint() {
         return tld_hint;
     }
 
+
     public void setTld_hint(String tld_hint) {
         this.tld_hint = tld_hint;
     }
+
 
     public int getEncoding_hint() {
         return encoding_hint;
     }
 
+
     public void setEncoding_hint(int encoding_hint) {
         this.encoding_hint = encoding_hint;
     }
+
 
     public int getLanguage_hint() {
         return language_hint;
     }
 
+
     public void setLanguage_hint(int language_hint) {
         this.language_hint = language_hint;
     }
+
 
     public void setLanguageCodes(String[] languageCodes) {
         this.languageCodes = languageCodes;
     }
 
+
     public void setLanguageNames(String[] languageNames) {
         this.languageNames = languageNames;
     }
+
 }

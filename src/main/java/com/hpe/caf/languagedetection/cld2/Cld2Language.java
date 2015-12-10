@@ -1,7 +1,8 @@
 package com.hpe.caf.languagedetection.cld2;
 
 /**
-* Created by smitcona on 02/12/2015.
+* Interface mapped to the CLD2 C++ Language Enum containing each language and its associated ordinal, which is used to
+ * get the language codes and names.
 */
 public interface Cld2Language{
     int ENGLISH = 0;
