@@ -1,7 +1,7 @@
 package com.hpe.caf.languagedetection;
 
 /**
- * Created by smitcona on 04/12/2015.
+ * Exception for Language Detection
  */
 public class LanguageDetectorException extends Exception {
 

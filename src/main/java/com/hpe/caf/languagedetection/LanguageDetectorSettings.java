@@ -1,9 +1,10 @@
 package com.hpe.caf.languagedetection;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Objects;
 
 /**
- * Created by smitcona on 04/12/2015.
+ * Settings defining behaviours of the detector, and including hints for more accurate detection
  */
 public class LanguageDetectorSettings{
 
@@ -14,40 +15,61 @@ public class LanguageDetectorSettings{
 
 
     /**
-     * boolean for whether the text is plain text, false if it contains html
+     * list of hints as strings to give detector a bias for more accurate detection results (optional)
+     * CLD2:
+     *  "mi,en" boosts Maori and English
+     *  "id" boosts Indonesian
+     *  SJS boosts Japanese
+     *  ITALIAN boosts it
      */
-    private boolean isPlainText;
+    private Iterable<String> hints;
 
 
     /**
-     * list of hints as strings to give detector a bias for more accurate detection results (optional)
-     * CLD2:
-     *  const char* tld_hint -- from the hostname of a URL
-     *  int encoding_hint -- from an encoding detector applied to the input document
-     *  Language language_hint -- from any other context you might have
-     * Conversion from string to appropriate type will be carried out in the implementation
+     * hint from an encoding detector applied to the input
+     * indicates likely encoding of the text
      */
-    private ArrayList<String> hints;
+    private String encodingHint;
 
 
     public LanguageDetectorSettings() {
-
+        //empty constructor for serialisation
     }
 
 
-    public LanguageDetectorSettings(boolean detectMultipleLanguages, boolean isPlainText, String... hints) {
-        this.hints = new ArrayList<String>();
-        setPlainText(detectMultipleLanguages);
-        setHints(hints);
-        setPlainText(isPlainText);
-    }
-
-
-    public LanguageDetectorSettings(boolean detectMultipleLanguages, boolean isPlainText) {
-        this.hints = new ArrayList<String>();
+    /**
+     * Constructors:
+     * if no encoding hint is passed in it defaults to ""
+     * if no hints are passed in it defaults to ""
+     * detectMultipleLanguages must be passed in
+     * @param encodingHint
+     * @param detectMultipleLanguages
+     * @param hints
+     */
+    public LanguageDetectorSettings(String encodingHint, boolean detectMultipleLanguages, String... hints) {
+        Objects.requireNonNull(encodingHint);
+        Objects.requireNonNull(hints);
+//        this.hints = new ArrayList<String>();//do you need this line?
         setDetectMultipleLanguages(detectMultipleLanguages);
-        setPlainText(isPlainText);
+        setHints(hints);
+        setEncodingHint(encodingHint);
     }
+
+
+    public LanguageDetectorSettings(boolean detectMultipleLanguages, String... hints) {
+        this("", detectMultipleLanguages, hints);
+    }
+
+
+    public LanguageDetectorSettings(String encodingHint, boolean detectMultipleLanguages) {
+        this(encodingHint, detectMultipleLanguages, "");
+    }
+
+
+    public LanguageDetectorSettings(boolean detectMultipleLanguages) {
+        this("", detectMultipleLanguages, "");
+    }
+
 
     public boolean isDetectMultipleLanguages() {
         return detectMultipleLanguages;
@@ -59,26 +81,22 @@ public class LanguageDetectorSettings{
     }
 
 
-    public ArrayList<String> getHints() {
+    public Iterable<String> getHints() {
         return hints;
     }
 
 
     public void setHints(String... hints) {
-        for(String s : hints){
-            this.hints.add(s);
-        }
+        this.hints = Arrays.asList(hints);
     }
 
 
-    public boolean isPlainText() {
-        return isPlainText;
+    public String getEncodingHint() {
+        return encodingHint;
     }
 
 
-    public void setPlainText(boolean plainText) {
-        isPlainText = plainText;
+    public void setEncodingHint(String encodingHint) {
+        this.encodingHint = encodingHint;
     }
-
-
 }
