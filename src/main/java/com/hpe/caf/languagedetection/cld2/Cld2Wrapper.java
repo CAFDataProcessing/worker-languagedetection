@@ -1,6 +1,5 @@
 package com.hpe.caf.languagedetection.cld2;
 
-import com.google.common.collect.Iterables;
 import com.hpe.caf.languagedetection.LanguageDetectorException;
 import com.hpe.caf.languagedetection.LanguageDetectorSettings;
 import com.sun.jna.Native;
@@ -35,7 +34,7 @@ public class Cld2Wrapper {
         Cld2Result cld2Result = new Cld2Result();
 
         /** HInts are put into tld_hint, encoding hint comes from settings **/
-        if(Iterables.size(settings.getHints()) > 0) {
+        if(!settings.getHints().isEmpty()) {
             cld2Result.setTld_hint(String.join(",",settings.getHints()));
         }
 

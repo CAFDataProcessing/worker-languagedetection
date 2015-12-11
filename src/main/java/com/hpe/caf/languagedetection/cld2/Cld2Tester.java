@@ -2,55 +2,74 @@ package com.hpe.caf.languagedetection.cld2;
 
 import com.hpe.caf.languagedetection.*;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * Created by smitcona on 30/11/2015.
  */
 public class Cld2Tester {
 
-    public static void main(String[] args) throws LanguageDetectorException {
+    public static void main(String[] args) throws LanguageDetectorException, IOException {
 
-        /** Set up strings for test with different langs **/
-        String text = "Hello, this is English. The paragraph must be more than 200 characters for the Cld2Library detection" +
-                " to work effectively. Therefore, I am writing some rubbish to fill out that 200 characters and will" +
-                " soon find out if the detection works correctly. Signed, Conal. ";
-
-        String textSpanish = "Hola, este es el español . El párrafo debe contener más de 200 caracteres para la detección " +
-                "Cld2Library para trabajar con eficacia. Por lo tanto, estoy escribiendo un poco de basura para llenar los 200 " +
-                "caracteres necesaria y pronto averiguar si la detección funciona correctamente. Firmado, Conal. ";
-
-        String textDutch = "Hallo, dit is Spaans. De paragraaf moet meer dan 200 tekens voor de Cld2Library detectie om " +
-                "effectief te werken . Daarom schrijf ik wat rommel nodig vul het 200 tekens en zal binnenkort te " +
-                "achterhalen of de detectie correct werkt . Ondertekend , Conal. ";
-
-        String textSwahili = "Hello, hii ni lugha ya Kihispaniola. Aya lazima wahusika zaidi ya 200 kwa Cld2Library kugundua" +
-                " kufanya kazi kwa ufanisi . Kwa hiyo mimi kuandika baadhi takataka kujaza wahusika 200 muhimu na hivi" +
-                " karibuni kujua kama kugundua kazi kwa usahihi . Saini , Conal. ";
-
-        String textMaori = "Ko te wahi o te kuputuhi i roto i te reo motuhake, e kore e whakahuatia e ahau rite ai tiwhaiwhai" +
-                " ai reira te pūoko ki te e taea ki te tiki ake te māmā tenei. Ka tāruatia te reira rite te faahitiraa i roto" +
-                " i tetahi atu kuputuhi. Ko kuputuhi mania reira.";
-
-        String textMix = text+textSpanish+textDutch+textSwahili;
-        String textEnMa = "This is a piece of text that includes a quotation of a different language inside it. The " +
-                "quotation will follow this line of code. \" "+textMaori +" \". The quotation is used by the eastern polynesian people " +
-                "of New Zealand closely related to cook islands. ";
+        /**
+         * Whether to return multiple languages or just the top language
+         */
+        boolean multiLang = true;
 
 
-        /** setup bytes from text, and arrays which are passed by reference **/
-        InputStream stream = new ByteArrayInputStream(textEnMa.getBytes());
-//        InputStream stream = null;
+        /**
+         * Pass in the filename from command line and it gets read in
+         * e.g. "C:\\Users\\smitcona\\Desktop\\emailGerman.txt"
+         */
+//        byte[] bytes = getAllData(args[0]);
+        byte[] bytes = Files.readAllBytes(Paths.get(args[0]));
 
-        LanguageDetectorSettings settings = new LanguageDetectorSettings("TAMIL BI", true,"en", "it");
-//        LanguageDetectorSettings settings = new LanguageDetectorSettings(true,"en", "it");
+        /**
+         * Settings file takes either:
+         * (multilang) -e.g. (true)
+         * (multilang, "hints") -e.g. (false, "ENGLISH")
+         * ("encoding", multilang, "hints") -e.g. ("utf8", true, "en", "fr")
+         */
+        LanguageDetectorSettings settings = new LanguageDetectorSettings(multiLang);
+//        LanguageDetectorSettings settings = new LanguageDetectorSettings(multiLang,"en", "it");
 
+
+        /**
+         * Provider to provide a detector implementation
+         */
         LanguageDetectorProvider provider = new Cld2DetectorProvider();
+
+
+        /**
+         * Detector implementation
+         */
         LanguageDetector detector = provider.getLanguageDetector();
 
-        LanguageDetectorResult result = detector.detectLanguage(stream, settings);
 
+        /**
+         * this is the final result from the language detection, and you pass in the bytes from the text file and settings
+         */
+        LanguageDetectorResult result = detector.detectLanguage(bytes, settings);
+
+
+        /**
+         * Get languages Collection into an array
+         */
+        DetectedLanguage[] d = result.getLanguages().toArray(new DetectedLanguage[result.getLanguages().size()]);
+
+
+        /**
+         * output the results
+         */
+        for(int i = 0; i< d.length; i++){
+            System.out.println("" +i +": " +d[i].getLanguageCode());
+            System.out.println("" +i +": " +d[i].getLanguageName());
+            System.out.println("" +i +": " +d[i].getConfidencePercentage());
+        }
     }
+
+
 
 }

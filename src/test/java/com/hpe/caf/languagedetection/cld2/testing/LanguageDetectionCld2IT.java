@@ -2,89 +2,245 @@ package com.hpe.caf.languagedetection.cld2.testing;
 
 import com.google.common.io.ByteStreams;
 import com.hpe.caf.languagedetection.*;
-import com.hpe.caf.languagedetection.cld2.Cld2Detector;
 import com.hpe.caf.languagedetection.cld2.Cld2DetectorProvider;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.file.Path;
+import java.nio.charset.StandardCharsets;
 
 /**
- * Created by smitcona on 08/12/2015.
+ * CLD2 Language detection integration test
  */
 public class LanguageDetectionCld2IT {
 
-    private Path inputPath;
     private String filename;
-    private String filepath;
     private LanguageDetectorProvider provider;
     private LanguageDetector detector;
     private LanguageDetectorResult result;
     private LanguageDetectorSettings settings;
     private boolean multiLang;
-    private FileInputStream fileInputStream;
+
 
     public LanguageDetectionCld2IT(){
 
     }
 
+
+    /**
+     * Set up the provider and detector
+     * @throws LanguageDetectorException
+     */
     @Before
-    public void setup(){
+    public void setup() throws LanguageDetectorException {
         provider = new Cld2DetectorProvider();
-        detector = new Cld2Detector();
+        detector = provider.getLanguageDetector();
     }
 
+
+    /**
+     * Test text with single language detection. Assert expected results
+     * @throws LanguageDetectorException
+     * @throws IOException
+     */
     @Test
-    public void testSingleLanguageHTML() throws LanguageDetectorException, IOException {
+    public void testSingleLanguage() throws LanguageDetectorException, IOException {
         multiLang = false;
 
-//        filepath = "C\\Workspace\\language-detection-cld2\\test\\resources\\";
-        filename = "holahtml.txt";
+        filename = "emailGerman.txt";
 
-//        byte[] bytes = getData(filename);
+        byte[] bytes = getAllData(filename);
 
-//        settings = new LanguageDetectorSettings(multiLang);
+        settings = new LanguageDetectorSettings("utf-8", multiLang, "de");
 
-//        result = detector.detectLanguage(bytes, settings);
+        result = detector.detectLanguage(bytes, settings);
 
-//        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
-//        Assert.assertTrue(result.isReliable());
-//        Assert.assertEquals(1, result.getLanguages().size());
-//        Assert.assertEquals("SPANISH", result.getLanguages().get(0));
+        DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
+
+        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
+        Assert.assertTrue(result.isReliable());//German is the main language here with a much higher percentage therefore result should be reliable
+        Assert.assertEquals(1, result.getLanguages().size());
+
+        Assert.assertEquals("de", arr[0].getLanguageCode());
+        Assert.assertEquals("GERMAN", arr[0].getLanguageName());
 
     }
 
+
+    /**
+     * Test text file with multiple languages (3) and assert expected values
+     * @throws LanguageDetectorException
+     * @throws IOException
+     */
     @Test
     public void testMultiLanguage() throws LanguageDetectorException, IOException {
+        multiLang = true;
+        String[] testCodes = {"de", "es", "en"};
+        String[] testNames = { "GERMAN", "SPANISH","ENGLISH"};
+
+        filename = "extractEnEsDe.txt";
+
+        byte[] bytes = getAllData(filename);
+
+        settings = new LanguageDetectorSettings(multiLang);
+
+        result = detector.detectLanguage(bytes, settings);
+
+        DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[3]);
+
+        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
+        Assert.assertTrue(!result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
+        Assert.assertEquals(3, result.getLanguages().size());
+
+        for(int i=0; i<3; i++) {
+            Assert.assertEquals(testCodes[i], arr[i].getLanguageCode());
+            Assert.assertEquals(testNames[i], arr[i].getLanguageName());
+        }
+    }
+
+
+    /**
+     * Test result obtained from short text with one language. Assert expected values.
+     * @throws LanguageDetectorException
+     * @throws IOException
+     */
+    @Test
+    public void testSingleLanguageShortText() throws LanguageDetectorException, IOException {
         multiLang = false;
 
-//        filepath = "C\\Workspace\\language-detection-cld2\\test\\resources\\";
-        filename = "holahtml.txt";
+        filename = "extractNLShort.txt";
 
-//        byte[] bytes = getData(filename);
+        byte[] bytes = getAllData(filename);
 
-//        settings = new LanguageDetectorSettings(multiLang);
+        settings = new LanguageDetectorSettings(multiLang, "nl");
 
-//        result = detector.detectLanguage(bytes, settings);
+        result = detector.detectLanguage(bytes, settings);
 
-//        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
-//        Assert.assertTrue(result.isReliable());
-//        Assert.assertEquals(1, result.getLanguages().size());
-//        Assert.assertEquals("SPANISH", result.getLanguages().get(0));
+        DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
+
+        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
+//        Assert.assertFalse(result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
+        Assert.assertEquals(1, result.getLanguages().size());
+
+        Assert.assertEquals("nl", arr[0].getLanguageCode());
+        Assert.assertEquals("DUTCH", arr[0].getLanguageName());
+
 
     }
 
-    private byte[] getData(final String name)
-            throws IOException
-    {
-        try ( InputStream stream = this.getClass().getResourceAsStream(name) ) {
-            return ByteStreams.toByteArray(stream);
-        } catch(IOException e){
+
+    /**
+     * Fail test on gibberish text of no language. Assert the results indicate unknown language
+     * @throws LanguageDetectorException
+     * @throws IOException
+     */
+    @Test
+    public void testMultipleLanguageGibberish() throws LanguageDetectorException, IOException {
+        multiLang = true;
+
+        filename = "extractGibberish.txt";
+
+        byte[] bytes = getAllData(filename);
+
+        settings = new LanguageDetectorSettings(multiLang);
+
+        result = detector.detectLanguage(bytes, settings);
+
+        DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[3]);
+
+        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
+        Assert.assertFalse(result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
+        Assert.assertEquals(3, result.getLanguages().size());
+
+        for(int i=0; i<3; i++) {
+            Assert.assertEquals("un", arr[i].getLanguageCode());
+            Assert.assertEquals("Unknown", arr[i].getLanguageName());
         }
-        return null;
+    }
+
+
+    /**
+     * test a text file with ASCII encoded text which is not supported.
+     * According to CLD2 all text should be utf-8
+     * @throws LanguageDetectorException
+     * @throws IOException
+     */
+    @Test
+    public void testLanguageASCII() throws LanguageDetectorException, IOException {
+        multiLang = false;
+
+        filename = "textASCII.txt";
+
+        String text = "This is a piece of text which will be converted to Ascii seven bit " +
+                "or else iso 8859 using java charsets. the resultant bytes will then be " +
+                "fed back to the detector.";
+
+//        byte[] bytes = getAllData(filename);
+        byte[] bytes = text.getBytes(StandardCharsets.US_ASCII);
+
+        settings = new LanguageDetectorSettings(multiLang);
+
+        result = detector.detectLanguage(bytes, settings);
+
+        DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
+
+        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
+        Assert.assertTrue(result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
+        Assert.assertEquals(1, result.getLanguages().size());
+
+        Assert.assertEquals("en", arr[0].getLanguageCode());
+        Assert.assertEquals("ENGLISH", arr[0].getLanguageName());
+    }
+
+
+    /**
+     * test a text file with ISO-8859-1 encoded text which is not supported.
+     * According to CLD2 all text should be utf-8
+     * @throws LanguageDetectorException
+     * @throws IOException
+     */
+    @Test
+    public void testLanguageISO_8859_1() throws LanguageDetectorException, IOException {
+        multiLang = false;
+
+        filename = "textISO_8859_1.txt";
+
+        String text = "This is a piece of text which will be converted to Ascii seven bit " +
+                "or else iso 8859 using java charsets. the resultant bytes will then be " +
+                "fed back to the detector.";
+
+//        byte[] bytes = getAllData(filename);
+        byte[] bytes = text.getBytes(StandardCharsets.ISO_8859_1);
+
+        settings = new LanguageDetectorSettings(multiLang);
+
+        result = detector.detectLanguage(bytes, settings);
+
+        DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
+
+        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
+        Assert.assertTrue(result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
+        Assert.assertEquals(1, result.getLanguages().size());
+
+        Assert.assertEquals("en", arr[0].getLanguageCode());
+        Assert.assertEquals("ENGLISH", arr[0].getLanguageName());
+    }
+
+
+    /**
+     * Read in an entire file into a byte array
+     * @param name
+     * @return
+     * @throws IOException
+     */
+    private byte[] getAllData(final String name) throws IOException, LanguageDetectorException {
+        try ( InputStream stream = this.getClass().getClassLoader().getResourceAsStream(name) ) {
+            return ByteStreams.toByteArray(stream);
+        } catch(IOException|NullPointerException e){
+            throw new LanguageDetectorException("File could not be converted to byte array. Invalid filename: " +name);
+        }
     }
 
 }
