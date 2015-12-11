@@ -1,6 +1,7 @@
 package com.hpe.caf.languagedetection;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -22,7 +23,7 @@ public class LanguageDetectorSettings{
      *  SJS boosts Japanese
      *  ITALIAN boosts it
      */
-    private Iterable<String> hints;
+    private Collection<String> hints;
 
 
     /**
@@ -81,7 +82,7 @@ public class LanguageDetectorSettings{
     }
 
 
-    public Iterable<String> getHints() {
+    public Collection<String> getHints() {
         return hints;
     }
 

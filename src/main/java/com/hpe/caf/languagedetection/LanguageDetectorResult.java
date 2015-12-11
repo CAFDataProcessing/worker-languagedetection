@@ -1,5 +1,6 @@
 package com.hpe.caf.languagedetection;
 
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -17,7 +18,7 @@ public class LanguageDetectorResult {
     /**
      * List of languages obtained through detection
      */
-    private Iterable<DetectedLanguage> languages;
+    private Collection<DetectedLanguage> languages;
 
 
     /**
@@ -48,12 +49,12 @@ public class LanguageDetectorResult {
     }
 
 
-    public Iterable<DetectedLanguage> getLanguages() {
+    public Collection<DetectedLanguage> getLanguages() {
         return languages;
     }
 
 
-    public void setLanguages(Iterable<DetectedLanguage> languages) {
+    public void setLanguages(Collection<DetectedLanguage> languages) {
         this.languages = languages;
     }
 
