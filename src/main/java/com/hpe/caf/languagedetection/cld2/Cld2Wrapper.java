@@ -3,6 +3,7 @@ package com.hpe.caf.languagedetection.cld2;
 import com.hpe.caf.languagedetection.LanguageDetectorException;
 import com.hpe.caf.languagedetection.LanguageDetectorSettings;
 import com.sun.jna.Native;
+import com.sun.jna.Platform;
 
 /**
  * Wrapper for the CLD2 library
@@ -18,8 +19,13 @@ public class Cld2Wrapper {
     /**
      * Using JNA to load the libcld2 library and use the cld2Library object as an access point
      */
-    public Cld2Wrapper(){
-        cld2Library = (Cld2Library) Native.loadLibrary("libcld2", Cld2Library.class);
+    public Cld2Wrapper() {
+        System.setProperty("jna.library.path", System.getProperty("cld2.location", System.getenv("cld2.location")));
+
+        System.out.println("Library location: " + System.getProperty("jna.library.path"));
+
+        cld2Library = (Cld2Library) Native.loadLibrary((Platform.isWindows() ? "libcld2.dll" : "libcld2.so"), Cld2Library.class);
+//        cld2Library = (Cld2Library) Native.loadLibrary("libcld2", Cld2Library.class);
     }
 
 
@@ -48,7 +54,7 @@ public class Cld2Wrapper {
             return cld2Result;
         }
         catch (Throwable e){
-            throw new LanguageDetectorException("Language detection failed. ", e);
+            throw new LanguageDetectorException("Language detection failed.\n", e);
         }
     }
 

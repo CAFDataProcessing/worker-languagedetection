@@ -1,5 +1,7 @@
 package com.hpe.caf.languagedetection.cld2;
 
+import java.util.HashSet;
+
 /**
  * Interface mapped to C++ Encoding Enum containing encodings and associated ordinals
  */
@@ -110,19 +112,43 @@ public enum Cld2Encoding {
      * @return
      */
     public static int getValueFromString(String code){
-        try {
+        if(contains(code))
             return Cld2Encoding.valueOf(code).getValue();
-        } catch(IllegalArgumentException e) {
-            if (code.equalsIgnoreCase("utf8") || code.equalsIgnoreCase("utf-8")) {
-                return Cld2Encoding.UTF8.getValue();
-            } else if (code.equalsIgnoreCase("ascii") || code.equalsIgnoreCase("ascii-7") || code.equalsIgnoreCase("ascii_7bit") || code.equalsIgnoreCase("ascii_7_bit")) {
-                return Cld2Encoding.ASCII_7BIT.getValue();
-            } else if(code.equalsIgnoreCase("iso-8859-1") || code.equalsIgnoreCase("iso_8859-1") || code.equalsIgnoreCase("iso_8859_1")){
-                return Cld2Encoding.ISO_8859_1.getValue();
-            } else {
-                return Cld2Encoding.UNKNOWN_ENCODING.getValue();
-            }
+
+        switch(code){
+            case "utf8":                return Cld2Encoding.UTF8.getValue();
+            case "ascii_7bit":          return Cld2Encoding.ASCII_7BIT.getValue();
+            case "iso_8859_1":          return Cld2Encoding.ISO_8859_1.getValue();
+            case "iso_8859_2":          return Cld2Encoding.ISO_8859_2.getValue();
+            case "iso_8859_3":          return Cld2Encoding.ISO_8859_3.getValue();
+            case "hz_gb_2312":          return Cld2Encoding.HZ_GB_2312.getValue();
+            case "msft_cp1252":         return Cld2Encoding.MSFT_CP1252.getValue();
+            case "msft_cp1250":         return Cld2Encoding.MSFT_CP1250.getValue();
+            case "msft_cp1256":         return Cld2Encoding.MSFT_CP1256.getValue();
+            case "japanese_shift_jis":  return Cld2Encoding.JAPANESE_SHIFT_JIS.getValue();
+            case "korean_euc_kr":       return Cld2Encoding.KOREAN_EUC_KR.getValue();
+            default:                    return Cld2Encoding.UNKNOWN_ENCODING.getValue();
         }
+
     }
 
+
+    public static boolean contains(String text) {
+        for (Cld2Encoding c : Cld2Encoding.values()) {
+            if (c.name().equals(text)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    public static HashSet<String> getEnums() {
+        HashSet<String> values = new HashSet<String>();
+
+        for (Cld2Encoding c : Cld2Encoding.values()) {
+            values.add(c.name());
+        }
+        return values;
+    }
 }
