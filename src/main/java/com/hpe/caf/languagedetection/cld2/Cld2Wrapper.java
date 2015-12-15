@@ -20,11 +20,12 @@ public class Cld2Wrapper {
      * Using JNA to load the libcld2 library and use the cld2Library object as an access point
      */
     public Cld2Wrapper() {
+
         System.setProperty("jna.library.path", System.getProperty("cld2.location", System.getenv("cld2.location")));
 
         System.out.println("Library location: " + System.getProperty("jna.library.path"));
 
-        cld2Library = (Cld2Library) Native.loadLibrary((Platform.isWindows() ? "libcld2.dll" : "libcld2.so"), Cld2Library.class);
+        cld2Library = (Cld2Library) Native.loadLibrary((Platform.isWindows() ? "win64/libcld2.dll" : "linux/libcld2.so"), Cld2Library.class);
 //        cld2Library = (Cld2Library) Native.loadLibrary("libcld2", Cld2Library.class);
     }
 
@@ -39,7 +40,6 @@ public class Cld2Wrapper {
     public Cld2Result detectLanguageSummaryWithHints(byte[] inputBytes, LanguageDetectorSettings settings) throws LanguageDetectorException {
         Cld2Result cld2Result = new Cld2Result();
 
-        /** HInts are put into tld_hint, encoding hint comes from settings **/
         if(!settings.getHints().isEmpty()) {
             cld2Result.setTld_hint(String.join(",",settings.getHints()));
         }
@@ -47,8 +47,13 @@ public class Cld2Wrapper {
         cld2Result.setEncoding_hint(Cld2Encoding.getValueFromString(settings.getEncodingHint()));
 
         try {
-            cld2Library.DetectLanguageSummaryWithHints(inputBytes, inputBytes.length, true, cld2Result.getTld_hint(),
+            int result = cld2Library.DetectLanguageSummaryWithHints(inputBytes, inputBytes.length, true, cld2Result.getTld_hint(),
                     cld2Result.getEncoding_hint(), cld2Result.getLanguage_hint(), cld2Result.getLanguage3(), cld2Result.getPercent3(), cld2Result.getTextBytes(), cld2Result.isReliable());
+
+            if(result==Cld2Language.UNKNOWN_LANGUAGE && !cld2Result.isReliable()[0]){
+                cld2Result.setValid(false);
+            }
+
             cld2Result.setLanguageCodes(getLanguageCodes(cld2Result.getLanguage3()));
             cld2Result.setLanguageNames(getLanguageNames(cld2Result.getLanguage3()));
             return cld2Result;
@@ -86,53 +91,5 @@ public class Cld2Wrapper {
         }
         return names;
     }
-
-
-//    public Cld2Result detectLanguageCheckUTF8(InputStream stream) throws LanguageDetectorException {
-//        try {
-////            String text = IOUtils.toString(stream, StandardCharsets.UTF_8);
-//            byte[] b = IOUtils.toByteArray(stream);
-//            stream.read(b);
-//            primaryLang = cld2Library.DetectLanguageCheckUTF8(b, b.length, result.isPlainText(), result.isReliable(), result.getTextBytes());
-//            getLanguageCodes();
-//            getLanguageNames();
-//            return result;
-//        }
-//        catch (Throwable e){
-//            throw new LanguageDetectorException("Language detection failed. ", e);
-//        }
-//    }
-//
-
-//    public Cld2Result detectLanguageSummary(InputStream stream) throws LanguageDetectorException {
-//        try {
-//            byte[] b = IOUtils.toByteArray(stream);
-//            stream.read(b);
-//            primaryLang = cld2Library.DetectLanguageSummary(b, b.length, result.isPlainText(), result.getLanguage3(),
-//                    result.getPercent3(), result.getTextBytes(), result.isReliable());
-//            getLanguageCodes();
-//            getLanguageNames();
-//            return result;
-//        }
-//        catch (Throwable e){
-//            throw new LanguageDetectorException("Language detection failed. ", e);
-//        }
-//    }
-
-
-//    public Cld2Result detectLanguage(InputStream stream) throws LanguageDetectorException {
-//        try {
-//            /** for now, just read entire inputstream into a byte array **/
-//            byte[] b = IOUtils.toByteArray(stream);
-//            stream.read(b);
-//            primaryLang = cld2Library.DetectLanguage(b, b.length, result.isPlainText(), result.isReliable());
-//            getLanguageCodes();
-//            getLanguageNames();
-//            return result;
-//        }
-//        catch (Throwable e){
-//            throw new LanguageDetectorException("Language detection failed. ", e);
-//        }
-//    }
 
 }

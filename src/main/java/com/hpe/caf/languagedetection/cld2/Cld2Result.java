@@ -107,6 +107,8 @@ public class Cld2Result {
     private String[] languageNames;
 
 
+    private boolean valid;
+
     /**
      * constructor setting up default values.
      * plaintext will be true for CAF
@@ -119,7 +121,7 @@ public class Cld2Result {
     public Cld2Result(){
         this.isPlainText = true;
         this.flags = 0;
-        language3  = new int[3];
+        language3  = new int[]{Cld2Language.UNKNOWN_LANGUAGE, Cld2Language.UNKNOWN_LANGUAGE, Cld2Language.UNKNOWN_LANGUAGE};
         percent3  = new int[3];
         textBytes  = new int[1];
         isReliable  = new boolean[1];
@@ -128,6 +130,7 @@ public class Cld2Result {
         language_hint = Cld2Language.UNKNOWN_LANGUAGE;
         languageCodes = new String[3];
         languageNames = new String[3];
+        valid = true;
     }
 
 
@@ -260,4 +263,12 @@ public class Cld2Result {
         this.languageNames = languageNames;
     }
 
+
+    public boolean isValid() {
+        return valid;
+    }
+
+    public void setValid(boolean valid) {
+        this.valid = valid;
+    }
 }

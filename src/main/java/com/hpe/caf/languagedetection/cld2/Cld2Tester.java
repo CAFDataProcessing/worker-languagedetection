@@ -54,20 +54,25 @@ public class Cld2Tester {
         LanguageDetectorResult result = detector.detectLanguage(bytes, settings);
 
 
-        /**
-         * Get languages Collection into an array
-         */
         DetectedLanguage[] d = result.getLanguages().toArray(new DetectedLanguage[result.getLanguages().size()]);
 
 
         /**
          * output the results
          */
-        for(int i = 0; i< d.length; i++){
-            System.out.println("" +i +": " +d[i].getLanguageCode());
-            System.out.println("" +i +": " +d[i].getLanguageName());
-            System.out.println("" +i +": " +d[i].getConfidencePercentage());
+        for (int i = 0; i < d.length; i++) {
+            System.out.println("" + i + ": " + d[i].getLanguageCode());
+            System.out.println("" + i + ": " + d[i].getLanguageName());
+            System.out.println("" + i + ": " + d[i].getConfidencePercentage());
         }
+
+        /**
+         * Get languages Collection into an array
+         */
+//        if(result.getLanguageDetectorStatus()==LanguageDetectorStatus.COMPLETED) {
+//        } else {
+//            System.out.println("Language detection failed. Make sure supplied text file encoding is UTF-8. \n");
+//        }
     }
 
 

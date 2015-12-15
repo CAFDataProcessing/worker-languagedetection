@@ -46,8 +46,12 @@ public class Cld2Detector implements LanguageDetector {
             }
 
             languageDetectorResult.setLanguages(languages);
-            languageDetectorResult.setLanguageDetectorStatus(LanguageDetectorStatus.COMPLETED);
             languageDetectorResult.setReliable(resultCLD2.isReliable()[0]);
+
+            if(resultCLD2.isValid())
+                languageDetectorResult.setLanguageDetectorStatus(LanguageDetectorStatus.COMPLETED);
+            else
+                languageDetectorResult.setLanguageDetectorStatus(LanguageDetectorStatus.FAILED);
 
         } catch (LanguageDetectorException e){
             languageDetectorResult.setLanguageDetectorStatus(LanguageDetectorStatus.FAILED);

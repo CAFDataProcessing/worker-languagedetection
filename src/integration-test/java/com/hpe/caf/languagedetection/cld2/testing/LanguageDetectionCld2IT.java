@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 /**
  * CLD2 Language detection integration test
@@ -150,7 +149,7 @@ public class LanguageDetectionCld2IT {
 
         DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[3]);
 
-        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
+        Assert.assertEquals(LanguageDetectorStatus.FAILED, result.getLanguageDetectorStatus());
         Assert.assertFalse(result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
         Assert.assertEquals(3, result.getLanguages().size());
 
@@ -162,23 +161,18 @@ public class LanguageDetectionCld2IT {
 
 
     /**
-     * test a text file with ASCII encoded text which is not supported.
+     * test a text file with UCS-2 LE BOM encoded text which is not supported.
      * According to CLD2 all text should be utf-8
      * @throws LanguageDetectorException
      * @throws IOException
      */
     @Test
-    public void testLanguageASCII() throws LanguageDetectorException, IOException {
+    public void testLanguageUCS2() throws LanguageDetectorException, IOException {
         multiLang = false;
 
-        filename = "textASCII.txt";
+        filename = "greekUCS2.txt";
 
-        String text = "This is a piece of text which will be converted to Ascii seven bit " +
-                "or else iso 8859 using java charsets. the resultant bytes will then be " +
-                "fed back to the detector.";
-
-//        byte[] bytes = getAllData(filename);
-        byte[] bytes = text.getBytes(StandardCharsets.US_ASCII);
+        byte[] bytes = getAllData(filename);
 
         settings = new LanguageDetectorSettings(multiLang);
 
@@ -186,47 +180,9 @@ public class LanguageDetectionCld2IT {
 
         DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
 
-        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
-        Assert.assertTrue(result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
-        Assert.assertEquals(1, result.getLanguages().size());
-
-        Assert.assertEquals("en", arr[0].getLanguageCode());
-        Assert.assertEquals("ENGLISH", arr[0].getLanguageName());
+        Assert.assertEquals(LanguageDetectorStatus.FAILED, result.getLanguageDetectorStatus());
     }
 
-
-    /**
-     * test a text file with ISO-8859-1 encoded text which is not supported.
-     * According to CLD2 all text should be utf-8
-     * @throws LanguageDetectorException
-     * @throws IOException
-     */
-    @Test
-    public void testLanguageISO_8859_1() throws LanguageDetectorException, IOException {
-        multiLang = false;
-
-        filename = "textISO_8859_1.txt";
-
-        String text = "This is a piece of text which will be converted to Ascii seven bit " +
-                "or else iso 8859 using java charsets. the resultant bytes will then be " +
-                "fed back to the detector.";
-
-//        byte[] bytes = getAllData(filename);
-        byte[] bytes = text.getBytes(StandardCharsets.ISO_8859_1);
-
-        settings = new LanguageDetectorSettings(multiLang);
-
-        result = detector.detectLanguage(bytes, settings);
-
-        DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
-
-        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
-        Assert.assertTrue(result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
-        Assert.assertEquals(1, result.getLanguages().size());
-
-        Assert.assertEquals("en", arr[0].getLanguageCode());
-        Assert.assertEquals("ENGLISH", arr[0].getLanguageName());
-    }
 
 
     /**

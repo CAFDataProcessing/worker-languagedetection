@@ -6,35 +6,6 @@ import com.sun.jna.Library;
  * JNA Interface to access the C++ CLD2 methods
  */
 public interface Cld2Library extends Library {
-
-    int DetectLanguage(
-            byte[] buffer,
-            int buffer_length,
-            boolean is_plain_text,
-            boolean[] is_reliable
-    );
-
-
-    int DetectLanguageCheckUTF8(
-            byte[] buffer,
-            int buffer_length,
-            boolean is_plain_text,
-            boolean[] is_reliable,
-            int[] valid_prefix_bytes
-    );
-
-
-    int DetectLanguageSummary(
-            byte[] buffer,
-            int buffer_length,
-            boolean is_plain_text,
-            int[] language3,
-            int[] percent3,
-            int[] text_bytes,
-            boolean[] is_reliable
-    );
-
-
     /**
      * this is the method used in CLD2 to detect the language, passing in the hints and
      * references (as java arrays) of the text buffer, language3, percent3, text_bytes and is_reliable fields
