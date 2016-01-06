@@ -16,7 +16,6 @@
 
     <build>
         <plugins>
-
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${maven.failsafe.version}</version>
@@ -59,7 +58,6 @@
         </plugins>
     </build>
 
-
     <dependencies>
         <dependency>
             <groupId>com.hpe.caf</groupId>
@@ -80,4 +78,10 @@
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
+
+    <ciManagement>
+        <system>hudson</system>
+        <url>http://cafbuilder.hpswlabs.hp.com:8080/job/language-detection-cld2/</url>
+    </ciManagement>
+
 </project>
