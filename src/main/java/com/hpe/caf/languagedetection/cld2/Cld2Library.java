@@ -23,10 +23,10 @@ public interface Cld2Library extends Library {
      *
      * @return integer value for language corresponding to value in Cld2Language.
      *
-     * @Output language3 array contains the top three languages found
-     * @Output percent3 array contains the confidence for each of the top three languages found, that they are correct
-     * @Output text_bytes array contains the amount of non-tag/letters-only text found
-     * @Output is_reliable, which is set true if the returned language is some amount more probable than the second best
+     * language3 array contains the top three languages found
+     * percent3 array contains the confidence for each of the top three languages found, that they are correct
+     * text_bytes array contains the amount of non-tag/letters-only text found
+     * is_reliable, which is set true if the returned language is some amount more probable than the second best
      * language. Calculation is a complex function of the length of the text and the different-script runs of text.
      */
     int DetectLanguageSummaryWithHints(
