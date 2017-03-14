@@ -1,0 +1,7 @@
+{
+    "prefetchBuffer": 1000,
+    "inputQueue": "LanguageDetectionWorker-input-1",
+    "retryQueue": "LanguageDetectionWorker-input-1",
+    "rejectedQueue": "LanguageDetectionWorker-rejected-1",
+    "retryLimit": 2
+}

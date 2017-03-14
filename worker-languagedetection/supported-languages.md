@@ -1,0 +1,124 @@
+## Supported Languages
+
+These 83 languages are detected: 
+
+- Afrikaans 
+- Albanian 
+- Arabic 
+- Armenian 
+- Azerbaijani 
+- Basque 
+- Belarusian 
+- Bengali 
+- Bihari 
+- Bulgarian 
+- Catalan 
+- Cebuano 
+- Cherokee 
+- Croatian 
+- Czech 
+- Chinese 
+- Chinese_T 
+- Danish 
+- Dhivehi 
+- Dutch 
+- English 
+- Estonian 
+- Finnish 
+- French 
+- Galician 
+- Ganda 
+- Georgian 
+- German 
+- Greek 
+- Gujarati 
+- Haitian_Creole 
+- Hebrew 
+- Hindi 
+- Hmong 
+- Hungarian 
+- Icelandic 
+- Indonesian 
+- Inuktitut 
+- Irish 
+- Italian 
+- Javanese 
+- Japanese 
+- Kannada 
+- Khmer 
+- Kinyarwanda 
+- Korean 
+- Laothian 
+- Latvian 
+- Limbu 
+- Lithuanian 
+- Macedonian 
+- Malay 
+- Malayalam 
+- Maltese 
+- Marathi 
+- Nepali 
+- Norwegian 
+- Oriya 
+- Persian 
+- Polish 
+- Portuguese 
+- Punjabi 
+- Romanian 
+- Russian 
+- Scots_Gaelic 
+- Serbian 
+- Sinhalese 
+- Slovak 
+- Slovenian 
+- Spanish 
+- Swahili 
+- Swedish 
+- Syriac 
+- Tagalog 
+- Tamil 
+- Telugu 
+- Thai 
+- Turkish
+- Ukrainian 
+- Urdu 
+- Vietnamese 
+- Welsh 
+- Yiddish.
+
+### NOTE:
+
+- Baybayin (ancient script of the Philippines) is detected as TAGALOG.
+- Chu Nom (Vietnamese ancient Han characters) is detected as VIETNAMESE.
+- HAITIAN_CREOLE is detected as such.
+- NORWEGIAN and NORWEGIAN_N are detected separately (but not robustly)
+- PORTUGUESE, PORTUGUESE_P, and PORTUGUESE_B are all detected as PORTUGUESE.
+- ROMANIAN-Latin is detected as ROMANIAN; 
+- ROMANIAN-Cyrillic as ROMANIAN.
+- BOSNIAN is not detected as such, but likely scores as Croatian or Serbian.
+- MONTENEGRIN is not detected as such, but likely scores as Serbian.
+- CROATIAN is detected in the Latin script
+- SERBIAN is detected in the Cyrililc and Latin scripts
+- Zhuang is detected in the Latin script only.
+
+The following languages are to be detected in multiple scripts:
+
+- AZERBAIJANI (Latin, Cyrillic*, Arabic*)
+- BURMESE (Latin, Myanmar)
+- HAUSA (Latin, Arabic)
+- KASHMIRI (Arabic, Devanagari)
+- KAZAKH (Latin, Cyrillic, Arabic)
+- KURDISH (Latin, Arabic)
+- KYRGYZ (Cyrillic, Arabic)
+- LIMBU (Devanagari, Limbu)
+- MONGOLIAN (Cyrillic, Mongolian)
+- SANSKRIT (Latin, Devanagari)
+- SINDHI (Arabic, Devanagari)
+- TAGALOG (Latin, Tagalog)
+- TAJIK (Cyrillic, Arabic*)
+- TATAR (Latin, Cyrillic, Arabic)
+- TURKMEN (Latin, Cyrillic, Arabic)
+- UIGHUR (Latin, Cyrillic, Arabic)
+- UZBEK (Latin, Cyrillic, Arabic)
+
+Due to a shortage of training text, AZERBAIJANI is not currently detected in Arabic or Cyrillic scripts, nor TAJIK in Arabic script.
