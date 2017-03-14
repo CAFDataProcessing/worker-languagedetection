@@ -2,7 +2,7 @@
 
 The Language Detection Worker will read a message from the queue and return a list of the top three languages present in the text data.
 
-For more information on the functioning of the Language Detection Worker visit [Language Detection Worker API](worker-languagedetection/worker-languagedetection.md).
+For more information on the functioning of the Language Detection Worker visit [Language Detection Worker](worker-languagedetection/README.md).
 
 ## Modules
 
