@@ -90,28 +90,18 @@ public final class LanguageDetectionWorker implements DocumentWorker
         LOG.debug("Document source data field to be used {}.", sourceDataFieldName);
         final Field sourceDataField = document.getField(sourceDataFieldName);
 
-        // Identify all source datas for the language detection worker.
-        final List<InputStream> streams = new ArrayList<>();
+        SequenceInputStream sequenceInputStream = null;
         try {
-            // Combine all source data input streams.
+
+            // Identify all source datas for the language detection worker.
+            final List<InputStream> streams = new ArrayList<>();
             for (FieldValue fv : sourceDataField.getValues()) {
                 final InputStream is = getInputStream(fv);
                 streams.add(is);
             }
-        } catch (RuntimeException re) {
-            final Throwable cause = re.getCause();
 
-            if (cause instanceof DataStoreException) {
-                document.addFailure(LanguageDetectionConstants.ErrorCodes.FAILED_TO_ACQUIRE_SOURCE_DATA, cause.getMessage());
-                return;
-            } else {
-                throw re;
-            }
-        }
-
-        // Use language detection library to identify languages in in the document source data text.
-        try (SequenceInputStream sequenceInputStream
-            = new SequenceInputStream(Collections.enumeration(streams))) {
+            //  Convert streams list to InputStream.
+            sequenceInputStream = new SequenceInputStream(Collections.enumeration(streams));
 
             // Perform language detection.
             LOG.debug("Perform language detection.");
@@ -123,13 +113,29 @@ public final class LanguageDetectionWorker implements DocumentWorker
                 addDetectedLanguagesToDocument(detectorResult, document);
             }
 
-        } catch (LanguageDetectorException | IOException e) {
+            //  Output response data (i.e. document field value changes).
+            outputDocumentFieldValueChanges(document);
+
+        } catch (RuntimeException re) {
+            final Throwable cause = re.getCause();
+
+            if (cause instanceof DataStoreException) {
+                document.addFailure(LanguageDetectionConstants.ErrorCodes.FAILED_TO_ACQUIRE_SOURCE_DATA, cause.getMessage());
+            } else {
+                //  If unexpected RuntimeException is detected, then re-throw.
+                throw re;
+            }
+        } catch (LanguageDetectorException e) {
             LOG.error(e.getMessage());
             document.addFailure(LanguageDetectionConstants.ErrorCodes.FAILED_TO_DETECT_LANGUAGES, e.getMessage());
+        } finally {
+            //  Close InputStream.
+            try {
+                if (sequenceInputStream != null) sequenceInputStream.close();
+            } catch (IOException e) {
+                LOG.debug("Failed to close InputStream.");
+            }
         }
-
-        // Output response data (i.e. document field value changes).
-        outputDocumentFieldValueChanges(document);
     }
 
     private static void addDetectedLanguagesToDocument(LanguageDetectorResult detectorResult, Document document)
@@ -268,12 +274,10 @@ public final class LanguageDetectionWorker implements DocumentWorker
         // Output document field value changes.
         if (field.hasChanges() && field.hasValues()) {
             for (FieldValue fv : field.getValues()) {
-                if (fv.isReference()) {
-                    // Not expecting reference values.
-                    continue;
+                if (!fv.isReference()) {
+                    final String changeValueDetails = field.getName() + " : " + fv.getStringValue() + System.lineSeparator();
+                    FileUtils.writeStringToFile(dataOutputFile, changeValueDetails, true);
                 }
-                final String changeValueDetails = field.getName() + " : " + fv.getStringValue() + System.lineSeparator();
-                FileUtils.writeStringToFile(dataOutputFile, changeValueDetails, true);
             }
         }
     }
