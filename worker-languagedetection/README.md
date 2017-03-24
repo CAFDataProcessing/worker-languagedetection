@@ -10,19 +10,19 @@ Several hints can be supplied which add a bias to the language detection but do 
 
 ### Global Settings
 
-#### DocumentWorkerConfiguration
+Worker configuration is supported through the following environment variables:
 
-The worker uses the [worker-document](https://github.hpe.com/caf/worker-document) system of `DocumentWorkerConfiguration`. The configuration class is [DocumentWorkerConfiguration](https://github.hpe.com/caf/worker-document/blob/develop/worker-document/src/main/java/com/hpe/caf/worker/document/DocumentWorkerConfiguration.java), which has the following relevant options:
+ - `WORKER_LANG_DETECT_SOURCE_FIELD`  
+    Default: `CONTENT`  
+    Used to specify which document field is used for data sources
 
-- `workerName`: the name of the worker
-- `workerVersion`: the version number of the worker
-- `outputQueue`: the output queue to return results to RabbitMQ
-- `threads`: the number of threads to be used to host this Worker
+ - `CAF_WORKER_THREADS`  
+    Default: `1`  
+    Specifies the number of threads used for parallel processing
 
-#### Environment Variables
-Additional worker configuration is supported through the following environment variables:
-
-- `WORKER_LANG_DETECT_SOURCE_FIELD`: Optional. This is used to specify which document field is used for data sources. e.g. CONTENT 
+ - `CAF_WORKER_OUTPUT_QUEUE`  
+    Default: `worker-out`  
+    Sets the output queue where results are returned
 
 #### Temporary Environment Variables
 The following environment variables are also supported however these are temporary and will be removed in a future version:
