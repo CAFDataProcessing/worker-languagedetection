@@ -12,14 +12,12 @@ Several hints can be supplied which add a bias to the language detection but do 
 
 #### DocumentWorkerConfiguration
 
-The worker uses the [worker-document](https://github.hpe.com/caf/worker-document) system of `DocumentWorkerConfiguration`. The configuration class is [DocumentWorkerConfiguration](https://github.hpe.com/caf/worker-document/blob/develop/worker-document/src/main/java/com/hpe/caf/worker/document/DocumentWorkerConfiguration.java), which has the following options:
+The worker uses the [worker-document](https://github.hpe.com/caf/worker-document) system of `DocumentWorkerConfiguration`. The configuration class is [DocumentWorkerConfiguration](https://github.hpe.com/caf/worker-document/blob/develop/worker-document/src/main/java/com/hpe/caf/worker/document/DocumentWorkerConfiguration.java), which has the following relevant options:
 
 - `workerName`: the name of the worker
 - `workerVersion`: the version number of the worker
 - `outputQueue`: the output queue to return results to RabbitMQ
 - `threads`: the number of threads to be used to host this Worker
-- `maxBatchSize`: the maximum number of documents to include in a batch
-- `maxBatchTime`: the maximum length of time (in milliseconds) to build up a batch
 
 #### Environment Variables
 Additional worker configuration is supported through the following environment variables:
