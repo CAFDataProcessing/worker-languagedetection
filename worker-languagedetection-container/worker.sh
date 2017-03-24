@@ -31,4 +31,4 @@ then
 fi
 
 cd /maven
-exec java -cp "*" com.hpe.caf.worker.core.WorkerApplication server ${dropwizardConfig}
+exec java -Dcld2.location=/maven/cld2native -cp "*" com.hpe.caf.worker.core.WorkerApplication server ${dropwizardConfig}

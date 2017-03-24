@@ -365,7 +365,6 @@
                                 <env>
                                     <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
                                     <CAF_CONFIG_PATH>/config</CAF_CONFIG_PATH>
-                                    <cld2.location>cld2native</cld2.location>
                                     <_JAVA_OPTIONS>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</_JAVA_OPTIONS>
                                 </env>
                                 <volumes>
