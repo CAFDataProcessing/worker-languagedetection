@@ -31,16 +31,6 @@ public final class LanguageDetectionConstants
          * Configurable setting to identify which document field corresponds to the source data.
          */
         public static final String WORKER_LANG_DETECT_SOURCE_FIELD = "WORKER_LANG_DETECT_SOURCE_FIELD";
-
-        /**
-         * Mounted location in the worker container where response data will be output to.
-         */
-        public static final String CAF_RESPONSE_DATA_OUTPUT_FOLDER = "CAF_RESPONSE_DATA_OUTPUT_FOLDER";
-
-        /**
-         * Filename which will be used to record the response data.
-         */
-        public static final String CAF_RESPONSE_DATA_OUTPUT_FILE_NAME = "CAF_RESPONSE_DATA_OUTPUT_FILE_NAME";
     }
 
     /**

@@ -9,11 +9,14 @@ import com.hpe.caf.worker.document.exceptions.DocumentWorkerTransientException;
 import com.hpe.caf.worker.document.extensibility.DocumentWorker;
 import com.hpe.caf.worker.document.model.*;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.InvalidPathException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 /**
@@ -236,37 +239,68 @@ public final class LanguageDetectionWorker implements DocumentWorker
             + LanguageDetectionConstants.Fields.DETECTED_LANGUAGE_PERCENTAGE_SUFFIX;
     }
 
-    private static void outputDocumentFieldValueChanges(Document document)
+    private static void outputDocumentFieldValueChanges(final Document document)
     {
-        final String cafResponseDataOutputFolder
-            = System.getenv(LanguageDetectionConstants.EnvironmentVariables.CAF_RESPONSE_DATA_OUTPUT_FOLDER);
-        final String cafResponseDataOutputFileName
-            = System.getenv(LanguageDetectionConstants.EnvironmentVariables.CAF_RESPONSE_DATA_OUTPUT_FILE_NAME);
-        final String dataOutputSubFolder = document.getCustomData("dataOutputSubFolder");
+        final String baseOutputDir = System.getenv("CAF_LANG_DETECT_WORKER_OUTPUT_FOLDER");
+        final String outputSubdir = document.getCustomData("outputSubfolder");
 
-        // Only output document field value changes if configured to do so.
-        if (cafResponseDataOutputFolder == null || cafResponseDataOutputFolder.isEmpty()
-            || cafResponseDataOutputFileName == null || cafResponseDataOutputFileName.isEmpty()
-            || dataOutputSubFolder == null || dataOutputSubFolder.isEmpty()) {
-            LOG.debug("No response data output folder or file specified.");
+        // Only output document field value changes if configured to do so
+        if (baseOutputDir == null || baseOutputDir.isEmpty()) {
+            LOG.debug("No response data output folder specified.");
             return;
         }
 
         LOG.debug("Outputting document field value changes.");
 
-        // Identify output folder location.
-        final String dataOutputFolder = FilenameUtils.concat(cafResponseDataOutputFolder, dataOutputSubFolder);
-
-        final File dataOutputFile = new File(dataOutputFolder, cafResponseDataOutputFileName);
+        final Path outputFir = getFullOutputPath(baseOutputDir, outputSubdir);
+        final File outputFile = getFilepath(outputFir, document).toFile();
 
         // Iterate through each of the document fields and output changes where they exist.
         document.getFields().forEach(field -> {
             try {
-                appendFieldValueChangesToFile(field, dataOutputFile);
+                appendFieldValueChangesToFile(field, outputFile);
             } catch (IOException ioe) {
                 LOG.warn("Failed to output document field value changes", ioe);
             }
         });
+    }
+
+    private static Path getFullOutputPath(final String outputDir, final String outputSubdir)
+    {
+        return (outputSubdir == null)
+            ? Paths.get(outputDir)
+            : Paths.get(outputDir, outputSubdir);
+    }
+
+    private static Path getFilepath(final Path dataOutputFolder, final Document document)
+    {
+        final String filenameField = getFilenameField();
+
+        final String filename = document.getField(filenameField).getValues()
+            .stream()
+            .filter(fieldValue -> (!fieldValue.isReference()) && fieldValue.isStringValue())
+            .map(fieldValue -> fieldValue.getStringValue())
+            .filter(fieldValue -> {
+                try {
+                    dataOutputFolder.resolve(fieldValue);
+                    return true;
+                } catch (InvalidPathException ex) {
+                    return false;
+                }
+            })
+            .findFirst()
+            .orElse("out.txt");
+
+        return dataOutputFolder.resolve(filename);
+    }
+
+    private static String getFilenameField()
+    {
+        final String filenameField = System.getenv("CAF_LANG_DETECT_WORKER_OUTPUT_FILENAME_FIELD");
+
+        return (filenameField == null || filenameField.isEmpty())
+            ? "FILE_NAME"
+            : filenameField;
     }
 
     private static void appendFieldValueChangesToFile(Field field, File dataOutputFile) throws IOException
@@ -275,8 +309,8 @@ public final class LanguageDetectionWorker implements DocumentWorker
         if (field.hasChanges() && field.hasValues()) {
             for (FieldValue fv : field.getValues()) {
                 if (!fv.isReference()) {
-                    final String changeValueDetails = field.getName() + " : " + fv.getStringValue() + System.lineSeparator();
-                    FileUtils.writeStringToFile(dataOutputFile, changeValueDetails, true);
+                    final String changeValueDetails = field.getName() + ": " + fv.getStringValue() + "\r\n";
+                    FileUtils.writeStringToFile(dataOutputFile, changeValueDetails, StandardCharsets.UTF_8, true);
                 }
             }
         }

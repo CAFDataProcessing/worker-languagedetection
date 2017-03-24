@@ -24,17 +24,6 @@ Worker configuration is supported through the following environment variables:
     Default: `worker-out`  
     Sets the output queue where results are returned
 
-#### Temporary Environment Variables
-The following environment variables are also supported however these are temporary and will be removed in a future version:
-
-- `CAF_RESPONSE_DATA_OUTPUT_FOLDER`: Optional. This is used to specify the mounted location in the worker container where response data will be output to.  
-- `CAF_RESPONSE_DATA_OUTPUT_FILE_NAME`: Optional. This is the filename which will be used to record the response data.
-
-### Per-tenant Configuration Settings
-The following per-tenant configuration is supplied through the ‘customData’ facility:
-
-- `dataOutputSubFolder`: Optional. This is used to specify the output sub folder where the response data will be written to. It is used along with the environment variable setting values for `CAF_RESPONSE_DATA_OUTPUT_FOLDER` and `CAF_RESPONSE_DATA_OUTPUT_FILE_NAME` to specify the full path of the response data output location and filename.
-
 ## Output Format
 
 The document is marked up with a list of the languages detected as well as the confidence in the result. The following fields are added:
@@ -52,7 +41,26 @@ e.g. DetectedLanguage1\_ConfidencePercentage:100
 
 - DetectedLanguages_ReliableResult : A boolean flag that signals whether the result is reliable. 
 
-These fields are written out to disk if the environment and per-tenant settings for `CAF_RESPONSE_DATA_OUTPUT_FOLDER`, `CAF_RESPONSE_DATA_OUTPUT_FILE_NAME` and  `dataOutputSubFolder` are configured.
+### Temporary File Output Mode
+The detected languages are always added to the document as fields, but the current version of the worker also supports a second mode for additionally returning the detected languages.  Setting the `CAF_LANG_DETECT_WORKER_OUTPUT_FOLDER` environment variable causes the detected languages to be written to disk.
+
+Note that this option is temporary and will be removed in a future version.
+
+It is controlled using the following environment variables:
+
+ - `CAF_LANG_DETECT_WORKER_OUTPUT_FOLDER`:  
+    Default: None  
+    Setting this environment variable causes the detected languages to be written to files on disk, in addition to being added as fields to the document.  The location specifies the output folder.
+
+ - `CAF_LANG_DETECT_WORKER_OUTPUT_FILENAME_FIELD`:  
+    Default: `FILE_NAME`  
+    Specifies the field which contains the output filename which should be used.
+
+In addition, the following configuration option can be passed using the Document Worker 'customData' facility:
+
+ - `outputSubfolder`:  
+    Default: None  
+    Specifies a subfolder within the output folder where the file should be written.  If this is not specified then the file is written directly to the output folder.
 
 ## Health Check
 
