@@ -11,3 +11,9 @@ This project contains the actual implementation of the Language Detection Worker
 
 ### worker-languagedetection-container
 This project builds a Docker image that packages the Language Detection Worker for deployment. It can be found in [worker-languagedetection-container](worker-languagedetection-container).
+
+### language-detection
+An interface for language detection implementations. It can be found in [language-detection](language-detection)
+
+### language-detection-cld2
+An implementation of the [language-detection](language-detection) api which wraps the Compact Language Detector 2 library. It can be found in [language-detection-cld2](language-detection-cld2).
