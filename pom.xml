@@ -35,6 +35,8 @@
     <modules>
         <module>worker-languagedetection</module>
         <module>worker-languagedetection-container</module>
+        <module>language-detection</module>
+        <module>language-detection-cld2</module>
     </modules>
 
 </project>
