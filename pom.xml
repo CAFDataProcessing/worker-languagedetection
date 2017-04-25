@@ -1,29 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2015-2017 Hewlett Packard Enterprise Development LP.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.hpe.caf.worker</groupId>
+    <groupId>com.github.cafdataprocessing</groupId>
     <artifactId>worker-languagedetection-aggregator</artifactId>
-    <version>1.1.0-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-
+    
     <parent>
         <groupId>com.github.cafapi</groupId>
-        <artifactId>caf-parent</artifactId>
-        <version>1.8.0-64</version>
-        <relativePath />
+        <artifactId>caf-common</artifactId>
+        <version>1.10.0-SNAPSHOT</version>
     </parent>
+    
+    <name>Worker-LanguageDetection</name>
+    <description>A worker for interpreting the languages used in a given input</description>
+    <url>https://pages.github.hpe.com/caf/data-processing-service/</url>
+    
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    
+    <developers>
+        <developer>
+            <id>arogan92</id>
+            <name>Adam Rogan</name>
+            <email>adam.pau.rogan@hpe.com</email>
+        </developer>
+        <developer>
+            <id>CJComac</id>
+            <name>Christopher Comac</name>
+            <email>christopher.jam.comac@hpe.com</email>
+        </developer>
+        <developer>
+            <id>dermot-hardy</id>
+            <name>Dermot Hardy</name>
+            <email>dermot.hardy@hpe.com</email>
+        </developer>
+        <developer>
+            <id>mulhollandc</id>
+            <name>Connor Mulholland</name>
+            <email>connor.mulholland@hpe.com</email>
+        </developer>
+        <developer>
+            <id>krzysztof-ploch</id>
+            <name>Krzysztof Ploch</name>
+            <email>krzysztof.ploch@hpe.com</email>
+        </developer>
+        <developer>
+            <id>tony-mcveigh</id>
+            <name>Anthony McVeigh</name>
+            <email>tony.mcveigh@hpe.com</email>
+        </developer>
+        
+    </developers>
 
     <properties>
-        <caf.worker-document-framework.version>1.1.0-41</caf.worker-document-framework.version>
+        <caf.worker-document-framework.version>2.0.0-SNAPSHOT</caf.worker-document-framework.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>com.hpe.caf.worker</groupId>
+                <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>worker-document-framework</artifactId>
                 <version>${caf.worker-document-framework.version}</version>
                 <type>pom</type>
@@ -38,5 +99,11 @@
         <module>language-detection</module>
         <module>language-detection-cld2</module>
     </modules>
+    
+    <scm>
+        <connection>scm:git:https://github.com/CAFDataProcessing/worker-languagedetection.git</connection>
+        <developerConnection>scm:git:https://github.com/CAFDataProcessing/worker-languagedetection.git</developerConnection>
+        <url>https://github.com/CAFDataProcessing/worker-languagedetection</url>
+    </scm>
 
 </project>

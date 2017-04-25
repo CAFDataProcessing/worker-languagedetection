@@ -1,6 +1,6 @@
 # language-detection-cld2
 
-An implementation of the [language-detection](https://github.hpe.com/caf/language-detection) api which wraps the Compact Language Detector 2 library.
+An implementation of the [language-detection](../language-detection) api which wraps the Compact Language Detector 2 library.
 
 
 
