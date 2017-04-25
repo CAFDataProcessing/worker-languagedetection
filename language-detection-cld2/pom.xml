@@ -71,6 +71,17 @@
                     </execution>
                 </executions>
             </plugin>
+            
+            <!-- Exclude the test and example configuration files when checking license headers -->
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <excludes combine.children="append">
+                        <exclude>src/integration-test/resources/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
