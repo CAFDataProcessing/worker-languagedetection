@@ -1,0 +1,87 @@
+---
+tag: "CAF_4001/portuguese.yaml"
+testCaseInformation:
+  associatedTickets: CAF-414
+  comments: "CAF_4001/portuguese.yaml"
+  description: Language detection on single language documents
+  testCaseId: "CAF_4001"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "No final do encontro com o Rio Ave, que o Benfica venceu por 3-1, o\
+          \ presidente dos encarnados lançou críticas à arbitragem e não deixou de\
+          \ passar o recado a alguma imprensa.   «O que se passou hoje no Estádio\
+          \ da Luz é bastante lamentável - o Benfica sabe que foi prejudicado em trê\
+          s penalties. Não vale a pena fazer conferências de imprensa todos os dias,\
+          \ podem gritar, podem fazer tudo. É tão escandaloso o que se está a fazer\
+          \ ao Benfica que ninguém compreende. Não compreendo porque, se quem nomeia\
+          \ os árbitros é a mesma pessoa (Vítor Pereira) do ano passado, então nã\
+          o sei o que se está a passar. Não adianta falar se jogámos muito ou pouco,\
+          \ certo é que, em qualquer jogo, somos nitidamente prejudicados. E assistimos\
+          \ nos outros jogos facilidades a mais – jogadores a serem ‘arrancados pela\
+          \ raiz’ sem que sejam marcadas grandes penalidades, jogadores a tocarem\
+          \ a bola na mão e não é penalty. Curiosamente no nosso caso, é tão claro\
+          \ que nos sentimos gravemente lesados», começou por dizer o líder do Benfica\
+          \ antes de direcionar as críticas noutro sentido  - A nossa curiosidade\
+          \ é em relação à comunicação social, se conseguem decifrar o que se passou\
+          \ aqui. Se for assim, estamos bem. É sinal que não há pressão de quem quer\
+          \ que seja. É sinal que quem está a escrever é isento e diz as verdades.\
+          \ Ou então, não sei se foi os voucheres… mas há uma coisa que eu garanto\
+          \ nem eu nem o meu treinador andamos a convidar jornalistas para almoçar\
+          \ ou jantar.   «Vi na semana passada na Madeira [ndr. referindo-se ao Nacional-FC\
+          \ Porto] duas grandes penalidades, uma tão escandalosa que penso que nã\
+          o voltará a repetir-se neste País. Curiosamente esse mesmo árbitro (Jorge\
+          \ Sousa), em jogos com o Benfica, não vê faltas sobre nós, nomeadamente\
+          \ na Supertaça, no jogo em casa com o rival, e é um árbitro internacional\
+          \ e bastante conceituado», prosseguiu.  E rematou «O Benfica está atento,\
+          \ não está dormente. E não está afastado de nada porque vamos continuar\
+          \ a lutar. Podem escrever o que quiserem, dizer mal do treinador… certo\
+          \ é que Rui Vitória é e vai continuar a ser treinador do Benfica.»"
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "pt"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "99"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "PORTUGUESE"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"

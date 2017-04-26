@@ -1,0 +1,111 @@
+---
+tag: "CAF_4002/afrikaans_albanian.yaml"
+testCaseInformation:
+  associatedTickets: CAF-414
+  comments: "CAF_4002/afrikaans_albanian.yaml"
+  description: Language detection on mixed language documents
+  testCaseId: "CAF_4002"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "Die ondersoekbeampte in die strafsaak teen adv. Nomgcobo Jiba, adjunkhoof\
+          \ van die Nasionale Vervolgingsgesag (NVG), se kontrak is weens “moontlike\
+          \ wangedrag” beëindig.   Dié kennisgewing het kol. Boats Botha, wat afgetree\
+          \ het en toe weer op kontrakbasis aangestel is, terwyl hy met verlof was,\
+          \ bereik.   Volgens lt.genl. Solomon Makgale, nasionale polisiewoordvoerder,\
+          \ was Botha “onregmatig” en op “ongerymde wyse” betrokke by die uitreiking\
+          \ van ’n dagvaarding vir Jiba om in die hof te verskyn.Die polisie en die\
+          \ NVG is sedert Maart in ’n bitter twis gewikkel oor dié “omstrede” dagvaarding\
+          \ – wat Botha in Jiba se afwesigheid op haar beteken het.  Die polisie het\
+          \ aangevoer Botha is nie meer die ondersoekbeampte in die saak nie en die\
+          \ nuwe ondersoekbeampte is genl. maj. Norman Taioe, Gautengse speurhoof\
+          \ en selferkende ondersteuner van pres. Jacob Zuma.  Jiba is volgens ingeligtes\
+          \ ook ’n vertroueling van Zuma. Sy het in April in die handelshof in Pretoria\
+          \ op twee aanklagte van bedrog en een van meineed verskyn. Die aanklagte\
+          \ hou verband met haar besluit om genl.maj. Johan Booysen, Valke-hoof in\
+          \ KwaZulu-Natal, van rampokkery aan te kla.  Adv. Jan Ferreira, aanklaer\
+          \ in die saak, het aan die hof gesê Botha is sonder twyfel nog die ondersoekbeampte.\
+          \ Botha het glo slegs aan Taioe verslag gedoen.  Maar Makgale en Jiba se\
+          \ verdediging het volgehou dis onwaar en dat Taioe as ondersoekbeampte oorgeneem\
+          \ het en die dossier by hom het.  “Dit was duidelik uit ’n verklaring wat\
+          \ Botha oor sy rol in die uitreiking van die dagvaarding afgelê het dat\
+          \ hy in die geheim met die NVG vergader het,” het Makgale in ’n verklaring\
+          \ gesê. “Hy het instruksies by die NVG gekry om die dagvaarding uit te reik\
+          \ sonder om Taioe in kennis te stel.”  Makgale het verder gesê die polisie\
+          \ se topbestuur is “baie teleurgesteld” omdat Botha hom “onprofessioneel”\
+          \ gedra het en dat hy sy base “ondermyn” het en die ondersoek teen Jiba\
+          \ skade berokken het.  Tydens sy “geheime” vergaderings met die NVG het\
+          \ Botha glo nie die dossier by hom gehad nie, het Makgale gesê.  Maar Netwerk24\
+          \ het by ’n senior polisiebron verneem dit was nie die geval nie en dat\
+          \ Taioe Botha versoek het om steeds die ondersoekbeampte in die saak te\
+          \ bly.  Botha het gesê hy gaan “dit beslis nie so aanvaar nie en is besig\
+          \ om regshulp in te win.”  Sy dienskontrak sou einde Junie verstryk het.\
+          \  Ish-kryeministri Sali Berisha, në seancën plenare të së enjtes, deklaroi\
+          \ se kryeministri aktual Edi Rama u vërtetua se para 27 muajsh i tregoi\
+          \ shqiptarëve një tufë me gënjeshtra. “Rama vepron në bazën e një dezekuilibri\
+          \ të thellë psiqik. Po i bën shqiptarëve të zeza që nuk ia ka bërë askush\
+          \ që nga koha e Enver Hoxhës. Ajo që spikat në qëndrimet e kreut të sotë\
+          m të ekzekutivit është përçmimi ndaj qytetarëve. Ai kalonte nga sheshi në\
+          \ shesh duke u betuar se ju qytetarë do të gëzoni ulje taksash, heqje TVSH-je\
+          \ për energjinë elektrike, për ushqimet, rrogën e 13, shërbimin shëndetë\
+          sor falas dhe legalizime falas. Pas 27 muajsh doli se ai që doli para jush\
+          \ ishte thjesht një Nastradin dhe një miniaturë e atit të tij shpirtëror”\
+          , tha Berisha. “Cili nga ju imagjinonte në vitin 2013 se në vitin 2015 do\
+          \ të kishte mbi 100 mijë shqiptarë që kërkojnë azil politik në dyert e botë\
+          s. Pse po ikin? Po ikin nga urrejtja e Ramës, nga burgosjet, nga dhuna dhe\
+          \ terrori shtetëror që ushtrohet në të katër anët e vendit, nga gjobat që\
+          \ vendos mbi qytetarët. Ky është vrasësi i shpresës së tyre. Ky gëzon dhe\
+          \ feston në suitën e tij për largimin e qytetarëve”, shtoi Berisha. Ish-kreu\
+          \ i qeverisë foli edhe për personat me precedentë penalë që janë në Parlament\
+          \ “Rama futi me vendosmëri në Parlament vrasësit, përdhunuesit dhe trafikantë\
+          t. Në asnjë vend tjetër nuk ndodh kjo. Nxori vrasësin në krye të PS-së në\
+          \ Shkodër. Edhe në diktaturë të largonin po të kishe vrarë, me dashje apo\
+          \ pa dashje. Ky nuk pyet fare sepse vrasja për atë është vlerë”."
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "af"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "58"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "AFRIKAANS"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "sq"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "41"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "ALBANIAN"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"

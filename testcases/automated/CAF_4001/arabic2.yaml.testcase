@@ -1,0 +1,80 @@
+---
+tag: "CAF_4001/arabic2.yaml"
+testCaseInformation:
+  associatedTickets: CAF-414
+  comments: "CAF_4001/arabic2.yaml"
+  description: Language detection on single language documents
+  testCaseId: "CAF_4001"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "فرضت إسرائيل عقوبات اقتصادية على الفلسطينيين في حين أنهى مفاوضون إس\
+          رائيليون وفلسطينيون محادثات دون اتفاق واضح على تمديد محادثات السلام المت\
+          عثرة، كما هدّد رئيس حزب البيت اليهودي بالانسحاب من حكومة بنيامين نتنياهو\
+          \ في حال إطلاق سراح أسرى من عرب الـ48. وقال مسؤول إسرائيلي اشترط عدم الإ\
+          فصاح عن اسمه إن إسرائيل ستخصم دفعات لتسديد ديون من تحويلات الضرائب التي\
+          \ تتلقاها السلطة الفلسطينية بانتظام، وستضع أيضا حدودا على ودائع البنوك ا\
+          لخاصة بسلطة الحكم الذاتي في إسرائيل. ويبلغ حجم الإيرادات التي تحصلها إسر\
+          ائيل على البضائع المتجهة إلى الأسواق الفلسطينية حوالي مائة مليون دولار ش\
+          هريا وتشكل حوالي ثلثي ميزانية السلطة الفلسطينية. وأدان كبير المفاوضين ال\
+          فلسطينيين صائب عريقات ما وصفها بـ\"السرقة الإسرائيلية\" لأموال الضرائب ا\
+          لفلسطينية.  عريقات وصف العقوبات الإسرائيلية بالسرقة والنهب (الجزيرة) وقا\
+          ل عريقات إن العقوبات الإسرائيلية هي مجرد نهب وسرقة إسرائيلية لأموال الشع\
+          ب الفلسطيني وانتهاك للقانون الدولي والأعراف انتقاما لتحرك الفلسطينيين لل\
+          انضمام لمجموعة من المعاهدات الدولية. وكانت إسرائيل قد أعلنت أمس الأول تج\
+          ميدا جزئيا للاتصالات بالمسؤولين الفلسطينيين، وأشارت إلى توقيع الرئيس الف\
+          لسطيني محمود عباس اتفاقيات الأمم المتحدة الخاصة بحقوق الإنسان الأسبوع ال\
+          ماضي. وقالت إسرائيل أيضا إنها ستعلق مشاركتها في مشروع للتنقيب عن الغاز ق\
+          بالة ساحل قطاع غزة. وجاء فرض إسرائيل عقوبات اقتصادية على الفلسطينيين ردا\
+          \ على توقيع القيادة الفلسطينية طلبات للانضمام إلى معاهدات دولية، وهذا ثا\
+          ني إجراء عقابي يتخذ في يومين، في خطوة من شأنها أن تعقد الجهود الأميركية\
+          \ لإنقاذ محادثات السلام من الانهيار قبل يوم 29 أبريل/نيسان الجاري المحدد\
+          \ كموعد نهائي للتوصل لاتفاق سلام."
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "ar"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "99"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "ARABIC"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"
