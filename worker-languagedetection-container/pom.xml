@@ -445,7 +445,7 @@
                 </property>
             </activation>
             <properties>
-                <test.data>${project.basedir}/../testcases/automated</test.data>
+                <test.data>${project.basedir}/testcases/automated</test.data>
             </properties>
         </profile>
     </profiles>
