@@ -418,7 +418,7 @@
                 <artifactId>license-maven-plugin</artifactId>
                 <configuration>
                     <excludes combine.children="append">
-                        <exclude>../testcases</exclude>
+                        <exclude>${project.basedir}/../testcases/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
