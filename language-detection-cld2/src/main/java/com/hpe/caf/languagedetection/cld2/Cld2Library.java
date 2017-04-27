@@ -28,8 +28,8 @@ public interface Cld2Library extends Library {
      * @param buffer - Bytes of text to be queried
      * @param buffer_length - The length of buffer
      * @param is_plain_text - States whether the text passed in is plain-text or not
-     * @param tld_hint
-     * @param encoding_hint
+     * @param tld_hint - Encoding hint, it is from an encoding detector applied to an input
+     * @param encoding_hint - Detector hint, such as "en" "en,it", ENGLISH
      * @param language_hint - The language code specifying a possible language that may be in the text.
      * @param language3 - Contains the top three languages found
      * @param percent3 - The confidence percentage for each of the top three languages found
