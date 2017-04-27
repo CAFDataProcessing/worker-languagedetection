@@ -78,7 +78,7 @@
     </developers>
 
     <properties>
-        <caf.worker-document-framework.version>2.0.0</caf.worker-document-framework.version>
+        <caf.worker-document-framework.version>2.0.0-5</caf.worker-document-framework.version>
     </properties>
 
     <dependencyManagement>
