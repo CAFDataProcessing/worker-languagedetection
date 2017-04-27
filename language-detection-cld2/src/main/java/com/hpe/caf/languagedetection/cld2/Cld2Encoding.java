@@ -123,8 +123,8 @@ public enum Cld2Encoding {
      * Converts code passed in to Cld2Encoding enum and returns the value.
      * If the code passed in is not the exact enum name, it will compare the code with text name variations of popular
      * encodings and return that encoding's value.
-     * @param code
-     * @return
+     * @param code - The code to be queried
+     * @return - Returns the enum value.
      */
     public static int getValueFromString(String code){
         if(contains(code))
