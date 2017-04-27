@@ -426,6 +426,18 @@
                 <worker.adminport>8081</worker.adminport>
             </properties>
         </profile>
+		<profile>
+            <id>nightly-test</id>
+            <activation>
+                <property>
+                    <name>RE_BUILD_TYPE</name>
+                    <value>release</value>
+                </property>
+            </activation>
+            <properties>
+                <test.data>${project.basedir}/../testcases/automated</test.data>
+            </properties>
+        </profile>
     </profiles>
 
 </project>
