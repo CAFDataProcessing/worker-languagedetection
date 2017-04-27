@@ -100,7 +100,7 @@
                                     <groupId>com.github.workerframework</groupId>
                                     <artifactId>worker-default-configs</artifactId>
                                     <outputDirectory>${project.build.directory}/config-files</outputDirectory>
-                                    <excludes>**/META-INF/**</excludes>
+                                    <excludes>META-INF/**,cfg*StorageServiceDataStore*</excludes>
                                 </artifactItem>
                             </artifactItems>
                         </configuration>
