@@ -79,7 +79,7 @@ public class Cld2Detector implements LanguageDetector {
      * calls the overload detectLanguage method with a default settings object with detectMultipleLanguages set to true
      * @param textBytes - bytes making up the text
      * @return LanguageDetectorResult
-     * @throws LanguageDetectorException
+     * @throws LanguageDetectorException - Attempt to detect the language has been unsuccessful, causes LanguageDetectorException
      */
     @Override
     public LanguageDetectorResult detectLanguage(byte[] textBytes) throws LanguageDetectorException {
@@ -91,10 +91,10 @@ public class Cld2Detector implements LanguageDetector {
      * Inputstream is converted to a byte array for CLD2 detection as it does not support InputStream.
      * Returns a LanguageDetectorResult with a FAILED status and isReliable set to false if it fails to
      * convert the stream to bytes
-     * @param textStream - the input stream containing the text
+     * @param textStream - AN InputSteam object containing the text for detection
      * @param settings - used by implementation to produce result
      * @return LanguageDetectorResult
-     * @throws LanguageDetectorException
+     * @throws LanguageDetectorException - Attempt to detect the language has been unsuccessful, causes LanguageDetectorException
      */
     @Override
     public LanguageDetectorResult detectLanguage(InputStream textStream, LanguageDetectorSettings settings) throws LanguageDetectorException {
@@ -113,9 +113,9 @@ public class Cld2Detector implements LanguageDetector {
     /**
      * calls into the overloaded detectLanguage method passing in a default settings object with detectMultipleLanguages
      * set to true.
-     * @param textStream
+     * @param textStream - AN InputSteam object containing the text for detection
      * @return LanguageDetectorResult
-     * @throws LanguageDetectorException
+     * @throws LanguageDetectorException - Attempt to detect the language has been unsuccessful, causes LanguageDetectorException
      */
     @Override
     public LanguageDetectorResult detectLanguage(InputStream textStream) throws LanguageDetectorException {
