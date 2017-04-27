@@ -25,16 +25,17 @@ public interface Cld2Library extends Library {
      * this is the method used in CLD2 to detect the language, passing in the hints and
      * references (as java arrays) of the text buffer, language3, percent3, text_bytes and is_reliable fields
      *
-     * @param buffer
-     * @param buffer_length
-     * @param is_plain_text
+     * @param buffer - Bytes of text to be queried
+     * @param buffer_length - The length of buffer
+     * @param is_plain_text - States whether the text passed in is plain-text or not
      * @param tld_hint
      * @param encoding_hint
-     * @param language_hint
-     * @param language3
-     * @param percent3
-     * @param text_bytes
-     * @param is_reliable
+     * @param language_hint - The language code specifying a possible language that may be in the text.
+     * @param language3 - Contains the top three languages found
+     * @param percent3 - The confidence percentage for each of the top three languages found
+     * @param text_bytes - The amount of non-tag/letters-only text found
+     * @param is_reliable - Determines the confidence in the findings - True if the returned language is some amount more probable than
+     *                      the second best.
      *
      * @return integer value for language corresponding to value in Cld2Language.
      *
@@ -60,18 +61,24 @@ public interface Cld2Library extends Library {
 
     /**
      * To get language name from kLanguageToName array in CLD2
+     * @param language - The language number
+     * @return -The language name
      */
     String _ZN4CLD212LanguageNameENS_8LanguageE(int language);
 
 
     /**
      * To get language code from kLanguageToCode array in CLD2
+     * @param language - The language number
+     * @return - The language code
      */
     String _ZN4CLD212LanguageCodeENS_8LanguageE(int language);
 
 
     /**
      * To get language number from kNameToLanguage array in CLD2
+     * @param name - The name of the  language to be queried
+     * @return -The language number
      */
     int _ZN4CLD219GetLanguageFromNameEPKc(String name);
 }

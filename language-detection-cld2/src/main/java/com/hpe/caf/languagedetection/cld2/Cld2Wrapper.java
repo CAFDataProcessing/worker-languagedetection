@@ -46,11 +46,11 @@ public class Cld2Wrapper {
 
 
     /**
-     * Using JNA, Calls into the cld2Library passing in the required fields to carry out hte language detection.
+     * Using JNA, Calls into the cld2Library passing in the required fields to carry out the language detection.
      * @param inputBytes - bytes of text data utf-8
      * @param settings - settings object with hints
-     * @return Cld2Result - contains the languages and is handled by the Cld2 class to produce a LanguageDetectorResult
-     * @throws LanguageDetectorException
+     * @return Cld2Result - Contains the languages and is handled by the Cld2 class to produce a LanguageDetectorResult
+     * @throws LanguageDetectorException - Attempt to detect the language has been unsuccessful, causes LanguageDetectorException
      */
     public Cld2Result detectLanguageSummaryWithHints(byte[] inputBytes, LanguageDetectorSettings settings) throws LanguageDetectorException {
         Cld2Result cld2Result = new Cld2Result();
