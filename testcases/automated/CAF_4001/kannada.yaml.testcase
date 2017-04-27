@@ -1,0 +1,73 @@
+---
+tag: "CAF_4001/kannada.yaml"
+testCaseInformation:
+  associatedTickets: CAF-414
+  comments: "CAF_4001/kannada.yaml"
+  description: Language detection on single language documents
+  testCaseId: "CAF_4001"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "ಕೊಲಂಬೊ (ಪಿಟಿಐ) ಭಾರತ ಕ್ರಿಕೆಟ್‌ ತಂಡದ ಯುವ ಆಟಗಾರರು ನಿರೀಕ್ಷೆ ಹುಸಿಗೊಳಿಸಲಿ\
+          ಲ್ಲ. ಚುರುಕಿನ ಬೌಲಿಂಗ್‌ ಹಾಗೂ ಅಬ್ಬರದ ಬ್ಯಾಟಿಂಗ್‌ ಮೂಲಕ ಮಿಂಚಿದ ಭಾರತ 19 ವರ್ಷದೊಳ\
+          ಗಿನವರ ಕ್ರಿಕೆಟ್ ತಂಡವು ತ್ರಿಕೋನ ಏಕದಿನ ಕ್ರಿಕೆಟ್ ಸರಣಿಯಲ್ಲಿ ಶ್ರೀಲಂಕಾ ತಂಡವನ್ನು\
+          \ ಮಣಿಸಿ ಪ್ರಶಸ್ತಿಗೆ ಮುತ್ತಿಕ್ಕಿತು.  ಟಾಸ್ ಗೆದ್ದು ಬ್ಯಾಟಿಂಗ್‌ ಆಯ್ದ ಆತಿಥೇಯ ಲಂಕ\
+          ಾ ತಂಡ 47.2 ಓವರ್‌ಗಳಲ್ಲಿ 158 ರನ್‌ಗಳಿಗೆ ಆಲೌಟ್‌ ಆಯಿತು. ಸುಲಭ ಗೆಲುವಿನ ಗುರಿ ಬೆನ\
+          ್ನಟ್ಟಿದ ಭಾರತ ಕೇವಲ 33.5 ಓವರ್‌ಗಳಲ್ಲಿ ಐದು ವಿಕೆಟ್ ಕಳೆದುಕೊಂಡು ಮುಟ್ಟಿತು.  ಸೋಮವ\
+          ಾರ ಆರ್‌. ಪ್ರೇಮದಾಸ್ ಕ್ರೀಡಾಂಗಣದಲ್ಲಿ ನಡೆದ ಪಂದ್ಯದಲ್ಲಿ ಭಾರತ ತಂಡ ಸಂಪೂರ್ಣ ಪಾರಮ್\
+          ಯ ಮರೆಯಿತು.  ಕೋಚ್‌ ರಾಹುಲ್ ದ್ರಾವಿಡ್‌ ಅವರ ಗರಡಿಯಲ್ಲಿ ಪಳಗಿರುವ ಭಾರತಕ್ಕೆ ಆರಂಭಿಕ\
+          \ ಆಟಗಾರರ ವಾಷಿಂಗ್ಟನ್‌ ಸುಂದರ್‌ ಹಾಗೂ ನಾಯಕ ರಿಶಬ್ ಪಂತ್ ಭದ್ರ ಬುನಾದಿ ಹಾಕಿದರು. ಈ\
+          \ ಜೋಡಿ ಮೊದಲ ವಿಕೆಟ್‌ಗೆ  89 ರನ್‌ ಪೇರಿಸಿದರು. ಆದರೆ, ಮೂರು ವಿಕೆಟ್ ಪಡೆದು ಮಿಂಚಿದ\
+          \ ಲಂಕಾದ ದಿಮಿತ್ ಸಿಲ್ವಾ ಅವರು ಭಾರತದ ಜಯವನ್ನು ತುಸು ವಿಳಂಬಗೊಳಿಸಿದರು.  ಇದಕ್ಕೂ ಮೊ\
+          ದಲು ಬ್ಯಾಟ್‌ ಮಾಡಿದ ಲಂಕಾ ತಂಡವನ್ನು ಭಾರತ ಬೌಲಿಂಗ್ ವಿಭಾಗ ಅಲ್ಪಮೊತ್ತಕ್ಕೆ ಕಟ್ಟಿಹಾ\
+          ಕುವಲ್ಲಿ ಯಶ ಕಂಡಿತು. ಆದರೂ ಬೇಗನೆ ವಿಕೆಟ್ ಉರುಳಿಸುವಲ್ಲಿ ವಿಫಲವಾಗಿತು.  ಭಾರತದ ಪರ\
+          \ ಖಲೀಲ್ ಅಹಮದ್ ಅವರು ಮೂರು ವಿಕೆಟ್ ಪಡೆದು ಗೆಲುವಿಗೆ ಕೊಡುಗೆ ನೀಡಿದರು. ಜತೆಗೆ ಪಂದ್\
+          ಯ ಶ್ರೇಷ್ಠ ಪ್ರಶಸ್ತಿ ಪಡೆದರು."
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "kn"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "100"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "KANNADA"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"

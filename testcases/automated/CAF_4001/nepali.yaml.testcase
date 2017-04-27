@@ -1,0 +1,77 @@
+---
+tag: "CAF_4001/nepali.yaml"
+testCaseInformation:
+  associatedTickets: CAF-414
+  comments: "CAF_4001/nepali.yaml"
+  description: Language detection on single language documents
+  testCaseId: "CAF_4001"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "“खै त? बिहान तिन गिलाँस, साँझ तिन गिलाँस पकाएको हो के रे मैले त । अ\
+          रु मलाई के थाहा?”– मैले पनि जवाफ फर्काएँ   म केही बोलिन ।   घरमा भाई, आम\
+          ा र म थियौँ । बाको सरकारी जागिर थियो । छ महिनामा एक वा दुईपल्ट दर्शन गर्\
+          न पाईन्थ्यो बाको । आमा चाँही धेरैजसो गाउँघर, सामुदायिक बन, खानेपानी, यस्\
+          तैयस्तै काममा ब्यस्त ।   बिहान उठेर, दैलो कुचो गर्ने, खाना पकाउने, भाँडा\
+          माझ्ने देखि गाइबस्तुलाइ घाँस काट्नेसम्मका काम प्रायः मैले नै गर्थेँ । त्\
+          यसैले गाउँका केटीहरु मलाई केटा बुहारी भनेर जिस्काउँथे ।   उनीहरुसंग बोल्\
+          न मलाई लाज लाग्थ्यो, अनि मैले आमाले घर अगाडी बाटोतिर फर्किनेगरी बनाएको ज\
+          ुठेल्नो खारेज गरेर घरको पछिल्तिर जुठेल्नो बनाएको थिएँ, ताकि मैले भाँडा म\
+          ाझेको कसैले नदेखोस् ।   सबैकुरा गरेपनि मलाई खानेकुरा पकाउँदा अड्कल्न कैल\
+          ्यै आएन । त्यसैले मैले सँधै धेरै धेरै चामल हालेर भात पकाउने अनि भाई र आफ\
+          ुले खाएर धेरै भात बचेमा आमालाई पाटेबटुकामा खाँदी खाँदी राखेर बाँकी गाईको\
+          \ कुँडोमा हालिदिन्थेँ । अनि कसरी चामल धेरैदिन टिकोस् ।   भाई अली आरिसे स\
+          ्वभावको थियो, म भन्दा धेरै सानो भएपनि उसलाई खाना भने मेरो थालमा जति छ त्\
+          यतिनै चाहिने । माग्ने बेलामा धेरै माग्ने, पछि खान नसके कुँडोको ताउलोमा ह\
+          ाल्दिने ।   एकदिन खाना पाकेर हामीले खानुभन्दा पहिल्यै आमा आउनुभो । घरमा\
+          \ तिनजनालाई भनेर पकाएको खाना छ जनालाई पुग्नेजति रहेछ ।   आमा कुर्लिनुभो–\
+          “कति धेरै भात पकाको? दुई छाक पुग्छ यो भातले । कस्ले खान्छ बासीभात साँझ?”\
+          \   भाईले प्वाक्क भन्दियो–“गाईले ।”"
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "ne"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "99"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "NEPALI"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"
