@@ -168,8 +168,7 @@
                         <rabbitmq.ctrl.port>${rabbitmq.ctrl.port}</rabbitmq.ctrl.port>
                         <input.folder>${test.data}</input.folder>
                         <expected.folder>${test.data}</expected.folder>
-                        <datastore.container.id>b591d8c6615c4af99d7915719b01259c</datastore.container.id>
-                        <datastore.enabled>true</datastore.enabled>
+                        <datastore.enabled>false</datastore.enabled>
                     </systemPropertyVariables>
                     <environmentVariables>
                         <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
@@ -381,12 +380,10 @@
                             <run>
                                 <ports>
                                     <port>${worker.adminport}:8081</port>
-                                    <!--<port>15005:5005</port>-->
                                 </ports>
                                 <env>
                                     <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
                                     <CAF_CONFIG_PATH>/config</CAF_CONFIG_PATH>
-                                    <!--<_JAVA_OPTIONS>-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005</_JAVA_OPTIONS>-->
                                 </env>
                                 <volumes>
                                     <from>
