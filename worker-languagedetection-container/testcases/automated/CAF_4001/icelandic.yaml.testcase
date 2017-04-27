@@ -1,0 +1,75 @@
+---
+tag: "CAF_4001/icelandic.yaml"
+testCaseInformation:
+  associatedTickets: CAF-414
+  comments: "CAF_4001/icelandic.yaml"
+  description: Language detection on single language documents
+  testCaseId: "CAF_4001"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "Árlega standa starfsmenn Íslandsbanki fyrir söfnun á þágu góðs málefnis.\
+          \ Að þessu sinni var ákveðið að styrkja Sólstafi vegna frétta sem bárust\
+          \ um að Félagsmálanefnd Ísafjarðarbæjar hefði ekki mælt með að samtökin\
+          \ fengju umbeðin styrk upp á 717.797 en þeim fjármunum var ætlað að standa\
+          \ straum af húsnæðiskostnaði. Niðurstaða eftir vinnslu fjárhagsáætlunar\
+          \ Ísafjarðarbæjar var að samtökin fengju styrk upp á um það bil 300.000.-\
+          \   Starfsmenn bankans tóku söfnunina með trompi og slógu met á þessu á\
+          ri með upphæð upp á kr. 1.018.418.-, almenn og góð þátttaka var meðal starfsmanna\
+          \ bankans og fór söfnunin fram með allskonar þrautum og sektarkerfum. Hö\
+          rpu Oddbjörnsdóttur, starfsmanni Sólstafa, var svo afhentur þessi höfðinglegi\
+          \ stuðningur sem tryggir rekstur þessara því miður bráðnauðsynlegu samtaka.\
+          \   Sólstafir eru systursamtök Stígamóta og eru óformleg grasrótarsamtö\
+          k kvenna, til samtakanna geta þeir leitað sem hafa orðið fyrir kynferðislegu\
+          \ ofbeldi eða þekkja einhvern sem hefur orðið fyrir kynferðislegu ofbeldi.\
+          \ Samtökin voru stofnuð að undirlagi Sunnevu Sigurðardóttur árið 2006 og\
+          \ hafa þau nú aðsetur að Aðalstræti 24 á Ísafirði. Hjá Sólstöfum er bæð\
+          i boðið upp á einkaviðtöl og sjálfshjálparhópa."
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "is"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "99"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "ICELANDIC"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"

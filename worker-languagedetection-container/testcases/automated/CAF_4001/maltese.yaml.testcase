@@ -1,0 +1,74 @@
+---
+tag: "CAF_4001/maltese.yaml"
+testCaseInformation:
+  associatedTickets: CAF-414
+  comments: "CAF_4001/maltese.yaml"
+  description: Language detection on single language documents
+  testCaseId: "CAF_4001"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "L-Ajruport Internazzjonali ta’ Malta se jinvesti €78 miljun fil-faċ\
+          ilitajiet tal-MIA. Waqt konferenza tal-aħbarijiet, il-Kap Eżekuttiv tal-MIA\
+          \ Alan Borg ħabbar li l-pjani ta’ investiment matul is-sena d-dieħla se\
+          \ jkunu nefqa kapitali ta’ €9.8 miljun, espansjoni tat-terminal tal-ajruport\
+          \ b’nefqa ta’ €28 miljun ewro u wara s-suċċess tal-ewwel kumpless, il-kumpanija\
+          \ se tinvesti €40 miljun ewro għal Skyparks 2. Waqt l-istess konferenza\
+          \ tal-aħbarijiet, Alan Borg ħabbar li l-ajruport qed jistenna li jagħlaq\
+          \ din is-sena b’numru rekord ta’ 4.6 miljun passiġġier li għaddew mill-MIA.\
+          \ Il-mitjar biss se jara investiment ta’ €6.3 miljun fir-rijabilitazzjoni\
+          \ ta’ Apron 9, titjib fir-runwa u s-sostituzzjoni tal-ILS, is-sistema ta’\
+          \ strumentazzjoni li tassisti lill-bdoti waqt avviċinament għall-inżul.\
+          \ Għal dak li għandu x’jaqsam mat-terminal, l-MIA qed jinvesti biex ikabbar\
+          \ in-numru ta’ check in desks, is-sala tat-tluq u z-zona tal-kontroll tas-sigurta.\
+          \ Alan Borg qal li Skyparks Business Centre kien suċċess kbir u issa il-kumpanija\
+          \ se tinvesti f’kumpless ieħor b’investiment ta’ madwar €40 miljun fuq medda\
+          \ ta’ 4,000 metru kwadru u li se jġib l-isema ta’ Skyparks 2"
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "mt"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "99"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "MALTESE"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"

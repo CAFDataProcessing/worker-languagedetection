@@ -1,0 +1,105 @@
+---
+tag: "CAF_4001/hungarian.yaml"
+testCaseInformation:
+  associatedTickets: CAF-414
+  comments: "CAF_4001/hungarian.yaml"
+  description: Language detection on single language documents
+  testCaseId: "CAF_4001"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "Aláírásokkal tiltakoznak fideszes szavazók is az ellen, hogy a Testnevelé\
+          si Egyetem sportlétesítményeinek „terjeszkedése” miatt elveszik a Csörsz\
+          \ utca–Avar utca sarkán álló park majdnem harmadát. Már több mint kétszá\
+          zan írták alá az íveket, és azt kérik, mint a Normafa ügyében, itt is talá\
+          ljanak mindenki számára megfelelő megoldást. Szerintük a park nem alku tá\
+          rgya, a kormány viszont aligha mond le a 30 milliárd forintból tervezett\
+          \ campusról. Kérdés, mit tud vagy akar lépni a kerület vezetése. Mi Pokorni\
+          \ Zoltánra szavaztunk, őt választottuk polgármesternek, elvárjuk, hogy most\
+          \ álljon ki mellettünk, képviselje az érdekeinket, és ne a beruházás legyen\
+          \ neki az első – többek között ezt hangoztatták azok a lakók, akik a napokban\
+          \ a XI., a XII., és az I. kerület határán, a Testnevelési Egyetem sportkö\
+          zpontja melletti, nagyjából egyhektáros parkban tüntettek a megmaradásáé\
+          rt. Annak csaknem harmadát ugyanis a jelenlegi tervek szerint elvennék ané\
+          lkül, hogy a helyieket megkérdezték volna, vagy bármilyen egyeztetés, fó\
+          rum vagy konzultáció lett volna. A terv ellen rövid idő alatt több mint\
+          \ 200 aláírás gyűlt össze, az akciót folytatják.  Nem kérnek belőle  Mé\
+          g december 5-én jelentette be Szabó Tünde, az Emberi Erőforrások Miniszté\
+          riuma államtitkára, hogy több mint százezer négyzetméteres területen kezdő\
+          dhet meg a Testnevelési Egyetem fejlesztése a XII. kerületben. Mint ismertette\
+          \ 30 milliárd forintból nem csupán felújítják az egyetemi épületeket, é\
+          s az októberben leégett csarnok helyén uszoda épül, hanem a campus kiegé\
+          szül az Országos Sportegészségügyi Intézet épületeivel, és egy új sportcsarnokot\
+          \ is építenek a Csörsz utcai telep BAH-csomópont felőli oldalán. – Az elké\
+          pzelések szerint az új létesítmény alatt kétszintes mélygarázst alakítanak\
+          \ majd ki, ugyanakkor a Csörsz utcai park „terhére” további, csaknem 3000\
+          \ négyzetméteres zöld területet vennének el – mondta a fejlesztésről korá\
+          bban Mocsai Lajos, a Testnevelési Egyetem rektora.  Arról is beszámolt,\
+          \ hogy már meg is állapodott arról Pokorni Zoltánnal, a XII. kerület fideszes\
+          \ polgármesterével, hogy a közelben hasonló méretű zöld felülettel „kárpó\
+          tolják” majd a környéken élőket. A rektor szerint a mélygarázsban az ott\
+          \ lakók autói is helyet kapnak majd. Ebből viszont nem kérnek a helyben\
+          \ lakók, ők a parkjukat szeretnék. Kiss Józsefné, az aláírásgyűjtés egyik\
+          \ szervezője arról beszélt lapunknak, hogy már 38 éve élnek a Csörsz utcá\
+          ban, abban a házban, amellyel szemben a jövőben már nem park, hanem valamilyen\
+          \ csarnok lenne. Világoszöld épületre mutatott, amely alig pár méterre á\
+          ll a parktól, az utca túloldalán.  Kalapban, piros sállal jelent meg a rö\
+          gtönzött „tiltakozógyűlésen” Róna-Tas András, aki 1975 óta lakik az utcá\
+          ban. Az idős úr szerint ha a Normafa ügyében sikerült a XII. kerületnek\
+          \ egy mindenki számára megfelelő megoldást találnia, akkor nem érti, hogy\
+          \ ez itt miért nem működne. Ő sem tartja jó megoldásnak, hogy a régi neve\
+          \ alapján TF-ként emlegetett Testnevelési Egyetem szeretne „leharapni” egy\
+          \ darabot a parkból, ahol játszótér és egy rendezett kutyafuttató is van.\
+          \ – Nézze azokat a sporteszközöket – mutatott rá a téren lévő, különböző\
+          \ gyakorlatokra alkalmas utcabútorokra – azokat rendszeresen használják\
+          \ a fiatalok, még ilyenkor, hideg időben is. Sok idős ember is jön ide,\
+          \ remélem, nem lesz szükség erősebb fellépésre – mondta a férfi, miközben\
+          \ az aláírásokkal teli papírokat szorongatta."
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "hu"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "99"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "HUNGARIAN"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"

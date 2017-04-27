@@ -413,6 +413,16 @@
                     </images>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <configuration>
+                    <excludes combine.children="append">
+                        <exclude>testcases/**</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -424,6 +434,18 @@
                 <rabbitmq.ctrl.port>15672</rabbitmq.ctrl.port>
                 <rabbitmq.node.port>5672</rabbitmq.node.port>
                 <worker.adminport>8081</worker.adminport>
+            </properties>
+        </profile>
+        <profile>
+            <id>nightly-test</id>
+            <activation>
+                <property>
+                    <name>RE_BUILD_TYPE</name>
+                    <value>release</value>
+                </property>
+            </activation>
+            <properties>
+                <test.data>${project.basedir}/testcases/automated</test.data>
             </properties>
         </profile>
     </profiles>

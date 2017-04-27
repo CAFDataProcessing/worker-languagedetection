@@ -1,0 +1,82 @@
+---
+tag: "CAF_4001/belarusian.yaml"
+testCaseInformation:
+  associatedTickets: CAF-414
+  comments: "CAF_4001/belarusian.yaml"
+  description: Language detection on single language documents
+  testCaseId: "CAF_4001"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "У Крамлі не абмяркоўваюць пытанне зніжэння цэнаў на нафту і газ для\
+          \ Беларусі, заявіў журналістам у Маскве 21 снежня прэс-сакратар прэзідэн\
+          та РФ Дзмітрый Пяскоў.  Пры гэтым ён адзначыў, што формула цэнаўтварэння\
+          \ «дастаткова рухомая» і «крытэрыі ўсе вядомыя».  16 снежня віцэ-прэм'ер\
+          \ Беларусі Уладзімір Сямашка заявіў, што бачыць «падставы для істотнага\
+          \ зніжэння цаны расійскага газу з 1 студзеня», і паведаміў, што дамовіцц\
+          а аб канкрэтнай цане і падрыхтаваць адпаведныя дакументы бакі плануюць д\
+          а 21 снежня. Паводле інфармацыі Сямашка, цяпер цана за расійскі газ на м\
+          яжы Беларусі складае 142 даляры 37 цэнтаў за 1 тыс. кубаметраў.  18 снеж\
+          ня намеснік міністра энергетыкі Беларусі Вадзім Закрэўскі паведаміў журн\
+          алістам, што Мінск і Масква працягваюць перамовы аб зніжэнні ў 2016 годз\
+          е цэны на мяжы за пастаўлены ў Беларусь расійскі газ.  «Зараз ідуць абме\
+          ркавання, кансультацыі з расейскім бокам аб зніжэнні кошту газу на мяжы\
+          . Тое, што ў нас ёсць падставы пра гэта казаць, — гэта факт. Я спадзяюся\
+          , зніжэнне складзе каля 10 даляраў (за 1 тыс. кубаметраў), недзе так», —\
+          \ сказаў Закрэўскі.  20 снежня ў інтэрв'ю тэлеканалу АНТ пасол РФ у Мінс\
+          ку Аляксандр Сурыкаў паведаміў, што цана на газ для Беларусі ў 2016 годз\
+          е можа скласці ад 135 да 140 даляраў за 1 тыс. куб. м. «У нас цэны на эн\
+          ерганосьбіты для Беларусі, як гэта належыць бліжэйшым партнёрам і партнё\
+          рам па Еўразійскім эканамічным саюзе, — унутрырасійскія, — падкрэсліў па\
+          сол. - Я думаю, што нейкія зрухі яшчэ могуць быць па газе, на нейкую кол\
+          ькасць даляраў. Цяпер 142 даляры за тысячу кубаметраў. Можа апынуцца ў р\
+          аёне ад 140 да 135 даляраў. Рух на сусветных рынках ідзе ўніз. І па нафц\
+          е магчымыя нейкія дамоўленасці»."
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "be"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "99"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "BELARUSIAN"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"

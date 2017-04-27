@@ -1,0 +1,102 @@
+---
+tag: "CAF_4001/lithuanian.yaml"
+testCaseInformation:
+  associatedTickets: CAF-414
+  comments: "CAF_4001/lithuanian.yaml"
+  description: Language detection on single language documents
+  testCaseId: "CAF_4001"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "Vykti į Stokholmą ir atstovauti šaliai gegužę vyksiančiame konkurse\
+          \ pretenduoja 28 atlikėjai. Tarp jų – ir labai žinomos, ir dar negirdėtos\
+          \ pavardės.  Sėkmę bandys „4 Roses“, Alice Way, Baiba Skurstenė-Serdiukė\
+          , Berta Timinskaitė, Deividas Žygas, Gabrielė Grigolaitytė-Vasha, „E.G.O.\"\
+          , „HIT\", Ieva Zasimauskaitė, Milda Martinkėnaitė, Neringa Šiaudikytė, Saulenė\
+          \ Chlevickaitė, Donatas Montvydas, Ištvan Kvik, Lawreigna, Ruslanas Kirilkinas,\
+          \ Vlad Kalugin, „Behind the Moon“, Catrinah, Eglė Jakštytė, Elena Jurgaitytė\
+          , Erica Jennings, Jurgis Brūzga, Petunija, Rūta Ščiogolevaitė, Ugnė Smile,\
+          \ Valdas Lacko ir Aistė Pilvelytė.  „Gerūtai Griniūtei kompaniją palaikys\
+          \ bene elegantiškiausio ir profesionaliausio humoro vedėjas Andrius Rož\
+          ickas“, – vedėjų porą pristatė Audrius Giržadas.  A. Rožickas anksčiau LRT\
+          \ TELEVIZIJOJE yra vedęs muzikinius projektus bei laidas su aktore Beata\
+          \ Tiškevič. G. Griniūtė veda LRT KLASIKOS laidą „Muzikinis pastišas“ bei\
+          \ LRT KULTŪROS laidą „Visu garsu“.   Paklausta, ką mano apie „Euroviziją\
+          “, naujoji nacionalinės atrankos vedėja tikino, kad tai – įdomus reiškinys,\
+          \ svarbus daugeliui Lietuvos žmonių. „O A. Rožickas – iššūkis. Tai – įdomus\
+          \ žmogus, su kuriuo, kaip žinia, niekada nenuobodu“, – teigė G. Griniūtė\
+          .  Drauge su A. Giržadu apie atrankos taisykles trumpai papasakojo muzikos\
+          \ vadybininkas Lauras Lučiūnas. „Kiekvieną savaitę balsuos ir komisija,\
+          \ ir žiūrovai, šios taisyklės nekinta. Praėjusiais metais atlikėjai skundė\
+          si, kad reikia atiduoti savo atsineštą dainą į bendrą katilą, ir kartais\
+          \ dainuoti iš jo ištrauktas dainas, kurios netinka ir nepatinka atlikėjui.\
+          \ Tad į šiuos skundus atsižvelgėme ir šįkart konkursas vyks dviem srautais“\
+          \ – pasakojo LRT TELEVIZIJOS vyriausiasis prodiuseris A. Giržadas.  Pirmajame\
+          \ sraute – atlikėjai, atėję su savo paruošta daina, norintys savo kūrinį\
+          \ atlikti tik patys. Jei toks atlikėjas iškrenta, kūrinys taip pat pasitraukia\
+          \ iš konkurso, arba, dainininko sprendimu, perleidžiamas kitam atlikėjui.\
+          \  Kitas srautas – atlikėjai, atėję be dainų ir turintys rinktis iš autorių\
+          \ pasiūlytų kūrinių. Tiesa, jei išsirinkta daina atlikėjui netinka, komisija\
+          \ gali patarti rinktis kitą kūrinį.   „Kompozitorių geografija šiemet –\
+          \ kaip niekad plati. Patys aktyviausi mūsų atrankoje yra ne lietuviai, o\
+          \ švedai. Jie – bene daugiausiai kartų „Eurovizijos“ nugalėtojams dainas\
+          \ sukūrusi tauta. Taip pat yra kompozitorių graikų, nemažai ir lietuvių\
+          \ kompozitorių kūrinių“, – sakė L. Lučiūnas.  Anot jo, komisijos darbo principas\
+          \ išliks toks pat, kaip ir pernai. Viena iš lietuvių komisijos narių – LRT\
+          \ KULTŪROS laidos „Skambantys pasauliai“ vedėja, muzikos pasaulio atstovė\
+          \ Nomeda Kazlaus.  „Taip pat bus užsienio komisija. Pernykščius ekspertus\
+          \ keis kiti – tarp jų bus grupės „Fools Garden“, „Touch and Go“ nariai ir\
+          \ kt.“, – žadėjo L. Lučiūnas.  Tiesa, nacionalinėje atrankoje galioja dar\
+          \ viena taisyklė. Visi, norintys atstovauti Lietuvai „Eurovizijos“ konkurse\
+          \ Stokholme, turi būti Lietuvos piliečiai. Tad kaimyninių šalių atstovams\
+          \ durys yra uždarytos.  Vienintelė šios taisyklės išimtis – E. Jennings,\
+          \ kuri nėra Lietuvos pilietė, bet yra ištekėjusi už lietuvio ir čia gyvena\
+          \ jau daug metų."
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "lt"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "99"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "LITHUANIAN"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"
