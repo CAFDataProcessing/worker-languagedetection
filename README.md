@@ -19,4 +19,4 @@ An interface for language detection implementations. It can be found in [languag
 An implementation of the [language-detection](language-detection) api which wraps the Compact Language Detector 2 library. It can be found in [language-detection-cld2](language-detection-cld2).
 
 ## Feature Testing
-The testing for the Language Detection Worker is defined in [testcases](testcases).
+The testing for the Language Detection Worker is defined in [testcases](worker-languagedetection-container/testcases).
