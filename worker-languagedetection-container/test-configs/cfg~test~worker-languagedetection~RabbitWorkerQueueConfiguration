@@ -3,5 +3,6 @@
     "inputQueue": "LanguageDetectionWorker-input-1",
     "retryQueue": "LanguageDetectionWorker-input-1",
     "rejectedQueue": "LanguageDetectionWorker-rejected-1",
-    "retryLimit": 2
+    "retryLimit": 2,
+    "maxPriority": 255
 }
