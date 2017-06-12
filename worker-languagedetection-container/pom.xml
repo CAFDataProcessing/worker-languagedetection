@@ -305,7 +305,7 @@
                         <!-- Configuration for the worker-languagedetection image -->
                         <image>
                             <alias>worker-languagedetection</alias>
-                            <name>cafinternal/worker-languagedetection:${project.version}</name>
+                            <name>cafinternal/prereleases:worker-languagedetection-${project.version}</name>
                             <build>
                                 <maintainer>connor.mulholland@hpe.com</maintainer>
                                 <from>java:8</from>
