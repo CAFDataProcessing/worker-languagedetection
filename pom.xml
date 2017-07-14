@@ -29,7 +29,7 @@
     <parent>
         <groupId>com.github.cafapi</groupId>
         <artifactId>caf-common</artifactId>
-        <version>1.9.0-197</version>
+        <version>1.12.0-232</version>
     </parent>
     
     <name>Worker-LanguageDetection</name>
