@@ -295,7 +295,7 @@
                         <!-- Configuration for the worker-languagedetection image -->
                         <image>
                             <alias>worker-languagedetection</alias>
-                            <name>cafinternal/prereleases:worker-languagedetection-${project.version}</name>
+                            <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
                             <build>
                                 <maintainer>connor.mulholland@hpe.com</maintainer>
                                 <from>java:8</from>
