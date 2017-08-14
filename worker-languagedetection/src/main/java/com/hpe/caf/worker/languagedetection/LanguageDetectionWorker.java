@@ -102,7 +102,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
                     detectLanguage(document, "CONTENT");
                 } else {
                     //Detect language on field requested
-                    detectLanguage(document, workerLangDetectSourceFieldEnv);;
+                    detectLanguage(document, workerLangDetectSourceFieldEnv);
                 }
             } else {
                 //split comma seperated list of filed to operate on and place the values in an array.

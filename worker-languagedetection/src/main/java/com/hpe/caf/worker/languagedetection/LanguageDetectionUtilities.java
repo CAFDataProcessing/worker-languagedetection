@@ -40,11 +40,12 @@ import org.slf4j.LoggerFactory;
 
 public final class LanguageDetectionUtilities
 {
+
+    private static final Logger LOG = LoggerFactory.getLogger(LanguageDetectionUtilities.class);
+
     private LanguageDetectionUtilities()
     {
     }
-
-    private static final Logger LOG = LoggerFactory.getLogger(LanguageDetectionUtilities.class);
 
     public static SequenceInputStream getFieldValuesAsStreams(final Field sourceDataField, final DataStore dataStore) throws RuntimeException
     {
