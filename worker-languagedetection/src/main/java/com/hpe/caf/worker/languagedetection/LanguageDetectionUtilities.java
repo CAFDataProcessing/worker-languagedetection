@@ -102,14 +102,21 @@ public final class LanguageDetectionUtilities
         if (document.getField(field).hasValues()) {
             document.getField(field).clear();
         }
+
+        boolean requiresUnknown = false;
         // For each language detected, add the name, language code and the percentage of the language detected within the text data to
         // the document.
         if (detectorResult.getLanguages() != null) {
-            detectorResult.getLanguages().forEach((detectedLanguage) -> {
-                document.getField(field).add(detectedLanguage.getConfidencePercentage()
-                    + "% " + detectedLanguage.getLanguageCode());
+            for (DetectedLanguage detectedLanguage : detectorResult.getLanguages()) {
+                if (!detectedLanguage.getLanguageCode().equals("un")) {
+                    document.getField(field).add(detectedLanguage.getConfidencePercentage()
+                        + "% " + detectedLanguage.getLanguageCode());
+                    requiresUnknown = true;
+                }
             }
-            );
+            if (!requiresUnknown) {
+                document.getField(field).add("0% un");
+            }
         }
     }
 

@@ -90,7 +90,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
      * @throws DocumentWorkerTransientException if the document could not be processed
      */
     @Override
-    public void processDocument(Document document) throws InterruptedException, DocumentWorkerTransientException
+    public void processDocument(final Document document) throws InterruptedException, DocumentWorkerTransientException
     {
         try {
             String fields = document.getCustomData("fieldSpecs");
@@ -125,7 +125,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
             LOG.error(e.getMessage());
             document.addFailure(LanguageDetectionConstants.ErrorCodes.FAILED_TO_DETECT_LANGUAGES, e.getMessage());
         } catch (IOException ex) {
-            //Thrown in the even that an input stream fails to close in one of the detect methods
+            //Thrown in the event that an input stream fails to close in one of the detect methods
             LOG.debug("Failed to close InputStream.");
         }
     }
@@ -154,7 +154,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
         }
     }
 
-    private void detectLanguagesOnFields(Document document, String fieldName)
+    private void detectLanguagesOnFields(final Document document, final String fieldName)
         throws LanguageDetectorException, IOException
     {
         LOG.debug("Document source data field to be used {}.", fieldName);

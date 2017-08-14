@@ -1,10 +1,10 @@
 ---
-tag: "multi_field_multi_lang_en_fr_ger_1.yaml"
+tag: "multi_field_multi_lang_en_fr_ger.yaml"
 testCaseInformation:
   associatedTickets: null
-  comments: "multi_field_multi_lang_en_fr_ger_1.yaml"
+  comments: "multi_field_multi_lang_en_fr_ger.yaml"
   description: null
-  testCaseId: "multi_field_multi_lang_en_fr_ger_1.yaml"
+  testCaseId: "multi_field_multi_lang_en_fr_ger.yaml"
 inputData:
   task:
     customData:
@@ -36,11 +36,7 @@ expectedOutputData:
         action: "add"
         values:
         - data: "98% fr"
-        - data: "0% un"
-        - data: "0% un"
       LANGUAGE_CODE_GER_CONTENT:
         action: "add"
         values:
         - data: "98% de"
-        - data: "0% un"
-        - data: "0% un"
