@@ -56,7 +56,6 @@ public class LanguageDetectionWorkerTest {
         Mockito.verify(mockApplication, Mockito.times(1)).getService(Mockito.any());
         Mockito.verify(mockDataStore, Mockito.times(0)).retrieve(Mockito.anyString());
         Mockito.verify(document, Mockito.times(12)).getField(Mockito.anyString());
-        Mockito.verify(document, Mockito.times(1)).getCustomData(Mockito.anyString());
         Mockito.verify(document, Mockito.times(0)).addFailure(Mockito.anyString(), Mockito.anyString());
     }
 
@@ -74,7 +73,6 @@ public class LanguageDetectionWorkerTest {
         Mockito.verify(mockApplication, Mockito.times(1)).getService(Mockito.any());
         Mockito.verify(mockDataStore, Mockito.times(1)).retrieve(Mockito.anyString());
         Mockito.verify(document, Mockito.times(1)).getField(Mockito.anyString());
-        Mockito.verify(document, Mockito.times(0)).getCustomData(Mockito.anyString());
         // LanguageDetectionConstants.ErrorCodes.FAILED_TO_ACQUIRE_SOURCE_DATA should be added as failure id.
         Mockito.verify(document, Mockito.times(1)).addFailure(Mockito.anyString(), Mockito.anyString());
     }
@@ -94,7 +92,6 @@ public class LanguageDetectionWorkerTest {
         Mockito.verify(mockApplication, Mockito.times(1)).getService(Mockito.any());
         Mockito.verify(mockDataStore, Mockito.times(0)).retrieve(Mockito.anyString());
         Mockito.verify(document, Mockito.times(1)).getField(Mockito.anyString());
-        Mockito.verify(document, Mockito.times(0)).getCustomData(Mockito.anyString());
         // LanguageDetectionConstants.ErrorCodes.FAILED_TO_DETECT_LANGUAGES should be added as failure id.
         Mockito.verify(document, Mockito.times(1)).addFailure(Mockito.anyString(), Mockito.anyString());
     }
