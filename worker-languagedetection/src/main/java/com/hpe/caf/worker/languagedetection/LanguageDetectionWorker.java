@@ -15,6 +15,7 @@
  */
 package com.hpe.caf.worker.languagedetection;
 
+import com.google.common.base.Strings;
 import com.hpe.caf.api.worker.DataStore;
 import com.hpe.caf.api.worker.DataStoreException;
 import com.hpe.caf.languagedetection.*;
@@ -28,9 +29,10 @@ import org.slf4j.LoggerFactory;
 
 import static com.hpe.caf.worker.languagedetection.LanguageDetectionUtilities.outputDocumentFieldValueChanges;
 import static com.hpe.caf.worker.languagedetection.LanguageDetectionUtilities.getFieldValuesAsStreams;
-import static com.hpe.caf.worker.languagedetection.LanguageDetectionUtilities.addDetectedLanguagesToDocument;
+import static com.hpe.caf.worker.languagedetection.LanguageDetectionUtilities.addDetectedLanguageToDocument;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Language Detection Worker. This is an implementation of the DocumentWorker interface. The Language Detection Worker receives a Document
@@ -93,23 +95,29 @@ public final class LanguageDetectionWorker implements DocumentWorker
     public void processDocument(final Document document) throws InterruptedException, DocumentWorkerTransientException
     {
         try {
-            String fields = document.getCustomData("fieldSpecs");
-            if (document.getCustomData("fieldSpecs") == null) {
+            final String fields = document.getCustomData("fieldSpecs");
+            if (fields == null) {
                 final String workerLangDetectSourceFieldEnv = System.getenv(
                     LanguageDetectionConstants.EnvironmentVariables.WORKER_LANG_DETECT_SOURCE_FIELD);
-                if (workerLangDetectSourceFieldEnv == null || workerLangDetectSourceFieldEnv.isEmpty()) {
-                    // Default to CONTENT field.
-                    detectLanguage(document, "CONTENT");
-                } else {
-                    //Detect language on field requested
-                    detectLanguage(document, workerLangDetectSourceFieldEnv);
-                }
+                detectLanguage(document,
+                               Strings.isNullOrEmpty(workerLangDetectSourceFieldEnv) ? "CONTENT" : workerLangDetectSourceFieldEnv, false);
             } else {
-                //split comma seperated list of filed to operate on and place the values in an array.
-                final String[] fieldsToDetect = fields.split(",");
+                //Split comma-seperated list of filed to operate on and place the values in an array.
+                final ArrayList<String> fieldsToDetect = new ArrayList<>();
+                for (String field : fields.split(",")) {
+                    if (field.contains("*")) {
+                        final String fieldRegex = field.replace("*", "(.*)");
+                        document.getFields().stream().forEach(fieldName -> {
+                            if (fieldName.getName().matches(fieldRegex)) {
+                                fieldsToDetect.add(fieldName.getName());
+                            }
+                        });
+                    }
+                    fieldsToDetect.add(field.trim());
+                }
                 for (final String fieldName : fieldsToDetect) {
-                    //detect languange for each field requested.
-                    detectLanguagesOnFields(document, fieldName.trim());
+                    //detect language for each field requested.
+                    detectLanguage(document, fieldName.trim(), true);
                 }
             }
         } catch (RuntimeException re) {
@@ -130,7 +138,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
         }
     }
 
-    private void detectLanguage(final Document document, final String fieldName)
+    private void detectLanguage(final Document document, final String fieldName, final boolean addFieldsInNewFormat)
         throws RuntimeException, LanguageDetectorException, IOException
     {
         LOG.debug("Document source data field to be used {}.", fieldName);
@@ -142,36 +150,12 @@ public final class LanguageDetectionWorker implements DocumentWorker
             LOG.debug("Perform language detection.");
             final LanguageDetectorResult detectorResult = languageDetector.detectLanguage(sequenceInputStream);
 
-            // Add detected languages to the document object.
             if (detectorResult != null) {
-                LOG.debug("Adding metadata to the document for each language detected.");
-                addDetectedLanguagesToDocument(detectorResult, document);
-            }
-
-            //  Output response data (i.e. document field value changes).
-            outputDocumentFieldValueChanges(document);
-
-        }
-    }
-
-    private void detectLanguagesOnFields(final Document document, final String fieldName)
-        throws LanguageDetectorException, IOException
-    {
-        LOG.debug("Document source data field to be used {}.", fieldName);
-        final Field sourceDataField = document.getField(fieldName);
-
-        try (final SequenceInputStream sequenceInputStream = getFieldValuesAsStreams(sourceDataField, dataStore)) {
-            // Perform language detection.
-            LOG.debug("Perform language detection.");
-            final LanguageDetectorResult detectorResult = languageDetector.detectLanguage(sequenceInputStream);
-
-            // Add detected languages to the document object.
-            if (detectorResult != null) {
-                LOG.debug("Adding metadata to the document for each language detected.");
-                addDetectedLanguagesToDocument(detectorResult, document, sourceDataField.getName());
+                addDetectedLanguageToDocument(detectorResult, document, sourceDataField, addFieldsInNewFormat);
             }
             //  Output response data (i.e. document field value changes).
             outputDocumentFieldValueChanges(document);
+
         }
     }
 }

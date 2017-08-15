@@ -34,6 +34,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,8 +48,11 @@ public final class LanguageDetectionUtilities
     {
     }
 
-    public static SequenceInputStream getFieldValuesAsStreams(final Field sourceDataField, final DataStore dataStore) throws RuntimeException
+    public static SequenceInputStream getFieldValuesAsStreams(final Field sourceDataField, final DataStore dataStore)
+        throws RuntimeException
     {
+        Objects.requireNonNull(sourceDataField);
+        Objects.requireNonNull(dataStore);
         final List<InputStream> streams = new ArrayList<>();
         for (FieldValue fv : sourceDataField.getValues()) {
             final InputStream is = getInputStream(fv, dataStore);
@@ -59,6 +63,8 @@ public final class LanguageDetectionUtilities
 
     public static void addDetectedLanguagesToDocument(final LanguageDetectorResult detectorResult, final Document document)
     {
+        Objects.requireNonNull(detectorResult);
+        Objects.requireNonNull(document);
         // Add DetectedLanguages_Status field to the document.
         replaceDocumentField(
             document,
@@ -98,24 +104,28 @@ public final class LanguageDetectionUtilities
     public static void addDetectedLanguagesToDocument(final LanguageDetectorResult detectorResult, final Document document,
                                                       final String fieldName)
     {
+        Objects.requireNonNull(detectorResult);
+        Objects.requireNonNull(document);
+        Objects.requireNonNull(fieldName);
         final String field = getLanguageFieldName(fieldName);
 
         if (document.getField(field).hasValues()) {
             document.getField(field).clear();
         }
 
-        boolean requiresUnknown = false;
+        boolean requiresUnknown = true;
         // For each language detected, add the name, language code and the percentage of the language detected within the text data to
         // the document.
         if (detectorResult.getLanguages() != null) {
+            final Field fieldToAdd = document.getField(field);
             for (DetectedLanguage detectedLanguage : detectorResult.getLanguages()) {
                 if (!detectedLanguage.getLanguageCode().equals("un")) {
-                    document.getField(field).add(detectedLanguage.getConfidencePercentage()
+                    fieldToAdd.add(detectedLanguage.getConfidencePercentage()
                         + "% " + detectedLanguage.getLanguageCode());
-                    requiresUnknown = true;
+                    requiresUnknown = false;
                 }
             }
-            if (!requiresUnknown) {
+            if (requiresUnknown) {
                 document.getField(field).add("0% un");
             }
         }
@@ -123,6 +133,7 @@ public final class LanguageDetectionUtilities
 
     public static void outputDocumentFieldValueChanges(final Document document)
     {
+        Objects.requireNonNull(document);
         final String baseOutputDir = System.getenv("CAF_LANG_DETECT_WORKER_OUTPUT_FOLDER");
         final String outputSubdir = document.getCustomData("outputSubfolder");
 
@@ -135,7 +146,7 @@ public final class LanguageDetectionUtilities
         LOG.debug("Outputting document field value changes.");
 
         final Path outputFir = getFullOutputPath(baseOutputDir, outputSubdir);
-        final File outputFile = getFilepath(outputFir, document).toFile();
+        final File outputFile = getFilePath(outputFir, document).toFile();
 
         // Iterate through each of the document fields and output changes where they exist.
         document.getFields().forEach(field -> {
@@ -147,9 +158,29 @@ public final class LanguageDetectionUtilities
         });
     }
 
+    public static void addDetectedLanguageToDocument(final LanguageDetectorResult detectorResult, final Document document,
+                                                      final Field sourceDataField, final boolean addNewFieldFormats)
+    {
+        Objects.requireNonNull(detectorResult);
+        Objects.requireNonNull(document);
+        Objects.requireNonNull(sourceDataField);
+        Objects.requireNonNull(addNewFieldFormats);
+        // Add detected languages to the document object.
+        if (addNewFieldFormats) {
+            LOG.debug("Adding metadata to the document for each language detected.");
+            addDetectedLanguagesToDocument(detectorResult, document, sourceDataField.getName());
+        } else {
+            // Add detected languages to the document object.
+            if (detectorResult != null) {
+                LOG.debug("Adding metadata to the document for each language detected.");
+                addDetectedLanguagesToDocument(detectorResult, document);
+            }
+        }
+    }
+
     private static void replaceDocumentField(final Document document, final String name, final String value)
     {
-        LOG.debug("Adding metadata field {} with value {} to the document.", name, value);
+        LOG.debug("Replacing metadata field {} with value {} to the document.", name, value);
 
         // Get a field object for the specified field.
         final Field documentField = document.getField(name);
@@ -209,7 +240,7 @@ public final class LanguageDetectionUtilities
 
     private static String getLanguageFieldName(final String detectedLanguageField)
     {
-        final String languagePrefix = System.getenv("LANGUAGE_FIELD_PREFIX");
+        final String languagePrefix = System.getenv("WORKER_LANG_DETECT_FIELD_PREFIX");
 
         if (languagePrefix == null) {
             return "LANGUAGE_CODE_" + detectedLanguageField;
@@ -224,14 +255,14 @@ public final class LanguageDetectionUtilities
             : Paths.get(outputDir, outputSubdir);
     }
 
-    private static Path getFilepath(final Path dataOutputFolder, final Document document)
+    private static Path getFilePath(final Path dataOutputFolder, final Document document)
     {
         final String filenameField = getFilenameField();
 
         final String filename = document.getField(filenameField).getValues()
             .stream()
             .filter(fieldValue -> (!fieldValue.isReference()) && fieldValue.isStringValue())
-            .map(fieldValue -> fieldValue.getStringValue())
+            .map(FieldValue::getStringValue)
             .filter(fieldValue -> {
                 try {
                     dataOutputFolder.resolve(fieldValue);

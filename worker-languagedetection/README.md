@@ -14,7 +14,11 @@ Worker configuration is supported through the following environment variables:
 
  - `WORKER_LANG_DETECT_SOURCE_FIELD`  
     Default: `CONTENT`  
-    Used to specify which document field is used for data sources
+    Used to specify which document field is used for data sources, however if fieldSpecs is passed as custom data this value is ignored.
+
+-  `WORKER_LANG_DETECT_FIELD_PREFIX`
+	Default: `LANGUAGE_CODE_`
+    This is used when processing using the new mode of operation that can process multiple fields at the same time. It will specify the name of the field that is to be added to the document to record results. For example if the worker is checking the `CONTENT` field it will add the field `LANGUAGE_CODE_CONTENT` to the document.
 
  - `CAF_WORKER_THREADS`  
     Default: `1`  
@@ -24,7 +28,15 @@ Worker configuration is supported through the following environment variables:
     Default: `worker-out`  
     Sets the output queue where results are returned
 
+### Per Tenant Settings
+ - `fieldSpecs`  
+    This field specifies to the worker on what fields to perform language detection. It is a string of comma-seperated values, each value will either be a complete field name or a partial field name supplied with a wildcard character "*".
+    **Example:** `{"fieldSpecs": "CONTENT_*, TITLE, SUBJECT"}`
+	This Example will cause the worker to check the TITLE and SUBJECT fields of the document provided as well as any field that begins `CONTENT_`.
+
 ## Output Format
+
+#### Standard processing:
 
 The document is marked up with a list of the languages detected as well as the confidence in the result. The following fields are added:
 
@@ -40,6 +52,13 @@ e.g. DetectedLanguage1\_Code:"en"
 e.g. DetectedLanguage1\_ConfidencePercentage:100
 
 - DetectedLanguages_ReliableResult : A boolean flag that signals whether the result is reliable. 
+
+#### Multi-Field Processing:
+
+- `WORKER_LANG_DETECT_FIELD_PREFIX$FieldName`: 
+   This field will contain two values at present, the first value in this string will be the percentage of the detected language, e.g. `98%`. The second value in the string after a space will be the language that was detected language code, e.g. `en`. If a field is multi value this result will be a combined result for all of the values.
+
+**NOTE:** This fields value may be extended in future, between each value within this string will be a space separating the result values. In future confidence percentage could also be added.
 
 ### Temporary File Output Mode
 The detected languages are always added to the document as fields, but the current version of the worker also supports a second mode for additionally returning the detected languages.  Setting the `CAF_LANG_DETECT_WORKER_OUTPUT_FOLDER` environment variable causes the detected languages to be written to disk.
