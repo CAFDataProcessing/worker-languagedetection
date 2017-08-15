@@ -126,7 +126,8 @@ public final class LanguageDetectionUtilities
                 }
             }
             if (requiresUnknown) {
-                document.getField(field).add("0% un");
+                //Adding Field to document to signify that all of the fields content was of an unknown language
+                document.getField(field).add("100% un");
             }
         }
     }

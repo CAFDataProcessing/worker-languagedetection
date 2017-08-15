@@ -6,6 +6,8 @@ The library is not designed to do well on very short text, short lists of names,
 
 Several hints can be supplied which add a bias to the language detection but do not force a specific language to be the detection result. For example: "en" boosts English, "mi, fr" boosts Maori and French, "ITALIAN" boosts Italian, "SJS" boosts Japanese. Hints should be supplied whenever possible as they improve detection accuracy.
 
+The Language Detection work has two modes of operation. The first is a standard mode of operation that will cause to worker to perform language detection on the `CONTENT` field should no other field be specified via environment variable. However, if `fieldSpecs` is provided to the worker on the documents `customData` the worker will being to identify any languages present on all of the fields specified. See [Per Tenant Settings](#per-tenant-values) for more information on this field.
+
 ## Configuration
 
 ### Global Settings
@@ -29,9 +31,13 @@ Worker configuration is supported through the following environment variables:
     Sets the output queue where results are returned
 
 ### Per Tenant Settings
+
+When `fieldSpecs` is provided to the worker via `customData` the worker's behaviour will change and the worker will begin [Multi-Field Processing](#multi-field-processing).
+
  - `fieldSpecs`  
     This field specifies to the worker on what fields to perform language detection. It is a string of comma-seperated values, each value will either be a complete field name or a partial field name supplied with a wildcard character "*".
-    **Example:** `{"fieldSpecs": "CONTENT_*, TITLE, SUBJECT"}`
+    
+**Example:** `{"fieldSpecs": "CONTENT_*, TITLE, SUBJECT"}`
 	This Example will cause the worker to check the TITLE and SUBJECT fields of the document provided as well as any field that begins `CONTENT_`.
 
 ## Output Format
