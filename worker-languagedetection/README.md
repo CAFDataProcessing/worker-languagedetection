@@ -6,6 +6,8 @@ The library is not designed to do well on very short text, short lists of names,
 
 Several hints can be supplied which add a bias to the language detection but do not force a specific language to be the detection result. For example: "en" boosts English, "mi, fr" boosts Maori and French, "ITALIAN" boosts Italian, "SJS" boosts Japanese. Hints should be supplied whenever possible as they improve detection accuracy.
 
+The Language Detection worker has two modes of operation, Standard Processing and Multi-Field Processing. The first mode of operation will cause the worker to perform language detection on the `CONTENT` field should no other field be specified via an environment variable. However, if `fieldSpecs` is provided to the worker on the document's `customData` the worker will begin to use Multi-Field Processing mode and identify any languages present on all of the fields specified. See [Per Tenant Settings](#per-tenant-settings) for more information on this field.
+
 ## Configuration
 
 ### Global Settings
@@ -14,7 +16,12 @@ Worker configuration is supported through the following environment variables:
 
  - `WORKER_LANG_DETECT_SOURCE_FIELD`  
     Default: `CONTENT`  
-    Used to specify which document field is used for data sources
+    Used to specify which document field is used for data sources.  
+	However if fieldSpecs is passed as custom data this value is ignored.
+
+-  `WORKER_LANG_DETECT_FIELD_PREFIX`  
+	Default: `LANGUAGE_CODE_`  
+    This is used when processing using the Multi-Field mode of operation that can process multiple fields at the same time. It will specify the field name prefix to use when creating a field that will be added to the document to record results. For example if the worker is checking the `CONTENT` field it will add the field `LANGUAGE_CODE_CONTENT` to the document.
 
  - `CAF_WORKER_THREADS`  
     Default: `1`  
@@ -24,7 +31,20 @@ Worker configuration is supported through the following environment variables:
     Default: `worker-out`  
     Sets the output queue where results are returned
 
+### Per Tenant Settings
+
+When `fieldSpecs` is provided to the worker via `customData` the worker's behaviour will change and the worker will begin [Multi-Field Processing](#multi-field-processing).
+
+ - `fieldSpecs`  
+    This parameter specifies to the worker the fields on which to perform language detection. It is a string of comma-separated values, each of which is either a complete field name or a partial field name supplied with a wildcard character "*". The wildcard character is supported at any position within any of the values of this parameter.
+    
+**Example:**   
+	`{"fieldSpecs": "CONTENT_*, TITLE, SUBJECT"}`  
+	This Example will cause the worker to check the TITLE and SUBJECT fields of the document provided as well as any field that begins `CONTENT_`.
+
 ## Output Format
+
+#### Standard processing:
 
 The document is marked up with a list of the languages detected as well as the confidence in the result. The following fields are added:
 
@@ -40,6 +60,14 @@ e.g. DetectedLanguage1\_Code:"en"
 e.g. DetectedLanguage1\_ConfidencePercentage:100
 
 - DetectedLanguages_ReliableResult : A boolean flag that signals whether the result is reliable. 
+
+#### Multi-Field Processing:
+
+- `WORKER_LANG_DETECT_FIELD_PREFIX + $FieldName`: 
+   This field will contain two values at present, the first value in this string will be the percentage of the detected language, e.g. `98%`. The second value in the string after a space will be the language that was detected language code, e.g. `en`. If a field is multi value this result will be a combined result for all of the values.       
+   **e.g.** `LANGUAGE_CODE_CONTENT: 99% en`
+
+**NOTE:** In future we may expand the field value to include whether the result is unreliable so it is recommended to split on spaces and take the second value to retrieve the language code. Any additions to the value will include a space before the new value.
 
 ### Temporary File Output Mode
 The detected languages are always added to the document as fields, but the current version of the worker also supports a second mode for additionally returning the detected languages.  Setting the `CAF_LANG_DETECT_WORKER_OUTPUT_FOLDER` environment variable causes the detected languages to be written to disk.

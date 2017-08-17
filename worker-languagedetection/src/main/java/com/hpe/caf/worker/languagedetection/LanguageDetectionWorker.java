@@ -15,6 +15,7 @@
  */
 package com.hpe.caf.worker.languagedetection;
 
+import com.google.common.base.Strings;
 import com.hpe.caf.api.worker.DataStore;
 import com.hpe.caf.api.worker.DataStoreException;
 import com.hpe.caf.languagedetection.*;
@@ -23,16 +24,15 @@ import com.hpe.caf.util.ModuleLoaderException;
 import com.hpe.caf.worker.document.exceptions.DocumentWorkerTransientException;
 import com.hpe.caf.worker.document.extensibility.DocumentWorker;
 import com.hpe.caf.worker.document.model.*;
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static com.hpe.caf.worker.languagedetection.LanguageDetectionUtilities.outputDocumentFieldValueChanges;
+import static com.hpe.caf.worker.languagedetection.LanguageDetectionUtilities.getFieldValuesAsStreams;
+import static com.hpe.caf.worker.languagedetection.LanguageDetectionUtilities.addDetectedLanguageToDocument;
+
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * Language Detection Worker. This is an implementation of the DocumentWorker interface. The Language Detection Worker receives a Document
@@ -92,48 +92,34 @@ public final class LanguageDetectionWorker implements DocumentWorker
      * @throws DocumentWorkerTransientException if the document could not be processed
      */
     @Override
-    public void processDocument(Document document) throws InterruptedException, DocumentWorkerTransientException
+    public void processDocument(final Document document) throws InterruptedException, DocumentWorkerTransientException
     {
-        // Identify source data field.
-        final String sourceDataFieldName;
-        final String workerLangDetectSourceFieldEnv
-            = System.getenv(LanguageDetectionConstants.EnvironmentVariables.WORKER_LANG_DETECT_SOURCE_FIELD);
-        if (workerLangDetectSourceFieldEnv == null || workerLangDetectSourceFieldEnv.isEmpty()) {
-            // Default to CONTENT field.
-            sourceDataFieldName = "CONTENT";
-        } else {
-            sourceDataFieldName = workerLangDetectSourceFieldEnv;
-        }
-
-        LOG.debug("Document source data field to be used {}.", sourceDataFieldName);
-        final Field sourceDataField = document.getField(sourceDataFieldName);
-
-        SequenceInputStream sequenceInputStream = null;
         try {
-
-            // Identify all source datas for the language detection worker.
-            final List<InputStream> streams = new ArrayList<>();
-            for (FieldValue fv : sourceDataField.getValues()) {
-                final InputStream is = getInputStream(fv);
-                streams.add(is);
+            final String fields = document.getCustomData("fieldSpecs");
+            if (fields == null) {
+                final String workerLangDetectSourceFieldEnv = System.getenv(
+                    LanguageDetectionConstants.EnvironmentVariables.WORKER_LANG_DETECT_SOURCE_FIELD);
+                detectLanguage(document,
+                               Strings.isNullOrEmpty(workerLangDetectSourceFieldEnv) ? "CONTENT" : workerLangDetectSourceFieldEnv, false);
+            } else {
+                //Split comma-separated list of filed to operate on and place the values in an array.
+                final ArrayList<String> fieldsToDetect = new ArrayList<>();
+                for (String field : fields.split(",")) {
+                    if (field.contains("*")) {
+                        final String fieldRegex = field.replace("*", "(.*)");
+                        document.getFields().stream().forEach(fieldName -> {
+                            if (fieldName.getName().matches(fieldRegex)) {
+                                fieldsToDetect.add(fieldName.getName());
+                            }
+                        });
+                    }
+                    fieldsToDetect.add(field.trim());
+                }
+                for (final String fieldName : fieldsToDetect) {
+                    //detect language for each field requested.
+                    detectLanguage(document, fieldName.trim(), true);
+                }
             }
-
-            //  Convert streams list to InputStream.
-            sequenceInputStream = new SequenceInputStream(Collections.enumeration(streams));
-
-            // Perform language detection.
-            LOG.debug("Perform language detection.");
-            final LanguageDetectorResult detectorResult = languageDetector.detectLanguage(sequenceInputStream);
-
-            // Add detected languages to the document object.
-            if (detectorResult != null) {
-                LOG.debug("Adding metadata to the document for each language detected.");
-                addDetectedLanguagesToDocument(detectorResult, document);
-            }
-
-            //  Output response data (i.e. document field value changes).
-            outputDocumentFieldValueChanges(document);
-
         } catch (RuntimeException re) {
             final Throwable cause = re.getCause();
 
@@ -146,188 +132,30 @@ public final class LanguageDetectionWorker implements DocumentWorker
         } catch (LanguageDetectorException e) {
             LOG.error(e.getMessage());
             document.addFailure(LanguageDetectionConstants.ErrorCodes.FAILED_TO_DETECT_LANGUAGES, e.getMessage());
-        } finally {
-            //  Close InputStream.
-            try {
-                if (sequenceInputStream != null) sequenceInputStream.close();
-            } catch (IOException e) {
-                LOG.debug("Failed to close InputStream.");
-            }
+        } catch (IOException ex) {
+            //Thrown in the event that an input stream fails to close in one of the detect methods
+            LOG.debug("Failed to close InputStream.");
         }
     }
 
-    private static void addDetectedLanguagesToDocument(LanguageDetectorResult detectorResult, Document document)
+    private void detectLanguage(final Document document, final String fieldName, final boolean inMultiFieldMode)
+        throws RuntimeException, LanguageDetectorException, IOException
     {
-        // Add DetectedLanguages_Status field to the document.
-        replaceDocumentField(
-            document,
-            LanguageDetectionConstants.Fields.DETECTED_LANGUAGES_STATUS,
-            detectorResult.getLanguageDetectorStatus().toString());
+        LOG.debug("Document source data field to be used {}.", fieldName);
+        final Field sourceDataField = document.getField(fieldName);
 
-        // Add DetectedLanguages_ReliableResult field to the document.
-        replaceDocumentField(
-            document,
-            LanguageDetectionConstants.Fields.DETECTED_LANGUAGES_RELIABLERESULT,
-            String.valueOf(detectorResult.isReliable()));
+        try (final SequenceInputStream sequenceInputStream = getFieldValuesAsStreams(sourceDataField, dataStore)) {
 
-        // For each language detected, add the name, language code and the percentage of the language detected within the text data to
-        // the document.
-        if (detectorResult.getLanguages() != null) {
-            int languageId = 0;
-            for (DetectedLanguage detectedLanguage : detectorResult.getLanguages()) {
-                languageId++;
-                replaceDocumentField(
-                    document,
-                    getLanguageNameFieldName(languageId),
-                    detectedLanguage.getLanguageName());
+            // Perform language detection.
+            LOG.debug("Perform language detection.");
+            final LanguageDetectorResult detectorResult = languageDetector.detectLanguage(sequenceInputStream);
 
-                replaceDocumentField(
-                    document,
-                    getLanguageCodeFieldName(languageId),
-                    detectedLanguage.getLanguageCode());
-
-                replaceDocumentField(
-                    document,
-                    getLanguagePercentageFieldName(languageId),
-                    String.valueOf(detectedLanguage.getConfidencePercentage()));
+            if (detectorResult != null) {
+                addDetectedLanguageToDocument(detectorResult, document, sourceDataField, inMultiFieldMode);
             }
-        }
-    }
+            //  Output response data (i.e. document field value changes).
+            outputDocumentFieldValueChanges(document);
 
-    private static void replaceDocumentField(Document document, String name, String value)
-    {
-        LOG.debug("Adding metadata field {} with value {} to the document.", name, value);
-
-        // Get a field object for the specified field.
-        final Field documentField = document.getField(name);
-
-        // Remove all values from the field.
-        documentField.clear();
-
-        // Add the specified value to the field.
-        documentField.add(value);
-    }
-
-    private InputStream getInputStream(FieldValue fieldValue) throws RuntimeException
-    {
-        final InputStream is;
-
-        try {
-            // Check if data is stored in the remote data store.
-            if (fieldValue.isReference()) {
-                LOG.debug("Field value data is stored in the remote data store.");
-                is = dataStore.retrieve(fieldValue.getReference());
-            } else {
-                LOG.debug("Field value data is local.");
-                is = new ByteArrayInputStream(fieldValue.getValue());
-            }
-        } catch (DataStoreException dse) {
-            LOG.error("Failed to acquire source data from the remote data store");
-            // Convert to unchecked exception for streams api usage.
-            throw new RuntimeException(dse);
-        }
-
-        return is;
-    }
-
-    private static String getLanguageNameFieldName(int detectedLanguageId)
-    {
-        return LanguageDetectionConstants.Fields.DETECTED_LANGUAGE_PREFIX
-            + String.valueOf(detectedLanguageId)
-            + "_"
-            + LanguageDetectionConstants.Fields.DETECTED_LANGUAGE_NAME_SUFFIX;
-    }
-
-    private static String getLanguageCodeFieldName(int detectedLanguageId)
-    {
-        return LanguageDetectionConstants.Fields.DETECTED_LANGUAGE_PREFIX
-            + String.valueOf(detectedLanguageId)
-            + "_"
-            + LanguageDetectionConstants.Fields.DETECTED_LANGUAGE_CODE_SUFFIX;
-    }
-
-    private static String getLanguagePercentageFieldName(int detectedLanguageId)
-    {
-        return LanguageDetectionConstants.Fields.DETECTED_LANGUAGE_PREFIX
-            + String.valueOf(detectedLanguageId)
-            + "_"
-            + LanguageDetectionConstants.Fields.DETECTED_LANGUAGE_PERCENTAGE_SUFFIX;
-    }
-
-    private static void outputDocumentFieldValueChanges(final Document document)
-    {
-        final String baseOutputDir = System.getenv("CAF_LANG_DETECT_WORKER_OUTPUT_FOLDER");
-        final String outputSubdir = document.getCustomData("outputSubfolder");
-
-        // Only output document field value changes if configured to do so
-        if (baseOutputDir == null || baseOutputDir.isEmpty()) {
-            LOG.debug("No response data output folder specified.");
-            return;
-        }
-
-        LOG.debug("Outputting document field value changes.");
-
-        final Path outputFir = getFullOutputPath(baseOutputDir, outputSubdir);
-        final File outputFile = getFilepath(outputFir, document).toFile();
-
-        // Iterate through each of the document fields and output changes where they exist.
-        document.getFields().forEach(field -> {
-            try {
-                appendFieldValueChangesToFile(field, outputFile);
-            } catch (IOException ioe) {
-                LOG.warn("Failed to output document field value changes", ioe);
-            }
-        });
-    }
-
-    private static Path getFullOutputPath(final String outputDir, final String outputSubdir)
-    {
-        return (outputSubdir == null)
-            ? Paths.get(outputDir)
-            : Paths.get(outputDir, outputSubdir);
-    }
-
-    private static Path getFilepath(final Path dataOutputFolder, final Document document)
-    {
-        final String filenameField = getFilenameField();
-
-        final String filename = document.getField(filenameField).getValues()
-            .stream()
-            .filter(fieldValue -> (!fieldValue.isReference()) && fieldValue.isStringValue())
-            .map(fieldValue -> fieldValue.getStringValue())
-            .filter(fieldValue -> {
-                try {
-                    dataOutputFolder.resolve(fieldValue);
-                    return true;
-                } catch (InvalidPathException ex) {
-                    return false;
-                }
-            })
-            .findFirst()
-            .orElse("out.txt");
-
-        return dataOutputFolder.resolve(filename);
-    }
-
-    private static String getFilenameField()
-    {
-        final String filenameField = System.getenv("CAF_LANG_DETECT_WORKER_OUTPUT_FILENAME_FIELD");
-
-        return (filenameField == null || filenameField.isEmpty())
-            ? "FILE_NAME"
-            : filenameField;
-    }
-
-    private static void appendFieldValueChangesToFile(Field field, File dataOutputFile) throws IOException
-    {
-        // Output document field value changes.
-        if (field.hasChanges() && field.hasValues()) {
-            for (FieldValue fv : field.getValues()) {
-                if (!fv.isReference()) {
-                    final String changeValueDetails = field.getName() + ": " + fv.getStringValue() + "\r\n";
-                    FileUtils.writeStringToFile(dataOutputFile, changeValueDetails, StandardCharsets.UTF_8, true);
-                }
-            }
         }
     }
 }
