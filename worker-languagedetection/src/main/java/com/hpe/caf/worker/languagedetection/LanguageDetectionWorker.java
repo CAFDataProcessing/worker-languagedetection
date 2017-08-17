@@ -109,7 +109,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
                     if (field.contains("*")) {
                         final String fieldRegex = field.replace("*", "(.*)");
                         document.getFields().stream().forEach(documentField -> {
-                            if (documentField.getName().toLowerCase(Locale.ENGLISH).matches(fieldRegex.toLowerCase(Locale.ENGLISH))) {
+                            if (documentField.getName().toLowerCase(Locale.ENGLISH).matches(fieldRegex.toLowerCase(Locale.ENGLISH).trim())) {
                                 fieldsToDetect.add(documentField.getName());
                             }
                         });
