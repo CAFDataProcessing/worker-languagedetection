@@ -33,6 +33,7 @@ import static com.hpe.caf.worker.languagedetection.LanguageDetectionUtilities.ad
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * Language Detection Worker. This is an implementation of the DocumentWorker interface. The Language Detection Worker receives a Document
@@ -107,13 +108,14 @@ public final class LanguageDetectionWorker implements DocumentWorker
                 for (String field : fields.split(",")) {
                     if (field.contains("*")) {
                         final String fieldRegex = field.replace("*", "(.*)");
-                        document.getFields().stream().forEach(fieldName -> {
-                            if (fieldName.getName().matches(fieldRegex)) {
-                                fieldsToDetect.add(fieldName.getName());
+                        document.getFields().stream().forEach(documentField -> {
+                            if (documentField.getName().toLowerCase(Locale.ENGLISH).matches(fieldRegex.toLowerCase(Locale.ENGLISH))) {
+                                fieldsToDetect.add(documentField.getName());
                             }
                         });
+                    } else {
+                        fieldsToDetect.add(field.trim());
                     }
-                    fieldsToDetect.add(field.trim());
                 }
                 for (final String fieldName : fieldsToDetect) {
                     //detect language for each field requested.
