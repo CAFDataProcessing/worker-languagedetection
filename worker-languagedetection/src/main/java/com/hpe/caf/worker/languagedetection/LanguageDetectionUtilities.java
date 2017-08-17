@@ -160,22 +160,20 @@ public final class LanguageDetectionUtilities
     }
 
     public static void addDetectedLanguageToDocument(final LanguageDetectorResult detectorResult, final Document document,
-                                                      final Field sourceDataField, final boolean addNewFieldFormats)
+                                                     final Field sourceDataField, final boolean inMultiFeildMode)
     {
         Objects.requireNonNull(detectorResult);
         Objects.requireNonNull(document);
         Objects.requireNonNull(sourceDataField);
-        Objects.requireNonNull(addNewFieldFormats);
+        Objects.requireNonNull(inMultiFeildMode);
         // Add detected languages to the document object.
-        if (addNewFieldFormats) {
+        if (inMultiFeildMode) {
             LOG.debug("Adding metadata to the document for each language detected.");
             addDetectedLanguagesToDocument(detectorResult, document, sourceDataField.getName());
         } else {
             // Add detected languages to the document object.
-            if (detectorResult != null) {
-                LOG.debug("Adding metadata to the document for each language detected.");
-                addDetectedLanguagesToDocument(detectorResult, document);
-            }
+            LOG.debug("Adding metadata to the document for each language detected.");
+            addDetectedLanguagesToDocument(detectorResult, document);
         }
     }
 

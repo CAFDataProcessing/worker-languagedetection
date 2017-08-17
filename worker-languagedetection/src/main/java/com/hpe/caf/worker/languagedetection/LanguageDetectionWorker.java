@@ -102,7 +102,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
                 detectLanguage(document,
                                Strings.isNullOrEmpty(workerLangDetectSourceFieldEnv) ? "CONTENT" : workerLangDetectSourceFieldEnv, false);
             } else {
-                //Split comma-seperated list of filed to operate on and place the values in an array.
+                //Split comma-separated list of filed to operate on and place the values in an array.
                 final ArrayList<String> fieldsToDetect = new ArrayList<>();
                 for (String field : fields.split(",")) {
                     if (field.contains("*")) {
@@ -138,7 +138,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
         }
     }
 
-    private void detectLanguage(final Document document, final String fieldName, final boolean addFieldsInNewFormat)
+    private void detectLanguage(final Document document, final String fieldName, final boolean inMultiFieldMode)
         throws RuntimeException, LanguageDetectorException, IOException
     {
         LOG.debug("Document source data field to be used {}.", fieldName);
@@ -151,7 +151,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
             final LanguageDetectorResult detectorResult = languageDetector.detectLanguage(sequenceInputStream);
 
             if (detectorResult != null) {
-                addDetectedLanguageToDocument(detectorResult, document, sourceDataField, addFieldsInNewFormat);
+                addDetectedLanguageToDocument(detectorResult, document, sourceDataField, inMultiFieldMode);
             }
             //  Output response data (i.e. document field value changes).
             outputDocumentFieldValueChanges(document);
