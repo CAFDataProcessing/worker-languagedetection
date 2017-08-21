@@ -78,7 +78,7 @@
     </developers>
 
     <properties>
-        <caf.worker-document-framework.version>3.1.0-SNAPSHOT</caf.worker-document-framework.version>
+        <caf.worker-document-framework.version>3.1.0-68</caf.worker-document-framework.version>
         <dockerHubOrganization>cafdataprocessing</dockerHubOrganization>
         <dockerCafDataProcessingOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafDataProcessingOrg>
         <dockerProjectVersion>${dockerVersionSeperator}${project.version}</dockerProjectVersion>
