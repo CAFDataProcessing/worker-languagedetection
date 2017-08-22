@@ -1,6 +1,6 @@
 {
     "workerName": "LanguageDetectionWorker",
-    "workerVersion": "2.3.0",
+    "workerVersion": "2.3.1",
     "outputQueue": "LanguageDetectionWorker-output-1",
     "threads": 1,
     "maxBatchSize": 2,
