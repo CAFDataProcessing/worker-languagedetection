@@ -208,7 +208,7 @@
                             <goal>push</goal>
                         </goals>
                         <configuration>
-                            <image>worker-languagedetection</image>
+                            <filter>worker-languagedetection</filter>
                         </configuration>
                     </execution>
                 </executions>
