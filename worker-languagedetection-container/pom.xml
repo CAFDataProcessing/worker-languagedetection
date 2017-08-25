@@ -172,9 +172,9 @@
                 for running the integration tests.
             -->
             <plugin>
-                <groupId>org.jolokia</groupId>
+                <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>${docker.maven.version}</version>
+                <version>${fabric8.docker.maven.version}</version>
                 <executions>
                     <!-- Build the container in compile phase. -->
                     <execution>
@@ -312,6 +312,9 @@
                                         <args>/maven/worker.sh</args>
                                     </exec>
                                 </entryPoint>
+                                <healthCheck>
+                                    <cmd>curl -f http://localhost:8081/healthcheck || exit 1</cmd>
+                                </healthCheck>
                                 <assembly>
                                     <mode>tar</mode>
                                     <inline>
