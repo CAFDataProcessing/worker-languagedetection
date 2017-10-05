@@ -96,12 +96,16 @@ public final class LanguageDetectionWorker implements DocumentWorker
     public void processDocument(final Document document) throws InterruptedException, DocumentWorkerTransientException
     {
         try {
-            final String fields = document.getCustomData("fieldSpecs");
+            final String fields = document.getCustomData(LanguageDetectionConstants.CustomData.FIELD_SPECS);
+            final LanguageDetectionResultFormat resultFormat = getResultFormatToUse(document);
+
             if (fields == null) {
                 final String workerLangDetectSourceFieldEnv = System.getenv(
                     LanguageDetectionConstants.EnvironmentVariables.WORKER_LANG_DETECT_SOURCE_FIELD);
                 detectLanguage(document,
-                               Strings.isNullOrEmpty(workerLangDetectSourceFieldEnv) ? "CONTENT" : workerLangDetectSourceFieldEnv, false);
+                               Strings.isNullOrEmpty(workerLangDetectSourceFieldEnv) ? "CONTENT" : workerLangDetectSourceFieldEnv,
+                        false, resultFormat
+                        );
             } else {
                 //Split comma-separated list of filed to operate on and place the values in an array.
                 final ArrayList<String> fieldsToDetect = new ArrayList<>();
@@ -117,9 +121,16 @@ public final class LanguageDetectionWorker implements DocumentWorker
                         fieldsToDetect.add(field.trim());
                     }
                 }
+                if(fieldsToDetect.size() > 1 && LanguageDetectionResultFormat.COMPLEX.equals(resultFormat)) {
+                    document.addFailure(LanguageDetectionConstants.ErrorCodes.INVALID_CUSTOM_DATA_VALUES,
+                            "Multiple fields are not supported on the '"
+                                    +LanguageDetectionConstants.CustomData.FIELD_SPECS+"' task property when '"
+                                    +LanguageDetectionConstants.CustomData.RESULT_FORMAT+"' is set to COMPLEX.");
+                    return;
+                }
                 for (final String fieldName : fieldsToDetect) {
                     //detect language for each field requested.
-                    detectLanguage(document, fieldName.trim(), true);
+                    detectLanguage(document, fieldName.trim(), true, resultFormat);
                 }
             }
         } catch (RuntimeException re) {
@@ -140,7 +151,8 @@ public final class LanguageDetectionWorker implements DocumentWorker
         }
     }
 
-    private void detectLanguage(final Document document, final String fieldName, final boolean inMultiFieldMode)
+    private void detectLanguage(final Document document, final String fieldName, final boolean inMultiFieldMode,
+                                final LanguageDetectionResultFormat resultFormat)
         throws RuntimeException, LanguageDetectorException, IOException
     {
         LOG.debug("Document source data field to be used {}.", fieldName);
@@ -153,11 +165,29 @@ public final class LanguageDetectionWorker implements DocumentWorker
             final LanguageDetectorResult detectorResult = languageDetector.detectLanguage(sequenceInputStream);
 
             if (detectorResult != null) {
-                addDetectedLanguageToDocument(detectorResult, document, sourceDataField, inMultiFieldMode);
+                addDetectedLanguageToDocument(detectorResult, document, sourceDataField, resultFormat, inMultiFieldMode);
             }
             //  Output response data (i.e. document field value changes).
             outputDocumentFieldValueChanges(document);
 
+        }
+    }
+
+    /**
+     * Determines the result output format that should be used with current document.
+     * @param document Document that results will be output for.
+     * @return the result format to use when outputting language detection results.
+     */
+    private LanguageDetectionResultFormat getResultFormatToUse(Document document)
+    {
+        final String resultFormatStr = document.getCustomData(LanguageDetectionConstants.CustomData.RESULT_FORMAT);
+        if(Strings.isNullOrEmpty(resultFormatStr)){
+            return LanguageDetectionResultFormat.SIMPLE;
+        }
+        else {
+            LanguageDetectionResultFormat convertedResultFormat =
+                    LanguageDetectionResultFormat.tryGetValueOf(resultFormatStr);
+            return convertedResultFormat == null ? LanguageDetectionResultFormat.SIMPLE : convertedResultFormat;
         }
     }
 }
