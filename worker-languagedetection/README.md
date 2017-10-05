@@ -66,7 +66,9 @@ This format will change the output result to be a single field on the document w
 
 **Example Output Field**
 
+```
 LANGUAGE_CODES: "[{\"CODE\":\"de\",\"CONFIDENCE\":\"37\"},{\"CODE\":\"fr\",\"CONFIDENCE\":\"35\"},{\"CODE\":\"en\",\"CONFIDENCE\":\"27\"}]"
+```
 
 The `fieldSpecs` property may be passed alongside `resultFormat` to control the field used in language detection however multiple fields in `fieldSpecs` when `resultFormat` is set to *COMPLEX* is not supported and will cause a failure to be added to the document.
 
@@ -74,7 +76,9 @@ In the complex format if no known languages are detected then the language code 
 
 **Example**
 
+```
 LANGUAGE_CODES: "[{\"CODE\":\"un\",\"CONFIDENCE\":\"100\"}]"
+```
 
 ### Simple Output Formats
 
