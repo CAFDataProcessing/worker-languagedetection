@@ -13,14 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hpe.caf.worker.languagedetection;
-
-import java.util.*;
-
-/**
- * Possible values that describe how the output result should be formatted.
- */
-public enum LanguageDetectionResultFormat {
-    SIMPLE,
-    COMPLEX;
-}
+({
+    resultFormat: getenv("CAF_LANGUAGE_DETECTION_WORKER_RESULT_FORMAT") || "SIMPLE"
+});

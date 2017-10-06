@@ -31,6 +31,10 @@ Worker configuration is supported through the following environment variables:
     Default: `worker-out`  
     Sets the output queue where results are returned
 
+ - `CAF_LANGUAGE_DETECTION_WORKER_RESULT_FORMAT`
+    Default: `SIMPLE`
+    Controls the default result format to use if none is passed in the custom data [resultFormat](#resultFormat) property.
+
 ### Per Tenant Settings
 
 #### fieldSpecs
@@ -50,7 +54,7 @@ The `resultFormat` property can be provided to the worker via `customData` to al
 
 ##### SIMPLE
 
-This is the default if `resultFormat` is not passed. The output fields from language detection will output fields as described by [Standard Processing](#standard-processing) or [Multi-Field Processing](#multi-field-processing) depending on if `fieldSpecs` was passed.
+The output fields from language detection will output fields as described by [Standard Processing](#standard-processing) or [Multi-Field Processing](#multi-field-processing) depending on if `fieldSpecs` was passed.
 
 ##### COMPLEX
 
@@ -72,7 +76,7 @@ LANGUAGE_CODES: "[{\"CODE\":\"de\",\"CONFIDENCE\":\"37\"},{\"CODE\":\"fr\",\"CON
 
 The `fieldSpecs` property may be passed alongside `resultFormat` to control the field used in language detection however multiple fields in `fieldSpecs` when `resultFormat` is set to *COMPLEX* is not supported and will cause a failure to be added to the document.
 
-In the complex format if no known languages are detected then the language code "un" for 'unknown' will be output with a confidence of 100.
+In the complex format, if no known languages are detected then the language code "un" for 'unknown' will be output with a confidence of 100.
 
 **Example**
 

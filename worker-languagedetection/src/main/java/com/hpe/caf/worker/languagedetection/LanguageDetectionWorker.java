@@ -44,11 +44,13 @@ public final class LanguageDetectionWorker implements DocumentWorker
 {
     private static final Logger LOG = LoggerFactory.getLogger(LanguageDetectionWorker.class);
 
+    private final LanguageDetectionWorkerConfiguration configuration;
     private final DataStore dataStore;
     private final LanguageDetector languageDetector;
 
-    public LanguageDetectionWorker(final Application application)
+    public LanguageDetectionWorker(final Application application, LanguageDetectionWorkerConfiguration configuration)
     {
+        this.configuration = configuration;
         // Retrieve the DataStore
         dataStore = application.getService(DataStore.class);
 
@@ -95,9 +97,18 @@ public final class LanguageDetectionWorker implements DocumentWorker
     @Override
     public void processDocument(final Document document) throws InterruptedException, DocumentWorkerTransientException
     {
+        final LanguageDetectionResultFormat resultFormat;
+        try {
+            resultFormat = getResultFormatToUse(document);
+        }
+        catch (IllegalArgumentException re){
+            LOG.error("Failed to read result format specified.");
+            document.addFailure(LanguageDetectionConstants.ErrorCodes.INVALID_RESULT_FORMAT, re.getMessage());
+            return;
+        }
+
         try {
             final String fields = document.getCustomData(LanguageDetectionConstants.CustomData.FIELD_SPECS);
-            final LanguageDetectionResultFormat resultFormat = getResultFormatToUse(document);
 
             if (fields == null) {
                 final String workerLangDetectSourceFieldEnv = System.getenv(
@@ -133,7 +144,8 @@ public final class LanguageDetectionWorker implements DocumentWorker
                     detectLanguage(document, fieldName.trim(), true, resultFormat);
                 }
             }
-        } catch (RuntimeException re) {
+        }
+        catch (RuntimeException re) {
             final Throwable cause = re.getCause();
 
             if (cause instanceof DataStoreException) {
@@ -177,17 +189,18 @@ public final class LanguageDetectionWorker implements DocumentWorker
      * Determines the result output format that should be used with current document.
      * @param document Document that results will be output for.
      * @return the result format to use when outputting language detection results.
+     * @throws IllegalArgumentException if the result format set on the document is not a valid value.
      */
-    private LanguageDetectionResultFormat getResultFormatToUse(Document document)
+    private LanguageDetectionResultFormat getResultFormatToUse(Document document) throws IllegalArgumentException
     {
         final String resultFormatStr = document.getCustomData(LanguageDetectionConstants.CustomData.RESULT_FORMAT);
-        if(Strings.isNullOrEmpty(resultFormatStr)){
-            return LanguageDetectionResultFormat.SIMPLE;
+        // Cover the case where property not passed on custom data
+        if(resultFormatStr==null){
+            return configuration.getResultFormat();
         }
         else {
-            LanguageDetectionResultFormat convertedResultFormat =
-                    LanguageDetectionResultFormat.tryGetValueOf(resultFormatStr);
-            return convertedResultFormat == null ? LanguageDetectionResultFormat.SIMPLE : convertedResultFormat;
+            // If the value is not a valid enum value then IllegalArgumentException will be thrown here
+            return LanguageDetectionResultFormat.valueOf(resultFormatStr.toUpperCase(Locale.ENGLISH));
         }
     }
 }

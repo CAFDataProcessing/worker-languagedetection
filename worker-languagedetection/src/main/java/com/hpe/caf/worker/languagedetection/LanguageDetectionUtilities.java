@@ -179,7 +179,7 @@ public final class LanguageDetectionUtilities
         Objects.requireNonNull(resultFormat);
 
         // Add detected languages to the document object.
-        if(resultFormat.equals(LanguageDetectionResultFormat.SIMPLE))
+        if(resultFormat == LanguageDetectionResultFormat.SIMPLE)
         {
             if (inMultiFieldMode) {
                 LOG.debug("Adding metadata to the document for each language detected in multi-field mode. " +
@@ -192,7 +192,7 @@ public final class LanguageDetectionUtilities
                 addDetectedLanguagesToDocument(detectorResult, document);
             }
         }
-        else if(resultFormat.equals(LanguageDetectionResultFormat.COMPLEX))
+        else if(resultFormat == LanguageDetectionResultFormat.COMPLEX)
         {
             LOG.debug("Adding metadata to the document for each language detected. Fields will be output in complex format.");
             addDetectedLanguageToDocumentComplexMode(detectorResult, document);
