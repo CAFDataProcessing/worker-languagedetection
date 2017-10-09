@@ -1,0 +1,23 @@
+---
+tag: "CAF_4010/resultFormat_complex_unknown.yaml"
+testCaseInformation:
+  associatedTickets: "CAF-3567"
+  comments: "CAF_4010/resultFormat_complex_unknown.yaml"
+  description: "Language Detection output a Complex result field for an Unknown Language"
+  testCaseId: "CAF_4010"
+inputData:
+  task:
+    customData:
+      resultFormat: "COMPLEX"
+    fields:
+      CONTENT:
+      - data: "rtert ehftjtfjf jgkg essgejoirjmhrnmife rgrhrhrtjh eeteytjyjf hthdtrhdrth\
+          \ sarwtruyututui nncvvddsewa awewetryhtj uoiupi ywse awregfbxed hjykyk jgdsa\
+          \ jjggtu"
+expectedOutputData:
+  result:
+    fieldChanges:
+      LANGUAGE_CODES:
+        action: "replace"
+        values:
+        - data: "[{\"CODE\":\"un\",\"CONFIDENCE\":\"100\"}]"

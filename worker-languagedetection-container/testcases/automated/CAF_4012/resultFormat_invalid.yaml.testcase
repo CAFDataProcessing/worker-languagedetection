@@ -1,0 +1,28 @@
+---
+tag: "CAF_4012/resultFormat_invalid.yaml"
+testCaseInformation:
+  associatedTickets: "CAF-3567"
+  comments: "CAF_4012/resultFormat_invalid.yaml"
+  description: "Language Detection configured to output an Unknown Result Format"
+  testCaseId: "CAF_4012"
+inputData:
+  task:
+    customData:
+      resultFormat: "JUNK"
+    fields:
+      CONTENT:
+      - data: "The steep cost of incarceration on women of color For Debra Henderson,\
+          \ love has come with a hefty price tag. Her ex-husband was incarcerated\
+          \ multiple times, her boyfriend was recently released after serving seven\
+          \ months for a felony and her son has had a few brushes with the law. In\
+          \ all, Henderson, who is 40 and makes $60,000 a year working at an insurance\
+          \ company, has spent more than $32,000 on everything from bail bonds to\
+          \ lawyers to phone calls trying to maintain relationships with the men in\
+          \ her life."
+      LANGUAGE_CODES:
+      - data: "This should not be cleared by the worker."
+expectedOutputData:
+  result:
+    failures:
+    - failureId: "LNG-InvalidResultFormat"
+      failureMessage: "No enum constant com.hpe.caf.worker.languagedetection.LanguageDetectionResultFormat.JUNK"
