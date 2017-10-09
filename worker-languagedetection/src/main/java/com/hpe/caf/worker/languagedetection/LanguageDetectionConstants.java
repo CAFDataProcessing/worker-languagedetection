@@ -25,6 +25,15 @@ public final class LanguageDetectionConstants
     }
 
     /**
+     * Recognized 'customData' property names
+     */
+    public static class CustomData
+    {
+        public static final String FIELD_SPECS = "fieldSpecs";
+        public static final String RESULT_FORMAT = "resultFormat";
+    }
+
+    /**
      * The following failure identifiers are possible.
      */
     public static class ErrorCodes
@@ -38,6 +47,16 @@ public final class LanguageDetectionConstants
          * Failed to acquire source data from the datastore.
          */
         public static final String FAILED_TO_ACQUIRE_SOURCE_DATA = "LNG-GetDataFail";
+
+        /**
+         * Custom data provided has invalid values.
+         */
+        public static final String INVALID_CUSTOM_DATA_VALUES = "LNG-InvalidCustomData";
+
+        /**
+         * Result format provided has invalid value
+         */
+        public static final String INVALID_RESULT_FORMAT = "LNG-InvalidResultFormat";
     }
 
     public static class EnvironmentVariables

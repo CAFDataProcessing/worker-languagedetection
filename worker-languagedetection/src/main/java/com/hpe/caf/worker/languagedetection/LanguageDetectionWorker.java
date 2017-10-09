@@ -44,11 +44,13 @@ public final class LanguageDetectionWorker implements DocumentWorker
 {
     private static final Logger LOG = LoggerFactory.getLogger(LanguageDetectionWorker.class);
 
+    private final LanguageDetectionWorkerConfiguration configuration;
     private final DataStore dataStore;
     private final LanguageDetector languageDetector;
 
-    public LanguageDetectionWorker(final Application application)
+    public LanguageDetectionWorker(final Application application, LanguageDetectionWorkerConfiguration configuration)
     {
+        this.configuration = configuration;
         // Retrieve the DataStore
         dataStore = application.getService(DataStore.class);
 
@@ -95,13 +97,26 @@ public final class LanguageDetectionWorker implements DocumentWorker
     @Override
     public void processDocument(final Document document) throws InterruptedException, DocumentWorkerTransientException
     {
+        final LanguageDetectionResultFormat resultFormat;
         try {
-            final String fields = document.getCustomData("fieldSpecs");
+            resultFormat = getResultFormatToUse(document);
+        }
+        catch (IllegalArgumentException re){
+            LOG.error("Failed to read result format specified.");
+            document.addFailure(LanguageDetectionConstants.ErrorCodes.INVALID_RESULT_FORMAT, re.getMessage());
+            return;
+        }
+
+        try {
+            final String fields = document.getCustomData(LanguageDetectionConstants.CustomData.FIELD_SPECS);
+
             if (fields == null) {
                 final String workerLangDetectSourceFieldEnv = System.getenv(
                     LanguageDetectionConstants.EnvironmentVariables.WORKER_LANG_DETECT_SOURCE_FIELD);
                 detectLanguage(document,
-                               Strings.isNullOrEmpty(workerLangDetectSourceFieldEnv) ? "CONTENT" : workerLangDetectSourceFieldEnv, false);
+                               Strings.isNullOrEmpty(workerLangDetectSourceFieldEnv) ? "CONTENT" : workerLangDetectSourceFieldEnv,
+                        false, resultFormat
+                        );
             } else {
                 //Split comma-separated list of filed to operate on and place the values in an array.
                 final ArrayList<String> fieldsToDetect = new ArrayList<>();
@@ -117,12 +132,20 @@ public final class LanguageDetectionWorker implements DocumentWorker
                         fieldsToDetect.add(field.trim());
                     }
                 }
+                if(fieldsToDetect.size() > 1 && LanguageDetectionResultFormat.COMPLEX.equals(resultFormat)) {
+                    document.addFailure(LanguageDetectionConstants.ErrorCodes.INVALID_CUSTOM_DATA_VALUES,
+                            "Multiple fields are not supported on the '"
+                                    +LanguageDetectionConstants.CustomData.FIELD_SPECS+"' task property when '"
+                                    +LanguageDetectionConstants.CustomData.RESULT_FORMAT+"' is set to COMPLEX.");
+                    return;
+                }
                 for (final String fieldName : fieldsToDetect) {
                     //detect language for each field requested.
-                    detectLanguage(document, fieldName.trim(), true);
+                    detectLanguage(document, fieldName.trim(), true, resultFormat);
                 }
             }
-        } catch (RuntimeException re) {
+        }
+        catch (RuntimeException re) {
             final Throwable cause = re.getCause();
 
             if (cause instanceof DataStoreException) {
@@ -140,7 +163,8 @@ public final class LanguageDetectionWorker implements DocumentWorker
         }
     }
 
-    private void detectLanguage(final Document document, final String fieldName, final boolean inMultiFieldMode)
+    private void detectLanguage(final Document document, final String fieldName, final boolean inMultiFieldMode,
+                                final LanguageDetectionResultFormat resultFormat)
         throws RuntimeException, LanguageDetectorException, IOException
     {
         LOG.debug("Document source data field to be used {}.", fieldName);
@@ -153,11 +177,30 @@ public final class LanguageDetectionWorker implements DocumentWorker
             final LanguageDetectorResult detectorResult = languageDetector.detectLanguage(sequenceInputStream);
 
             if (detectorResult != null) {
-                addDetectedLanguageToDocument(detectorResult, document, sourceDataField, inMultiFieldMode);
+                addDetectedLanguageToDocument(detectorResult, document, sourceDataField, resultFormat, inMultiFieldMode);
             }
             //  Output response data (i.e. document field value changes).
             outputDocumentFieldValueChanges(document);
 
+        }
+    }
+
+    /**
+     * Determines the result output format that should be used with current document.
+     * @param document Document that results will be output for.
+     * @return the result format to use when outputting language detection results.
+     * @throws IllegalArgumentException if the result format set on the document is not a valid value.
+     */
+    private LanguageDetectionResultFormat getResultFormatToUse(Document document) throws IllegalArgumentException
+    {
+        final String resultFormatStr = document.getCustomData(LanguageDetectionConstants.CustomData.RESULT_FORMAT);
+        // Cover the case where property not passed on custom data
+        if(resultFormatStr==null){
+            return configuration.getResultFormat();
+        }
+        else {
+            // If the value is not a valid enum value then IllegalArgumentException will be thrown here
+            return LanguageDetectionResultFormat.valueOf(resultFormatStr.toUpperCase(Locale.ENGLISH));
         }
     }
 }

@@ -22,26 +22,21 @@ import com.hpe.caf.languagedetection.LanguageDetectorResult;
 import com.hpe.caf.worker.document.model.Document;
 import com.hpe.caf.worker.document.model.Field;
 import com.hpe.caf.worker.document.model.FieldValue;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.SequenceInputStream;
+import org.apache.commons.io.FileUtils;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import org.apache.commons.io.FileUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.*;
 
 public final class LanguageDetectionUtilities
 {
-
     private static final Logger LOG = LoggerFactory.getLogger(LanguageDetectionUtilities.class);
 
     private LanguageDetectionUtilities()
@@ -159,22 +154,95 @@ public final class LanguageDetectionUtilities
         });
     }
 
+    /**
+     * Updates the passed {@code document} with the language detection result passed in {@code detectorResult}.
+     * @param detectorResult result of performing language detection. Cannot be null.
+     * @param document the document to update with result of language detection. Cannot be null.
+     * @param sourceDataField the field that language detection was ran against. Depending on the values of
+     *                        {@code resultFormat} and {@code inMultiFieldMode} this may be used in the output field
+     *                        name. Cannot be null.
+     * @param resultFormat whether the result fields should be output in simple or complex format. If set to COMPLEX then
+     *                     {@code inMultiFieldMode} has no effect on output fields. Cannot be null.
+     * @param inMultiFieldMode whether the language detection was ran in multi-field mode. This will effect the fields output
+     *                         but only if {@code resultFormat} is set to {@code LanguageDetectionResultFormat.SIMPLE}.
+     * @throws RuntimeException if {@code detectorResult}, {@code document} or {@code sourceDataField} is null.
+     */
     public static void addDetectedLanguageToDocument(final LanguageDetectorResult detectorResult, final Document document,
-                                                     final Field sourceDataField, final boolean inMultiFeildMode)
+                                                     final Field sourceDataField,
+                                                     final LanguageDetectionResultFormat resultFormat,
+                                                     final boolean inMultiFieldMode)
+        throws RuntimeException
     {
         Objects.requireNonNull(detectorResult);
         Objects.requireNonNull(document);
         Objects.requireNonNull(sourceDataField);
-        Objects.requireNonNull(inMultiFeildMode);
+        Objects.requireNonNull(resultFormat);
+
         // Add detected languages to the document object.
-        if (inMultiFeildMode) {
-            LOG.debug("Adding metadata to the document for each language detected.");
-            addDetectedLanguagesToDocument(detectorResult, document, sourceDataField.getName());
-        } else {
-            // Add detected languages to the document object.
-            LOG.debug("Adding metadata to the document for each language detected.");
-            addDetectedLanguagesToDocument(detectorResult, document);
+        if(resultFormat == LanguageDetectionResultFormat.SIMPLE)
+        {
+            if (inMultiFieldMode) {
+                LOG.debug("Adding metadata to the document for each language detected in multi-field mode. " +
+                        "Fields will be output in simple format.");
+                addDetectedLanguagesToDocument(detectorResult, document, sourceDataField.getName());
+            } else {
+                // Add detected languages to the document object.
+                LOG.debug("Adding metadata to the document for each language detected. " +
+                        "Fields will be output in simple format.");
+                addDetectedLanguagesToDocument(detectorResult, document);
+            }
         }
+        else if(resultFormat == LanguageDetectionResultFormat.COMPLEX)
+        {
+            LOG.debug("Adding metadata to the document for each language detected. Fields will be output in complex format.");
+            addDetectedLanguageToDocumentComplexMode(detectorResult, document);
+        }
+    }
+
+    /**
+     * Updates the passed @code document} with the language detection result passed in by adding a field to the document
+     * that records the result in complex form.
+     * @param detectorResult result of performing language detection.
+     * @param document the document to update with result of language detection
+     */
+    private static void addDetectedLanguageToDocumentComplexMode(final LanguageDetectorResult detectorResult,
+                                                                 final Document document)
+    {
+        Collection<DetectedLanguage> detectedLanguages = detectorResult.getLanguages();
+        if(detectedLanguages==null || detectedLanguages.isEmpty())
+        {
+            LOG.debug("No languages detected for the document.");
+            return;
+        }
+
+        JSONArray languageCodes = new JSONArray();
+        boolean unknownOnlyLanguageDetected = true;
+        for(DetectedLanguage detectedLanguage: detectedLanguages)
+        {
+            String languageCode = detectedLanguage.getLanguageCode();
+            // Only add an output entry for unknown language code if it is the only detected language. 3 languages
+            // are always 'detected' so first may be English and then unknown twice.
+            if("un".equals(languageCode))
+            {
+                continue;
+            }
+            unknownOnlyLanguageDetected = false;
+            languageCodes.put(buildLanguageCodeEntry(languageCode,
+                    String.valueOf(detectedLanguage.getConfidencePercentage())));
+        }
+        if(unknownOnlyLanguageDetected)
+        {
+            languageCodes.put(buildLanguageCodeEntry("un", "100"));
+        }
+        replaceDocumentField(document, "LANGUAGE_CODES", languageCodes.toString());
+    }
+
+    private static JSONObject buildLanguageCodeEntry(String languageCode, String confidence)
+    {
+        JSONObject languageCodeEntry = new JSONObject();
+        languageCodeEntry.put("CODE", languageCode);
+        languageCodeEntry.put("CONFIDENCE", confidence);
+        return languageCodeEntry;
     }
 
     private static void replaceDocumentField(final Document document, final String name, final String value)

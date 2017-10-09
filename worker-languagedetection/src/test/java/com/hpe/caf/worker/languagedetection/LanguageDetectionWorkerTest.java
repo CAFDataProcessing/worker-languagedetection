@@ -43,7 +43,9 @@ public class LanguageDetectionWorkerTest {
 
     @Test
     public void processDocumentTest() throws InterruptedException, DocumentWorkerTransientException, DataStoreException {
-        LanguageDetectionWorker ldw = new LanguageDetectionWorker(mockApplication);
+        LanguageDetectionWorkerConfiguration config = new LanguageDetectionWorkerConfiguration();
+        config.setResultFormat(LanguageDetectionResultFormat.SIMPLE);
+        LanguageDetectionWorker ldw = new LanguageDetectionWorker(mockApplication, config);
 
         //  Create a test document object.
         Document document = createTestDocument("LanguageDetectionWorker Unit Test!");
@@ -61,7 +63,9 @@ public class LanguageDetectionWorkerTest {
 
     @Test
     public void processDocumentTest_GetDataFail() throws Throwable {
-        LanguageDetectionWorker ldw = new LanguageDetectionWorker(mockApplication);
+        LanguageDetectionWorkerConfiguration config = new LanguageDetectionWorkerConfiguration();
+        config.setResultFormat(LanguageDetectionResultFormat.SIMPLE);
+        LanguageDetectionWorker ldw = new LanguageDetectionWorker(mockApplication, config);
 
         //  Create a remote data store test document object. This is configured to throw a DataStoreException.
         Document document = createTestDocumentForDataFailure("LanguageDetectionWorker Unit Test!");
@@ -79,7 +83,9 @@ public class LanguageDetectionWorkerTest {
 
     @Test
     public void processDocumentTest_LangDetectFail() throws InterruptedException, DocumentWorkerTransientException, DataStoreException {
-        LanguageDetectionWorker ldw = new LanguageDetectionWorker(mockApplication);
+        LanguageDetectionWorkerConfiguration config = new LanguageDetectionWorkerConfiguration();
+        config.setResultFormat(LanguageDetectionResultFormat.SIMPLE);
+        LanguageDetectionWorker ldw = new LanguageDetectionWorker(mockApplication, config);
 
         //  Create a test document object.
         //  Use specific document text to simulate a LanguageDetectorException being thrown.

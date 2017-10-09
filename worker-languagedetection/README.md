@@ -31,7 +31,13 @@ Worker configuration is supported through the following environment variables:
     Default: `worker-out`  
     Sets the output queue where results are returned
 
+ - `CAF_LANGUAGE_DETECTION_WORKER_RESULT_FORMAT`
+    Default: `SIMPLE`
+    Controls the default result format to use if none is passed in the custom data [resultFormat](#resultFormat) property.
+
 ### Per Tenant Settings
+
+#### fieldSpecs
 
 When `fieldSpecs` is provided to the worker via `customData` the worker's behaviour will change and the worker will begin [Multi-Field Processing](#multi-field-processing).
 
@@ -41,8 +47,46 @@ When `fieldSpecs` is provided to the worker via `customData` the worker's behavi
 **Example:**   
 	`{"fieldSpecs": "CONTENT_*, TITLE, SUBJECT"}`  
 	This Example will cause the worker to check the TITLE and SUBJECT fields of the document provided as well as any field that begins `CONTENT_`.
+  
+#### resultFormat
 
-## Output Format
+The `resultFormat` property can be provided to the worker via `customData` to alter the format of the output language detection result. There are two supported formats.
+
+##### SIMPLE
+
+The output fields from language detection will output fields as described by [Standard Processing](#standard-processing) or [Multi-Field Processing](#multi-field-processing) depending on if `fieldSpecs` was passed.
+
+##### COMPLEX
+
+This format will change the output result to be a single field on the document whose value is a string version of an object. The object will be an array of objects each having the properties 'CODE' (a language code detected) and 'CONFIDENCE' (the percentage of the language detected within the document text).
+
+**Example Custom Data Input** 
+
+```
+{
+  "resultFormat": "COMPLEX"
+}
+```
+
+**Example Output Field**
+
+```
+LANGUAGE_CODES: "[{\"CODE\":\"de\",\"CONFIDENCE\":\"37\"},{\"CODE\":\"fr\",\"CONFIDENCE\":\"35\"},{\"CODE\":\"en\",\"CONFIDENCE\":\"27\"}]"
+```
+
+The `fieldSpecs` property may be passed alongside `resultFormat` to control the field used in language detection however multiple fields in `fieldSpecs` when `resultFormat` is set to *COMPLEX* is not supported and will cause a failure to be added to the document.
+
+In the complex format, if no known languages are detected then the language code "un" for 'unknown' will be output with a confidence of 100.
+
+**Example**
+
+```
+LANGUAGE_CODES: "[{\"CODE\":\"un\",\"CONFIDENCE\":\"100\"}]"
+```
+
+### Simple Output Formats
+
+These output formats can apply if `resultFormat` is not passed on `customData` or is passed with a value `SIMPLE`.
 
 #### Standard processing:
 
@@ -106,3 +150,5 @@ files.
 
 - Language detection errors: when no languages can be detected by the language detection implementation. This may be due to incorrect encoding, if the text is not long enough or if the text does not contain a language.
 Valid text should be over 200 characters encoded in UTF-8.
+
+- If the `customData` on a task defines `fieldSpecs` with multiple fields and `resultFormat` is passed with a value of "COMPLEX". This is not supported and a failure will be added to the document.
