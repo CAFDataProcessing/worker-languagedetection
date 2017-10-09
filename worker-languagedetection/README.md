@@ -31,8 +31,8 @@ Worker configuration is supported through the following environment variables:
     Default: `worker-out`  
     Sets the output queue where results are returned
 
- - `CAF_LANGUAGE_DETECTION_WORKER_RESULT_FORMAT`
-    Default: `SIMPLE`
+ - `CAF_LANGUAGE_DETECTION_WORKER_RESULT_FORMAT`  
+    Default: `SIMPLE`  
     Controls the default result format to use if none is passed in the custom data [resultFormat](#resultFormat) property.
 
 ### Per Tenant Settings
