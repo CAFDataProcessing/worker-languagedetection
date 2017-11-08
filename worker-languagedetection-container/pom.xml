@@ -56,11 +56,6 @@
             <artifactId>worker-document</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.cafapi</groupId>
-            <artifactId>container-cert-script</artifactId>
-            <type>tar.gz</type>
-        </dependency>
-        <dependency>
             <groupId>com.github.cafdataprocessing</groupId>
             <artifactId>worker-document-testing</artifactId>
             <scope>test</scope>
@@ -298,7 +293,7 @@
                             <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
                             <build>
                                 <maintainer>connor.mulholland@hpe.com</maintainer>
-                                <from>java:8</from>
+                                <from>cafinternal/prereleases:opensuse-jre8-1.1.0-SNAPSHOT</from>
                                 <labels>
                                     <Build.Number>${project.version}</Build.Number>
                                     <Build.Date>${maven.build.timestamp}</Build.Date>
@@ -307,11 +302,11 @@
                                     <caf.worker-document-framework.version>${caf.worker-document-framework.version}</caf.worker-document-framework.version>
                                 </labels>
                                 <!-- The entry point will be the worker.sh executable. -->
-                                <entryPoint>
+                                <cmd>
                                     <exec>
                                         <args>/maven/worker.sh</args>
                                     </exec>
-                                </entryPoint>
+                                </cmd>
                                 <healthCheck>
                                     <cmd>curl -f http://localhost:8081/healthcheck || exit 1</cmd>
                                 </healthCheck>
@@ -347,21 +342,6 @@
                                         </fileSets>
                                         <!-- Including the dependencies into the docker tar -->
                                         <dependencySets>
-                                            <dependencySet>
-                                                <useProjectArtifact>false</useProjectArtifact>
-                                                <scope>runtime</scope>
-                                                <excludes>
-                                                    <exclude>com.github.cafapi:container-cert-script</exclude>
-                                                </excludes>
-                                            </dependencySet>
-                                            <dependencySet>
-                                                <useProjectArtifact>false</useProjectArtifact>
-                                                <useTransitiveFiltering>true</useTransitiveFiltering>
-                                                <unpack>true</unpack>
-                                                <includes>
-                                                    <include>com.github.cafapi:container-cert-script</include>
-                                                </includes>
-                                            </dependencySet>
                                             <dependencySet>
                                                 <useProjectArtifact>false</useProjectArtifact>
                                                 <scope>runtime</scope>
