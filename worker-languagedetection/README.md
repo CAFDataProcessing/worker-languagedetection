@@ -33,7 +33,7 @@ Worker configuration is supported through the following environment variables:
 
  - `CAF_LANGUAGE_DETECTION_WORKER_RESULT_FORMAT`  
     Default: `SIMPLE`  
-    Controls the default result format to use if none is passed in the custom data [resultFormat](#resultFormat) property.
+    Controls the default result format to use if none is passed in the custom data [resultFormat](#resultformat) property.
 
 ### Per Tenant Settings
 
