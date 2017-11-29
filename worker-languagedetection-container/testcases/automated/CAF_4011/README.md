@@ -13,7 +13,7 @@ Variety of documents in varying languages
 
 **Expected Result**
 
-The files are all processed and an "InvalidCustomData" error is thrown with the message "Multiple fields are not supported on the 'fieldSpecs' task property when 'resultFormat' is set to COMPLEX."
+The files are all processed and an "InvalidCustomData" error is thrown with the message "Multiple fields are not supported on the 'fieldSpecs' task property when 'resultFormat' is set to a complex format."
 
 **JIRA Link** - [CAF-3567](https://jira.autonomy.com/browse/CAF-3567)
 

@@ -27,4 +27,4 @@ expectedOutputData:
     failures:
     - failureId: "LNG-InvalidCustomData"
       failureMessage: "Multiple fields are not supported on the 'fieldSpecs' task\
-        \ property when 'resultFormat' is set to COMPLEX."
+        \ property when 'resultFormat' is set to a complex format."
