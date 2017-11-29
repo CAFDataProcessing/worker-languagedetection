@@ -28,7 +28,7 @@ public class LanguageDetectionWorkerConfiguration {
     private LanguageDetectionResultFormat resultFormat;
 
     /**
-     * Getter for property 'resultFormat' which controls the format that langauge detection results are output.
+     * Getter for property 'resultFormat' which controls the format that language detection results are output.
      * @return value for property 'resultFormat'.
      */
     public LanguageDetectionResultFormat getResultFormat() {

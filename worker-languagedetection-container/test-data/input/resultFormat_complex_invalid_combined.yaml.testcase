@@ -1,15 +1,15 @@
 ---
-tag: "resultFormat_complex_invalid.yaml"
+tag: "resultFormat_complex_invalid_combined.yaml"
 testCaseInformation:
   associatedTickets: null
-  comments: "resultFormat_complex_invalid.yaml"
+  comments: "resultFormat_complex_invalid_combined.yaml"
   description: null
-  testCaseId: "resultFormat_complex_invalid.yaml"
+  testCaseId: "resultFormat_complex_invalid_combined.yaml"
 inputData:
   task:
     customData:
       fieldSpecs: "CONTENT, FR_CONTENT, GER_CONTENT"
-      resultFormat: "COMPLEX"
+      resultFormat: "COMPLEX_COMBINED"
     fields:
       CONTENT:
       - data: "Bonjour, this is a test of language detection's ability to detect multiple\

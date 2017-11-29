@@ -192,10 +192,10 @@ public final class LanguageDetectionUtilities
                 addDetectedLanguagesToDocument(detectorResult, document);
             }
         }
-        else if(resultFormat == LanguageDetectionResultFormat.COMPLEX)
+        else if(LanguageDetectionResultFormat.isComplexFormat(resultFormat))
         {
             LOG.debug("Adding metadata to the document for each language detected. Fields will be output in complex format.");
-            addDetectedLanguageToDocumentComplexMode(detectorResult, document);
+            addDetectedLanguageToDocumentComplexMode(detectorResult, document, resultFormat);
         }
     }
 
@@ -204,9 +204,11 @@ public final class LanguageDetectionUtilities
      * that records the result in complex form.
      * @param detectorResult result of performing language detection.
      * @param document the document to update with result of language detection
+     * @param resultFormat the format to output result in. Should be a complex format type.
      */
     private static void addDetectedLanguageToDocumentComplexMode(final LanguageDetectorResult detectorResult,
-                                                                 final Document document)
+                                                                 final Document document,
+                                                                 final LanguageDetectionResultFormat resultFormat)
     {
         Collection<DetectedLanguage> detectedLanguages = detectorResult.getLanguages();
         if(detectedLanguages==null || detectedLanguages.isEmpty())
@@ -215,8 +217,7 @@ public final class LanguageDetectionUtilities
             return;
         }
 
-        Field langCodeField = document.getField("LANGUAGE_CODES");
-        langCodeField.clear();
+        List<JSONObject> languageCodesToAdd = new ArrayList<>();
 
         boolean unknownOnlyLanguageDetected = true;
         for(DetectedLanguage detectedLanguage: detectedLanguages)
@@ -229,21 +230,43 @@ public final class LanguageDetectionUtilities
                 continue;
             }
             unknownOnlyLanguageDetected = false;
-            langCodeField.add(buildLanguageCodeEntry(languageCode,
+            languageCodesToAdd.add(buildLanguageCodeEntry(languageCode,
                     String.valueOf(detectedLanguage.getConfidencePercentage())));
         }
         if(unknownOnlyLanguageDetected)
         {
-            langCodeField.add(buildLanguageCodeEntry("un", "100"));
+            languageCodesToAdd.add(buildLanguageCodeEntry("un", "100"));
+        }
+
+        // Output in specific complex format
+        if(LanguageDetectionResultFormat.COMPLEX.equals(resultFormat) ||
+                LanguageDetectionResultFormat.COMPLEX_COMBINED.equals(resultFormat))
+        {
+            JSONArray languageCodes =  new JSONArray();
+            languageCodesToAdd.stream().forEach(lc -> languageCodes.put(lc));
+            replaceDocumentField(document, "LANGUAGE_CODES", languageCodes.toString());
+            return;
+        }
+        else if(LanguageDetectionResultFormat.COMPLEX_SPLIT.equals(resultFormat))
+        {
+            Field langCodeField = document.getField("LANGUAGE_CODES");
+            langCodeField.clear();
+            languageCodesToAdd.stream().forEach(lc -> langCodeField.add(lc.toString()));
+            return;
+        }
+        else
+        {
+            throw new RuntimeException("Unrecognized complex output format for language result. Format was: "
+                    +resultFormat.toString());
         }
     }
 
-    private static String buildLanguageCodeEntry(String languageCode, String confidence)
+    private static JSONObject buildLanguageCodeEntry(String languageCode, String confidence)
     {
         JSONObject languageCodeEntry = new JSONObject();
         languageCodeEntry.put("CODE", languageCode);
         languageCodeEntry.put("CONFIDENCE", confidence);
-        return languageCodeEntry.toString();
+        return languageCodeEntry;
     }
 
     private static void replaceDocumentField(final Document document, final String name, final String value)

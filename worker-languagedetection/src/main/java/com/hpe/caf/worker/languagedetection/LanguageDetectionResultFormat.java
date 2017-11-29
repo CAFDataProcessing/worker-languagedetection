@@ -22,5 +22,13 @@ import java.util.*;
  */
 public enum LanguageDetectionResultFormat {
     SIMPLE,
-    COMPLEX;
+    COMPLEX,
+    COMPLEX_COMBINED,
+    COMPLEX_SPLIT;
+
+    public static boolean isComplexFormat(LanguageDetectionResultFormat formatToCheck)
+    {
+        return COMPLEX.equals(formatToCheck) || COMPLEX_COMBINED.equals(formatToCheck)
+                || COMPLEX_SPLIT.equals(formatToCheck);
+    }
 }

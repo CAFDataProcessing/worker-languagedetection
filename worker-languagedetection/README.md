@@ -56,15 +56,21 @@ The `resultFormat` property can be provided to the worker via `customData` to al
 
 The output fields from language detection will output fields as described by [Standard Processing](#standard-processing) or [Multi-Field Processing](#multi-field-processing) depending on if `fieldSpecs` was passed.
 
-##### COMPLEX
+##### COMPLEX or COMPLEX_COMBINED
 
 This format will change the output result to be a single field on the document whose value is a string version of an object. The object will be an array of objects each having the properties 'CODE' (a language code detected) and 'CONFIDENCE' (the percentage of the language detected within the document text).
 
-**Example Custom Data Input** 
+**Example Custom Data Inputs** 
 
 ```
 {
   "resultFormat": "COMPLEX"
+}
+```
+
+```
+{
+  "resultFormat": "COMPLEX_COMBINED"
 }
 ```
 
@@ -74,15 +80,41 @@ This format will change the output result to be a single field on the document w
 LANGUAGE_CODES: "[{\"CODE\":\"de\",\"CONFIDENCE\":\"37\"},{\"CODE\":\"fr\",\"CONFIDENCE\":\"35\"},{\"CODE\":\"en\",\"CONFIDENCE\":\"27\"}]"
 ```
 
-The `fieldSpecs` property may be passed alongside `resultFormat` to control the field used in language detection however multiple fields in `fieldSpecs` when `resultFormat` is set to *COMPLEX* is not supported and will cause a failure to be added to the document.
-
-In the complex format, if no known languages are detected then the language code "un" for 'unknown' will be output with a confidence of 100.
+If no known languages are detected then the language code "un" for 'unknown' will be output with a confidence of 100.
 
 **Example**
 
 ```
 LANGUAGE_CODES: "[{\"CODE\":\"un\",\"CONFIDENCE\":\"100\"}]"
 ```
+
+##### COMPLEX_SPLIT
+
+This format will change the output result to fields on the document for each language detected whose value is a string version of an object. The object will have the properties 'CODE' (a language code detected) and 'CONFIDENCE' (the percentage of the language detected within the document text).
+
+**Example Custom Data Inputs** 
+
+```
+{
+  "resultFormat": "COMPLEX_SPLIT"
+}
+```
+
+**Example Output Field**
+
+```
+LANGUAGE_CODES: "[{\"CODE\":\"de\",\"CONFIDENCE\":\"37\"},{\"CODE\":\"fr\",\"CONFIDENCE\":\"35\"},{\"CODE\":\"en\",\"CONFIDENCE\":\"27\"}]"
+```
+
+If no known languages are detected then the language code "un" for 'unknown' will be output with a confidence of 100.
+
+**Example**
+
+```
+LANGUAGE_CODES: "[{\"CODE\":\"un\",\"CONFIDENCE\":\"100\"}]"
+```
+
+The `fieldSpecs` property may be passed alongside `resultFormat` to control the field used in language detection however multiple fields in `fieldSpecs` when `resultFormat` is set to *COMPLEX*, *COMPLEX_COMBINED* or *COMPLEX_SPLIT* is not supported and will cause a failure to be added to the document.
 
 ### Simple Output Formats
 
