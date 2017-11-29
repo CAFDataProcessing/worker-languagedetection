@@ -215,7 +215,9 @@ public final class LanguageDetectionUtilities
             return;
         }
 
-        JSONArray languageCodes = new JSONArray();
+        Field langCodeField = document.getField("LANGUAGE_CODES");
+        langCodeField.clear();
+
         boolean unknownOnlyLanguageDetected = true;
         for(DetectedLanguage detectedLanguage: detectedLanguages)
         {
@@ -227,22 +229,21 @@ public final class LanguageDetectionUtilities
                 continue;
             }
             unknownOnlyLanguageDetected = false;
-            languageCodes.put(buildLanguageCodeEntry(languageCode,
+            langCodeField.add(buildLanguageCodeEntry(languageCode,
                     String.valueOf(detectedLanguage.getConfidencePercentage())));
         }
         if(unknownOnlyLanguageDetected)
         {
-            languageCodes.put(buildLanguageCodeEntry("un", "100"));
+            langCodeField.add(buildLanguageCodeEntry("un", "100"));
         }
-        replaceDocumentField(document, "LANGUAGE_CODES", languageCodes.toString());
     }
 
-    private static JSONObject buildLanguageCodeEntry(String languageCode, String confidence)
+    private static String buildLanguageCodeEntry(String languageCode, String confidence)
     {
         JSONObject languageCodeEntry = new JSONObject();
         languageCodeEntry.put("CODE", languageCode);
         languageCodeEntry.put("CONFIDENCE", confidence);
-        return languageCodeEntry;
+        return languageCodeEntry.toString();
     }
 
     private static void replaceDocumentField(final Document document, final String name, final String value)
