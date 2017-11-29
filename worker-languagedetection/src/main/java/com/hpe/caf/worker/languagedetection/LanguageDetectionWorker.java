@@ -132,11 +132,11 @@ public final class LanguageDetectionWorker implements DocumentWorker
                         fieldsToDetect.add(field.trim());
                     }
                 }
-                if(fieldsToDetect.size() > 1 && LanguageDetectionResultFormat.COMPLEX.equals(resultFormat)) {
+                if(fieldsToDetect.size() > 1 && LanguageDetectionResultFormat.isComplexFormat(resultFormat)) {
                     document.addFailure(LanguageDetectionConstants.ErrorCodes.INVALID_CUSTOM_DATA_VALUES,
                             "Multiple fields are not supported on the '"
                                     +LanguageDetectionConstants.CustomData.FIELD_SPECS+"' task property when '"
-                                    +LanguageDetectionConstants.CustomData.RESULT_FORMAT+"' is set to COMPLEX.");
+                                    +LanguageDetectionConstants.CustomData.RESULT_FORMAT+"' is set to a complex format.");
                     return;
                 }
                 for (final String fieldName : fieldsToDetect) {
