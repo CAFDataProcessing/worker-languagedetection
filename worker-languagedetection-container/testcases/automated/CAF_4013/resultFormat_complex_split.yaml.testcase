@@ -8,7 +8,7 @@ testCaseInformation:
 inputData:
   task:
     customData:
-      resultFormat: "COMPLEX"
+      resultFormat: "COMPLEX_SPLIT"
     fields:
       CONTENT:
       - data: "The steep cost of incarceration on women of color For Debra Henderson,\
