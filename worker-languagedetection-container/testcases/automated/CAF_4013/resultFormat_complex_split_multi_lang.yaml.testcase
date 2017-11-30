@@ -47,5 +47,5 @@ expectedOutputData:
         action: "replace"
         values:
         - data: "{\"CODE\":\"de\",\"CONFIDENCE\":\"37\"}"
-		- data: "{\"CODE\":\"fr\",\"CONFIDENCE\":\"35\"}"
-		- data: "{\"CODE\":\"en\",\"CONFIDENCE\":\"27\"}"
+        - data: "{\"CODE\":\"fr\",\"CONFIDENCE\":\"35\"}"
+        - data: "{\"CODE\":\"en\",\"CONFIDENCE\":\"27\"}"
