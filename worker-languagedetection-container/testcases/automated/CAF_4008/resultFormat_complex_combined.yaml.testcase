@@ -1,0 +1,30 @@
+---
+tag: "CAF_4008/resultFormat_complex_combined.yaml"
+testCaseInformation:
+  associatedTickets: "CAF-3567, CAF_3859"
+  comments: "CAF_4008/resultFormat_complex_combined.yaml"
+  description: "Language Detection output a Complex result field"
+  testCaseId: "CAF_4008"
+inputData:
+  task:
+    customData:
+      resultFormat: "COMPLEX_COMBINED"
+    fields:
+      CONTENT:
+      - data: "The steep cost of incarceration on women of color For Debra Henderson,\
+          \ love has come with a hefty price tag. Her ex-husband was incarcerated\
+          \ multiple times, her boyfriend was recently released after serving seven\
+          \ months for a felony and her son has had a few brushes with the law. In\
+          \ all, Henderson, who is 40 and makes $60,000 a year working at an insurance\
+          \ company, has spent more than $32,000 on everything from bail bonds to\
+          \ lawyers to phone calls trying to maintain relationships with the men in\
+          \ her life."
+      LANGUAGE_CODES:
+      - data: "This should be cleared by the worker."
+expectedOutputData:
+  result:
+    fieldChanges:
+      LANGUAGE_CODES:
+        action: "replace"
+        values:
+        - data: "[{\"CODE\":\"en\",\"CONFIDENCE\":\"99\"}]"

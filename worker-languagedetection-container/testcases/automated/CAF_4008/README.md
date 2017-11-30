@@ -1,10 +1,10 @@
 ## CAF_4008 - Language Detection output a Complex result field ##
 
-Process the specified text documents that are all in variety of languages with the result format configured to be COMPLEX
+Process the specified text documents that are all in variety of languages with the result format configured to be `COMPLEX` or `COMPLEX_COMBINED`
 
 **Test Steps**
 
-1. Set up system to perform language detection with the result format configured to be COMPLEX in the Custom Data
+1. Set up system to perform language detection with the result format configured to be `COMPLEX` or `COMPLEX_COMBINED` in the Custom Data
 2. Examine output
 
 **Test Data**
@@ -21,5 +21,5 @@ The files are all processed and the top 3 most occurring languages are in a comp
             ]
 </code>
 
-**JIRA Link** - [CAF-3567](https://jira.autonomy.com/browse/CAF-3567)
+**JIRA Link** - [CAF-3567](https://jira.autonomy.com/browse/CAF-3567), [CAF-3859](https://jira.autonomy.com/browse/CAF-3859)
 

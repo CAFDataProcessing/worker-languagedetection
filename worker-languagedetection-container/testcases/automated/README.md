@@ -11,5 +11,6 @@ The automated testcases for the Language Detection Worker are defined as follows
 - [CAF_4010 - Language Detection output a Complex result field for an Unknown Language](CAF_4010)
 - [CAF_4011 - Language Detection configured to output a Complex result field with multiple FieldSpecs defined](CAF_4011)
 - [CAF_4012 - Language Detection configured to output an Unknown Result Format](CAF_4012)
+- [CAF_4013 - Language Detection output a Complex Split result field](CAF_4013)
 
 
