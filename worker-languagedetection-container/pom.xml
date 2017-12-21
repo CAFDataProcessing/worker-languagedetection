@@ -160,6 +160,7 @@
                         <CAF_CONFIG_PATH>${test.configs}</CAF_CONFIG_PATH>
                         <CAF_INTEGRATIONTESTS_FS_PATH>${caf.integrationtests.fs.path}</CAF_INTEGRATIONTESTS_FS_PATH>
                     </environmentVariables>
+                    <!--<debugForkedProcess>true</debugForkedProcess>-->
                 </configuration>
             </plugin>
             <!--
@@ -396,8 +397,34 @@
         </plugins>
     </build>
 
-    <!-- Use this profile if your virtual machine setup must use fixed ports. -->
     <profiles>
+        <!-- profile to optionally disable build of a container, you can enable this profile, and run your tests against
+        a fixed container without rebuilding each time. -->
+        <profile>
+            <id>skip-build-docker-container</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>io.fabric8</groupId>
+                        <artifactId>docker-maven-plugin</artifactId>
+                        <version>${fabric8.docker.maven.version}</version>
+                        <executions>
+                            <execution>
+                                <id>build-docker-container</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>build</goal>
+                                </goals>
+                                <configuration>
+                                    <skip>true</skip>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!-- Use this profile if your virtual machine setup must use fixed ports. -->
         <profile>
             <id>use-default-fixed-ports</id>
             <properties>
