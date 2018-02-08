@@ -104,15 +104,12 @@ public final class LanguageDetectionUtilities
         Objects.requireNonNull(fieldName);
         final String field = getLanguageFieldName(fieldName);
 
-        if (document.getField(field).hasValues()) {
-            document.getField(field).clear();
-        }
-
         boolean requiresUnknown = true;
         // For each language detected, add the name, language code and the percentage of the language detected within the text data to
         // the document.
         if (detectorResult.getLanguages() != null) {
             final Field fieldToAdd = document.getField(field);
+            fieldToAdd.clear();
             for (DetectedLanguage detectedLanguage : detectorResult.getLanguages()) {
                 if (!detectedLanguage.getLanguageCode().equals("un")) {
                     fieldToAdd.add(detectedLanguage.getConfidencePercentage()
@@ -122,7 +119,7 @@ public final class LanguageDetectionUtilities
             }
             if (requiresUnknown) {
                 //Adding Field to document to signify that all of the fields content was of an unknown language
-                document.getField(field).add("100% un");
+                fieldToAdd.add("100% un");
             }
         }
     }
@@ -272,15 +269,7 @@ public final class LanguageDetectionUtilities
     private static void replaceDocumentField(final Document document, final String name, final String value)
     {
         LOG.debug("Replacing metadata field {} with value {} to the document.", name, value);
-
-        // Get a field object for the specified field.
-        final Field documentField = document.getField(name);
-
-        // Remove all values from the field.
-        documentField.clear();
-
-        // Add the specified value to the field.
-        documentField.add(value);
+        document.getField(name).set(value);
     }
 
     private static InputStream getInputStream(final FieldValue fieldValue, final DataStore dataStore) throws RuntimeException
