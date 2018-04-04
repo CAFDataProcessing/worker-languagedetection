@@ -36,16 +36,20 @@ Worker configuration is supported through the following environment variables:
     Controls the default result format to use if none is passed in the custom data [resultFormat](#resultformat) property.
 
  - `CAF_WORKER_STATIC_SCRIPT_CACHE_SIZE`  
-    Default: `50`
+    Default: `50`  
+    This setting controls the maximum number of scripts to hold in the static script cache. The static script cache is used to cache static scripts such as inline scripts and scripts downloaded from the remote data store (which doesn't support updating).
 
  - `CAF_WORKER_STATIC_SCRIPT_CACHE_DURATION`  
-    Default: `1800` (30 minutes)
+    Default: `1800` (30 minutes)  
+    This setting controls the length of time that static scripts are cached for. If the script is not used for the specified duration then it will be flushed from the cache. If it is used from the cache then the timer will be reset.
 
  - `CAF_WORKER_DYNAMIC_SCRIPT_CACHE_SIZE`  
-    Default: `50`
+    Default: `50`  
+    This setting controls the maximum number of scripts to hold in the dynamic script cache. The dynamic script cache is used to cache scripts which could potentially be changed whilst the worker is running, such as scripts specified by URL.
 
  - `CAF_WORKER_DYNAMIC_SCRIPT_CACHE_DURATION`  
-    Default: `1800` (30 minutes)
+    Default: `1800` (30 minutes)  
+    This setting controls the length of time that static scripts are cached for. This is a fixed duration and the use of the script from the cache will not cause the timer to be reset.
 
 ### Per Tenant Settings
 
