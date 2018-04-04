@@ -49,7 +49,7 @@ Worker configuration is supported through the following environment variables:
 
  - `CAF_WORKER_DYNAMIC_SCRIPT_CACHE_DURATION`  
     Default: `1800` (30 minutes)  
-    This setting controls the length of time that static scripts are cached for. This is a fixed duration and the use of the script from the cache will not cause the timer to be reset.
+    This setting controls the length of time that dynamic scripts are cached for. This is a fixed duration and the use of the script from the cache will not cause the timer to be reset.
 
 ### Per Tenant Settings
 
