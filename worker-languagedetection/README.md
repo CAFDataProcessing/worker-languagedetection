@@ -35,6 +35,18 @@ Worker configuration is supported through the following environment variables:
     Default: `SIMPLE`  
     Controls the default result format to use if none is passed in the custom data [resultFormat](#resultformat) property.
 
+ - `CAF_WORKER_STATIC_SCRIPT_CACHE_SIZE`  
+    Default: `50`
+
+ - `CAF_WORKER_STATIC_SCRIPT_CACHE_DURATION`  
+    Default: `1800` (30 minutes)
+
+ - `CAF_WORKER_DYNAMIC_SCRIPT_CACHE_SIZE`  
+    Default: `50`
+
+ - `CAF_WORKER_DYNAMIC_SCRIPT_CACHE_DURATION`  
+    Default: `1800` (30 minutes)
+
 ### Per Tenant Settings
 
 #### fieldSpecs
