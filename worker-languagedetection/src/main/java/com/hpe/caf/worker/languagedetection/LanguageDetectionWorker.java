@@ -16,8 +16,6 @@
 package com.hpe.caf.worker.languagedetection;
 
 import com.google.common.base.Strings;
-import com.hpe.caf.api.worker.DataStore;
-import com.hpe.caf.api.worker.DataStoreException;
 import com.hpe.caf.languagedetection.*;
 import com.hpe.caf.util.ModuleLoader;
 import com.hpe.caf.util.ModuleLoaderException;
@@ -45,14 +43,11 @@ public final class LanguageDetectionWorker implements DocumentWorker
     private static final Logger LOG = LoggerFactory.getLogger(LanguageDetectionWorker.class);
 
     private final LanguageDetectionWorkerConfiguration configuration;
-    private final DataStore dataStore;
     private final LanguageDetector languageDetector;
 
     public LanguageDetectionWorker(final Application application, LanguageDetectionWorkerConfiguration configuration)
     {
         this.configuration = configuration;
-        // Retrieve the DataStore
-        dataStore = application.getService(DataStore.class);
 
         // Initialise language detection library implementation.
         final LanguageDetectorProvider provider;
@@ -148,7 +143,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
         catch (RuntimeException re) {
             final Throwable cause = re.getCause();
 
-            if (cause instanceof DataStoreException) {
+            if (cause instanceof IOException) {
                 document.addFailure(LanguageDetectionConstants.ErrorCodes.FAILED_TO_ACQUIRE_SOURCE_DATA, cause.getMessage());
             } else {
                 //  If unexpected RuntimeException is detected, then re-throw.
@@ -170,7 +165,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
         LOG.debug("Document source data field to be used {}.", fieldName);
         final Field sourceDataField = document.getField(fieldName);
 
-        try (final SequenceInputStream sequenceInputStream = getFieldValuesAsStreams(sourceDataField, dataStore)) {
+        try (final SequenceInputStream sequenceInputStream = getFieldValuesAsStreams(sourceDataField)) {
 
             // Perform language detection.
             LOG.debug("Perform language detection.");

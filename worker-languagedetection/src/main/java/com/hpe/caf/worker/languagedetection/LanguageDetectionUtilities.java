@@ -15,8 +15,6 @@
  */
 package com.hpe.caf.worker.languagedetection;
 
-import com.hpe.caf.api.worker.DataStore;
-import com.hpe.caf.api.worker.DataStoreException;
 import com.hpe.caf.languagedetection.DetectedLanguage;
 import com.hpe.caf.languagedetection.LanguageDetectorResult;
 import com.hpe.caf.worker.document.model.Document;
@@ -43,14 +41,13 @@ public final class LanguageDetectionUtilities
     {
     }
 
-    public static SequenceInputStream getFieldValuesAsStreams(final Field sourceDataField, final DataStore dataStore)
+    public static SequenceInputStream getFieldValuesAsStreams(final Field sourceDataField)
         throws RuntimeException
     {
         Objects.requireNonNull(sourceDataField);
-        Objects.requireNonNull(dataStore);
         final List<InputStream> streams = new ArrayList<>();
         for (FieldValue fv : sourceDataField.getValues()) {
-            final InputStream is = getInputStream(fv, dataStore);
+            final InputStream is = getInputStream(fv);
             streams.add(is);
         }
         return new SequenceInputStream(Collections.enumeration(streams));
@@ -272,26 +269,15 @@ public final class LanguageDetectionUtilities
         document.getField(name).set(value);
     }
 
-    private static InputStream getInputStream(final FieldValue fieldValue, final DataStore dataStore) throws RuntimeException
+    private static InputStream getInputStream(final FieldValue fieldValue) throws RuntimeException
     {
-        final InputStream is;
-
         try {
-            // Check if data is stored in the remote data store.
-            if (fieldValue.isReference()) {
-                LOG.debug("Field value data is stored in the remote data store.");
-                is = dataStore.retrieve(fieldValue.getReference());
-            } else {
-                LOG.debug("Field value data is local.");
-                is = new ByteArrayInputStream(fieldValue.getValue());
-            }
-        } catch (DataStoreException dse) {
+            return fieldValue.openInputStream();
+        } catch (IOException ex) {
             LOG.error("Failed to acquire source data from the remote data store");
             // Convert to unchecked exception for streams api usage.
-            throw new RuntimeException(dse);
+            throw new RuntimeException(ex);
         }
-
-        return is;
     }
 
     private static String getLanguageNameFieldName(final int detectedLanguageId)

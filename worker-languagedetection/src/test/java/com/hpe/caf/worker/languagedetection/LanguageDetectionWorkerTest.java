@@ -15,10 +15,10 @@
  */
 package com.hpe.caf.worker.languagedetection;
 
-import com.hpe.caf.api.worker.DataStore;
-import com.hpe.caf.api.worker.DataStoreException;
 import com.hpe.caf.worker.document.exceptions.DocumentWorkerTransientException;
 import com.hpe.caf.worker.document.model.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import org.junit.*;
 import org.mockito.Mockito;
 
@@ -32,17 +32,14 @@ import static org.mockito.Mockito.when;
 public class LanguageDetectionWorkerTest {
 
     private Application mockApplication;
-    private DataStore mockDataStore;
 
     @Before
     public void setup(){
         mockApplication = Mockito.mock(Application.class);
-        mockDataStore = Mockito.mock(DataStore.class);
-        Mockito.when(mockApplication.getService(DataStore.class)).thenReturn(mockDataStore);
     }
 
     @Test
-    public void processDocumentTest() throws InterruptedException, DocumentWorkerTransientException, DataStoreException {
+    public void processDocumentTest() throws InterruptedException, DocumentWorkerTransientException, IOException {
         LanguageDetectionWorkerConfiguration config = new LanguageDetectionWorkerConfiguration();
         config.setResultFormat(LanguageDetectionResultFormat.SIMPLE);
         LanguageDetectionWorker ldw = new LanguageDetectionWorker(mockApplication, config);
@@ -55,8 +52,7 @@ public class LanguageDetectionWorkerTest {
         ldw.processDocument(document);
 
         //  Verify mock methods are being called the expected number of times.
-        Mockito.verify(mockApplication, Mockito.times(1)).getService(Mockito.any());
-        Mockito.verify(mockDataStore, Mockito.times(0)).retrieve(Mockito.anyString());
+        Mockito.verify(mockApplication, Mockito.times(0)).getService(Mockito.any());
         Mockito.verify(document, Mockito.times(12)).getField(Mockito.anyString());
         Mockito.verify(document, Mockito.times(0)).addFailure(Mockito.anyString(), Mockito.anyString());
     }
@@ -68,21 +64,20 @@ public class LanguageDetectionWorkerTest {
         LanguageDetectionWorker ldw = new LanguageDetectionWorker(mockApplication, config);
 
         //  Create a remote data store test document object. This is configured to throw a DataStoreException.
-        Document document = createTestDocumentForDataFailure("LanguageDetectionWorker Unit Test!");
+        Document document = createTestDocumentForDataFailure();
 
         //  Test data failure.
         ldw.processDocument(document);
 
         //  Verify mock methods are being called the expected number of times.
-        Mockito.verify(mockApplication, Mockito.times(1)).getService(Mockito.any());
-        Mockito.verify(mockDataStore, Mockito.times(1)).retrieve(Mockito.anyString());
+        Mockito.verify(mockApplication, Mockito.times(0)).getService(Mockito.any());
         Mockito.verify(document, Mockito.times(1)).getField(Mockito.anyString());
         // LanguageDetectionConstants.ErrorCodes.FAILED_TO_ACQUIRE_SOURCE_DATA should be added as failure id.
         Mockito.verify(document, Mockito.times(1)).addFailure(Mockito.anyString(), Mockito.anyString());
     }
 
     @Test
-    public void processDocumentTest_LangDetectFail() throws InterruptedException, DocumentWorkerTransientException, DataStoreException {
+    public void processDocumentTest_LangDetectFail() throws InterruptedException, DocumentWorkerTransientException, IOException {
         LanguageDetectionWorkerConfiguration config = new LanguageDetectionWorkerConfiguration();
         config.setResultFormat(LanguageDetectionResultFormat.SIMPLE);
         LanguageDetectionWorker ldw = new LanguageDetectionWorker(mockApplication, config);
@@ -95,14 +90,13 @@ public class LanguageDetectionWorkerTest {
         ldw.processDocument(document);
 
         //  Verify mock methods are being called the expected number of times.
-        Mockito.verify(mockApplication, Mockito.times(1)).getService(Mockito.any());
-        Mockito.verify(mockDataStore, Mockito.times(0)).retrieve(Mockito.anyString());
+        Mockito.verify(mockApplication, Mockito.times(0)).getService(Mockito.any());
         Mockito.verify(document, Mockito.times(1)).getField(Mockito.anyString());
         // LanguageDetectionConstants.ErrorCodes.FAILED_TO_DETECT_LANGUAGES should be added as failure id.
         Mockito.verify(document, Mockito.times(1)).addFailure(Mockito.anyString(), Mockito.anyString());
     }
 
-    private Document createTestDocument(String documentText) {
+    private Document createTestDocument(String documentText) throws IOException {
         //  Mock FieldValue.
         FieldValue contentFieldValue = mock(FieldValue.class);
 
@@ -111,7 +105,7 @@ public class LanguageDetectionWorkerTest {
 
         //  Assign input stream text.
         byte[] b = documentText.getBytes(StandardCharsets.UTF_8);
-        when(contentFieldValue.getValue()).thenReturn(b);
+        when(contentFieldValue.openInputStream()).thenReturn(new ByteArrayInputStream(b));
 
         //  Mock Field.
         Field contentField = mock(Field.class);
@@ -131,18 +125,12 @@ public class LanguageDetectionWorkerTest {
         return document;
     }
 
-    private Document createTestDocumentForDataFailure(String documentText) throws DataStoreException {
+    private Document createTestDocumentForDataFailure() throws IOException {
         //  Mock FieldValue.
         FieldValue contentFieldValue = mock(FieldValue.class);
 
-        //  Set isReference to true.
-        when(contentFieldValue.isReference()).thenReturn(true);
-
-        //  Assign input stream text.
-        when(contentFieldValue.getReference()).thenReturn(documentText);
-
         //  Throw DataStoreException when attempting to retrieve from remote data store.
-        when(mockDataStore.retrieve(documentText)).thenThrow(new DataStoreException("Test DataStoreException!"));
+        when(contentFieldValue.openInputStream()).thenThrow(new IOException("Test DataStoreException!"));
 
         //  Mock Field.
         Field contentField = mock(Field.class);
