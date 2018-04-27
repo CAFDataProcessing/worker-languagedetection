@@ -28,8 +28,8 @@ import java.io.InputStream;
 /**
  * CLD2 Language detection integration test
  */
-public class LanguageDetectionCld2IT {
-
+public class LanguageDetectionCld2IT
+{
     private String filename;
     private LanguageDetectorProvider provider;
     private LanguageDetector detector;
@@ -37,30 +37,31 @@ public class LanguageDetectionCld2IT {
     private LanguageDetectorSettings settings;
     private boolean multiLang;
 
-
-    public LanguageDetectionCld2IT(){
-
+    public LanguageDetectionCld2IT()
+    {
     }
-
 
     /**
      * Set up the provider and detector
+     *
      * @throws LanguageDetectorException
      */
     @Before
-    public void setup() throws LanguageDetectorException {
+    public void setup() throws LanguageDetectorException
+    {
         provider = new Cld2DetectorProvider();
         detector = provider.getLanguageDetector();
     }
 
-
     /**
      * Test text with single language detection. Assert expected results
+     *
      * @throws LanguageDetectorException
      * @throws IOException
      */
     @Test
-    public void testSingleLanguage() throws LanguageDetectorException, IOException {
+    public void testSingleLanguage() throws LanguageDetectorException, IOException
+    {
         multiLang = false;
 
         filename = "emailGerman.txt";
@@ -79,20 +80,20 @@ public class LanguageDetectionCld2IT {
 
         Assert.assertEquals("de", arr[0].getLanguageCode());
         Assert.assertEquals("GERMAN", arr[0].getLanguageName());
-
     }
-
 
     /**
      * Test text file with multiple languages (3) and assert expected values
+     *
      * @throws LanguageDetectorException
      * @throws IOException
      */
     @Test
-    public void testMultiLanguage() throws LanguageDetectorException, IOException {
+    public void testMultiLanguage() throws LanguageDetectorException, IOException
+    {
         multiLang = true;
         String[] testCodes = {"de", "es", "en"};
-        String[] testNames = { "GERMAN", "SPANISH","ENGLISH"};
+        String[] testNames = {"GERMAN", "SPANISH", "ENGLISH"};
 
         filename = "extractEnEsDe.txt";
 
@@ -108,20 +109,21 @@ public class LanguageDetectionCld2IT {
         Assert.assertTrue(!result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
         Assert.assertEquals(3, result.getLanguages().size());
 
-        for(int i=0; i<3; i++) {
+        for (int i = 0; i < 3; i++) {
             Assert.assertEquals(testCodes[i], arr[i].getLanguageCode());
             Assert.assertEquals(testNames[i], arr[i].getLanguageName());
         }
     }
 
-
     /**
      * Test result obtained from short text with one language. Assert expected values.
+     *
      * @throws LanguageDetectorException
      * @throws IOException
      */
     @Test
-    public void testSingleLanguageShortText() throws LanguageDetectorException, IOException {
+    public void testSingleLanguageShortText() throws LanguageDetectorException, IOException
+    {
         multiLang = false;
 
         filename = "extractNLShort.txt";
@@ -140,18 +142,17 @@ public class LanguageDetectionCld2IT {
 
         Assert.assertEquals("nl", arr[0].getLanguageCode());
         Assert.assertEquals("DUTCH", arr[0].getLanguageName());
-
-
     }
-
 
     /**
      * Fail test on gibberish text of no language. Assert the results indicate unknown language
+     *
      * @throws LanguageDetectorException
      * @throws IOException
      */
     @Test
-    public void testMultipleLanguageGibberish() throws LanguageDetectorException, IOException {
+    public void testMultipleLanguageGibberish() throws LanguageDetectorException, IOException
+    {
         multiLang = true;
 
         filename = "extractGibberish.txt";
@@ -168,21 +169,21 @@ public class LanguageDetectionCld2IT {
         Assert.assertFalse(result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
         Assert.assertEquals(3, result.getLanguages().size());
 
-        for(int i=0; i<3; i++) {
+        for (int i = 0; i < 3; i++) {
             Assert.assertEquals("un", arr[i].getLanguageCode());
             Assert.assertEquals("Unknown", arr[i].getLanguageName());
         }
     }
 
-
     /**
-     * test a text file with UCS-2 LE BOM encoded text which is not supported.
-     * According to CLD2 all text should be utf-8
+     * test a text file with UCS-2 LE BOM encoded text which is not supported. According to CLD2 all text should be utf-8
+     *
      * @throws LanguageDetectorException
      * @throws IOException
      */
     @Test
-    public void testLanguageUCS2() throws LanguageDetectorException, IOException {
+    public void testLanguageUCS2() throws LanguageDetectorException, IOException
+    {
         multiLang = false;
 
         filename = "greekUCS2.txt";
@@ -198,20 +199,19 @@ public class LanguageDetectionCld2IT {
         Assert.assertEquals(LanguageDetectorStatus.FAILED, result.getLanguageDetectorStatus());
     }
 
-
-
     /**
      * Read in an entire file into a byte array
+     *
      * @param name
      * @return
      * @throws IOException
      */
-    private byte[] getAllData(final String name) throws IOException, LanguageDetectorException {
-        try ( InputStream stream = this.getClass().getClassLoader().getResourceAsStream(name) ) {
+    private byte[] getAllData(final String name) throws IOException, LanguageDetectorException
+    {
+        try (InputStream stream = this.getClass().getClassLoader().getResourceAsStream(name)) {
             return ByteStreams.toByteArray(stream);
-        } catch(IOException|NullPointerException e){
-            throw new LanguageDetectorException("File could not be converted to byte array. Invalid filename: " +name);
+        } catch (IOException | NullPointerException e) {
+            throw new LanguageDetectorException("File could not be converted to byte array. Invalid filename: " + name);
         }
     }
-
 }

@@ -22,24 +22,28 @@ import javax.validation.constraints.NotNull;
  * Language Detection Worker specific configuration.
  */
 @Configuration
-public class LanguageDetectionWorkerConfiguration {
-
+public class LanguageDetectionWorkerConfiguration
+{
     @NotNull
     private LanguageDetectionResultFormat resultFormat;
 
     /**
      * Getter for property 'resultFormat' which controls the format that language detection results are output.
+     *
      * @return value for property 'resultFormat'.
      */
-    public LanguageDetectionResultFormat getResultFormat() {
+    public LanguageDetectionResultFormat getResultFormat()
+    {
         return resultFormat;
     }
 
     /**
      * Setter for property 'resultFormat' which controls the format that langauge detection results are output.
+     *
      * @param resultFormat value to set for property 'resultFormat'.
      */
-    public void setResultFormat(final LanguageDetectionResultFormat resultFormat) {
+    public void setResultFormat(final LanguageDetectionResultFormat resultFormat)
+    {
         this.resultFormat = resultFormat;
     }
 }

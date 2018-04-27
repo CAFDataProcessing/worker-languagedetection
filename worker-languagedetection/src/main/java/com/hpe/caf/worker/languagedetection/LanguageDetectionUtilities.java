@@ -150,15 +150,15 @@ public final class LanguageDetectionUtilities
 
     /**
      * Updates the passed {@code document} with the language detection result passed in {@code detectorResult}.
+     *
      * @param detectorResult result of performing language detection. Cannot be null.
      * @param document the document to update with result of language detection. Cannot be null.
-     * @param sourceDataField the field that language detection was ran against. Depending on the values of
-     *                        {@code resultFormat} and {@code inMultiFieldMode} this may be used in the output field
-     *                        name. Cannot be null.
+     * @param sourceDataField the field that language detection was ran against. Depending on the values of {@code resultFormat} and
+     * {@code inMultiFieldMode} this may be used in the output field name. Cannot be null.
      * @param resultFormat whether the result fields should be output in simple or complex format. If set to COMPLEX then
-     *                     {@code inMultiFieldMode} has no effect on output fields. Cannot be null.
-     * @param inMultiFieldMode whether the language detection was ran in multi-field mode. This will effect the fields output
-     *                         but only if {@code resultFormat} is set to {@code LanguageDetectionResultFormat.SIMPLE}.
+     * {@code inMultiFieldMode} has no effect on output fields. Cannot be null.
+     * @param inMultiFieldMode whether the language detection was ran in multi-field mode. This will effect the fields output but only if
+     * {@code resultFormat} is set to {@code LanguageDetectionResultFormat.SIMPLE}.
      * @throws RuntimeException if {@code detectorResult}, {@code document} or {@code sourceDataField} is null.
      */
     public static void addDetectedLanguageToDocument(final LanguageDetectorResult detectorResult, final Document document,
@@ -173,29 +173,27 @@ public final class LanguageDetectionUtilities
         Objects.requireNonNull(resultFormat);
 
         // Add detected languages to the document object.
-        if(resultFormat == LanguageDetectionResultFormat.SIMPLE)
-        {
+        if (resultFormat == LanguageDetectionResultFormat.SIMPLE) {
             if (inMultiFieldMode) {
-                LOG.debug("Adding metadata to the document for each language detected in multi-field mode. " +
-                        "Fields will be output in simple format.");
+                LOG.debug("Adding metadata to the document for each language detected in multi-field mode. "
+                    + "Fields will be output in simple format.");
                 addDetectedLanguagesToDocument(detectorResult, document, sourceDataField.getName());
             } else {
                 // Add detected languages to the document object.
-                LOG.debug("Adding metadata to the document for each language detected. " +
-                        "Fields will be output in simple format.");
+                LOG.debug("Adding metadata to the document for each language detected. "
+                    + "Fields will be output in simple format.");
                 addDetectedLanguagesToDocument(detectorResult, document);
             }
-        }
-        else if(LanguageDetectionResultFormat.isComplexFormat(resultFormat))
-        {
+        } else if (LanguageDetectionResultFormat.isComplexFormat(resultFormat)) {
             LOG.debug("Adding metadata to the document for each language detected. Fields will be output in complex format.");
             addDetectedLanguageToDocumentComplexMode(detectorResult, document, resultFormat);
         }
     }
 
     /**
-     * Updates the passed @code document} with the language detection result passed in by adding a field to the document
-     * that records the result in complex form.
+     * Updates the passed @code document} with the language detection result passed in by adding a field to the document that records the
+     * result in complex form.
+     *
      * @param detectorResult result of performing language detection.
      * @param document the document to update with result of language detection
      * @param resultFormat the format to output result in. Should be a complex format type.
@@ -205,8 +203,7 @@ public final class LanguageDetectionUtilities
                                                                  final LanguageDetectionResultFormat resultFormat)
     {
         Collection<DetectedLanguage> detectedLanguages = detectorResult.getLanguages();
-        if(detectedLanguages==null || detectedLanguages.isEmpty())
-        {
+        if (detectedLanguages == null || detectedLanguages.isEmpty()) {
             LOG.debug("No languages detected for the document.");
             return;
         }
@@ -214,44 +211,36 @@ public final class LanguageDetectionUtilities
         List<JSONObject> languageCodesToAdd = new ArrayList<>();
 
         boolean unknownOnlyLanguageDetected = true;
-        for(DetectedLanguage detectedLanguage: detectedLanguages)
-        {
+        for (DetectedLanguage detectedLanguage : detectedLanguages) {
             String languageCode = detectedLanguage.getLanguageCode();
             // Only add an output entry for unknown language code if it is the only detected language. 3 languages
             // are always 'detected' so first may be English and then unknown twice.
-            if("un".equals(languageCode))
-            {
+            if ("un".equals(languageCode)) {
                 continue;
             }
             unknownOnlyLanguageDetected = false;
             languageCodesToAdd.add(buildLanguageCodeEntry(languageCode,
-                    String.valueOf(detectedLanguage.getConfidencePercentage())));
+                                                          String.valueOf(detectedLanguage.getConfidencePercentage())));
         }
-        if(unknownOnlyLanguageDetected)
-        {
+        if (unknownOnlyLanguageDetected) {
             languageCodesToAdd.add(buildLanguageCodeEntry("un", "100"));
         }
 
         // Output in specific complex format
-        if(LanguageDetectionResultFormat.COMPLEX.equals(resultFormat) ||
-                LanguageDetectionResultFormat.COMPLEX_COMBINED.equals(resultFormat))
-        {
-            JSONArray languageCodes =  new JSONArray();
+        if (LanguageDetectionResultFormat.COMPLEX.equals(resultFormat)
+            || LanguageDetectionResultFormat.COMPLEX_COMBINED.equals(resultFormat)) {
+            JSONArray languageCodes = new JSONArray();
             languageCodesToAdd.stream().forEach(lc -> languageCodes.put(lc));
             replaceDocumentField(document, "LANGUAGE_CODES", languageCodes.toString());
             return;
-        }
-        else if(LanguageDetectionResultFormat.COMPLEX_SPLIT.equals(resultFormat))
-        {
+        } else if (LanguageDetectionResultFormat.COMPLEX_SPLIT.equals(resultFormat)) {
             Field langCodeField = document.getField("LANGUAGE_CODES");
             langCodeField.clear();
             languageCodesToAdd.stream().forEach(lc -> langCodeField.add(lc.toString()));
             return;
-        }
-        else
-        {
+        } else {
             throw new RuntimeException("Unrecognized complex output format for language result. Format was: "
-                    +resultFormat.toString());
+                + resultFormat.toString());
         }
     }
 

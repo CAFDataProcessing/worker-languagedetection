@@ -23,11 +23,12 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class LanguageDetectorTest implements LanguageDetector {
-
+public class LanguageDetectorTest implements LanguageDetector
+{
     private LanguageDetectorResult languageDetectorResult;
 
-    public LanguageDetectorTest(){
+    public LanguageDetectorTest()
+    {
         //  Initialize LanguageDetectorResult for unit testing purposes.
         languageDetectorResult = new LanguageDetectorResult();
         final ArrayList<DetectedLanguage> languages = new ArrayList<DetectedLanguage>();
@@ -56,22 +57,26 @@ public class LanguageDetectorTest implements LanguageDetector {
     }
 
     @Override
-    public LanguageDetectorResult detectLanguage(byte[] textBytes, LanguageDetectorSettings settings) {
+    public LanguageDetectorResult detectLanguage(byte[] textBytes, LanguageDetectorSettings settings)
+    {
         return languageDetectorResult;
     }
 
     @Override
-    public LanguageDetectorResult detectLanguage(byte[] textBytes) throws LanguageDetectorException {
+    public LanguageDetectorResult detectLanguage(byte[] textBytes) throws LanguageDetectorException
+    {
         return languageDetectorResult;
     }
 
     @Override
-    public LanguageDetectorResult detectLanguage(InputStream textStream, LanguageDetectorSettings settings) throws LanguageDetectorException {
+    public LanguageDetectorResult detectLanguage(InputStream textStream, LanguageDetectorSettings settings) throws LanguageDetectorException
+    {
         return languageDetectorResult;
     }
 
     @Override
-    public LanguageDetectorResult detectLanguage(InputStream textStream) throws LanguageDetectorException {
+    public LanguageDetectorResult detectLanguage(InputStream textStream) throws LanguageDetectorException
+    {
         String textString;
         try {
             textString = IOUtils.toString(textStream, StandardCharsets.UTF_8);
@@ -86,5 +91,4 @@ public class LanguageDetectorTest implements LanguageDetector {
 
         return languageDetectorResult;
     }
-
 }

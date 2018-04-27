@@ -20,7 +20,8 @@ import java.util.HashSet;
 /**
  * Interface mapped to C++ Encoding Enum containing encodings and associated ordinals
  */
-public enum Cld2Encoding {
+public enum Cld2Encoding
+{
     ISO_8859_1(0),
     ISO_8859_2(1),
     ISO_8859_3(2),
@@ -98,57 +99,69 @@ public enum Cld2Encoding {
     SOFTBANK_ISO_2022_JP(74),
     NUM_ENCODINGS(75);
 
-
     /**
      * integer to hold each enum's value
      */
     private final int value;
 
-
     /**
      * constructor allowing each enum declared above to pass in an int value and save into the enum's value field
+     *
      * @param newValue
      */
-    Cld2Encoding(final int newValue){
+    Cld2Encoding(final int newValue)
+    {
         value = newValue;
     }
 
-
-    public int getValue(){
+    public int getValue()
+    {
         return value;
     }
 
-
     /**
-     * Converts code passed in to Cld2Encoding enum and returns the value.
-     * If the code passed in is not the exact enum name, it will compare the code with text name variations of popular
-     * encodings and return that encoding's value.
+     * Converts code passed in to Cld2Encoding enum and returns the value. If the code passed in is not the exact enum name, it will
+     * compare the code with text name variations of popular encodings and return that encoding's value.
+     *
      * @param code - The code to be queried
      * @return - Returns the enum value.
      */
-    public static int getValueFromString(String code){
-        if(contains(code))
+    public static int getValueFromString(String code)
+    {
+        if (contains(code)) {
             return Cld2Encoding.valueOf(code).getValue();
-
-        switch(code){
-            case "utf8":                return Cld2Encoding.UTF8.getValue();
-            case "ascii_7bit":          return Cld2Encoding.ASCII_7BIT.getValue();
-            case "iso_8859_1":          return Cld2Encoding.ISO_8859_1.getValue();
-            case "iso_8859_2":          return Cld2Encoding.ISO_8859_2.getValue();
-            case "iso_8859_3":          return Cld2Encoding.ISO_8859_3.getValue();
-            case "hz_gb_2312":          return Cld2Encoding.HZ_GB_2312.getValue();
-            case "msft_cp1252":         return Cld2Encoding.MSFT_CP1252.getValue();
-            case "msft_cp1250":         return Cld2Encoding.MSFT_CP1250.getValue();
-            case "msft_cp1256":         return Cld2Encoding.MSFT_CP1256.getValue();
-            case "japanese_shift_jis":  return Cld2Encoding.JAPANESE_SHIFT_JIS.getValue();
-            case "korean_euc_kr":       return Cld2Encoding.KOREAN_EUC_KR.getValue();
-            default:                    return Cld2Encoding.UNKNOWN_ENCODING.getValue();
         }
 
+        switch (code) {
+            case "utf8":
+                return Cld2Encoding.UTF8.getValue();
+            case "ascii_7bit":
+                return Cld2Encoding.ASCII_7BIT.getValue();
+            case "iso_8859_1":
+                return Cld2Encoding.ISO_8859_1.getValue();
+            case "iso_8859_2":
+                return Cld2Encoding.ISO_8859_2.getValue();
+            case "iso_8859_3":
+                return Cld2Encoding.ISO_8859_3.getValue();
+            case "hz_gb_2312":
+                return Cld2Encoding.HZ_GB_2312.getValue();
+            case "msft_cp1252":
+                return Cld2Encoding.MSFT_CP1252.getValue();
+            case "msft_cp1250":
+                return Cld2Encoding.MSFT_CP1250.getValue();
+            case "msft_cp1256":
+                return Cld2Encoding.MSFT_CP1256.getValue();
+            case "japanese_shift_jis":
+                return Cld2Encoding.JAPANESE_SHIFT_JIS.getValue();
+            case "korean_euc_kr":
+                return Cld2Encoding.KOREAN_EUC_KR.getValue();
+            default:
+                return Cld2Encoding.UNKNOWN_ENCODING.getValue();
+        }
     }
 
-
-    public static boolean contains(String text) {
+    public static boolean contains(String text)
+    {
         for (Cld2Encoding c : Cld2Encoding.values()) {
             if (c.name().equals(text)) {
                 return true;
@@ -157,8 +170,8 @@ public enum Cld2Encoding {
         return false;
     }
 
-
-    public static HashSet<String> getEnums() {
+    public static HashSet<String> getEnums()
+    {
         HashSet<String> values = new HashSet<String>();
 
         for (Cld2Encoding c : Cld2Encoding.values()) {

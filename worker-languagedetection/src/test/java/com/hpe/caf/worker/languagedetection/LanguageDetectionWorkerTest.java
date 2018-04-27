@@ -29,17 +29,19 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class LanguageDetectionWorkerTest {
-
+public class LanguageDetectionWorkerTest
+{
     private Application mockApplication;
 
     @Before
-    public void setup(){
+    public void setup()
+    {
         mockApplication = Mockito.mock(Application.class);
     }
 
     @Test
-    public void processDocumentTest() throws InterruptedException, DocumentWorkerTransientException, IOException {
+    public void processDocumentTest() throws InterruptedException, DocumentWorkerTransientException, IOException
+    {
         LanguageDetectionWorkerConfiguration config = new LanguageDetectionWorkerConfiguration();
         config.setResultFormat(LanguageDetectionResultFormat.SIMPLE);
         LanguageDetectionWorker ldw = new LanguageDetectionWorker(mockApplication, config);
@@ -58,7 +60,8 @@ public class LanguageDetectionWorkerTest {
     }
 
     @Test
-    public void processDocumentTest_GetDataFail() throws Throwable {
+    public void processDocumentTest_GetDataFail() throws Throwable
+    {
         LanguageDetectionWorkerConfiguration config = new LanguageDetectionWorkerConfiguration();
         config.setResultFormat(LanguageDetectionResultFormat.SIMPLE);
         LanguageDetectionWorker ldw = new LanguageDetectionWorker(mockApplication, config);
@@ -77,7 +80,8 @@ public class LanguageDetectionWorkerTest {
     }
 
     @Test
-    public void processDocumentTest_LangDetectFail() throws InterruptedException, DocumentWorkerTransientException, IOException {
+    public void processDocumentTest_LangDetectFail() throws InterruptedException, DocumentWorkerTransientException, IOException
+    {
         LanguageDetectionWorkerConfiguration config = new LanguageDetectionWorkerConfiguration();
         config.setResultFormat(LanguageDetectionResultFormat.SIMPLE);
         LanguageDetectionWorker ldw = new LanguageDetectionWorker(mockApplication, config);
@@ -96,7 +100,8 @@ public class LanguageDetectionWorkerTest {
         Mockito.verify(document, Mockito.times(1)).addFailure(Mockito.anyString(), Mockito.anyString());
     }
 
-    private Document createTestDocument(String documentText) throws IOException {
+    private Document createTestDocument(String documentText) throws IOException
+    {
         //  Mock FieldValue.
         FieldValue contentFieldValue = mock(FieldValue.class);
 
@@ -125,7 +130,8 @@ public class LanguageDetectionWorkerTest {
         return document;
     }
 
-    private Document createTestDocumentForDataFailure() throws IOException {
+    private Document createTestDocumentForDataFailure() throws IOException
+    {
         //  Mock FieldValue.
         FieldValue contentFieldValue = mock(FieldValue.class);
 

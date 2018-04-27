@@ -36,9 +36,8 @@ public class LanguageDetectionWorkerFactory implements DocumentWorkerFactory
         LanguageDetectionWorkerConfiguration configuration;
         try {
             configuration = application.getService(ConfigurationSource.class)
-                    .getConfiguration(LanguageDetectionWorkerConfiguration.class);
-        }
-        catch (ConfigurationException e) {
+                .getConfiguration(LanguageDetectionWorkerConfiguration.class);
+        } catch (ConfigurationException e) {
             LOG.error("Unable to retrieve worker configuration.", e);
             return new UnhealthyWorker("Unable to retrieve worker configuration. " + e.getMessage());
         }

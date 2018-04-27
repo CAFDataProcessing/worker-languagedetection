@@ -16,11 +16,10 @@
 package com.hpe.caf.languagedetection;
 
 /**
- * for language objects detected by the implementation of language detector, found in
- * LanguageDetectorResult
+ * for language objects detected by the implementation of language detector, found in LanguageDetectorResult
  */
-public class DetectedLanguage {
-
+public class DetectedLanguage
+{
     /**
      * Name of language e.g. "FRENCH", "ENGLISH"
      */
@@ -36,39 +35,38 @@ public class DetectedLanguage {
      */
     private int confidencePercentage;
 
-
-    public DetectedLanguage(){
+    public DetectedLanguage()
+    {
         //empty constructor for serialisation
     }
 
-
-
-    public String getLanguageName() {
+    public String getLanguageName()
+    {
         return languageName;
     }
 
-
-    public void setLanguageName(String languageName) {
+    public void setLanguageName(String languageName)
+    {
         this.languageName = languageName;
     }
 
-
-    public String getLanguageCode() {
+    public String getLanguageCode()
+    {
         return languageCode;
     }
 
-
-    public void setLanguageCode(String languageCode) {
+    public void setLanguageCode(String languageCode)
+    {
         this.languageCode = languageCode;
     }
 
-
-    public int getConfidencePercentage() {
+    public int getConfidencePercentage()
+    {
         return confidencePercentage;
     }
 
-
-    public void setConfidencePercentage(int confidencePercentage) {
+    public void setConfidencePercentage(int confidencePercentage)
+    {
         this.confidencePercentage = confidencePercentage;
     }
 }

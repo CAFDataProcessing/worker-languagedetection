@@ -95,8 +95,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
         final LanguageDetectionResultFormat resultFormat;
         try {
             resultFormat = getResultFormatToUse(document);
-        }
-        catch (IllegalArgumentException re){
+        } catch (IllegalArgumentException re) {
             LOG.error("Failed to read result format specified.");
             document.addFailure(LanguageDetectionConstants.ErrorCodes.INVALID_RESULT_FORMAT, re.getMessage());
             return;
@@ -110,8 +109,8 @@ public final class LanguageDetectionWorker implements DocumentWorker
                     LanguageDetectionConstants.EnvironmentVariables.WORKER_LANG_DETECT_SOURCE_FIELD);
                 detectLanguage(document,
                                Strings.isNullOrEmpty(workerLangDetectSourceFieldEnv) ? "CONTENT" : workerLangDetectSourceFieldEnv,
-                        false, resultFormat
-                        );
+                               false, resultFormat
+                );
             } else {
                 //Split comma-separated list of filed to operate on and place the values in an array.
                 final ArrayList<String> fieldsToDetect = new ArrayList<>();
@@ -127,11 +126,11 @@ public final class LanguageDetectionWorker implements DocumentWorker
                         fieldsToDetect.add(field.trim());
                     }
                 }
-                if(fieldsToDetect.size() > 1 && LanguageDetectionResultFormat.isComplexFormat(resultFormat)) {
+                if (fieldsToDetect.size() > 1 && LanguageDetectionResultFormat.isComplexFormat(resultFormat)) {
                     document.addFailure(LanguageDetectionConstants.ErrorCodes.INVALID_CUSTOM_DATA_VALUES,
-                            "Multiple fields are not supported on the '"
-                                    +LanguageDetectionConstants.CustomData.FIELD_SPECS+"' task property when '"
-                                    +LanguageDetectionConstants.CustomData.RESULT_FORMAT+"' is set to a complex format.");
+                                        "Multiple fields are not supported on the '"
+                                        + LanguageDetectionConstants.CustomData.FIELD_SPECS + "' task property when '"
+                                        + LanguageDetectionConstants.CustomData.RESULT_FORMAT + "' is set to a complex format.");
                     return;
                 }
                 for (final String fieldName : fieldsToDetect) {
@@ -139,8 +138,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
                     detectLanguage(document, fieldName.trim(), true, resultFormat);
                 }
             }
-        }
-        catch (RuntimeException re) {
+        } catch (RuntimeException re) {
             final Throwable cause = re.getCause();
 
             if (cause instanceof IOException) {
@@ -182,6 +180,7 @@ public final class LanguageDetectionWorker implements DocumentWorker
 
     /**
      * Determines the result output format that should be used with current document.
+     *
      * @param document Document that results will be output for.
      * @return the result format to use when outputting language detection results.
      * @throws IllegalArgumentException if the result format set on the document is not a valid value.
@@ -190,10 +189,9 @@ public final class LanguageDetectionWorker implements DocumentWorker
     {
         final String resultFormatStr = document.getCustomData(LanguageDetectionConstants.CustomData.RESULT_FORMAT);
         // Cover the case where property not passed on custom data
-        if(resultFormatStr==null){
+        if (resultFormatStr == null) {
             return configuration.getResultFormat();
-        }
-        else {
+        } else {
             // If the value is not a valid enum value then IllegalArgumentException will be thrown here
             return LanguageDetectionResultFormat.valueOf(resultFormatStr.toUpperCase(Locale.ENGLISH));
         }

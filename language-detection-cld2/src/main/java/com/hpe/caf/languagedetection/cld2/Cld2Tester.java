@@ -24,53 +24,46 @@ import java.nio.file.Paths;
 /**
  * Created by smitcona on 30/11/2015.
  */
-public class Cld2Tester {
-
-    public static void main(String[] args) throws LanguageDetectorException, IOException {
-
+public class Cld2Tester
+{
+    public static void main(String[] args) throws LanguageDetectorException, IOException
+    {
         /**
          * Whether to return multiple languages or just the top language
          */
         boolean multiLang = true;
 
-
         /**
-         * Pass in the filename from command line and it gets read in
-         * e.g. "C:\\Users\\smitcona\\Desktop\\emailGerman.txt"
+         * Pass in the filename from command line and it gets read in e.g. "C:\\Users\\smitcona\\Desktop\\emailGerman.txt"
          */
 //        byte[] bytes = getAllData(args[0]);
         byte[] bytes = Files.readAllBytes(Paths.get(args[0]));
 
         /**
          * Settings file takes either:
-         * (multilang) -e.g. (true)
-         * (multilang, "hints") -e.g. (false, "ENGLISH")
-         * ("encoding", multilang, "hints") -e.g. ("utf8", true, "en", "fr")
+         * <li>(multilang) -e.g. (true)</li>
+         * <li>(multilang, "hints") -e.g. (false, "ENGLISH")</li>
+         * <li>("encoding", multilang, "hints") -e.g. ("utf8", true, "en", "fr")</li>
          */
         LanguageDetectorSettings settings = new LanguageDetectorSettings(multiLang);
 //        LanguageDetectorSettings settings = new LanguageDetectorSettings(multiLang,"en", "it");
-
 
         /**
          * Provider to provide a detector implementation
          */
         LanguageDetectorProvider provider = new Cld2DetectorProvider();
 
-
         /**
          * Detector implementation
          */
         LanguageDetector detector = provider.getLanguageDetector();
-
 
         /**
          * this is the final result from the language detection, and you pass in the bytes from the text file and settings
          */
         LanguageDetectorResult result = detector.detectLanguage(bytes, settings);
 
-
         DetectedLanguage[] d = result.getLanguages().toArray(new DetectedLanguage[result.getLanguages().size()]);
-
 
         /**
          * output the results
@@ -89,7 +82,4 @@ public class Cld2Tester {
 //            System.out.println("Language detection failed. Make sure supplied text file encoding is UTF-8. \n");
 //        }
     }
-
-
-
 }

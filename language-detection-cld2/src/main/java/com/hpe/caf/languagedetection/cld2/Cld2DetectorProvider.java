@@ -21,13 +21,15 @@ import com.hpe.caf.languagedetection.LanguageDetectorProvider;
 /**
  * Provider implementation returning a CLD2Detector object
  */
-public class Cld2DetectorProvider implements LanguageDetectorProvider {
-
+public class Cld2DetectorProvider implements LanguageDetectorProvider
+{
     /**
      * returns a new CLD2Detector object
+     *
      * @return LanguageDetector
      */
-    public LanguageDetector getLanguageDetector() {
+    public LanguageDetector getLanguageDetector()
+    {
         return new Cld2Detector();
     }
 }

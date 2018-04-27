@@ -20,7 +20,8 @@ import java.util.*;
 /**
  * Possible values that describe how the output result should be formatted.
  */
-public enum LanguageDetectionResultFormat {
+public enum LanguageDetectionResultFormat
+{
     SIMPLE,
     COMPLEX,
     COMPLEX_COMBINED,
@@ -29,6 +30,6 @@ public enum LanguageDetectionResultFormat {
     public static boolean isComplexFormat(LanguageDetectionResultFormat formatToCheck)
     {
         return COMPLEX.equals(formatToCheck) || COMPLEX_COMBINED.equals(formatToCheck)
-                || COMPLEX_SPLIT.equals(formatToCheck);
+            || COMPLEX_SPLIT.equals(formatToCheck);
     }
 }
