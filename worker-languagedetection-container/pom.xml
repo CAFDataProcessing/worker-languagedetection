@@ -294,7 +294,7 @@
                             <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
                             <build>
                                 <maintainer>connor.mulholland@hpe.com</maintainer>
-                                <from>cafapi/opensuse-jre8:1.2</from>
+                                <from>cafapi/opensuse-jre8:1</from>
                                 <labels>
                                     <Build.Number>${project.version}</Build.Number>
                                     <Build.Date>${maven.build.timestamp}</Build.Date>
