@@ -32,11 +32,6 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     
-    <organization>
-        <name>EntIT Software LLC, a Micro Focus company</name>
-        <url>https://www.microfocus.com</url>
-    </organization>
-    
     <name>Worker-LanguageDetection</name>
     <description>A worker for interpreting the languages used in a given input</description>
     <url>https://github.com/CAFDataProcessing/worker-languagedetection</url>
