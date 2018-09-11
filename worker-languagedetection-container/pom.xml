@@ -270,7 +270,6 @@
                             <alias>config</alias>
                             <name>${project.artifactId}-test-config:${project.version}</name>
                             <build>
-                                <maintainer>connor.mulholland@hpe.com</maintainer>
                                 <assembly>
                                     <basedir>/config</basedir>
                                     <inline>
@@ -293,7 +292,6 @@
                             <alias>worker-languagedetection</alias>
                             <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
                             <build>
-                                <maintainer>connor.mulholland@hpe.com</maintainer>
                                 <from>cafapi/opensuse-jre8:1</from>
                                 <labels>
                                     <Build.Number>${project.version}</Build.Number>
