@@ -19,12 +19,16 @@ import com.hpe.caf.languagedetection.LanguageDetectorException;
 import com.hpe.caf.languagedetection.LanguageDetectorSettings;
 import com.sun.jna.Native;
 import com.sun.jna.Platform;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Wrapper for the CLD2 library
  */
 public class Cld2Wrapper
 {
+    private static final Logger LOG = LoggerFactory.getLogger(Cld2Wrapper.class);
+    
     /**
      * JNA interface access class
      */
@@ -37,7 +41,7 @@ public class Cld2Wrapper
     {
         System.setProperty("jna.library.path", System.getProperty("cld2.location", System.getenv("cld2.location")));
 
-        System.out.println("Library location: " + System.getProperty("jna.library.path"));
+        LOG.debug("Library location: " + System.getProperty("jna.library.path"));
 
         cld2Library = (Cld2Library) Native.loadLibrary((Platform.isWindows() ? "win64/libcld2.dll" : "linux/libcld2.so"), Cld2Library.class);
 //        cld2Library = (Cld2Library) Native.loadLibrary("libcld2", Cld2Library.class);
