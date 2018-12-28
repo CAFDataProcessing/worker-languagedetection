@@ -85,6 +85,7 @@
         <dockerCafDataProcessingOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafDataProcessingOrg>
         <dockerProjectVersion>${dockerVersionSeperator}${project.version}</dockerProjectVersion>
         <gitRepo>https://github.com/CAFDataProcessing/worker-languagedetection</gitRepo>
+        <enforceCorrectDependencies>true</enforceCorrectDependencies>
     </properties>
 
     <dependencyManagement>
@@ -95,6 +96,21 @@
                 <version>${caf.worker-document-framework.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>net.java.dev.jna</groupId>
+                <artifactId>jna</artifactId>
+                <version>4.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>20160810</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.25</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
