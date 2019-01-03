@@ -49,7 +49,6 @@
         <dependency>
             <groupId>com.github.cafdataprocessing</groupId>
             <artifactId>worker-languagedetection</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.cafdataprocessing</groupId>
@@ -57,13 +56,12 @@
         </dependency>
         <dependency>
             <groupId>com.github.cafdataprocessing</groupId>
-            <artifactId>worker-document-testing</artifactId>
-            <scope>test</scope>
+            <artifactId>language-detection-cld2</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.cafdataprocessing</groupId>
-            <artifactId>language-detection-cld2</artifactId>
-            <version>${project.version}</version>
+            <artifactId>worker-document-testing</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 

@@ -39,7 +39,6 @@
         <dependency>
             <groupId>com.github.cafdataprocessing</groupId>
             <artifactId>language-detection</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.github.cafapi</groupId>
