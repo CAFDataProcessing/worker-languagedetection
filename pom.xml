@@ -85,6 +85,7 @@
         <dockerCafDataProcessingOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafDataProcessingOrg>
         <dockerProjectVersion>${dockerVersionSeperator}${project.version}</dockerProjectVersion>
         <gitRepo>https://github.com/CAFDataProcessing/worker-languagedetection</gitRepo>
+        <enforceCorrectDependencies>true</enforceCorrectDependencies>
     </properties>
 
     <dependencyManagement>
@@ -95,6 +96,31 @@
                 <version>${caf.worker-document-framework.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.github.cafdataprocessing</groupId>
+                <artifactId>language-detection</artifactId>
+                <version>3.2.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.cafdataprocessing</groupId>
+                <artifactId>language-detection-cld2</artifactId>
+                <version>3.2.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.cafdataprocessing</groupId>
+                <artifactId>worker-languagedetection</artifactId>
+                <version>3.2.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>net.java.dev.jna</groupId>
+                <artifactId>jna</artifactId>
+                <version>4.2.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>20160810</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
