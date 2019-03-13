@@ -120,7 +120,7 @@
             <dependency>
                 <groupId>org.json</groupId>
                 <artifactId>json</artifactId>
-                <version>20160810</version>
+                <version>20180130</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
