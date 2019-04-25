@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright 2015-2018 Micro Focus or one of its affiliates.
+    Copyright 2015-2019 Micro Focus or one of its affiliates.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@
 
     <properties>
         <caf.worker-document-framework.version>4.1.0-292</caf.worker-document-framework.version>
-        <copyrightYear>2018</copyrightYear>
+        <copyrightYear>2019</copyrightYear>
         <copyrightNotice>Copyright ${project.inceptionYear}-${copyrightYear} Micro Focus or one of its affiliates.</copyrightNotice>
         <dockerHubOrganization>cafdataprocessing</dockerHubOrganization>
         <dockerCafDataProcessingOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafDataProcessingOrg>
