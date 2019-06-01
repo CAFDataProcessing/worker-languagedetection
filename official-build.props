@@ -1,3 +1,5 @@
+SEPG_BUILD_ENV_IMAGE=maven:3.5.3-jdk-8
+
 DISABLE_AUTOTAGGING=true
 
 GENERIC_1_TARGET_URL=${genericRepoMgr}/saas-helm-testing/${filename}
