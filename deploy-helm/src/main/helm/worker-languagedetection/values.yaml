@@ -33,7 +33,7 @@ workerLanguageDetection:
   deployment:
     replicas: 1
     strategyType: Recreate
-    image: cafdataprocessing/worker-languagedetection:${project.version}
+    image: cafinternal/prereleases:worker-languagedetection-${project.version}
     adminPort: 8081
     env:
       resultFormat: COMPLEX_SPLIT
