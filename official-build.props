@@ -1,1 +1,9 @@
 DISABLE_AUTOTAGGING=true
+
+GENERIC_1_TARGET_URL=${genericRepoMgr}/saas-helm-testing/${filename}
+GENERIC_1_ARTIFACTS=deploy-helm/target/helm/*.tgz
+GENERIC_1_EXPECTED_ARTIFACT_COUNT=1
+
+GENERIC_2_TARGET_URL=${sepgStagingRepo}/saas-helm-release/${filename}
+GENERIC_2_ARTIFACTS=deploy-helm/target/helm/*.tgz
+GENERIC_2_EXPECTED_ARTIFACT_COUNT=1
