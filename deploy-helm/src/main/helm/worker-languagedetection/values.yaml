@@ -33,7 +33,7 @@ workerLanguageDetection:
   deployment:
     replicas: 1
     strategyType: Recreate
-    image: rwca3-apollo-reg01.swinfra.net:5100/cafinternal/prereleases:worker-languagedetection-${project.version}
+    image: cafinternal/prereleases:worker-languagedetection-${project.version}
     adminPort: 8081
     env:
       resultFormat: COMPLEX_SPLIT
