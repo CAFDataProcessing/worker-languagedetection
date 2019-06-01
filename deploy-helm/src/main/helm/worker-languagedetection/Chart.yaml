@@ -15,10 +15,10 @@
 #
 
 apiVersion: v1
-appVersion: ${project.version}
-description: A Helm chart for the Worker Language Detection
 name: worker-languagedetection
-version: ${project.version}
+version: "${project.version}"
+description: Detects the top three languages present in text
 home: https://github.com/CAFDataProcessing/worker-languagedetection
 sources:
-  - https://github.com/CAFDataProcessing/worker-languagedetection
+- https://github.com/CAFDataProcessing/worker-languagedetection
+appVersion: "${project.version}"
