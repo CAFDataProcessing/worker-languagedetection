@@ -16,18 +16,18 @@
 
 # common values
 general:
+  dockerRegistry: docker.io
+  failureThreshold: 15
+  initialDelaySeconds: 30
+  labelAppName: enrichment-quickstart
+  periodSeconds: 60
   pullPolicy: IfNotPresent
   pullSecret: test-secret
-  initialDelaySeconds: 30
   timeoutSeconds: 3
-  periodSeconds: 60
-  failureThreshold: 15
-  workflowLocation: /srv/common/webdav
-  workflowVolumeName: workflow-location
+  workflowLocation: "/srv/common/webdav"
   workflowVolumeConfigMap: workflow-test-configmap
-  labelAppName: enrichment-quickstart
-  dockerRegistry: docker.io
- 
+  workflowVolumeName: workflow-location
+
 # worker-languagedetection deployment
 workerLanguageDetection:
   deployment:
@@ -39,9 +39,9 @@ workerLanguageDetection:
       resultFormat: COMPLEX_SPLIT
       inputQueue: dataprocessing-langdetect-in
       outputQueue: dataprocessing-workflow-in
-      javaOptions: -Xms1024m -Xmx1024m
-    healthcheckPath: /
+      javaOptions: "-Xms1024m -Xmx1024m"
+    healthcheckPath: "/"
   labels:
-      name: worker-languagedetection
-      version: ${project.version}
-      component: worker
+    name: worker-languagedetection
+    version: "${project.version}"
+    component: worker
