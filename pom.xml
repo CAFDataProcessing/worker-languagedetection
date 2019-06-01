@@ -171,9 +171,9 @@
     </dependencyManagement>
 
     <modules>
+        <module>deploy-helm</module>
         <module>worker-languagedetection</module>
         <module>worker-languagedetection-container</module>
-        <module>worker-languagedetection-helm</module>
         <module>language-detection</module>
         <module>language-detection-cld2</module>
     </modules>
