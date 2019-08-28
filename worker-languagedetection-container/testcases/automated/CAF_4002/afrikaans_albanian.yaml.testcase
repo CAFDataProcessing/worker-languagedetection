@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4002/afrikaans_albanian.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4002/afrikaans_albanian.yaml"
-  description: Language detection on mixed language documents
+  description: null
   testCaseId: "CAF_4002"
 inputData:
   task:
@@ -68,39 +68,39 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "af"
+        - data: "sq"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "58"
+        - data: "29"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "AFRIKAANS"
+        - data: "ALBANIAN"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "sq"
+        - data: "nl"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "41"
+        - data: "21"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "ALBANIAN"
+        - data: "DUTCH"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "af"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "14"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "AFRIKAANS"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

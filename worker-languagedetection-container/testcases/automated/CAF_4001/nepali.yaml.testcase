@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4001/nepali.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4001/nepali.yaml"
-  description: Language detection on single language documents
+  description: null
   testCaseId: "CAF_4001"
 inputData:
   task:
@@ -38,35 +38,11 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "99"
+        - data: "100"
       DetectedLanguage1_Name:
         action: "replace"
         values:
         - data: "NEPALI"
-      DetectedLanguage2_Code:
-        action: "replace"
-        values:
-        - data: "un"
-      DetectedLanguage2_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "0"
-      DetectedLanguage2_Name:
-        action: "replace"
-        values:
-        - data: "Unknown"
-      DetectedLanguage3_Code:
-        action: "replace"
-        values:
-        - data: "un"
-      DetectedLanguage3_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "0"
-      DetectedLanguage3_Name:
-        action: "replace"
-        values:
-        - data: "Unknown"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

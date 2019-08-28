@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4012/resultFormat_invalid.yaml"
 testCaseInformation:
-  associatedTickets: "CAF-3567"
+  associatedTickets: null
   comments: "CAF_4012/resultFormat_invalid.yaml"
-  description: "Language Detection configured to output an Unknown Result Format"
+  description: null
   testCaseId: "CAF_4012"
 inputData:
   task:

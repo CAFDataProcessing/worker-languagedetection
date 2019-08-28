@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4001/cherokee.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4001/cherokee.yaml"
-  description: Language detection on single language documents
+  description: null
   testCaseId: "CAF_4001"
 inputData:
   task:
@@ -54,43 +54,43 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "chr"
+        - data: "unknown"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "99"
+        - data: "63"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "CHEROKEE"
+        - data: "UNKNOWN"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "zh"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "15"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "CHINESE"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "en"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "11"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "ENGLISH"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:
-        - data: "true"
+        - data: "false"
       DetectedLanguages_Status:
         action: "replace"
         values:

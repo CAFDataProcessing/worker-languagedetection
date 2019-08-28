@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4001/swahili.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4001/swahili.yaml"
-  description: Language detection on single language documents
+  description: null
   testCaseId: "CAF_4001"
 inputData:
   task:
@@ -32,7 +32,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "99"
+        - data: "40"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -40,27 +40,27 @@ expectedOutputData:
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "unknown"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "37"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "UNKNOWN"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "en"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "8"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "ENGLISH"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

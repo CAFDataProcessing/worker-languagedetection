@@ -1,10 +1,10 @@
 ---
 tag: "multi_lang_single_datasource.yaml"
 testCaseInformation:
-  testCaseId: "multi_lang_single_datasource.yaml"
   associatedTickets: null
-  description: null
   comments: "multi_lang_single_datasource.yaml"
+  description: null
+  testCaseId: "multi_lang_single_datasource.yaml"
 inputData:
   task:
     fields:
@@ -36,52 +36,49 @@ inputData:
           \ filières, les jeunes mettent du temps à trouver un emploi stable », indique\
           \ Geneviève Fioraso, la ministre de l'enseignement supérieur."
 expectedOutputData:
-  expectedContentFile: null
-  expectedSimilarityPercentage: 0
-  comparisonType: "TEXT"
   result:
     fieldChanges:
-      DetectedLanguage2_ConfidencePercentage:
+      DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "35"
+        - data: "fr"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "37"
       DetectedLanguage1_Name:
-        action: "replace"
-        values:
-        - data: "GERMAN"
-      DetectedLanguage2_Name:
         action: "replace"
         values:
         - data: "FRENCH"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "fr"
+        - data: "de"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "35"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "GERMAN"
       DetectedLanguage3_Code:
         action: "replace"
         values:
         - data: "en"
-      DetectedLanguage1_Code:
+      DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "de"
-      DetectedLanguage1_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "37"
+        - data: "26"
       DetectedLanguage3_Name:
         action: "replace"
         values:
         - data: "ENGLISH"
-      DetectedLanguage3_ConfidencePercentage:
+      DetectedLanguages_ReliableResult:
         action: "replace"
         values:
-        - data: "27"
+        - data: "true"
       DetectedLanguages_Status:
         action: "replace"
         values:
         - data: "COMPLETED"
-      DetectedLanguages_ReliableResult:
-        action: "replace"
-        values:
-        - data: "false"

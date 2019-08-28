@@ -39,7 +39,7 @@ public class Cld2Wrapper
      */
     public Cld2Wrapper()
     {
-        System.setProperty("jna.library.path", System.getProperty("cld2.location", System.getenv("cld2.location")));
+        System.setProperty("jna.library.path", System.getProperty("resources.location", System.getenv("resources.location")));
 
         LOG.debug("Library location: " + System.getProperty("jna.library.path"));
 

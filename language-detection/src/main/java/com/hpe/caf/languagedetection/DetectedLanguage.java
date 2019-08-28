@@ -15,6 +15,8 @@
  */
 package com.hpe.caf.languagedetection;
 
+import java.util.Objects;
+
 /**
  * for language objects detected by the implementation of language detector, found in LanguageDetectorResult
  */
@@ -68,5 +70,22 @@ public class DetectedLanguage
     public void setConfidencePercentage(int confidencePercentage)
     {
         this.confidencePercentage = confidencePercentage;
+    }
+    
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        final DetectedLanguage lang = (DetectedLanguage) o;
+        return languageName.equals(lang.languageName) &&
+            languageCode.equals(lang.languageCode) &&
+            confidencePercentage == lang.confidencePercentage;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        return Objects.hash(languageName, languageCode, confidencePercentage);
     }
 }

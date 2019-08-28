@@ -1,10 +1,10 @@
 ---
 tag: "single_lang_french.yaml"
 testCaseInformation:
-  testCaseId: "single_lang_french.yaml"
   associatedTickets: null
-  description: null
   comments: "single_lang_french.yaml"
+  description: null
+  testCaseId: "single_lang_french.yaml"
 inputData:
   task:
     fields:
@@ -20,31 +20,8 @@ inputData:
           \ mettent du temps à trouver un emploi stable », indique Geneviève Fioraso,\
           \ la ministre de l'enseignement supérieur."
 expectedOutputData:
-  expectedContentFile: null
-  expectedSimilarityPercentage: 0
-  comparisonType: "TEXT"
   result:
     fieldChanges:
-      DetectedLanguage2_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "0"
-      DetectedLanguage1_Name:
-        action: "replace"
-        values:
-        - data: "FRENCH"
-      DetectedLanguage2_Name:
-        action: "replace"
-        values:
-        - data: "Unknown"
-      DetectedLanguage2_Code:
-        action: "replace"
-        values:
-        - data: "un"
-      DetectedLanguage3_Code:
-        action: "replace"
-        values:
-        - data: "un"
       DetectedLanguage1_Code:
         action: "replace"
         values:
@@ -52,20 +29,16 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "99"
-      DetectedLanguage3_Name:
+        - data: "100"
+      DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "Unknown"
-      DetectedLanguage3_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "0"
-      DetectedLanguages_Status:
-        action: "replace"
-        values:
-        - data: "COMPLETED"
+        - data: "FRENCH"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:
         - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"

@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4008/resultFormat_complex_combined_multi_lang.yaml"
 testCaseInformation:
-  associatedTickets: "CAF-3567, CAF-3859"
+  associatedTickets: null
   comments: "CAF_4008/resultFormat_complex_combined_multi_lang.yaml"
-  description: "Language Detection output a Complex result field"
+  description: null
   testCaseId: "CAF_4008"
 inputData:
   task:
@@ -46,5 +46,5 @@ expectedOutputData:
       LANGUAGE_CODES:
         action: "replace"
         values:
-        - data: "[{\"CODE\":\"de\",\"CONFIDENCE\":\"37\"},{\"CODE\":\"fr\",\"CONFIDENCE\"\
-            :\"35\"},{\"CODE\":\"en\",\"CONFIDENCE\":\"27\"}]"
+        - data: "[{\"CODE\":\"de\",\"CONFIDENCE\":\"36\"},{\"CODE\":\"fr\",\"CONFIDENCE\"\
+            :\"36\"},{\"CODE\":\"en\",\"CONFIDENCE\":\"24\"}]"

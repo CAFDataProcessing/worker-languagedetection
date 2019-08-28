@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4002/dhivehi_oriya.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4002/dhivehi_oriya.yaml"
-  description: Language detection on mixed language documents
+  description: null
   testCaseId: "CAF_4002"
 inputData:
   task:
@@ -68,35 +68,11 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "60"
+        - data: "100"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "DHIVEHI"
-      DetectedLanguage2_Code:
-        action: "replace"
-        values:
-        - data: "or"
-      DetectedLanguage2_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "40"
-      DetectedLanguage2_Name:
-        action: "replace"
-        values:
-        - data: "ORIYA"
-      DetectedLanguage3_Code:
-        action: "replace"
-        values:
-        - data: "un"
-      DetectedLanguage3_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "0"
-      DetectedLanguage3_Name:
-        action: "replace"
-        values:
-        - data: "Unknown"
+        - data: "DIVEHI"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

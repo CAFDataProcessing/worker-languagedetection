@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4009/resultFormat_simple.yaml"
 testCaseInformation:
-  associatedTickets: "CAF-3567"
+  associatedTickets: null
   comments: "CAF_4009/resultFormat_simple.yaml"
-  description: "Language Detection output Simple result fields"
+  description: null
   testCaseId: "CAF_4009"
 inputData:
   task:
@@ -31,35 +31,11 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "99"
+        - data: "100"
       DetectedLanguage1_Name:
         action: "replace"
         values:
         - data: "ENGLISH"
-      DetectedLanguage2_Code:
-        action: "replace"
-        values:
-        - data: "un"
-      DetectedLanguage2_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "0"
-      DetectedLanguage2_Name:
-        action: "replace"
-        values:
-        - data: "Unknown"
-      DetectedLanguage3_Code:
-        action: "replace"
-        values:
-        - data: "un"
-      DetectedLanguage3_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "0"
-      DetectedLanguage3_Name:
-        action: "replace"
-        values:
-        - data: "Unknown"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

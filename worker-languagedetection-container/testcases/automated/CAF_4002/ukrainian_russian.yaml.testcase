@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4002/ukrainian_russian.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4002/ukrainian_russian.yaml"
-  description: Language detection on mixed language documents
+  description: null
   testCaseId: "CAF_4002"
 inputData:
   task:
@@ -68,7 +68,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "53"
+        - data: "58"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -80,7 +80,7 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "44"
+        - data: "39"
       DetectedLanguage2_Name:
         action: "replace"
         values:
@@ -88,15 +88,15 @@ expectedOutputData:
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "sr"
+        - data: "bg"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "2"
+        - data: "1"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "SERBIAN"
+        - data: "BULGARIAN"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

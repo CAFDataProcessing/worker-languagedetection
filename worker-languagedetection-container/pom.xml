@@ -56,8 +56,12 @@
         </dependency>
         <dependency>
             <groupId>com.github.cafdataprocessing</groupId>
-            <artifactId>language-detection-cld2</artifactId>
+            <artifactId>language-detection-fasttext</artifactId>
         </dependency>
+<!--        <dependency>
+            <groupId>com.github.cafdataprocessing</groupId>
+            <artifactId>language-detection-cld2</artifactId>
+        </dependency>-->
         <dependency>
             <groupId>com.github.cafdataprocessing</groupId>
             <artifactId>worker-document-testing</artifactId>
@@ -290,7 +294,7 @@
                             <alias>worker-languagedetection</alias>
                             <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
                             <build>
-                                <from>cafapi/opensuse-jre8:1</from>
+                                <from>cafinternal/prereleases:opensuse-jepfasttext-1.0.0-SNAPSHOT</from>
                                 <labels>
                                     <Build.Number>${project.version}</Build.Number>
                                     <Build.Date>${maven.build.timestamp}</Build.Date>
@@ -320,11 +324,18 @@
                                                 </includes>
                                                 <fileMode>0755</fileMode>
                                             </fileSet>
-                                            <fileSet>
-                                                <directory>cld2native/linux</directory>
-                                                <outputDirectory>cld2native/linux</outputDirectory>
+<!--                                            <fileSet>
+                                                <directory>resources/cld2native/linux</directory>
+                                                <outputDirectory>/resources</outputDirectory>
                                                 <includes>
                                                     <include>*.so</include>
+                                                </includes>
+                                            </fileSet>-->
+                                            <fileSet>
+                                                <directory>/resources/fasttext_model</directory>
+                                                <outputDirectory>/resources</outputDirectory>
+                                                <includes>
+                                                    <include>*</include>
                                                 </includes>
                                             </fileSet>
                                             <fileSet>

@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4001/hmong.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4001/hmong.yaml"
-  description: Language detection on single language documents
+  description: null
   testCaseId: "CAF_4001"
 inputData:
   task:
@@ -34,39 +34,39 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "hmn"
+        - data: "unknown"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "99"
+        - data: "32"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "HMONG"
+        - data: "UNKNOWN"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "en"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "18"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "ENGLISH"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "pl"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "6"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "POLISH"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

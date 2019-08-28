@@ -1,0 +1,65 @@
+---
+tag: "en_fr_de_single-line.yaml"
+testCaseInformation:
+  associatedTickets: null
+  comments: "en_fr_de_single-line.yaml"
+  description: null
+  testCaseId: "en_fr_de_single-line.yaml"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "Bonjour, this is a test of language detection's ability to detect multiple\
+          \ languages from one field. Bonjour, il s'agit d'un test de la capacité\
+          \ de détection de plusieurs langues dans un champ. Hallo, das ist ein Test\
+          \ der Spracherkennung, um mehrere Sprachen aus einem Feld zu erkennen. Bonjour,\
+          \ il s'agit d'un test de la capacité de détection de plusieurs langues dans\
+          \ un champ. Hallo, das ist ein Test der Spracherkennung, um mehrere Sprachen\
+          \ aus einem Feld zu erkennen."
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "fr"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "41"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "FRENCH"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "de"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "35"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "GERMAN"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "en"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "19"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "ENGLISH"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"

@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4002/cebuano_ganda.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4002/cebuano_ganda.yaml"
-  description: Language detection on mixed language documents
+  description: null
   testCaseId: "CAF_4002"
 inputData:
   task:
@@ -53,35 +53,35 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "55"
+        - data: "33"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "CEBUANO"
+        - {}
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "lg"
+        - data: "unknown"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "44"
+        - data: "32"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "GANDA"
+        - data: "UNKNOWN"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "fi"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "4"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "FINNISH"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

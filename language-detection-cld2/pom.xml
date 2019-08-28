@@ -37,7 +37,7 @@
                 <version>${maven.failsafe.version}</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <cld2.location>${project.basedir}/cld2native</cld2.location>
+                        <resources.location>${project.basedir}/cld2native</resources.location>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>

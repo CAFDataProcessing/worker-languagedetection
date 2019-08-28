@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4002/basque_catalan.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4002/basque_catalan.yaml"
-  description: Language detection on mixed language documents
+  description: null
   testCaseId: "CAF_4002"
 inputData:
   task:
@@ -55,7 +55,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "54"
+        - data: "37"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -67,7 +67,7 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "45"
+        - data: "32"
       DetectedLanguage2_Name:
         action: "replace"
         values:
@@ -75,15 +75,15 @@ expectedOutputData:
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "unknown"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "10"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "UNKNOWN"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

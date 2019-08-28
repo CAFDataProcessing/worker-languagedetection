@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4001/kinyarwanda.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4001/kinyarwanda.yaml"
-  description: Language detection on single language documents
+  description: null
   testCaseId: "CAF_4001"
 inputData:
   task:
@@ -37,43 +37,43 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "rw"
+        - data: "unknown"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "99"
+        - data: "73"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "KINYARWANDA"
+        - data: "UNKNOWN"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "en"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "13"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "ENGLISH"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "id"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "2"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "INDONESIAN"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:
-        - data: "true"
+        - data: "false"
       DetectedLanguages_Status:
         action: "replace"
         values:

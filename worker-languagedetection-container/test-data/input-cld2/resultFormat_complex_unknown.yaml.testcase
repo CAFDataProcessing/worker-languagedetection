@@ -1,0 +1,23 @@
+---
+tag: "resultFormat_complex_unknown.yaml"
+testCaseInformation:
+  associatedTickets: null
+  comments: "resultFormat_complex_unknown.yaml"
+  description: null
+  testCaseId: "resultFormat_complex_unknown.yaml"
+inputData:
+  task:
+    customData:
+      resultFormat: "COMPLEX"
+    fields:
+      CONTENT:
+      - data: "rtert ehftjtfjf jgkg essgejoirjmhrnmife rgrhrhrtjh eeteytjyjf hthdtrhdrth\
+          \ sarwtruyututui nncvvddsewa awewetryhtj uoiupi ywse awregfbxed hjykyk jgdsa\
+          \ jjggtu"
+expectedOutputData:
+  result:
+    fieldChanges:
+      LANGUAGE_CODES:
+        action: "replace"
+        values:
+        - data: "[{\"CODE\":\"un\",\"CONFIDENCE\":\"100\"}]"

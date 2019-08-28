@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4010/resultFormat_complex_unknown.yaml"
 testCaseInformation:
-  associatedTickets: "CAF-3567"
+  associatedTickets: null
   comments: "CAF_4010/resultFormat_complex_unknown.yaml"
-  description: "Language Detection output a Complex result field for an Unknown Language"
+  description: null
   testCaseId: "CAF_4010"
 inputData:
   task:
@@ -20,4 +20,5 @@ expectedOutputData:
       LANGUAGE_CODES:
         action: "replace"
         values:
-        - data: "[{\"CODE\":\"un\",\"CONFIDENCE\":\"100\"}]"
+        - data: "[{\"CODE\":\"unknown\",\"CONFIDENCE\":\"67\"},{\"CODE\":\"da\",\"\
+            CONFIDENCE\":\"15\"},{\"CODE\":\"de\",\"CONFIDENCE\":\"13\"}]"

@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4002/10_EU_Languages.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4002/10_EU_Languages.yaml"
-  description: Language detection on mixed language documents
+  description: null
   testCaseId: "CAF_4002"
 inputData:
   task:
@@ -229,44 +229,44 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "pt"
+        - data: "en"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "20"
+        - data: "17"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "PORTUGUESE"
+        - data: "ENGLISH"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "el"
+        - data: "pl"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "19"
+        - data: "12"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "GREEK"
+        - data: "POLISH"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "en"
+        - data: "el"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "14"
+        - data: "11"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "ENGLISH"
+        - data: "GREEK"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:
-        - data: "false"
+        - data: "true"
       DetectedLanguages_Status:
         action: "replace"
         values:
-        - data: "FAILED"
+        - data: "COMPLETED"

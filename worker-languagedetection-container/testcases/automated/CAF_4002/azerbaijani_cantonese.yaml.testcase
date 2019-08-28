@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4002/azerbaijani_cantonese.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4002/azerbaijani_cantonese.yaml"
-  description: Language detection on mixed language documents
+  description: null
   testCaseId: "CAF_4002"
 inputData:
   task:
@@ -30,39 +30,15 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "zh-Hant"
+        - data: "az"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "53"
+        - data: "100"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "ChineseT"
-      DetectedLanguage2_Code:
-        action: "replace"
-        values:
-        - data: "az"
-      DetectedLanguage2_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "46"
-      DetectedLanguage2_Name:
-        action: "replace"
-        values:
         - data: "AZERBAIJANI"
-      DetectedLanguage3_Code:
-        action: "replace"
-        values:
-        - data: "un"
-      DetectedLanguage3_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "0"
-      DetectedLanguage3_Name:
-        action: "replace"
-        values:
-        - data: "Unknown"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

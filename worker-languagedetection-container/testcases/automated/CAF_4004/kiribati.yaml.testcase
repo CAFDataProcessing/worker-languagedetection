@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4004/kiribati.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4004/kiribati.yaml"
-  description: Language detection on single unsupported language documents
+  description: null
   testCaseId: "CAF_4004"
 inputData:
   task:
@@ -17,44 +17,44 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "unknown"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "44"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "UNKNOWN"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "ceb"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "15"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - {}
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "hr"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "10"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "CROATIAN"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:
-        - data: "false"
+        - data: "true"
       DetectedLanguages_Status:
         action: "replace"
         values:
-        - data: "FAILED"
+        - data: "COMPLETED"

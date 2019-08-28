@@ -1,0 +1,12 @@
+---
+customData:
+  fieldSpecs: "CONTENT, FR_CONTENT, GER_CONTENT"
+fields:
+  CONTENT: 
+    - data: "Bonjour, this is a test of language detection's ability to detect multiple languages from one field. Bonjour, il s'agit d'un test de la capacité de détection de plusieurs langues dans un champ. Hallo, das ist ein Test der Spracherkennung, um mehrere Sprachen aus einem Feld zu erkennen."
+  FR_CONTENT:
+    - data: "Bonjour, il s'agit d'un test de la capacité de détection de plusieurs langues dans un champ."
+  GER_CONTENT:
+    - data: "Hallo, das ist ein Test der Spracherkennung, um mehrere Sprachen aus einem Feld zu erkennen."
+  LANGUAGE_CODE_CONTENT:
+    - data: "This should be cleared by the worker"

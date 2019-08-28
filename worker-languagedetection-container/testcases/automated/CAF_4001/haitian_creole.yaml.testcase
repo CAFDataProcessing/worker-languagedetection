@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4001/haitian_creole.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4001/haitian_creole.yaml"
-  description: Language detection on single language documents
+  description: null
   testCaseId: "CAF_4001"
 inputData:
   task:
@@ -30,39 +30,39 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "ht"
+        - data: "unknown"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "99"
+        - data: "29"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "HAITIAN_CREOLE"
+        - data: "UNKNOWN"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "fr"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "9"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "FRENCH"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "ht"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "6"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "HAITIAN"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

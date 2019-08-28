@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4013/resultFormat_complex_split.yaml"
 testCaseInformation:
-  associatedTickets: "CAF-3859"
+  associatedTickets: null
   comments: "CAF_4013/resultFormat_complex_split.yaml"
-  description: "Language Detection output a Complex Split result field"
+  description: null
   testCaseId: "CAF_4013"
 inputData:
   task:
@@ -27,4 +27,4 @@ expectedOutputData:
       LANGUAGE_CODES:
         action: "replace"
         values:
-        - data: "{\"CODE\":\"en\",\"CONFIDENCE\":\"99\"}"
+        - data: "{\"CODE\":\"en\",\"CONFIDENCE\":\"100\"}"

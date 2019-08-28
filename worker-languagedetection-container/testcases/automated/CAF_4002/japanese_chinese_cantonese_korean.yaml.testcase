@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4002/japanese_chinese_cantonese_korean.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4002/japanese_chinese_cantonese_korean.yaml"
-  description: Language detection on mixed language documents
+  description: null
   testCaseId: "CAF_4002"
 inputData:
   task:
@@ -63,11 +63,11 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "50"
+        - data: "52"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "Chinese"
+        - data: "CHINESE"
       DetectedLanguage2_Code:
         action: "replace"
         values:
@@ -75,27 +75,27 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "27"
+        - data: "31"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "Korean"
+        - data: "KOREAN"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "zh-Hant"
+        - data: "ja"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "13"
+        - data: "8"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "ChineseT"
+        - data: "JAPANESE"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:
-        - data: "false"
+        - data: "true"
       DetectedLanguages_Status:
         action: "replace"
         values:

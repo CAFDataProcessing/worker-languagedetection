@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4002/latvian_estonian_belarusian_lithuanian.yaml"
 testCaseInformation:
-  associatedTickets: CAF-414
+  associatedTickets: null
   comments: "CAF_4002/latvian_estonian_belarusian_lithuanian.yaml"
-  description: Language detection on mixed language documents
+  description: null
   testCaseId: "CAF_4002"
 inputData:
   task:
@@ -317,35 +317,11 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "67"
+        - data: "100"
       DetectedLanguage1_Name:
         action: "replace"
         values:
         - data: "LATVIAN"
-      DetectedLanguage2_Code:
-        action: "replace"
-        values:
-        - data: "lt"
-      DetectedLanguage2_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "14"
-      DetectedLanguage2_Name:
-        action: "replace"
-        values:
-        - data: "LITHUANIAN"
-      DetectedLanguage3_Code:
-        action: "replace"
-        values:
-        - data: "be"
-      DetectedLanguage3_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "11"
-      DetectedLanguage3_Name:
-        action: "replace"
-        values:
-        - data: "BELARUSIAN"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:
