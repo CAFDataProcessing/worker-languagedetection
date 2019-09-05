@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4001/slovak.yaml"
 testCaseInformation:
-  associatedTickets: null
+  associatedTickets: CAF-414
   comments: "CAF_4001/slovak.yaml"
-  description: null
+  description: Language detection on single language documents
   testCaseId: "CAF_4001"
 inputData:
   task:
@@ -45,7 +45,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "59"
+        - data: "74"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -57,7 +57,7 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "17"
+        - data: "12"
       DetectedLanguage2_Name:
         action: "replace"
         values:
@@ -65,11 +65,11 @@ expectedOutputData:
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "unknown"
+        - data: "un"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "9"
+        - data: "7"
       DetectedLanguage3_Name:
         action: "replace"
         values:

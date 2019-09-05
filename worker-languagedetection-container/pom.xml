@@ -58,10 +58,6 @@
             <groupId>com.github.cafdataprocessing</groupId>
             <artifactId>language-detection-fasttext</artifactId>
         </dependency>
-<!--        <dependency>
-            <groupId>com.github.cafdataprocessing</groupId>
-            <artifactId>language-detection-cld2</artifactId>
-        </dependency>-->
         <dependency>
             <groupId>com.github.cafdataprocessing</groupId>
             <artifactId>worker-document-testing</artifactId>
@@ -348,13 +344,6 @@
                                                 </includes>
                                                 <fileMode>0755</fileMode>
                                             </fileSet>
-<!--                                            <fileSet>
-                                                <directory>resources/cld2native/linux</directory>
-                                                <outputDirectory>/resources</outputDirectory>
-                                                <includes>
-                                                    <include>*.so</include>
-                                                </includes>
-                                            </fileSet>-->
                                             <fileSet>
                                                 <directory>${project.build.directory}/resources/fasttext_model</directory>
                                                 <outputDirectory>/resources</outputDirectory>

@@ -29,9 +29,9 @@ expectedOutputData:
       LANGUAGE_CODE_CONTENT:
         action: "replace"
         values:
-        - data: "32% en"
-        - data: "31% fr"
-        - data: "29% de"
+        - data: "39% fr"
+        - data: "34% en"
+        - data: "25% de"
       LANGUAGE_CODE_FR_CONTENT:
         action: "replace"
         values:

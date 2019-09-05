@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4008/resultFormat_complex.yaml"
 testCaseInformation:
-  associatedTickets: null
+  associatedTickets: "CAF-3567"
   comments: "CAF_4008/resultFormat_complex.yaml"
-  description: null
+  description: "Language Detection output a Complex result field"
   testCaseId: "CAF_4008"
 inputData:
   task:

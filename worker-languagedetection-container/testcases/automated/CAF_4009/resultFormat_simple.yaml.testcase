@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4009/resultFormat_simple.yaml"
 testCaseInformation:
-  associatedTickets: null
+  associatedTickets: "CAF-3567"
   comments: "CAF_4009/resultFormat_simple.yaml"
-  description: null
+  description: "Language Detection output Simple result fields"
   testCaseId: "CAF_4009"
 inputData:
   task:

@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4001/khmer.yaml"
 testCaseInformation:
-  associatedTickets: null
+  associatedTickets: CAF-414
   comments: "CAF_4001/khmer.yaml"
-  description: null
+  description: Language detection on single language documents
   testCaseId: "CAF_4001"
 inputData:
   task:
@@ -40,7 +40,7 @@ expectedOutputData:
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "CENTRAL_KHMER"
+        - data: "CENTRAL KHMER"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

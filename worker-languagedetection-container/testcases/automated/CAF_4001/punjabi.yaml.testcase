@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4001/punjabi.yaml"
 testCaseInformation:
-  associatedTickets: null
+  associatedTickets: CAF-414
   comments: "CAF_4001/punjabi.yaml"
-  description: null
+  description: Language detection on single language documents
   testCaseId: "CAF_4001"
 inputData:
   task:
@@ -37,7 +37,7 @@ expectedOutputData:
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "PUNJABI"
+        - data: "PANJABI"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

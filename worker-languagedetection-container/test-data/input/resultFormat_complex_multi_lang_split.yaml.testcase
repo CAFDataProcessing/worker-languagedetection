@@ -46,6 +46,6 @@ expectedOutputData:
       LANGUAGE_CODES:
         action: "replace"
         values:
+        - data: "{\"CODE\":\"fr\",\"CONFIDENCE\":\"38\"}"
         - data: "{\"CODE\":\"de\",\"CONFIDENCE\":\"36\"}"
-        - data: "{\"CODE\":\"fr\",\"CONFIDENCE\":\"36\"}"
-        - data: "{\"CODE\":\"en\",\"CONFIDENCE\":\"24\"}"
+        - data: "{\"CODE\":\"en\",\"CONFIDENCE\":\"25\"}"

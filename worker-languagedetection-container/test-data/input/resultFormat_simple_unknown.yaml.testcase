@@ -20,7 +20,7 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "unknown"
+        - data: "un"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
@@ -48,7 +48,7 @@ expectedOutputData:
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "13"
+        - data: "12"
       DetectedLanguage3_Name:
         action: "replace"
         values:

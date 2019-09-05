@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4001/croatian.yaml"
 testCaseInformation:
-  associatedTickets: null
+  associatedTickets: CAF-414
   comments: "CAF_4001/croatian.yaml"
-  description: null
+  description: Language detection on single language documents
   testCaseId: "CAF_4001"
 inputData:
   task:
@@ -40,7 +40,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "41"
+        - data: "51"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -48,27 +48,27 @@ expectedOutputData:
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "sh"
+        - data: "un"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "21"
+        - data: "16"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "SERBO_CROATIAN"
+        - data: "UNKNOWN"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "unknown"
+        - data: "sh"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "21"
+        - data: "15"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "UNKNOWN"
+        - data: "SERBO-CROATIAN"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

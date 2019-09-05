@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4013/resultFormat_complex_split.yaml"
 testCaseInformation:
-  associatedTickets: null
+  associatedTickets: "CAF-3859"
   comments: "CAF_4013/resultFormat_complex_split.yaml"
-  description: null
+  description: "Language Detection output a Complex Split result field"
   testCaseId: "CAF_4013"
 inputData:
   task:

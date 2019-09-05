@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4001/malayalam.yaml"
 testCaseInformation:
-  associatedTickets: null
+  associatedTickets: CAF-414
   comments: "CAF_4001/malayalam.yaml"
-  description: null
+  description: Language detection on single language documents
   testCaseId: "CAF_4001"
 inputData:
   task:

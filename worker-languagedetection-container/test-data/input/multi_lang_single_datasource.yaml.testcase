@@ -1,10 +1,10 @@
 ---
 tag: "multi_lang_single_datasource.yaml"
 testCaseInformation:
-  associatedTickets: null
-  comments: "multi_lang_single_datasource.yaml"
-  description: null
   testCaseId: "multi_lang_single_datasource.yaml"
+  associatedTickets: null
+  description: null
+  comments: "multi_lang_single_datasource.yaml"
 inputData:
   task:
     fields:
@@ -45,7 +45,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "37"
+        - data: "36"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -69,7 +69,7 @@ expectedOutputData:
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "26"
+        - data: "27"
       DetectedLanguage3_Name:
         action: "replace"
         values:

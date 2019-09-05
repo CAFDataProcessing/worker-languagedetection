@@ -1,10 +1,10 @@
 ---
 tag: "single_lang_german.yaml"
 testCaseInformation:
-  associatedTickets: null
-  comments: "single_lang_german.yaml"
-  description: null
   testCaseId: "single_lang_german.yaml"
+  associatedTickets: null
+  description: null
+  comments: "single_lang_german.yaml"
 inputData:
   task:
     fields:

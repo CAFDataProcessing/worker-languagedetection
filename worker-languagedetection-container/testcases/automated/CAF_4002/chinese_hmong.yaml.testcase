@@ -1,9 +1,9 @@
 ---
 tag: "CAF_4002/chinese_hmong.yaml"
 testCaseInformation:
-  associatedTickets: null
+  associatedTickets: CAF-414
   comments: "CAF_4002/chinese_hmong.yaml"
-  description: null
+  description: Language detection on mixed language documents
   testCaseId: "CAF_4002"
 inputData:
   task:
@@ -61,7 +61,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "56"
+        - data: "55"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -69,11 +69,11 @@ expectedOutputData:
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "unknown"
+        - data: "un"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "15"
+        - data: "16"
       DetectedLanguage2_Name:
         action: "replace"
         values:
