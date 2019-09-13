@@ -15,13 +15,12 @@
  */
 package com.hpe.caf.languagedetection.fasttext;
 
-import com.hpe.caf.languagedetection.*;
+import com.hpe.caf.languagedetection.LanguageDetector;
+import com.hpe.caf.languagedetection.LanguageDetectorResult;
+import com.hpe.caf.languagedetection.LanguageDetectorSettings;
+import com.hpe.caf.languagedetection.LanguageDetectorStatus;
 import java.io.ByteArrayInputStream;
-import org.apache.commons.io.IOUtils;
-
-import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,11 +28,11 @@ import org.slf4j.LoggerFactory;
 /**
  * FastText implementation of LanguageDetector
  */
-public class FastTextDetector implements LanguageDetector
+public final class FastTextDetector implements LanguageDetector
 {
     private static final Logger LOGGER = LoggerFactory.getLogger(FastTextDetector.class);
-    private final static int MAX_LANG_COUNT = 3;
-    static final double MIN_RELIABILITY = 0.3;
+    private static final int MAX_LANG_COUNT = 3;
+    private static final double MIN_RELIABILITY = 0.3;
     
     /**
      * Calls the overload detectLanguage method with a default settings object with detectMultipleLanguages set to true.
@@ -85,13 +84,7 @@ public class FastTextDetector implements LanguageDetector
         Objects.requireNonNull(textStream);
         Objects.requireNonNull(settings);
 
-        try {
-            final String document = IOUtils.toString(textStream, StandardCharsets.UTF_8);
-            return processDetectionResults(new FastTextWrapper().detect(document), settings);            
-        } catch (final IOException ex) {
-            LOGGER.error("Detection failed.", ex);
-            return new LanguageDetectorResult(LanguageDetectorStatus.FAILED, false);
-        }
+        return processDetectionResults(FastTextWrapper.detect(textStream), settings);            
     }
 
     private LanguageDetectorResult processDetectionResults(final LDResult result, final LanguageDetectorSettings settings) {        
@@ -104,7 +97,7 @@ public class FastTextDetector implements LanguageDetector
                     (detectedLangCount > MAX_LANG_COUNT ? MAX_LANG_COUNT : detectedLangCount) : 1;
                 languageDetectorResult.setLanguages(result.getLanguages().subList(0, itemCountToReturn));
                 LOGGER.info("Accuracy percentage: {}", result.getOverallAccuracy());
-                languageDetectorResult.setReliable((result.getOverallAccuracy() > MIN_RELIABILITY));
+                languageDetectorResult.setReliable(result.getOverallAccuracy() > MIN_RELIABILITY);
                 languageDetectorResult.setLanguageDetectorStatus(LanguageDetectorStatus.COMPLETED);
             }
         } else {

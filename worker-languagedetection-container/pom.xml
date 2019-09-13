@@ -346,7 +346,7 @@
                                             </fileSet>
                                             <fileSet>
                                                 <directory>${project.build.directory}/resources/fasttext_model</directory>
-                                                <outputDirectory>/resources</outputDirectory>
+                                                <outputDirectory>resources</outputDirectory>
                                                 <includes>
                                                     <include>*</include>
                                                 </includes>

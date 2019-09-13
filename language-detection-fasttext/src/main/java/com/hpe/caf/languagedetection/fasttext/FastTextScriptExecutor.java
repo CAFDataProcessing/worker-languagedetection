@@ -27,20 +27,18 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Uses Jep to call the FastText library in python 3 for language detection.
- * 
  */
 public final class FastTextScriptExecutor {
     private static final Logger LOGGER = LoggerFactory.getLogger(FastTextScriptExecutor.class);
     
     /**
      * An instance of the Jep library with imported FastText library and loaded model. 
-     * FastText is using Numpy Python Library and closing the Jep instance breaks the library <a href=" https://github.com/mrj0/jep/issues/28">.
+     * FastText is using Numpy Python Library and <a href="https://github.com/mrj0/jep/issues/28">closing the Jep instance breaks the library</a>.
      * Try to reimport it will fail and as a result of this issue FastText can be imported only once.
      * Jep will only execute calls on the thread it was instantiated on therefore is Jep instatance required here to be thread local, 
-     * more at <a href="https://github.com/mrj0/jep/wiki/Performance-Considerations">.
+     * more at <a href="https://github.com/mrj0/jep/wiki/Performance-Considerations">Performance-Considerations</a>.
      */
-    
-    private static final ThreadLocal<Jep> THREAD_LOCAL = new ThreadLocal<Jep>() {
+    private static final ThreadLocal<Jep> JEP_POOL = new ThreadLocal<Jep>() {
         @Override
         protected Jep initialValue() {
             try {
@@ -49,18 +47,18 @@ public final class FastTextScriptExecutor {
                 LOGGER.debug("Loading fasttext model.");
                 jep.eval("model = fasttext.load_model('/maven/resources/lid.176.bin')");
                 return jep;
-            } catch (JepException e) {
+            } catch (final JepException e) {
                 throw new RuntimeException(e);
             }
         }
 
         @Override
         public void remove() {
-            Jep jep = this.get();
+            final Jep jep = this.get();
             if (jep != null) {
                 try {
                     jep.close();
-                } catch (JepException ex) {
+                } catch (final JepException ex) {
                     throw new RuntimeException(ex);
                 }
             }
@@ -68,23 +66,22 @@ public final class FastTextScriptExecutor {
         }
     };
     
-    /**
+    /*
      * In python are prediction results represented by a tuple of list and array e.g. (('__label__en',), array([0.92452818])). First 
      * value represents list of identified languages and the second one their probabilities.
      * Prediction allows to return more than one/highest probability by calling e.g. model.predict(text, 3), but this implementation 
      * uses only the most relevant result.
      */
     public static LanguagePrediction detect(final String text) throws JepException {
-        final Jep jep = THREAD_LOCAL.get();
+        final Jep jep = JEP_POOL.get();
         jep.set("text", text);
         jep.eval("prediction = model.predict(text)");
         final Object prediction = jep.getValue("prediction");
-        jep.eval("del text");
-        jep.eval("del prediction");
+        jep.eval("del text, prediction");
          
         final List list = new ArrayList((Collection) prediction);
         final List<String> languages = new ArrayList<>((Collection) list.get(0));
-        double[] probabilities = (double[]) ((NDArray)list.get(1)).getData();
+        final double[] probabilities = (double[]) ((NDArray)list.get(1)).getData();
         
         return new LanguagePrediction(languages.get(0), probabilities[0]);
     }

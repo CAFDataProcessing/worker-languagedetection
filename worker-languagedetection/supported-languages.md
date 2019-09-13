@@ -55,7 +55,7 @@ fy - WEST FRISIAN
 ga - IRISH
 gd - SCOTTISH GAELIC
 gl - GALICIAN
-gn - GUARAN�
+gn - GUARANI
 gom - Goan Konkani 
 gu - GUJARATI
 gv - MANX
@@ -168,7 +168,7 @@ vec - VENETIAN
 vep - VEPS
 vi - VIETNAMESE
 vls - VLAAMS
-vo - VOLAP�K
+vo - VOLAPUK
 wa - WALLOON
 war - WARAY (PHILIPPINES)
 wuu - WU CHINESE

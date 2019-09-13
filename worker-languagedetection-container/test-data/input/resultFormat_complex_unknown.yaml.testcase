@@ -20,5 +20,5 @@ expectedOutputData:
       LANGUAGE_CODES:
         action: "replace"
         values:
-        - data: "[{\"CODE\":\"un\",\"CONFIDENCE\":\"67\"},{\"CODE\":\"da\",\"CONFIDENCE\"\
-            :\"15\"},{\"CODE\":\"de\",\"CONFIDENCE\":\"12\"}]"
+        - data: "[{\"CODE\":\"un\",\"CONFIDENCE\":\"66\"},{\"CODE\":\"da\",\"CONFIDENCE\"\
+            :\"15\"},{\"CODE\":\"de\",\"CONFIDENCE\":\"13\"}]"

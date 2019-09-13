@@ -56,7 +56,7 @@ expectedOutputData:
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "en"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
@@ -64,11 +64,11 @@ expectedOutputData:
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "UNKNOWN"
+        - data: "ENGLISH"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "en"
+        - data: "un"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
@@ -76,7 +76,7 @@ expectedOutputData:
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "ENGLISH"
+        - data: "UNKNOWN"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

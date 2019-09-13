@@ -1,18 +1,10 @@
 # Language Detection Worker
 
-The Language Detection Worker uses a language detection interface. Currently there are 2 implementations:
+The Language Detection Worker uses a language detection interface.
 
-### fasText Library - currently used
+### FastText Library
 
 The library probabilistically detects over 176 languages in Unicode UTF-8 text. Legacy encodings must be converted to valid UTF-8. For mixed language input, the library returns the top three languages found and their approximate percentages of the total text (e.g. 80% English and 20% French).
-
-### Compact Language Detector 2 Library (CLD2) 
-
-The library probabilistically detects over 80 languages in Unicode UTF-8 text. Legacy encodings must be converted to valid UTF-8. For mixed language input, the library returns the top three languages found and their approximate percentages of the total text bytes (e.g. 80% English and 20% French out of 1000 bytes of text means about 800 bytes of English and 200 bytes of French).
-
-The library is not designed to do well on very short text, short lists of names, part numbers, etc.
-
-Several hints can be supplied which add a bias to the language detection but do not force a specific language to be the detection result. For example: "en" boosts English, "mi, fr" boosts Maori and French, "ITALIAN" boosts Italian, "SJS" boosts Japanese. Hints should be supplied whenever possible as they improve detection accuracy.
 
 ## Modes of operation
 
