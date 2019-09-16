@@ -18,39 +18,39 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "jw"
+        - data: "un"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "99"
+        - data: "41"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "JAVANESE"
+        - data: "UNKNOWN"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "jv"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "29"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "JAVANESE"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "no"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "18"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "NORWEGIAN"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

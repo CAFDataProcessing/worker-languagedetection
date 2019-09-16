@@ -28,7 +28,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "99"
+        - data: "79"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -40,23 +40,23 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "10"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "UNKNOWN"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "br"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "3"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "BRETON"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

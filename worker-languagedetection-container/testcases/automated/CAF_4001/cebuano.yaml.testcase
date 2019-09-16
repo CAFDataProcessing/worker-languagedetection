@@ -39,7 +39,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "99"
+        - data: "85"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -47,27 +47,27 @@ expectedOutputData:
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "tl"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "4"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "TAGALOG"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "war"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "2"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "WARAY (PHILIPPINES)"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

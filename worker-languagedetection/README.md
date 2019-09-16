@@ -1,10 +1,12 @@
 # Language Detection Worker
 
-The Language Detection Worker uses a language detection interface whose implementation wraps the Compact Language Detector 2 Library (CLD2) Language Detection Library. The library probabilistically detects over 80 languages in Unicode UTF-8 text. Legacy encodings must be converted to valid UTF-8. For mixed language input, the library returns the top three languages found and their approximate percentages of the total text bytes (e.g. 80% English and 20% French out of 1000 bytes of text means about 800 bytes of English and 200 bytes of French).
+The Language Detection Worker uses a language detection interface.
 
-The library is not designed to do well on very short text, short lists of names, part numbers, etc.
+### FastText Library
 
-Several hints can be supplied which add a bias to the language detection but do not force a specific language to be the detection result. For example: "en" boosts English, "mi, fr" boosts Maori and French, "ITALIAN" boosts Italian, "SJS" boosts Japanese. Hints should be supplied whenever possible as they improve detection accuracy.
+The library probabilistically detects over 176 languages in Unicode UTF-8 text. Legacy encodings must be converted to valid UTF-8. For mixed language input, the library returns the top three languages found and their approximate percentages of the total text (e.g. 80% English and 20% French).
+
+## Modes of operation
 
 The Language Detection worker has two modes of operation, Standard Processing and Multi-Field Processing. The first mode of operation will cause the worker to perform language detection on the `CONTENT` field should no other field be specified via an environment variable. However, if `fieldSpecs` is provided to the worker on the document's `customData` the worker will begin to use Multi-Field Processing mode and identify any languages present on all of the fields specified. See [Per Tenant Settings](#per-tenant-settings) for more information on this field.
 
@@ -60,10 +62,11 @@ When `fieldSpecs` is provided to the worker via `customData` the worker's behavi
  - `fieldSpecs`  
     This parameter specifies to the worker the fields on which to perform language detection. It is a string of comma-separated values, each of which is either a complete field name or a partial field name supplied with a wildcard character "*". The wildcard character is supported at any position within any of the values of this parameter.
     
+
 **Example:**   
-	`{"fieldSpecs": "CONTENT_*, TITLE, SUBJECT"}`  
-	This Example will cause the worker to check the TITLE and SUBJECT fields of the document provided as well as any field that begins `CONTENT_`.
-  
+​	`{"fieldSpecs": "CONTENT_*, TITLE, SUBJECT"}`  
+​	This Example will cause the worker to check the TITLE and SUBJECT fields of the document provided as well as any field that begins `CONTENT_`.
+
 #### resultFormat
 
 The `resultFormat` property can be provided to the worker via `customData` to alter the format of the output language detection result. There are two supported formats.
@@ -141,7 +144,7 @@ These output formats can apply if `resultFormat` is not passed on `customData` o
 The document is marked up with a list of the languages detected as well as the confidence in the result. The following fields are added:
 
 - DetectedLanguages_Status : Indicates the processing result status. Any value other than `COMPLETED` means failure.
-    
+  
 - DetectedLanguageN_Name : The name of the Nth language detected   
 e.g. DetectedLanguage1\_Name:"English"
 

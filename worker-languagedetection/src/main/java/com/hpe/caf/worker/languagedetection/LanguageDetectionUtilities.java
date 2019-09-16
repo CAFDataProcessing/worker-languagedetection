@@ -100,23 +100,15 @@ public final class LanguageDetectionUtilities
         Objects.requireNonNull(document);
         Objects.requireNonNull(fieldName);
         final String field = getLanguageFieldName(fieldName);
-
-        boolean requiresUnknown = true;
+        
         // For each language detected, add the name, language code and the percentage of the language detected within the text data to
         // the document.
         if (detectorResult.getLanguages() != null) {
             final Field fieldToAdd = document.getField(field);
             fieldToAdd.clear();
             for (DetectedLanguage detectedLanguage : detectorResult.getLanguages()) {
-                if (!detectedLanguage.getLanguageCode().equals("un")) {
-                    fieldToAdd.add(detectedLanguage.getConfidencePercentage()
-                        + "% " + detectedLanguage.getLanguageCode());
-                    requiresUnknown = false;
-                }
-            }
-            if (requiresUnknown) {
-                //Adding Field to document to signify that all of the fields content was of an unknown language
-                fieldToAdd.add("100% un");
+                fieldToAdd.add(detectedLanguage.getConfidencePercentage()
+                    + "% " + detectedLanguage.getLanguageCode());
             }
         }
     }
@@ -210,20 +202,9 @@ public final class LanguageDetectionUtilities
 
         List<JSONObject> languageCodesToAdd = new ArrayList<>();
 
-        boolean unknownOnlyLanguageDetected = true;
         for (DetectedLanguage detectedLanguage : detectedLanguages) {
-            String languageCode = detectedLanguage.getLanguageCode();
-            // Only add an output entry for unknown language code if it is the only detected language. 3 languages
-            // are always 'detected' so first may be English and then unknown twice.
-            if ("un".equals(languageCode)) {
-                continue;
-            }
-            unknownOnlyLanguageDetected = false;
-            languageCodesToAdd.add(buildLanguageCodeEntry(languageCode,
+            languageCodesToAdd.add(buildLanguageCodeEntry(detectedLanguage.getLanguageCode(),
                                                           String.valueOf(detectedLanguage.getConfidencePercentage())));
-        }
-        if (unknownOnlyLanguageDetected) {
-            languageCodesToAdd.add(buildLanguageCodeEntry("un", "100"));
         }
 
         // Output in specific complex format

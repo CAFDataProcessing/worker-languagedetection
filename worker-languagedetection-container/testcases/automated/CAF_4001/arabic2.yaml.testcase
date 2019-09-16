@@ -46,30 +46,6 @@ expectedOutputData:
         action: "replace"
         values:
         - data: "ARABIC"
-      DetectedLanguage2_Code:
-        action: "replace"
-        values:
-        - data: "un"
-      DetectedLanguage2_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "0"
-      DetectedLanguage2_Name:
-        action: "replace"
-        values:
-        - data: "Unknown"
-      DetectedLanguage3_Code:
-        action: "replace"
-        values:
-        - data: "un"
-      DetectedLanguage3_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "0"
-      DetectedLanguage3_Name:
-        action: "replace"
-        values:
-        - data: "Unknown"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

@@ -1,0 +1,63 @@
+---
+tag: "resultFormat_simple_unknown.yaml"
+testCaseInformation:
+  associatedTickets: null
+  comments: "resultFormat_simple_unknown.yaml"
+  description: null
+  testCaseId: "resultFormat_simple_unknown.yaml"
+inputData:
+  task:
+    customData:
+      resultFormat: "SIMPLE"
+    fields:
+      CONTENT:
+      - data: "rtert ehftjtfjf jgkg essgejoirjmhrnmife rgrhrhrtjh eeteytjyjf hthdtrhdrth\
+          \ sarwtruyututui nncvvddsewa awewetryhtj uoiupi ywse awregfbxed hjykyk jgdsa\
+          \ jjggtu"
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "66"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "UNKNOWN"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "da"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "15"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "DANISH"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "de"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "13"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "GERMAN"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "false"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"

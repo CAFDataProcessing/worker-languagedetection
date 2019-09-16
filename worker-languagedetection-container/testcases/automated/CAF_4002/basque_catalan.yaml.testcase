@@ -55,11 +55,11 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "54"
+        - data: "42"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "BASQUE"
+        - data: "BASQUE (FAMILY)"
       DetectedLanguage2_Code:
         action: "replace"
         values:
@@ -67,7 +67,7 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "45"
+        - data: "41"
       DetectedLanguage2_Name:
         action: "replace"
         values:
@@ -79,11 +79,11 @@ expectedOutputData:
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "7"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "UNKNOWN"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

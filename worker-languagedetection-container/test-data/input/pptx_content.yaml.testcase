@@ -1,0 +1,62 @@
+---
+tag: "pptx_content.yaml"
+testCaseInformation:
+  associatedTickets: null
+  comments: "pptx_content.yaml"
+  description: null
+  testCaseId: "pptx_content.yaml"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "Title Placeholder 1 Text Placeholder 2 Date Placeholder 3 Footer Placeholder\
+          \ 4 Slide Number Placeholder 5 Title 1 Subtitle 2 Date Placeholder 3 Footer\
+          \ Placeholder 4 Slide Number Placeholder 5 Title 1 Contact: Hector Arroyo\
+          \ Subtitle 2 E: harroyo@yahoo.com P: (813) 230-7947 M: (719) 269-4070\n\
+          Title Placeholder 1 Text Placeholder 2 Date Placeholder 3 Footer Placeholder\
+          \ 4 Slide Number Placeholder 5 Title 1 Content Placeholder 2 Date Placeholder\
+          \ 3 Footer Placeholder 4 Slide Number Placeholder 5 Title 1 Hans Barlow\
+          \ Content Placeholder 2 N0083727 SSN: 623-06-4066 M: (406) 205-0783 Hans.barlow@gmail.com\n\
+          Title Placeholder 1 Text Placeholder 2 Date Placeholder 3 Footer Placeholder\
+          \ 4 Slide Number Placeholder 5 Title 1 Content Placeholder 2 Date Placeholder\
+          \ 3 Footer Placeholder 4 Slide Number Placeholder 5 Title 1 Hayden Franks\
+          \ Content Placeholder 2 N0083767 SSN: 347-86-7520 M: 217.563.4747 Hayf86@gmail.com\n\
+          Title Placeholder 1 Text Placeholder 2 Date Placeholder 3 Footer Placeholder\
+          \ 4 Slide Number Placeholder 5 Title 1 Content Placeholder 2 Date Placeholder\
+          \ 3 Footer Placeholder 4 Slide Number Placeholder 5 Title 1 Chuck Cooke\
+          \ Content Placeholder 2 N0083712 SSN: 610-16-4649 M: (517) 552-9315 ccooke@gmail.com"
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "en"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "76"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "ENGLISH"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "23"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "UNKNOWN"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"

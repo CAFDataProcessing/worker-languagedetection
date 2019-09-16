@@ -317,7 +317,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "67"
+        - data: "68"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -329,7 +329,7 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "14"
+        - data: "13"
       DetectedLanguage2_Name:
         action: "replace"
         values:
@@ -341,7 +341,7 @@ expectedOutputData:
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "11"
+        - data: "7"
       DetectedLanguage3_Name:
         action: "replace"
         values:

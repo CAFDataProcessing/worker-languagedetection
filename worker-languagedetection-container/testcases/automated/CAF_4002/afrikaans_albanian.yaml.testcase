@@ -68,39 +68,39 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "af"
+        - data: "sq"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "58"
+        - data: "37"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "AFRIKAANS"
+        - data: "ALBANIAN"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "sq"
+        - data: "af"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "41"
+        - data: "27"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "ALBANIAN"
+        - data: "AFRIKAANS"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "nl"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "20"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "DUTCH"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

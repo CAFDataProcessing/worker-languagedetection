@@ -31,39 +31,39 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "mt"
+        - data: "un"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "99"
+        - data: "56"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "MALTESE"
+        - data: "UNKNOWN"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "mt"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "29"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "MALTESE"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "un"
+        - data: "hu"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "0"
+        - data: "2"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "Unknown"
+        - data: "HUNGARIAN"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:
