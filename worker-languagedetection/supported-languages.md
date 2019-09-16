@@ -2,179 +2,180 @@
 
 These 176 languages are detected: 
 
-af - AFRIKAANS
-als - TOSK ALBANIAN
-am - AMHARIC
-an - ARAGONESE
-ar - ARABIC
-arz - EGYPTIAN ARABIC
-as - ASSAMESE
-ast - ASTURIAN
-av - AVARIC
-az - AZERBAIJANI
-azb - SOUTH AZERBAIJANI
-ba - BASHKIR
-bar - BAVARIAN
-bcl - CENTRAL BIKOL
-be - BELARUSIAN
-bg - BULGARIAN
-bh - BIHARI LANGUAGES
-bn - BENGALI
-bo - TIBETAN
-bpy - BISHNUPRIYA
-br - BRETON
-bs - BOSNIAN
-bxr - RUSSIA BURIAT
-ca - CATALAN
-cbk - CHAVACANO
-ce - CHECHEN
-ceb - CEBUANO
-ckb - CENTRAL KURDISH
-co - CORSICAN
-cs - CZECH
-cv - CHUVASH
-cy - WELSH
-da - DANISH
-de - GERMAN
-diq - DIMLI (individual language) 
-dsb - LOWER SORBIAN
-dty - DOTYALI
-dv - DHIVEHI
-el - MODERN GREEK
-eml - EMILIANO-ROMAGNOLO
-en - ENGLISH
-eo - ESPERANTO
-es - SPANISH
-et - ESTONIAN
-eu - BASQUE (FAMILY)
-fa - PERSIAN
-fi - FINNISH
-fr - FRENCH
-frr - NORTHERN FRISIAN
-fy - WEST FRISIAN
-ga - IRISH
-gd - SCOTTISH GAELIC
-gl - GALICIAN
-gn - GUARANI
-gom - Goan Konkani 
-gu - GUJARATI
-gv - MANX
-he - HEBREW
-hi - HINDI
-hif - FIJI HINDI 
-hr - CROATIAN
-hsb - UPPER SORBIAN
-ht - HAITIAN
-hu - HUNGARIAN
-hy - ARMENIAN
-ia - INTERLINGUA
-id - INDONESIAN
-ie - INTERLINGUE
-ilo - ILOKO
-io - IDO
-is - ICELANDIC
-it - ITALIAN
-ja - JAPANESE
-jbo - LOJBAN
-jv - JAVANESE
-ka - GEORGIAN
-kk - KAZAKH
-km - CENTRAL KHMER
-kn - KANNADA
-ko - KOREAN
-krc - KARACHAY-BALKAR
-ku - KURDISH
-kv - KOMI
-kw - COMISH
-ky - KIRGHIZ
-la - LATIN
-lb - LUXEMBOURGISH
-lez - LEZGHIAN
-li - LIMBURGAN
-lmo - LOMBARD
-lo - LAO
-lrc - NORTHERN LURI 
-lt - LITHUANIAN
-lv - LATVIAN
-mai - MAITHILI
-mg - MALAGASY
-mhr - EASTERN MARI
-min - MINANGKABAU
-mk - MACEDONIAN
-ml - MALAYALAM
-mn - MONGOLIAN
-mr - MARATHI
-mrj - WESTERN MARI
-ms - MALAY
-mt - MALTESE
-mwl - MIRANDESE
-my - BURMESE
-myv - ERZYA
-mzn -  MAZANDERANI 
-nah - NAHUATL LANGUAGES
-nap - NEAPOLITAN
-nds - LOW GERMAN
-ne - NEPALI
-new - NEWARI
-nl - DUTCH
-nn - NORWEGIAN NYNORSK
-no - NORWEGIAN
-oc - OCCITAN
-or - ORIYA
-os - OSSETIAN
-pa - PANJABI
-pam - PAMPANGA
-pfl - PFAELZISCH
-pl - POLISH
-pms - PIEMENTESE
-pnb - WESTERN PANJABI 
-ps - PUSHTO
-pt - PORTUGUESE
-qu - QUECHUA
-rm - ROMANSH
-ro - ROMANIAN
-ru - RUSSIAN
-rue - RUSYN
-sa - SANSKRIT
-sah - YAKUT
-sc - SARDINIAN
-scn - SICILIAN
-sco - SCOTS
-sd - SINDHI
-sh - SERBO-CROATIAN
-si - SINHALA
-sk - SLOVAK
-sl - SLOVENE
-so - SOMALI
-sq - ALBANIAN
-sr - SERBIAN
-su - SUNDANESE
-sv - SWEDISH
-sw - SWAHILI
-ta - TAMIL
-te - TELUGU
-tg - TAJIK
-th - THAI
-tk - TURKMEN
-tl - TAGALOG
-tr - TURKISH
-tt - TATAR
-tyv - TUVINIAN
-ug - UIGHUR
-uk - UKRAINIAN
-ur - URDU
-uz - UZBEK
-vec - VENETIAN
-vep - VEPS
-vi - VIETNAMESE
-vls - VLAAMS
-vo - VOLAPUK
-wa - WALLOON
-war - WARAY (PHILIPPINES)
-wuu - WU CHINESE
-xal - KALMYK
-xmf - MINGRELIAN
-yi - YIDDISH
-yo - YORUBA
-yue - CANTONESE
-zh - CHINESE
+- af - AFRIKAANS
+
+- als - TOSK ALBANIAN
+- am - AMHARIC
+- an - ARAGONESE
+- ar - ARABIC
+- arz - EGYPTIAN ARABIC
+- as - ASSAMESE
+- ast - ASTURIAN
+- av - AVARIC
+- az - AZERBAIJANI
+- azb - SOUTH AZERBAIJANI
+- ba - BASHKIR
+- bar - BAVARIAN
+- bcl - CENTRAL BIKOL
+- be - BELARUSIAN
+- bg - BULGARIAN
+- bh - BIHARI LANGUAGES
+- bn - BENGALI
+- bo - TIBETAN
+- bpy - BISHNUPRIYA
+- br - BRETON
+- bs - BOSNIAN
+- bxr - RUSSIA BURIAT
+- ca - CATALAN
+- cbk - CHAVACANO
+- ce - CHECHEN
+- ceb - CEBUANO
+- ckb - CENTRAL KURDISH
+- co - CORSICAN
+- cs - CZECH
+- cv - CHUVASH
+- cy - WELSH
+- da - DANISH
+- de - GERMAN
+- diq - DIMLI (individual language) 
+- dsb - LOWER SORBIAN
+- dty - DOTYALI
+- dv - DHIVEHI
+- el - MODERN GREEK
+- eml - EMILIANO-ROMAGNOLO
+- en - ENGLISH
+- eo - ESPERANTO
+- es - SPANISH
+- et - ESTONIAN
+- eu - BASQUE (FAMILY)
+- fa - PERSIAN
+- fi - FINNISH
+- fr - FRENCH
+- frr - NORTHERN FRISIAN
+- fy - WEST FRISIAN
+- ga - IRISH
+- gd - SCOTTISH GAELIC
+- gl - GALICIAN
+- gn - GUARANI
+- gom - Goan Konkani 
+- gu - GUJARATI
+- gv - MANX
+- he - HEBREW
+- hi - HINDI
+- hif - FIJI HINDI 
+- hr - CROATIAN
+- hsb - UPPER SORBIAN
+- ht - HAITIAN
+- hu - HUNGARIAN
+- hy - ARMENIAN
+- ia - INTERLINGUA
+- id - INDONESIAN
+- ie - INTERLINGUE
+- ilo - ILOKO
+- io - IDO
+- is - ICELANDIC
+- it - ITALIAN
+- ja - JAPANESE
+- jbo - LOJBAN
+- jv - JAVANESE
+- ka - GEORGIAN
+- kk - KAZAKH
+- km - CENTRAL KHMER
+- kn - KANNADA
+- ko - KOREAN
+- krc - KARACHAY-BALKAR
+- ku - KURDISH
+- kv - KOMI
+- kw - COMISH
+- ky - KIRGHIZ
+- la - LATIN
+- lb - LUXEMBOURGISH
+- lez - LEZGHIAN
+- li - LIMBURGAN
+- lmo - LOMBARD
+- lo - LAO
+- lrc - NORTHERN LURI 
+- lt - LITHUANIAN
+- lv - LATVIAN
+- mai - MAITHILI
+- mg - MALAGASY
+- mhr - EASTERN MARI
+- min - MINANGKABAU
+- mk - MACEDONIAN
+- ml - MALAYALAM
+- mn - MONGOLIAN
+- mr - MARATHI
+- mrj - WESTERN MARI
+- ms - MALAY
+- mt - MALTESE
+- mwl - MIRANDESE
+- my - BURMESE
+- myv - ERZYA
+- mzn -  MAZANDERANI 
+- nah - NAHUATL LANGUAGES
+- nap - NEAPOLITAN
+- nds - LOW GERMAN
+- ne - NEPALI
+- new - NEWARI
+- nl - DUTCH
+- nn - NORWEGIAN NYNORSK
+- no - NORWEGIAN
+- oc - OCCITAN
+- or - ORIYA
+- os - OSSETIAN
+- pa - PANJABI
+- pam - PAMPANGA
+- pfl - PFAELZISCH
+- pl - POLISH
+- pms - PIEMENTESE
+- pnb - WESTERN PANJABI 
+- ps - PUSHTO
+- pt - PORTUGUESE
+- qu - QUECHUA
+- rm - ROMANSH
+- ro - ROMANIAN
+- ru - RUSSIAN
+- rue - RUSYN
+- sa - SANSKRIT
+- sah - YAKUT
+- sc - SARDINIAN
+- scn - SICILIAN
+- sco - SCOTS
+- sd - SINDHI
+- sh - SERBO-CROATIAN
+- si - SINHALA
+- sk - SLOVAK
+- sl - SLOVENE
+- so - SOMALI
+- sq - ALBANIAN
+- sr - SERBIAN
+- su - SUNDANESE
+- sv - SWEDISH
+- sw - SWAHILI
+- ta - TAMIL
+- te - TELUGU
+- tg - TAJIK
+- th - THAI
+- tk - TURKMEN
+- tl - TAGALOG
+- tr - TURKISH
+- tt - TATAR
+- tyv - TUVINIAN
+- ug - UIGHUR
+- uk - UKRAINIAN
+- ur - URDU
+- uz - UZBEK
+- vec - VENETIAN
+- vep - VEPS
+- vi - VIETNAMESE
+- vls - VLAAMS
+- vo - VOLAPUK
+- wa - WALLOON
+- war - WARAY (PHILIPPINES)
+- wuu - WU CHINESE
+- xal - KALMYK
+- xmf - MINGRELIAN
+- yi - YIDDISH
+- yo - YORUBA
+- yue - CANTONESE
+- zh - CHINESE
