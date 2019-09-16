@@ -91,11 +91,6 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>black.ninia</groupId>
-                <artifactId>jep</artifactId>
-                <version>3.8.2</version>
-            </dependency>
-            <dependency>
                 <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>worker-document-framework</artifactId>
                 <version>${caf.worker-document-framework.version}</version>
@@ -114,7 +109,7 @@
             </dependency>
             <dependency>
                 <groupId>com.github.cafdataprocessing</groupId>
-                <artifactId>language-detection-fasttext</artifactId>
+                <artifactId>language-detection-cld2</artifactId>
                 <version>3.2.0-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -131,11 +126,6 @@
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
                 <version>25.0-jre</version>
-            </dependency>
-            <dependency>
-                <groupId>com.neovisionaries</groupId>
-                <artifactId>nv-i18n</artifactId>
-                <version>1.23</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -181,10 +171,10 @@
     </dependencyManagement>
 
     <modules>
-        <module>language-detection</module>
-        <module>language-detection-fasttext</module>
         <module>worker-languagedetection</module>
         <module>worker-languagedetection-container</module>
+        <module>language-detection</module>
+        <module>language-detection-cld2</module>
     </modules>
     
     <scm>

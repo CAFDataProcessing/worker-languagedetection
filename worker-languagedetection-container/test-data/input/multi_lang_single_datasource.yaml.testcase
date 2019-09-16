@@ -36,49 +36,52 @@ inputData:
           \ filières, les jeunes mettent du temps à trouver un emploi stable », indique\
           \ Geneviève Fioraso, la ministre de l'enseignement supérieur."
 expectedOutputData:
+  expectedContentFile: null
+  expectedSimilarityPercentage: 0
+  comparisonType: "TEXT"
   result:
     fieldChanges:
-      DetectedLanguage1_Code:
+      DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "fr"
-      DetectedLanguage1_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "36"
+        - data: "35"
       DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "GERMAN"
+      DetectedLanguage2_Name:
         action: "replace"
         values:
         - data: "FRENCH"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "de"
-      DetectedLanguage2_ConfidencePercentage:
-        action: "replace"
-        values:
-        - data: "35"
-      DetectedLanguage2_Name:
-        action: "replace"
-        values:
-        - data: "GERMAN"
+        - data: "fr"
       DetectedLanguage3_Code:
         action: "replace"
         values:
         - data: "en"
-      DetectedLanguage3_ConfidencePercentage:
+      DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "27"
+        - data: "de"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "37"
       DetectedLanguage3_Name:
         action: "replace"
         values:
         - data: "ENGLISH"
-      DetectedLanguages_ReliableResult:
+      DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "true"
+        - data: "27"
       DetectedLanguages_Status:
         action: "replace"
         values:
         - data: "COMPLETED"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "false"

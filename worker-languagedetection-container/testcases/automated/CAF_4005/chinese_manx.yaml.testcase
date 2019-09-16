@@ -35,11 +35,11 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "65"
+        - data: "84"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "CHINESE"
+        - data: "Chinese"
       DetectedLanguage2_Code:
         action: "replace"
         values:
@@ -47,23 +47,23 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "14"
+        - data: "0"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "UNKNOWN"
+        - data: "Unknown"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "fy"
+        - data: "un"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "6"
+        - data: "0"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "WEST FRISIAN"
+        - data: "Unknown"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

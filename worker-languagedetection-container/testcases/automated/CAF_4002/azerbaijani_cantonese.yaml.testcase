@@ -30,39 +30,39 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "az"
+        - data: "zh-Hant"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "68"
+        - data: "53"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "AZERBAIJANI"
+        - data: "ChineseT"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "zh"
+        - data: "az"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "18"
+        - data: "46"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "CHINESE"
+        - data: "AZERBAIJANI"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "yue"
+        - data: "un"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "12"
+        - data: "0"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "CANTONESE"
+        - data: "Unknown"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

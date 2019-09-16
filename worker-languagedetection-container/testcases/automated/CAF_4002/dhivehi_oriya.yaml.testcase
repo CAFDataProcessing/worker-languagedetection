@@ -68,7 +68,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "69"
+        - data: "60"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -80,11 +80,23 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "30"
+        - data: "40"
       DetectedLanguage2_Name:
         action: "replace"
         values:
         - data: "ORIYA"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

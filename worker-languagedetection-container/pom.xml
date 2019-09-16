@@ -56,7 +56,7 @@
         </dependency>
         <dependency>
             <groupId>com.github.cafdataprocessing</groupId>
-            <artifactId>language-detection-fasttext</artifactId>
+            <artifactId>language-detection-cld2</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.cafdataprocessing</groupId>
@@ -161,30 +161,6 @@
                     <!--<debugForkedProcess>true</debugForkedProcess>-->
                 </configuration>
             </plugin>
-            
-            <plugin>
-                <groupId>com.googlecode.maven-download-plugin</groupId>
-                <artifactId>download-maven-plugin</artifactId>
-                <version>1.4.2</version>
-                <executions>
-                    <execution>
-                        <id>download-target-file</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>wget</goal>
-                        </goals>
-                        <configuration>
-                            <readTimeOut>120000</readTimeOut>
-                            <url>http://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin</url>
-                            <outputDirectory>${project.build.directory}/resources/fasttext_model</outputDirectory>
-                            <outputFileName>lid.176.bin</outputFileName>
-                            <overwrite>true</overwrite>
-                            <skipCache>true</skipCache>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-            
             <!--
                 Builds the Docker image for the LanguageDetectionWorker, starts RabbitMQ and assembles the configuration files
                 for running the integration tests.
@@ -314,7 +290,7 @@
                             <alias>worker-languagedetection</alias>
                             <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
                             <build>
-                                <from>cafinternal/prereleases:opensuse-jepfasttext-1.0.0-SNAPSHOT</from>
+                                <from>cafapi/opensuse-jre8:1</from>
                                 <labels>
                                     <Build.Number>${project.version}</Build.Number>
                                     <Build.Date>${maven.build.timestamp}</Build.Date>
@@ -345,8 +321,11 @@
                                                 <fileMode>0755</fileMode>
                                             </fileSet>
                                             <fileSet>
-                                                <directory>${project.build.directory}/resources/fasttext_model</directory>
-                                                <outputDirectory>resources</outputDirectory>
+                                                <directory>cld2native/linux</directory>
+                                                <outputDirectory>cld2native/linux</outputDirectory>
+                                                <includes>
+                                                    <include>*.so</include>
+                                                </includes>
                                             </fileSet>
                                             <fileSet>
                                                 <lineEnding>unix</lineEnding>

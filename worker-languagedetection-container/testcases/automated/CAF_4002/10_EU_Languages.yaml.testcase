@@ -229,44 +229,44 @@ expectedOutputData:
       DetectedLanguage1_Code:
         action: "replace"
         values:
-        - data: "en"
+        - data: "pt"
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "17"
+        - data: "20"
       DetectedLanguage1_Name:
         action: "replace"
         values:
-        - data: "ENGLISH"
+        - data: "PORTUGUESE"
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "pl"
+        - data: "el"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "13"
+        - data: "19"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "POLISH"
+        - data: "GREEK"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "pt"
+        - data: "en"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "13"
+        - data: "14"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "PORTUGUESE"
+        - data: "ENGLISH"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:
-        - data: "true"
+        - data: "false"
       DetectedLanguages_Status:
         action: "replace"
         values:
-        - data: "COMPLETED"
+        - data: "FAILED"

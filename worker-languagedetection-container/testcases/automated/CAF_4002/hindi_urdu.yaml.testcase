@@ -70,7 +70,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "69"
+        - data: "62"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -82,11 +82,23 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "30"
+        - data: "37"
       DetectedLanguage2_Name:
         action: "replace"
         values:
         - data: "HINDI"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

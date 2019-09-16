@@ -42,7 +42,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "54"
+        - data: "99"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -50,27 +50,27 @@ expectedOutputData:
       DetectedLanguage2_Code:
         action: "replace"
         values:
-        - data: "pt"
+        - data: "un"
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "18"
+        - data: "0"
       DetectedLanguage2_Name:
         action: "replace"
         values:
-        - data: "PORTUGUESE"
+        - data: "Unknown"
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "es"
+        - data: "un"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "15"
+        - data: "0"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "SPANISH"
+        - data: "Unknown"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

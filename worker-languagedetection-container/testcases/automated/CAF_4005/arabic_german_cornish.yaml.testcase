@@ -61,7 +61,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "66"
+        - data: "78"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -73,7 +73,7 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "23"
+        - data: "15"
       DetectedLanguage2_Name:
         action: "replace"
         values:
@@ -81,15 +81,15 @@ expectedOutputData:
       DetectedLanguage3_Code:
         action: "replace"
         values:
-        - data: "kw"
+        - data: "un"
       DetectedLanguage3_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "2"
+        - data: "0"
       DetectedLanguage3_Name:
         action: "replace"
         values:
-        - data: "COMISH"
+        - data: "Unknown"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

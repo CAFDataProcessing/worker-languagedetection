@@ -68,7 +68,7 @@ expectedOutputData:
       DetectedLanguage1_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "58"
+        - data: "53"
       DetectedLanguage1_Name:
         action: "replace"
         values:
@@ -80,11 +80,23 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "41"
+        - data: "44"
       DetectedLanguage2_Name:
         action: "replace"
         values:
         - data: "UKRAINIAN"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "sr"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "2"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "SERBIAN"
       DetectedLanguages_ReliableResult:
         action: "replace"
         values:

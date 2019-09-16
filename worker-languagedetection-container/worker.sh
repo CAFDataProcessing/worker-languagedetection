@@ -40,4 +40,4 @@ then
 fi
 
 cd /maven
-exec java $CAF_WORKER_JAVA_OPTS -Dfile.encoding=UTF-8 -Dsun.jnu.encoding=UTF-8 -Dresources.location=/maven/resources -cp "*" com.hpe.caf.worker.core.WorkerApplication server ${dropwizardConfig}
+exec java $CAF_WORKER_JAVA_OPTS -Dcld2.location=/maven/cld2native -cp "*" com.hpe.caf.worker.core.WorkerApplication server ${dropwizardConfig}

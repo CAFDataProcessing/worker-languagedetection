@@ -30,13 +30,13 @@ expectedOutputData:
         action: "replace"
         values:
         - data: "39% fr"
-        - data: "35% en"
-        - data: "25% de"
+        - data: "31% de"
+        - data: "29% en"
       LANGUAGE_CODE_FR_CONTENT:
         action: "replace"
         values:
-        - data: "100% fr"
+        - data: "98% fr"
       LANGUAGE_CODE_GER_CONTENT:
         action: "replace"
         values:
-        - data: "100% de"
+        - data: "98% de"

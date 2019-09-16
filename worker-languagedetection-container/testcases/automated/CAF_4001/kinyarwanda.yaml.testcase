@@ -1,0 +1,80 @@
+---
+tag: "CAF_4001/kinyarwanda.yaml"
+testCaseInformation:
+  associatedTickets: CAF-414
+  comments: "CAF_4001/kinyarwanda.yaml"
+  description: Language detection on single language documents
+  testCaseId: "CAF_4001"
+inputData:
+  task:
+    fields:
+      CONTENT:
+      - data: "Inama nshingamateka na nkenguzamateka bariko bariga ikibazo cirungikwa\
+          \ ry’abasirikare 5,000 mu Burundi, bo gukinga ko hoba genocide. Umukuru\
+          \ w’inama nshingamateka, Pascal Nyabenda, yatanguje iyo nama yiyamiriza\
+          \ abantu bamwe bamwe, harimwo n’abanyamahanga ngo bihaye uburenganzira bwo\
+          \ kuza baravugira abarundi. Avuga ko abafise ubwo burenganzira ari abashingamateka\
+          \ gusa. Bitegekanijwe ko baharira ku bibaz bitatu, ico kumenya nimba mu\
+          \ Burundi ubu hariko haraba genocide, iriko igirwa na bande n’uko muri kino\
+          \ gihe genocide ishoboka mu Burundi. burundi parliament Icicaro c'inama\
+          \ nshingamateka y'Uburundi Abashingamateka baraza kandi gushikiriza ico\
+          \ bibaza kw’irungikwa ry’inteko mpuzamakungu mu Burundi, n’ico ababaserukira\
+          \ babatumye kuri ico kibazo. Reta ivuga ko ku mitumba 2913, amakaritye 5\
+          \ gusa ari yo afise umutekano muke. “ N’aho hoba umutumba umwe uhungabanye,\
+          \ birababaje kuko nta muntu yari akwiye gupfa, reta itegerezwa gukora ibishoboka\
+          \ vyose mu gukingira abanyagihugu,” ivyo bikaba bishikirijwe na Rwasa Agathon,\
+          \ icegera ca mbere c’umukuru w’inama nshingamateka. “ Ihonyabwoko mu Burundi\
+          \ ntirishoboka, hariko haraba ubwicanyi ariko bukorwa n’abanyepolitike bamwe\
+          \ bamwe, ijambo ihonyabwoko ni bo baryubatse, ” Everyne Butoyi yatowe muri\
+          \ Bujumbura Rural Hari n’abashikirije ko uko gukorana kw’inama nshingamateka\
+          \ na nkenguzamateka bidakurikije amategeko, abandi basaba ko reta yokwumviriza\
+          \ abafise akababakiye bose kugira ubwcanyi buhagarare. Mu ndwi iheze, akanama\
+          \ kajejwe amahoro n’umutekano mw’ishirahamwe ry’ubumwe bya Afrika UA, kemeje\
+          \ kurungika abasirikare 5,000 mu Burundi, gukinga ko hoba genocide."
+expectedOutputData:
+  result:
+    fieldChanges:
+      DetectedLanguage1_Code:
+        action: "replace"
+        values:
+        - data: "rw"
+      DetectedLanguage1_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "99"
+      DetectedLanguage1_Name:
+        action: "replace"
+        values:
+        - data: "KINYARWANDA"
+      DetectedLanguage2_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage2_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage2_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguage3_Code:
+        action: "replace"
+        values:
+        - data: "un"
+      DetectedLanguage3_ConfidencePercentage:
+        action: "replace"
+        values:
+        - data: "0"
+      DetectedLanguage3_Name:
+        action: "replace"
+        values:
+        - data: "Unknown"
+      DetectedLanguages_ReliableResult:
+        action: "replace"
+        values:
+        - data: "true"
+      DetectedLanguages_Status:
+        action: "replace"
+        values:
+        - data: "COMPLETED"
