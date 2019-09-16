@@ -3,7 +3,6 @@
 These 176 languages are detected: 
 
 - af - AFRIKAANS
-
 - als - TOSK ALBANIAN
 - am - AMHARIC
 - an - ARAGONESE
