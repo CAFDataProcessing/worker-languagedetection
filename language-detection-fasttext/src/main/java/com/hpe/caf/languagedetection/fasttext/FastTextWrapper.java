@@ -25,7 +25,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -167,7 +166,7 @@ public final class FastTextWrapper {
                 return null;
             })
             .filter(val -> val!=null)
-            .collect(Collectors.toCollection(LinkedList::new));
+            .collect(Collectors.toCollection(ArrayList::new));
     }
     
     private static String getLanguageName(final String languageCode) {
