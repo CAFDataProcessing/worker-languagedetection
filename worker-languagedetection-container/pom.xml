@@ -47,6 +47,11 @@
             <type>pom</type>
         </dependency>
         <dependency>
+            <groupId>com.github.cafapi.logging</groupId>
+            <artifactId>caf-logging-logback</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
             <groupId>com.github.cafdataprocessing</groupId>
             <artifactId>worker-languagedetection</artifactId>
         </dependency>
@@ -355,6 +360,7 @@
                                 <env>
                                     <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
                                     <CAF_CONFIG_PATH>/config</CAF_CONFIG_PATH>
+                                    <CAF_LOG_LEVEL>DEBUG</CAF_LOG_LEVEL>
                                 </env>
                                 <volumes>
                                     <from>
