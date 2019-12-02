@@ -40,36 +40,20 @@
     
     <developers>
         <developer>
-            <id>arogan92</id>
-            <name>Adam Rogan</name>
-            <email>adam.pau.rogan@hpe.com</email>
-        </developer>
-        <developer>
             <id>CJComac</id>
             <name>Christopher Comac</name>
-            <email>christopher.jam.comac@hpe.com</email>
+            <email>christopher.jam.comac@microfocus.com</email>
         </developer>
         <developer>
             <id>dermot-hardy</id>
             <name>Dermot Hardy</name>
-            <email>dermot.hardy@hpe.com</email>
+            <email>dermot.hardy@microfocus.com</email>
         </developer>
         <developer>
             <id>mulhollandc</id>
             <name>Connor Mulholland</name>
-            <email>connor.mulholland@hpe.com</email>
+            <email>connor.mulholland@microfocus.com</email>
         </developer>
-        <developer>
-            <id>krzysztof-ploch</id>
-            <name>Krzysztof Ploch</name>
-            <email>krzysztof.ploch@hpe.com</email>
-        </developer>
-        <developer>
-            <id>tony-mcveigh</id>
-            <name>Anthony McVeigh</name>
-            <email>tony.mcveigh@hpe.com</email>
-        </developer>
-        
     </developers>
 
     <properties>
