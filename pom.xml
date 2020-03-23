@@ -57,7 +57,7 @@
     </developers>
 
     <properties>
-        <caf.worker-document-framework.version>4.3.0-SNAPSHOT</caf.worker-document-framework.version>
+        <caf.worker-document-framework.version>4.3.0-593</caf.worker-document-framework.version>
         <copyrightYear>2020</copyrightYear>
         <dockerHubOrganization>cafdataprocessing</dockerHubOrganization>
         <dockerCafDataProcessingOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafDataProcessingOrg>
