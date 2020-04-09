@@ -57,7 +57,6 @@
     </developers>
 
     <properties>
-        <caf.worker-document-framework.version>4.3.0-593</caf.worker-document-framework.version>
         <copyrightYear>2020</copyrightYear>
         <dockerHubOrganization>cafdataprocessing</dockerHubOrganization>
         <dockerCafDataProcessingOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafDataProcessingOrg>
@@ -69,23 +68,15 @@
 
     <dependencyManagement>
         <dependencies>
+            <!--Centralized CAF dependency BOM-->
             <dependency>
-                <groupId>com.github.cafdataprocessing</groupId>
-                <artifactId>worker-document-framework</artifactId>
-                <version>${caf.worker-document-framework.version}</version>
+                <groupId>com.github.cafapi</groupId>
+                <artifactId>caf-dependency-management-bom</artifactId>
+                <version>1.0.0-SCMOD-8829-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-annotations</artifactId>
-                <version>2.9.6</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cafapi.logging</groupId>
-                <artifactId>caf-logging-logback</artifactId>
-                <version>1.0.0-36</version>
-            </dependency>
+
             <dependency>
                 <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>language-detection</artifactId>
@@ -100,56 +91,6 @@
                 <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>worker-languagedetection</artifactId>
                 <version>3.3.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.code.findbugs</groupId>
-                <artifactId>jsr305</artifactId>
-                <version>3.0.2</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>25.0-jre</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>2.6</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.annotation</groupId>
-                <artifactId>javax.annotation-api</artifactId>
-                <version>1.3.2</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.ws.rs</groupId>
-                <artifactId>javax.ws.rs-api</artifactId>
-                <version>2.1.1</version>
-            </dependency>
-            <dependency>
-                <groupId>net.java.dev.jna</groupId>
-                <artifactId>jna</artifactId>
-                <version>4.2.2</version>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-validator</artifactId>
-                <version>5.4.2.Final</version>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.logging</groupId>
-                <artifactId>jboss-logging</artifactId>
-                <version>3.3.1.Final</version>
-            </dependency>
-            <dependency>
-                <groupId>org.json</groupId>
-                <artifactId>json</artifactId>
-                <version>20180130</version>
-            </dependency>
-            <dependency>
-                <groupId>org.yaml</groupId>
-                <artifactId>snakeyaml</artifactId>
-                <version>1.23</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
