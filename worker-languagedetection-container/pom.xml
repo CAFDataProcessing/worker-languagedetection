@@ -297,7 +297,6 @@
                                     <Git.Repo>${gitRepo}</Git.Repo>
                                     <Git.Branch>${git.branch}</Git.Branch>
                                     <Git.Commit>${git.revision}</Git.Commit>
-                                    <caf.worker-document-framework.version>${caf.worker-document-framework.version}</caf.worker-document-framework.version>
                                 </labels>
                                 <!-- The entry point will be the worker.sh executable. -->
                                 <cmd>
