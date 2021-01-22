@@ -61,7 +61,6 @@
         <dockerHubOrganization>cafdataprocessing</dockerHubOrganization>
         <dockerCafDataProcessingOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafDataProcessingOrg>
         <dockerProjectVersion>${dockerVersionSeperator}${project.version}</dockerProjectVersion>
-        <gitRepo>https://github.com/CAFDataProcessing/worker-languagedetection</gitRepo>
         <enforceCorrectDependencies>true</enforceCorrectDependencies>
         <enforceBannedDependencies>true</enforceBannedDependencies>
     </properties>
@@ -105,7 +104,7 @@
     <scm>
         <connection>scm:git:https://github.com/CAFDataProcessing/worker-languagedetection.git</connection>
         <developerConnection>scm:git:https://github.com/CAFDataProcessing/worker-languagedetection.git</developerConnection>
-        <url>${gitRepo}</url>
+        <url>https://github.com/CAFDataProcessing/worker-languagedetection</url>
     </scm>
 
 </project>
