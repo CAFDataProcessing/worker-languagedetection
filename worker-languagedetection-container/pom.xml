@@ -419,6 +419,7 @@
             <properties>
                 <rabbitmq.ctrl.port>15672</rabbitmq.ctrl.port>
                 <rabbitmq.node.port>5672</rabbitmq.node.port>
+                <webdav.apache.port>28080</webdav.apache.port>
                 <worker.adminport>8081</worker.adminport>
             </properties>
         </profile>
