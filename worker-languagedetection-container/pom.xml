@@ -151,11 +151,12 @@
                         <input.folder>${test.data}</input.folder>
                         <expected.folder>${test.data}</expected.folder>
                         <datastore.enabled>false</datastore.enabled>
+                        <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>
                     </systemPropertyVariables>
                     <environmentVariables>
                         <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
                         <CAF_CONFIG_PATH>${test.configs}</CAF_CONFIG_PATH>
-                        <CAF_INTEGRATIONTESTS_FS_PATH>\\${docker.host.address}@${webdav.apache.port}\webdav</CAF_INTEGRATIONTESTS_FS_PATH>
+                        <CAF_WORKER_HTTP_DATASTORE_URL>http://${docker.host.address}:${webdav.apache.port}/webdav</CAF_WORKER_HTTP_DATASTORE_URL>
                     </environmentVariables>
                     <!--<debugForkedProcess>true</debugForkedProcess>-->
                 </configuration>
