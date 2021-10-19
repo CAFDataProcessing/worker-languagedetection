@@ -23,7 +23,7 @@
 
     <groupId>com.github.cafdataprocessing</groupId>
     <artifactId>worker-languagedetection-aggregator</artifactId>
-    <version>3.5.1-1048</version>
+    <version>3.6.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     
     <parent>
@@ -85,17 +85,17 @@
             <dependency>
                 <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>language-detection</artifactId>
-                <version>3.5.1-1048</version>
+                <version>3.6.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>language-detection-cld2</artifactId>
-                <version>3.5.1-1048</version>
+                <version>3.6.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>worker-languagedetection</artifactId>
-                <version>3.5.1-1048</version>
+                <version>3.6.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
