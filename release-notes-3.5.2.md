@@ -4,6 +4,10 @@
 ${version-number}
 
 #### New Features
-- US355271: Dependency updates
 
 #### Known Issues
+- none
+
+#### Other Changes
+
+- US355271: High Priority dependency updates from 3.6.0 CVE analysis
