@@ -4,7 +4,7 @@
 ${version-number}
 
 #### New Features
-- US573066: Updated base image to use Java 17
+- US573066: Updated image to use Java 17
 
 #### Known Issues
 - None
