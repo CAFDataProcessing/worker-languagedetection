@@ -68,13 +68,39 @@
     <dependencyManagement>
         <dependencies>
 
+<!--            <dependency>-->
+<!--                <groupId>com.github.cafdataprocessing</groupId>-->
+<!--                <artifactId>worker-document-framework</artifactId>-->
+<!--                <version>5.2.0-wmp-SNAPSHOT</version>-->
+<!--                <type>pom</type>-->
+<!--                <scope>import</scope>-->
+<!--            </dependency>-->
+
             <dependency>
                 <groupId>com.github.cafdataprocessing</groupId>
-                <artifactId>worker-document-framework</artifactId>
+                <artifactId>worker-document</artifactId>
                 <version>5.2.0-wmp-SNAPSHOT</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>com.github.cafdataprocessing</groupId>
+                <artifactId>worker-document-interface</artifactId>
+                <version>5.2.0-wmp-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.cafdataprocessing</groupId>
+                <artifactId>worker-document-shared</artifactId>
+                <version>5.2.0-wmp-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.cafdataprocessing</groupId>
+                <artifactId>worker-document-testing</artifactId>
+                <version>5.2.0-wmp-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.cafdataprocessing</groupId>
+                <artifactId>worker-document-testing-unit</artifactId>
+                <version>5.2.0-wmp-SNAPSHOT</version>
+            </dependency>            
             
             <dependency>
                 <groupId>org.json</groupId>
