@@ -3,8 +3,11 @@
 #### Version Number
 ${version-number}
 
+#### Breaking Changes
+- US593021: Nashorn script engine is no longer supported.
+
 #### New Features
-- US573066: Updated image to use Java 17
+- US593021: Updated to run on Java 17.
 
 #### Known Issues
 - None
