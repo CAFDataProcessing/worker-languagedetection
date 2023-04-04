@@ -15,6 +15,7 @@
  */
 package com.hpe.caf.worker.languagedetection;
 
+import com.github.workerframework.workermessageprioritization.rerouting.MessageRouterSingleton;
 import com.google.common.base.Strings;
 import com.hpe.caf.languagedetection.*;
 import com.hpe.caf.util.ModuleLoader;
@@ -80,6 +81,8 @@ public final class LanguageDetectionWorker implements DocumentWorker
         if (languageDetector == null) {
             healthMonitor.reportUnhealthy("Language Detection Library unavailable.");
         }
+
+        MessageRouterSingleton.checkHealth(healthMonitor);
     }
 
     /**
