@@ -16,7 +16,7 @@
 package com.hpe.caf.worker.languagedetection;
 
 import com.hpe.caf.api.Configuration;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 /**
  * Language Detection Worker specific configuration.
