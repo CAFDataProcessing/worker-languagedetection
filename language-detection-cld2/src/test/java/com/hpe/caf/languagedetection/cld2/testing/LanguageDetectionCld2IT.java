@@ -15,7 +15,6 @@
  */
 package com.hpe.caf.languagedetection.cld2.testing;
 
-import com.google.common.io.ByteStreams;
 import com.hpe.caf.languagedetection.*;
 import com.hpe.caf.languagedetection.cld2.Cld2DetectorProvider;
 import org.junit.Assert;
@@ -209,7 +208,7 @@ public class LanguageDetectionCld2IT
     private byte[] getAllData(final String name) throws IOException, LanguageDetectorException
     {
         try (InputStream stream = this.getClass().getClassLoader().getResourceAsStream(name)) {
-            return ByteStreams.toByteArray(stream);
+            return stream.readAllBytes();
         } catch (IOException | NullPointerException e) {
             throw new LanguageDetectorException("File could not be converted to byte array. Invalid filename: " + name);
         }
