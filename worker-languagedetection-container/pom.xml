@@ -28,7 +28,7 @@
     <parent>
         <groupId>com.github.cafdataprocessing</groupId>
         <artifactId>worker-languagedetection-aggregator</artifactId>
-        <version>4.2.0-SNAPSHOT</version>
+        <version>5.0.0-SNAPSHOT</version>
     </parent>
 
     <!-- Properties for the worker. -->
@@ -63,6 +63,16 @@
             <artifactId>worker-document-testing</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.github.workerframework.testing</groupId>
+            <artifactId>workerframework-testing-integration</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -95,7 +105,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.2</version>
                 <executions>
                     <execution>
                         <id>process-config-files</id>
@@ -169,7 +178,6 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.20.1</version>
                 <executions>
                     <!-- Build the container in compile phase. -->
                     <execution>
@@ -208,6 +216,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <containerNamePattern>%a-%t</containerNamePattern>
                     <watchInterval>500</watchInterval>
                     <logDate>default</logDate>
                     <verbose>true</verbose>
@@ -277,7 +286,7 @@
                                         <fileSets>
                                             <fileSet>
                                                 <directory>test-configs</directory>
-                                                <outputDirectory>/</outputDirectory>
+                                                <outputDirectory>.</outputDirectory>
                                                 <includes>
                                                     <include>*</include>
                                                 </includes>
@@ -374,16 +383,6 @@
                         </image>
 
                     </images>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <configuration>
-                    <excludes combine.children="append">
-                        <exclude>testcases/**</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
         </plugins>

@@ -43,8 +43,8 @@ public class Cld2Wrapper
 
         LOG.debug("Library location: " + System.getProperty("jna.library.path"));
 
-        cld2Library = (Cld2Library) Native.loadLibrary((Platform.isWindows() ? "win64/libcld2.dll" : "linux/libcld2.so"), Cld2Library.class);
-//        cld2Library = (Cld2Library) Native.loadLibrary("libcld2", Cld2Library.class);
+        cld2Library = Native.load((Platform.isWindows() ? "win64/libcld2.dll" : "linux/libcld2.so"), Cld2Library.class);
+//        cld2Library = Native.load("libcld2", Cld2Library.class);
     }
 
     /**
