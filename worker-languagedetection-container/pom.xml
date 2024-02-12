@@ -28,7 +28,7 @@
     <parent>
         <groupId>com.github.cafdataprocessing</groupId>
         <artifactId>worker-languagedetection-aggregator</artifactId>
-        <version>5.0.0-SNAPSHOT</version>
+        <version>5.0.0-1351</version>
     </parent>
 
     <!-- Properties for the worker. -->
