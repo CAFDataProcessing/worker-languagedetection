@@ -54,10 +54,6 @@
             <artifactId>util-moduleloader</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.workerframework</groupId>
-            <artifactId>worker-message-prioritization-rerouting</artifactId>
-        </dependency>
-        <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
         </dependency>
