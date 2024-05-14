@@ -223,7 +223,7 @@
                     <images>
                         <image>
                             <alias>webdav</alias>
-                            <name>${dockerHubPublic}/cloudesire/webdav</name>
+                            <name>${projectDockerRegistry}/cloudesire/webdav</name>
                             <run>
                                 <volumes>
                                     <bind>
@@ -253,7 +253,7 @@
                         <!-- Run the RabbitMQ image. -->
                         <image>
                             <alias>rabbitmq</alias>
-                            <name>${dockerHubPublic}/library/rabbitmq:3-management</name>
+                            <name>${projectDockerRegistry}/library/rabbitmq</name>
                             <run>
                                 <ports>
                                     <port>${rabbitmq.ctrl.port}:15672</port>
@@ -278,7 +278,7 @@
                             <alias>config</alias>
                             <name>${project.artifactId}-test-config:${project.version}</name>
                             <build>
-                                <from>${dockerHubPublic}/library/busybox:latest</from>
+                                <from>${projectDockerRegistry}/library/busybox</from>
                                 <assembly>
                                     <exportTargetDir>true</exportTargetDir>
                                     <basedir>/config</basedir>
@@ -302,7 +302,7 @@
                             <alias>worker-languagedetection</alias>
                             <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
                             <build>
-                                <from>${dockerHubPublic}/cafapi/opensuse-jre17:4</from>
+                                <from>${projectDockerRegistry}/cafapi/opensuse-jre17</from>
                                 <!-- The entry point will be the worker.sh executable. -->
                                 <cmd>
                                     <exec>
