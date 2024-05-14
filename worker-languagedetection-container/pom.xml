@@ -302,7 +302,7 @@
                             <alias>worker-languagedetection</alias>
                             <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
                             <build>
-                                <from>${dockerHubPublic}/cafapi/opensuse-jre17:1</from>
+                                <from>${dockerHubPublic}/cafapi/opensuse-jre17:4</from>
                                 <!-- The entry point will be the worker.sh executable. -->
                                 <cmd>
                                     <exec>
