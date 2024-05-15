@@ -17,9 +17,11 @@ package com.hpe.caf.languagedetection.cld2.testing;
 
 import com.hpe.caf.languagedetection.*;
 import com.hpe.caf.languagedetection.cld2.Cld2DetectorProvider;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -45,7 +47,7 @@ public class LanguageDetectionCld2IT
      *
      * @throws LanguageDetectorException
      */
-    @Before
+    @BeforeEach
     public void setup() throws LanguageDetectorException
     {
         provider = new Cld2DetectorProvider();
@@ -73,12 +75,12 @@ public class LanguageDetectionCld2IT
 
         DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
 
-        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
-        Assert.assertTrue(result.isReliable());//German is the main language here with a much higher percentage therefore result should be reliable
-        Assert.assertEquals(1, result.getLanguages().size());
+        assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
+        assertTrue(result.isReliable());//German is the main language here with a much higher percentage therefore result should be reliable
+        assertEquals(1, result.getLanguages().size());
 
-        Assert.assertEquals("de", arr[0].getLanguageCode());
-        Assert.assertEquals("GERMAN", arr[0].getLanguageName());
+        assertEquals("de", arr[0].getLanguageCode());
+        assertEquals("GERMAN", arr[0].getLanguageName());
     }
 
     /**
@@ -104,13 +106,13 @@ public class LanguageDetectionCld2IT
 
         DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[3]);
 
-        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
-        Assert.assertTrue(!result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
-        Assert.assertEquals(3, result.getLanguages().size());
+        assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
+        assertFalse(result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
+        assertEquals(3, result.getLanguages().size());
 
         for (int i = 0; i < 3; i++) {
-            Assert.assertEquals(testCodes[i], arr[i].getLanguageCode());
-            Assert.assertEquals(testNames[i], arr[i].getLanguageName());
+            assertEquals(testCodes[i], arr[i].getLanguageCode());
+            assertEquals(testNames[i], arr[i].getLanguageName());
         }
     }
 
@@ -135,12 +137,12 @@ public class LanguageDetectionCld2IT
 
         DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
 
-        Assert.assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
+        assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
 //        Assert.assertFalse(result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
-        Assert.assertEquals(1, result.getLanguages().size());
+        assertEquals(1, result.getLanguages().size());
 
-        Assert.assertEquals("nl", arr[0].getLanguageCode());
-        Assert.assertEquals("DUTCH", arr[0].getLanguageName());
+        assertEquals("nl", arr[0].getLanguageCode());
+        assertEquals("DUTCH", arr[0].getLanguageName());
     }
 
     /**
@@ -164,13 +166,13 @@ public class LanguageDetectionCld2IT
 
         DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[3]);
 
-        Assert.assertEquals(LanguageDetectorStatus.FAILED, result.getLanguageDetectorStatus());
-        Assert.assertFalse(result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
-        Assert.assertEquals(3, result.getLanguages().size());
+        assertEquals(LanguageDetectorStatus.FAILED, result.getLanguageDetectorStatus());
+        assertFalse(result.isReliable());//spanish and german have similar language percentages therefore the result is not reliable
+        assertEquals(3, result.getLanguages().size());
 
         for (int i = 0; i < 3; i++) {
-            Assert.assertEquals("un", arr[i].getLanguageCode());
-            Assert.assertEquals("Unknown", arr[i].getLanguageName());
+            assertEquals("un", arr[i].getLanguageCode());
+            assertEquals("Unknown", arr[i].getLanguageName());
         }
     }
 
@@ -195,7 +197,7 @@ public class LanguageDetectionCld2IT
 
         DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
 
-        Assert.assertEquals(LanguageDetectorStatus.FAILED, result.getLanguageDetectorStatus());
+        assertEquals(LanguageDetectorStatus.FAILED, result.getLanguageDetectorStatus());
     }
 
     /**
