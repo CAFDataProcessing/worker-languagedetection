@@ -1,0 +1,12 @@
+{
+    "livenessInitialDelaySeconds": 15,
+    "livenessCheckIntervalSeconds": 60,
+    "livenessDowntimeIntervalSeconds":  60,
+    "livenessSuccessAttempts": 1,
+    "livenessFailureAttempts": 3,
+    "readinessInitialDelaySeconds": 15,
+    "readinessCheckIntervalSeconds": 60,
+    "readinessDowntimeIntervalSeconds": 60,
+    "readinessSuccessAttempts": 1,
+    "readinessFailureAttempts": 3
+}
