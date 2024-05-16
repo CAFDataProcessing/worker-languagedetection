@@ -154,6 +154,7 @@
                 <configuration>
                     <systemPropertyVariables>
                         <docker.host.address>${docker.host.address}</docker.host.address>
+                        <worker.restport>${worker.restport}</worker.restport>
                         <worker.adminport>${worker.adminport}</worker.adminport>
                         <rabbitmq.node.port>${rabbitmq.node.port}</rabbitmq.node.port>
                         <rabbitmq.ctrl.port>${rabbitmq.ctrl.port}</rabbitmq.ctrl.port>
@@ -310,7 +311,7 @@
                                     </exec>
                                 </cmd>
                                 <healthCheck>
-                                    <cmd>curl -f http://localhost:8081/healthcheck || exit 1</cmd>
+                                    <cmd>curl -f http://localhost:8080/health-check?type=READY || exit 1</cmd>
                                 </healthCheck>
                                 <assembly>
                                     <mode>tar</mode>
@@ -354,6 +355,7 @@
                             </build>
                             <run>
                                 <ports>
+                                    <port>${worker.restport}:8080</port>
                                     <port>${worker.adminport}:8081</port>
                                 </ports>
                                 <env>
@@ -374,7 +376,7 @@
                                 </log>
                                 <wait>
                                     <http>
-                                        <url>http://${docker.host.address}:${worker.adminport}</url>
+                                        <url>http://${docker.host.address}:${worker.restport}/health-check?type=READY</url>
                                     </http>
                                     <time>120000</time>
                                     <shutdown>500</shutdown>
@@ -421,6 +423,7 @@
                 <rabbitmq.ctrl.port>15672</rabbitmq.ctrl.port>
                 <rabbitmq.node.port>5672</rabbitmq.node.port>
                 <webdav.apache.port>28080</webdav.apache.port>
+                <worker.restport>8080</worker.restport>
                 <worker.adminport>8081</worker.adminport>
             </properties>
         </profile>
