@@ -19,7 +19,9 @@ import com.hpe.caf.worker.document.exceptions.DocumentWorkerTransientException;
 import com.hpe.caf.worker.document.model.*;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import org.junit.*;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.nio.charset.StandardCharsets;
@@ -33,7 +35,7 @@ public class LanguageDetectionWorkerTest
 {
     private Application mockApplication;
 
-    @Before
+    @BeforeEach
     public void setup()
     {
         mockApplication = Mockito.mock(Application.class);
