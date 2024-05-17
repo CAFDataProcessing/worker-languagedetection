@@ -569,11 +569,6 @@
                 <version>2.12.7</version>
             </dependency>
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>5.10.2</version>
-            </dependency>
-            <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
                 <version>1.14.15</version>
@@ -834,6 +829,11 @@
                 <groupId>org.json</groupId>
                 <artifactId>json</artifactId>
                 <version>20240303</version>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>5.10.2</version>
             </dependency>
             <dependency>
                 <groupId>org.mockito</groupId>
