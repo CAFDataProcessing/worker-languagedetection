@@ -929,8 +929,7 @@
                         </image>
                         <image>
                             <repository>${dockerHubPublic}/library/busybox</repository>
-                            <tag>1.36.1</tag>
-                            <digest>sha256:5eef5ed34e1e1ff0a4ae850395cbf665c4de6b4b83a32a0bc7bcb998e24e7bbb</digest>
+                            <tag>latest</tag>
                         </image>
                         <image>
                             <repository>${dockerHubPublic}/library/rabbitmq</repository>
