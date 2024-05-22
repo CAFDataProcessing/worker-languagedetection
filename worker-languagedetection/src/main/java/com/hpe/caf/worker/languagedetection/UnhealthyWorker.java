@@ -33,6 +33,12 @@ public class UnhealthyWorker implements DocumentWorker
     }
 
     @Override
+    public void checkLiveness(HealthMonitor healthMonitor)
+    {
+        healthMonitor.reportUnhealthy(message);
+    }
+
+    @Override
     public void checkHealth(HealthMonitor healthMonitor)
     {
         healthMonitor.reportUnhealthy(message);
