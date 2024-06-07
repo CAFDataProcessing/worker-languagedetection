@@ -925,7 +925,6 @@
                             <repository>${dockerHubPublic}/library/rabbitmq</repository>
                             <tag>3.13.3-management</tag>
                             <latestTag>management</latestTag>
-                            <digest>sha256:f4e56b7d7bea1213e51004e4e5ae01b6217e2ca6d62713d7e3cf41de0d6a01db</digest>
                         </image>
                     </imageManagement>
                 </configuration>
