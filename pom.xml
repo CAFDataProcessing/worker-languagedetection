@@ -169,77 +169,77 @@
             <dependency>
                 <groupId>com.github.cafapi</groupId>
                 <artifactId>caf-api</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0-596</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.cipher</groupId>
                 <artifactId>cipher-null</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0-596</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.codec</groupId>
                 <artifactId>codec-json</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0-596</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.config</groupId>
                 <artifactId>config-caf</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0-596</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.config</groupId>
                 <artifactId>config-decoder</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0-596</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.config</groupId>
                 <artifactId>config-file</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0-596</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.config</groupId>
                 <artifactId>config-system</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0-596</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.decoder</groupId>
                 <artifactId>decoder-js</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0-596</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.logging</groupId>
                 <artifactId>caf-logging-common</artifactId>
-                <version>2.0.0-238</version>
+                <version>2.1.0-374</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.logging</groupId>
                 <artifactId>caf-logging-logback</artifactId>
-                <version>2.0.0-238</version>
+                <version>2.1.0-374</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.logging</groupId>
                 <artifactId>caf-logging-logback-converters</artifactId>
-                <version>2.0.0-238</version>
+                <version>2.1.0-374</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.util</groupId>
                 <artifactId>util-moduleloader</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0-596</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.util</groupId>
                 <artifactId>util-naming</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0-596</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.util</groupId>
                 <artifactId>util-process-identifier</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0-596</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.util</groupId>
                 <artifactId>util-ref</artifactId>
-                <version>3.1.0-SNAPSHOT</version>
+                <version>3.1.0-596</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafdataprocessing</groupId>
@@ -925,7 +925,6 @@
                             <repository>${dockerHubPublic}/library/rabbitmq</repository>
                             <tag>3.13.3-management</tag>
                             <latestTag>management</latestTag>
-                            <digest>sha256:43ef6b8536c47db9e047994bd6b8113cf5ab2ece9e3798a3e1284c0ade5ec743</digest>
                         </image>
                     </imageManagement>
                 </configuration>
