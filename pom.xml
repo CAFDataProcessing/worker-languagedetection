@@ -586,7 +586,7 @@
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>
-                <version>3.15.0</version>
+                <version>3.14.0</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>
@@ -681,32 +681,32 @@
             <dependency>
                 <groupId>org.glassfish.jersey.containers</groupId>
                 <artifactId>jersey-container-servlet</artifactId>
-                <version>3.0.14</version>
+                <version>3.0.15</version>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jersey.containers</groupId>
                 <artifactId>jersey-container-servlet-core</artifactId>
-                <version>3.0.14</version>
+                <version>3.0.15</version>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-client</artifactId>
-                <version>3.0.14</version>
+                <version>3.0.15</version>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-common</artifactId>
-                <version>3.0.14</version>
+                <version>3.0.15</version>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-server</artifactId>
-                <version>3.0.14</version>
+                <version>3.0.15</version>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jersey.ext</groupId>
                 <artifactId>jersey-bean-validation</artifactId>
-                <version>3.0.14</version>
+                <version>3.0.15</version>
                 <exclusions>
                     <exclusion>
                         <groupId>org.glassfish</groupId>
@@ -717,12 +717,12 @@
             <dependency>
                 <groupId>org.glassfish.jersey.ext</groupId>
                 <artifactId>jersey-metainf-services</artifactId>
-                <version>3.0.14</version>
+                <version>3.0.15</version>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jersey.inject</groupId>
                 <artifactId>jersey-hk2</artifactId>
-                <version>3.0.14</version>
+                <version>3.0.15</version>
             </dependency>
             <dependency>
                 <groupId>org.graalvm.js</groupId>
