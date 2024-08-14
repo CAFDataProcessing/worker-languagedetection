@@ -303,7 +303,7 @@
                             <alias>worker-languagedetection</alias>
                             <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
                             <build>
-                                <from>${projectDockerRegistry}/cafapi/prereleases:oraclelinux-jre21</from>
+                                <from>${homeDockerPrereleaseRegistry}/cafapi/oraclelinux-jre21:1.0.0-SNAPSHOT</from>
                                 <!-- The entry point will be the worker.sh executable. -->
                                 <cmd>
                                     <exec>
