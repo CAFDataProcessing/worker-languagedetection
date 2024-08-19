@@ -61,7 +61,6 @@
         <dockerHubOrganization>cafdataprocessing</dockerHubOrganization>
         <dockerCafDataProcessingOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafDataProcessingOrg>
         <dockerProjectVersion>${dockerVersionSeperator}${project.version}</dockerProjectVersion>
-        <projectDockerRegistry>worker-languagedetection-${project.version}.project-registries.local</projectDockerRegistry>
     </properties>
 
     <dependencyManagement>
@@ -892,7 +891,7 @@
                 <plugin>
                     <groupId>com.github.cafapi.plugins.docker.versions</groupId>
                     <artifactId>docker-versions-maven-plugin</artifactId>
-                    <version>1.0.0-29</version>
+                    <version>2.0.0-SNAPSHOT</version>
                 </plugin>
                 <plugin>
                     <groupId>io.fabric8</groupId>
@@ -907,6 +906,7 @@
                 <artifactId>docker-versions-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
+                    <projectDockerRegistry>worker-languagedetection-${project.version}.project-registries.local</projectDockerRegistry>
                     <imageManagement>
                         <image>
                             <repository>${dockerHubPublic}/cafapi/opensuse-jre21</repository>
