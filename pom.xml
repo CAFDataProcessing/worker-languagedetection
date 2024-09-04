@@ -285,52 +285,52 @@
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>standard-worker-container</artifactId>
                 <type>pom</type>
-                <version>8.1.0-1251</version>
+                <version>8.2.0-US922349-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>util-rabbitmq</artifactId>
-                <version>8.1.0-1251</version>
+                <version>8.2.0-US922349-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-api</artifactId>
-                <version>8.1.0-1251</version>
+                <version>8.2.0-US922349-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-configs</artifactId>
-                <version>8.1.0-1251</version>
+                <version>8.2.0-US922349-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-core</artifactId>
-                <version>8.1.0-1251</version>
+                <version>8.2.0-US922349-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-default-configs</artifactId>
-                <version>8.1.0-1251</version>
+                <version>8.2.0-US922349-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-queue-rabbit</artifactId>
-                <version>8.1.0-1251</version>
+                <version>8.2.0-US922349-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-store-fs</artifactId>
-                <version>8.1.0-1251</version>
+                <version>8.2.0-US922349-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-store-http</artifactId>
-                <version>8.1.0-1251</version>
+                <version>8.2.0-US922349-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-tracking-report</artifactId>
-                <version>8.1.0-1251</version>
+                <version>8.2.0-US922349-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework.testing</groupId>
@@ -924,6 +924,10 @@
                         <image>
                             <repository>${dockerHubPublic}/library/rabbitmq</repository>
                             <tag>3-management</tag>
+                        </image>
+                        <image>
+                            <repository>${dockerHubPublic}/localstack/localstack</repository>
+                            <tag>latest</tag>
                         </image>
                     </imageManagement>
                 </configuration>
