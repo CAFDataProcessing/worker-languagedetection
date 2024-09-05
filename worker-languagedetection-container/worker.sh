@@ -39,6 +39,8 @@ function set_default_crash_dump_file_path_if_not_set() {
       export CRASH_DUMP_FILE_PATH=$defaultCrashDumpFilePath
       echo "Updated CRASH_DUMP_FILE_PATH: $CRASH_DUMP_FILE_PATH"
   fi
+
+  mkdir -vp "$CRASH_DUMP_FILE_PATH"
 }
 
 set_dropwizard_config_file_location_if_mounted
