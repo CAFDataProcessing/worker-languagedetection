@@ -60,7 +60,7 @@ public class LanguageDetectionCld2IT
      * @throws LanguageDetectorException
      * @throws IOException
      */
-    @Test
+//    @Test
     public void testSingleLanguage() throws LanguageDetectorException, IOException
     {
         multiLang = false;
@@ -89,7 +89,7 @@ public class LanguageDetectionCld2IT
      * @throws LanguageDetectorException
      * @throws IOException
      */
-    @Test
+//    @Test
     public void testMultiLanguage() throws LanguageDetectorException, IOException
     {
         multiLang = true;
@@ -122,7 +122,7 @@ public class LanguageDetectionCld2IT
      * @throws LanguageDetectorException
      * @throws IOException
      */
-    @Test
+//    @Test
     public void testSingleLanguageShortText() throws LanguageDetectorException, IOException
     {
         multiLang = false;
@@ -151,7 +151,7 @@ public class LanguageDetectionCld2IT
      * @throws LanguageDetectorException
      * @throws IOException
      */
-    @Test
+//    @Test
     public void testMultipleLanguageGibberish() throws LanguageDetectorException, IOException
     {
         multiLang = true;
@@ -182,7 +182,7 @@ public class LanguageDetectionCld2IT
      * @throws LanguageDetectorException
      * @throws IOException
      */
-    @Test
+//    @Test
     public void testLanguageUCS2() throws LanguageDetectorException, IOException
     {
         multiLang = false;

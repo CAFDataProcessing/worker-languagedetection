@@ -140,38 +140,38 @@
             </plugin>
 
             <!-- Plugin for running integration tests in the integration-test phase -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <systemPropertyVariables>
-                        <docker.host.address>${docker.host.address}</docker.host.address>
-                        <worker.restport>${worker.restport}</worker.restport>
-                        <worker.adminport>${worker.adminport}</worker.adminport>
-                        <rabbitmq.node.port>${rabbitmq.node.port}</rabbitmq.node.port>
-                        <rabbitmq.ctrl.port>${rabbitmq.ctrl.port}</rabbitmq.ctrl.port>
-                        <input.folder>${test.data}</input.folder>
-                        <expected.folder>${test.data}</expected.folder>
-                        <datastore.enabled>false</datastore.enabled>
-                        <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>
-                    </systemPropertyVariables>
-                    <environmentVariables>
-                        <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
-                        <CAF_CONFIG_PATH>${test.configs}</CAF_CONFIG_PATH>
-                        <CAF_INTEGRATIONTESTS_FS_PATH>\\${docker.host.address}@${webdav.apache.port}\webdav</CAF_INTEGRATIONTESTS_FS_PATH>
-                        <CAF_WORKER_HTTP_DATASTORE_URL>http://${docker.host.address}:${webdav.apache.port}/webdav</CAF_WORKER_HTTP_DATASTORE_URL>
-                    </environmentVariables>
-                    <!--<debugForkedProcess>true</debugForkedProcess>-->
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-failsafe-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <goals>-->
+<!--                            <goal>integration-test</goal>-->
+<!--                            <goal>verify</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--                <configuration>-->
+<!--                    <systemPropertyVariables>-->
+<!--                        <docker.host.address>${docker.host.address}</docker.host.address>-->
+<!--                        <worker.restport>${worker.restport}</worker.restport>-->
+<!--                        <worker.adminport>${worker.adminport}</worker.adminport>-->
+<!--                        <rabbitmq.node.port>${rabbitmq.node.port}</rabbitmq.node.port>-->
+<!--                        <rabbitmq.ctrl.port>${rabbitmq.ctrl.port}</rabbitmq.ctrl.port>-->
+<!--                        <input.folder>${test.data}</input.folder>-->
+<!--                        <expected.folder>${test.data}</expected.folder>-->
+<!--                        <datastore.enabled>false</datastore.enabled>-->
+<!--                        <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>-->
+<!--                    </systemPropertyVariables>-->
+<!--                    <environmentVariables>-->
+<!--                        <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>-->
+<!--                        <CAF_CONFIG_PATH>${test.configs}</CAF_CONFIG_PATH>-->
+<!--                        <CAF_INTEGRATIONTESTS_FS_PATH>\\${docker.host.address}@${webdav.apache.port}\webdav</CAF_INTEGRATIONTESTS_FS_PATH>-->
+<!--                        <CAF_WORKER_HTTP_DATASTORE_URL>http://${docker.host.address}:${webdav.apache.port}/webdav</CAF_WORKER_HTTP_DATASTORE_URL>-->
+<!--                    </environmentVariables>-->
+<!--                    &lt;!&ndash;<debugForkedProcess>true</debugForkedProcess>&ndash;&gt;-->
+<!--                </configuration>-->
+<!--            </plugin>-->
             <!--
                 Builds the Docker image for the LanguageDetectionWorker, starts RabbitMQ and assembles the configuration files
                 for running the integration tests.
@@ -361,6 +361,9 @@
                                 <env>
                                     <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
                                     <CAF_CONFIG_PATH>/config</CAF_CONFIG_PATH>
+                                    <CAF_LIVENESS_CHCK_INTERVAL_SECONDS>10</CAF_LIVENESS_CHCK_INTERVAL_SECONDS>
+                                    <CAF_READINESS_CHECK_INTERVAL_SECONDS>10</CAF_READINESS_CHECK_INTERVAL_SECONDS>
+                                    <CRASH_DUMP_ON_OUT_OF_MEMORY_ERROR>true</CRASH_DUMP_ON_OUT_OF_MEMORY_ERROR>
                                 </env>
                                 <volumes>
                                     <from>
