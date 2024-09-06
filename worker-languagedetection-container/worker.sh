@@ -16,6 +16,7 @@
 #
 
 dropwizardConfig="/maven/worker.yaml"
+defaultCrashDumpFilePath="/tmp/"
 
 ####################################################
 # Sets the dropwizard config file to a path passed in by environment variable if a variable was passed in and the file exists there.
@@ -27,6 +28,21 @@ function set_dropwizard_config_file_location_if_mounted(){
     dropwizardConfig="$DROPWIZARD_CONFIG_PATH"
   fi
 }
+
+####################################################
+# Sets the CRASH_DUMP_FILE_PATH to a default value if it is not set
+####################################################
+function set_default_crash_dump_file_path_if_not_set() {
+  if [ -z "$CRASH_DUMP_FILE_PATH" ]
+  then
+    echo "CRASH_DUMP_FILE_PATH was not set - using default: $defaultCrashDumpFilePath"
+    export CRASH_DUMP_FILE_PATH=$defaultCrashDumpFilePath
+    echo "Updated CRASH_DUMP_FILE_PATH: $CRASH_DUMP_FILE_PATH"
+  fi
+
+  mkdir -vp "$CRASH_DUMP_FILE_PATH"
+}
+
 set_dropwizard_config_file_location_if_mounted
 
 # If the CAF_APPNAME and CAF_CONFIG_PATH environment variables are not set, then use the
@@ -37,6 +53,24 @@ then
   export CAF_CONFIG_PATH=/maven/config
   export CAF_CONFIG_DECODER=JavascriptDecoder
   export CAF_CONFIG_ENABLE_SUBSTITUTOR=false
+fi
+
+# If CRASH_DUMP_ON_OUT_OF_MEMORY_ERROR is true, then add JVM argument and append CAF_WORKER_JAVA_OPTS
+if [ "$CRASH_DUMP_ON_OUT_OF_MEMORY_ERROR" == "true" ]
+then
+  set_default_crash_dump_file_path_if_not_set
+
+  CAF_WORKER_JAVA_OPTS="${CAF_WORKER_JAVA_OPTS} -XX:+CrashOnOutOfMemoryError -XX:ErrorFile=${CRASH_DUMP_FILE_PATH}${HOSTNAME}_crash.log"
+  echo "CRASH_DUMP_ON_OUT_OF_MEMORY_ERROR set: Updated CAF_WORKER_JAVA_OPTS: $CAF_WORKER_JAVA_OPTS"
+fi
+
+# If HEAP_DUMP_ON_OUT_OF_MEMORY_ERROR is true, then add JVM argument and append CAF_WORKER_JAVA_OPTS
+if [ "$HEAP_DUMP_ON_OUT_OF_MEMORY_ERROR" == "true" ]
+then
+  set_default_crash_dump_file_path_if_not_set
+
+  CAF_WORKER_JAVA_OPTS="${CAF_WORKER_JAVA_OPTS} -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=${CRASH_DUMP_FILE_PATH}${HOSTNAME}_heap_dump.hprof"
+  echo "HEAP_DUMP_ON_OUT_OF_MEMORY_ERROR set: Updated CAF_WORKER_JAVA_OPTS: $CAF_WORKER_JAVA_OPTS"
 fi
 
 cd /maven
