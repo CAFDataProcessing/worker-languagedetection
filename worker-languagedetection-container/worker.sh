@@ -33,11 +33,11 @@ function set_dropwizard_config_file_location_if_mounted(){
 # Sets the CRASH_DUMP_FILE_PATH to a default value if it is not set
 ####################################################
 function set_default_crash_dump_file_path_if_not_set() {
-  if [ -z "$CRASH_DUMP_FILE_PATH" ];
-    then
-      echo "CRASH_DUMP_FILE_PATH was not set - using default: $defaultCrashDumpFilePath"
-      export CRASH_DUMP_FILE_PATH=$defaultCrashDumpFilePath
-      echo "Updated CRASH_DUMP_FILE_PATH: $CRASH_DUMP_FILE_PATH"
+  if [ -z "$CRASH_DUMP_FILE_PATH" ]
+  then
+    echo "CRASH_DUMP_FILE_PATH was not set - using default: $defaultCrashDumpFilePath"
+    export CRASH_DUMP_FILE_PATH=$defaultCrashDumpFilePath
+    echo "Updated CRASH_DUMP_FILE_PATH: $CRASH_DUMP_FILE_PATH"
   fi
 
   mkdir -vp "$CRASH_DUMP_FILE_PATH"
@@ -65,7 +65,7 @@ then
 fi
 
 # If HEAP_DUMP_ON_OUT_OF_MEMORY_ERROR is true, then add JVM argument and append CAF_WORKER_JAVA_OPTS
-if [ "$HEAP_DUMP_ON_OUT_OF_MEMORY_ERROR" == "true" ];
+if [ "$HEAP_DUMP_ON_OUT_OF_MEMORY_ERROR" == "true" ]
 then
   set_default_crash_dump_file_path_if_not_set
 
