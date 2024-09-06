@@ -168,6 +168,12 @@
                         <CAF_CONFIG_PATH>${test.configs}</CAF_CONFIG_PATH>
                         <CAF_INTEGRATIONTESTS_FS_PATH>\\${docker.host.address}@${webdav.apache.port}\webdav</CAF_INTEGRATIONTESTS_FS_PATH>
                         <CAF_WORKER_HTTP_DATASTORE_URL>http://${docker.host.address}:${webdav.apache.port}/webdav</CAF_WORKER_HTTP_DATASTORE_URL>
+
+                        <!-- sqs start-->
+                        <LOCALSTACK_IMAGE>${projectDockerRegistry}/localstack/localstack:latest</LOCALSTACK_IMAGE>
+                        <COMPATIBLE_LOCALSTACK_IMAGE>localstack/localstack</COMPATIBLE_LOCALSTACK_IMAGE>
+                        <TESTCONTAINERS_REUSE_ENABLE>true</TESTCONTAINERS_REUSE_ENABLE>
+                        <!-- sqs end-->
                     </environmentVariables>
                     <!--<debugForkedProcess>true</debugForkedProcess>-->
                 </configuration>
@@ -252,22 +258,40 @@
                         </image>
 
                         <!-- Run the RabbitMQ image. -->
+<!--                        <image>-->
+<!--                            <alias>rabbitmq</alias>-->
+<!--                            <name>${projectDockerRegistry}/library/rabbitmq</name>-->
+<!--                            <run>-->
+<!--                                <ports>-->
+<!--                                    <port>${rabbitmq.ctrl.port}:15672</port>-->
+<!--                                    <port>${rabbitmq.node.port}:5672</port>-->
+<!--                                </ports>-->
+<!--                                <wait>-->
+<!--                                    <log>Server startup complete</log>-->
+<!--                                    <http>-->
+<!--                                        <url>http://${docker.host.address}:${rabbitmq.ctrl.port}</url>-->
+<!--                                    </http>-->
+<!--                                    <time>120000</time>-->
+<!--                                    <shutdown>500</shutdown>-->
+<!--                                </wait>-->
+<!--                                <log>-->
+<!--                                    <enabled>true</enabled>-->
+<!--                                </log>-->
+<!--                            </run>-->
+<!--                        </image>-->
+
+                        <!-- Run the Localstack image. -->
                         <image>
-                            <alias>rabbitmq</alias>
-                            <name>${projectDockerRegistry}/library/rabbitmq</name>
+                            <alias>sqs</alias>
+                            <name>${projectDockerRegistry}/localstack/localstack</name>
                             <run>
                                 <ports>
-                                    <port>${rabbitmq.ctrl.port}:15672</port>
-                                    <port>${rabbitmq.node.port}:5672</port>
+                                    <port>14566:4566</port>
                                 </ports>
-                                <wait>
-                                    <log>Server startup complete</log>
-                                    <http>
-                                        <url>http://${docker.host.address}:${rabbitmq.ctrl.port}</url>
-                                    </http>
-                                    <time>120000</time>
-                                    <shutdown>500</shutdown>
-                                </wait>
+                                <env>
+                                    <!--https://docs.localstack.cloud/references/logging/-->
+                                    <LS_LOG>warn</LS_LOG>
+                                </env>
                                 <log>
                                     <enabled>true</enabled>
                                 </log>
@@ -369,7 +393,7 @@
                                     </from>
                                 </volumes>
                                 <links>
-                                    <link>rabbitmq</link>
+                                    <link>sqs</link>
                                 </links>
                                 <log>
                                     <enabled>true</enabled>

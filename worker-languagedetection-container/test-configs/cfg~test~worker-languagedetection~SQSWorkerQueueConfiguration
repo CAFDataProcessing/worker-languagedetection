@@ -1,0 +1,10 @@
+{
+    "inputQueue": "LanguageDetectionWorker-input-1",
+    "retryQueue": "LanguageDetectionWorker-input-1",
+    "pausedQueue": "LanguageDetectionWorker-paused-1",
+    "longPollInterval": 20,
+    "maxNumberOfMessages": 1,
+    "visibilityTimeout": 300,
+    "messageRetentionPeriod": 1000,
+    "maxDeliveries": 1000
+}

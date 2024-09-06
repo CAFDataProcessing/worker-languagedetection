@@ -319,6 +319,11 @@
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
+                <artifactId>worker-queue-sqs</artifactId>
+                <version>8.2.0-US922349-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-store-fs</artifactId>
                 <version>8.2.0-US922349-SNAPSHOT</version>
             </dependency>
