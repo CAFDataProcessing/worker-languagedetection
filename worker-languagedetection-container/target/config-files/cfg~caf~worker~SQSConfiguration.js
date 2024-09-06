@@ -19,5 +19,5 @@
     awsPort: getenv("CAF_AWS_PORT") || 4566,
     awsRegion: getenv("CAF_AWS_REGION") || "us-east-1",
     awsAccessKey: getenv("CAF_AWS_ACCESS_KEY") || "x",
-    secretAccessKey: getenv("CAF_AWS_SECRET_ACCESS_KEY") || "x"
+    awsSecretAccessKey: getenv("CAF_AWS_SECRET_ACCESS_KEY") || "x"
 });

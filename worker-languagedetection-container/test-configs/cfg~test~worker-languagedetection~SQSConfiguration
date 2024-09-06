@@ -4,5 +4,5 @@
     "awsPort": 14566,
     "awsRegion": "us-east-1",
     "awsAccessKey": "x",
-    "secretAccessKey": "x"
+    "awsSecretAccessKey": "x"
 }
