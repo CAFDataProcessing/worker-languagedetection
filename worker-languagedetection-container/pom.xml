@@ -168,12 +168,6 @@
                         <CAF_CONFIG_PATH>${test.configs}</CAF_CONFIG_PATH>
                         <CAF_INTEGRATIONTESTS_FS_PATH>\\${docker.host.address}@${webdav.apache.port}\webdav</CAF_INTEGRATIONTESTS_FS_PATH>
                         <CAF_WORKER_HTTP_DATASTORE_URL>http://${docker.host.address}:${webdav.apache.port}/webdav</CAF_WORKER_HTTP_DATASTORE_URL>
-
-                        <!-- sqs start-->
-                        <LOCALSTACK_IMAGE>${projectDockerRegistry}/localstack/localstack:latest</LOCALSTACK_IMAGE>
-                        <COMPATIBLE_LOCALSTACK_IMAGE>localstack/localstack</COMPATIBLE_LOCALSTACK_IMAGE>
-                        <TESTCONTAINERS_REUSE_ENABLE>true</TESTCONTAINERS_REUSE_ENABLE>
-                        <!-- sqs end-->
                     </environmentVariables>
                     <!--<debugForkedProcess>true</debugForkedProcess>-->
                 </configuration>
@@ -292,6 +286,11 @@
                                     <!--https://docs.localstack.cloud/references/logging/-->
                                     <LS_LOG>warn</LS_LOG>
                                 </env>
+                                <wait>
+                                    <log>Ready.</log>
+                                    <time>120000</time>
+                                    <shutdown>500</shutdown>
+                                </wait>
                                 <log>
                                     <enabled>true</enabled>
                                 </log>
