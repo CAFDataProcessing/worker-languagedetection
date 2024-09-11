@@ -276,7 +276,7 @@
 
                         <!-- Run the Localstack image. -->
                         <image>
-                            <alias>sqs</alias>
+                            <alias>localstack</alias>
                             <name>${projectDockerRegistry}/localstack/localstack</name>
                             <run>
                                 <ports>
@@ -392,7 +392,7 @@
                                     </from>
                                 </volumes>
                                 <links>
-                                    <link>sqs</link>
+                                    <link>localstack</link>
                                 </links>
                                 <log>
                                     <enabled>true</enabled>

@@ -1,7 +1,7 @@
 {
     "awsProtocol": "http",
-    "awsHost": "sqs.us-east-1.localhost.localstack.cloud",
-    "awsPort": 14566,
+    "awsHost": "localstack",
+    "awsPort": 4566,
     "awsRegion": "us-east-1",
     "awsAccessKey": "x",
     "awsSecretAccessKey": "x"

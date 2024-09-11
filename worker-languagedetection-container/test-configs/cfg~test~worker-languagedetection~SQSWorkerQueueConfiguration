@@ -7,5 +7,6 @@
     "maxNumberOfMessages": 1,
     "visibilityTimeout": 300,
     "messageRetentionPeriod": 1000,
-    "maxDeliveries": 1000
+    "maxDeliveries": 1000,
+    "maxInflightMessages": 120000
 }
