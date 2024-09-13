@@ -63,6 +63,7 @@
         <dockerProjectVersion>${dockerVersionSeperator}${project.version}</dockerProjectVersion>
         <projectDockerRegistry>worker-languagedetection-${project.version}.project-registries.local</projectDockerRegistry>
         <worker.framework.version>8.2.0-US922349-SNAPSHOT</worker.framework.version>
+        <worker.framework.testing.version>3.1.0-US922349-SNAPSHOT</worker.framework.testing.version>
     </properties>
 
     <dependencyManagement>
@@ -341,12 +342,12 @@
             <dependency>
                 <groupId>com.github.workerframework.testing</groupId>
                 <artifactId>workerframework-testing-integration</artifactId>
-                <version>3.0.0-205</version>
+                <version>${worker.framework.testing.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework.testing</groupId>
                 <artifactId>workerframework-testing-util</artifactId>
-                <version>3.0.0-205</version>
+                <version>${worker.framework.testing.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.findbugs</groupId>

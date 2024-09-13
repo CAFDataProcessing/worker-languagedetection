@@ -1,6 +1,6 @@
 {
     "awsProtocol": "http",
-    "awsHost": "localstack",
+    "awsHost": "sqs",
     "awsPort": 4566,
     "awsRegion": "us-east-1",
     "awsAccessKey": "x",

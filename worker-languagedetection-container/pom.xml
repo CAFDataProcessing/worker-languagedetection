@@ -37,6 +37,9 @@
         <maven.deploy.skip>true</maven.deploy.skip>
         <test.data>${project.basedir}/test-data/input</test.data>
         <test.configs>${project.basedir}/test-configs</test.configs>
+        <skip-rabbit>false</skip-rabbit>
+        <skip-sqs>true</skip-sqs>
+        <messaging.implementation>rabbitmq</messaging.implementation>
     </properties>
 
     <!-- CAF standard worker container dependency, LanguageDetectionWorker dependency. -->
@@ -145,26 +148,55 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>sqs-implementation-testing</id>
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
                         </goals>
+                        <configuration>
+                            <skip>${skip-sqs}</skip>
+                            <systemPropertyVariables>
+                                <!-- for test-framework-->
+                                <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>
+                                <sqs.ctrl.port>${sqs.ctrl.port}</sqs.ctrl.port>
+                                <sqs.hostname>sqs.us-east-1.localhost.localstack.cloud</sqs.hostname>
+                            </systemPropertyVariables>
+                            <environmentVariables>
+                                <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
+                            </environmentVariables>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>rabbit-implementation-testing</id>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skip-rabbit}</skip>
+                            <systemPropertyVariables>
+                                <!-- for test-framework-->
+                                <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>
+                                <worker.restport>${worker.restport}</worker.restport>
+                                <worker.adminport>${worker.adminport}</worker.adminport>
+                                <rabbitmq.node.port>${rabbitmq.node.port}</rabbitmq.node.port>
+                                <rabbitmq.ctrl.port>${rabbitmq.ctrl.port}</rabbitmq.ctrl.port>
+                            </systemPropertyVariables>
+                            <environmentVariables>
+                                <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
+                            </environmentVariables>
+                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
                     <systemPropertyVariables>
                         <docker.host.address>${docker.host.address}</docker.host.address>
-                        <worker.restport>${worker.restport}</worker.restport>
-                        <worker.adminport>${worker.adminport}</worker.adminport>
-                        <rabbitmq.node.port>${rabbitmq.node.port}</rabbitmq.node.port>
-                        <rabbitmq.ctrl.port>${rabbitmq.ctrl.port}</rabbitmq.ctrl.port>
                         <input.folder>${test.data}</input.folder>
                         <expected.folder>${test.data}</expected.folder>
                         <datastore.enabled>false</datastore.enabled>
-                        <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>
+                        <messaging.implementation>${messaging.implementation}</messaging.implementation>
                     </systemPropertyVariables>
                     <environmentVariables>
-                        <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
                         <CAF_CONFIG_PATH>${test.configs}</CAF_CONFIG_PATH>
                         <CAF_INTEGRATIONTESTS_FS_PATH>\\${docker.host.address}@${webdav.apache.port}\webdav</CAF_INTEGRATIONTESTS_FS_PATH>
                         <CAF_WORKER_HTTP_DATASTORE_URL>http://${docker.host.address}:${webdav.apache.port}/webdav</CAF_WORKER_HTTP_DATASTORE_URL>
@@ -252,35 +284,35 @@
                         </image>
 
                         <!-- Run the RabbitMQ image. -->
-<!--                        <image>-->
-<!--                            <alias>rabbitmq</alias>-->
-<!--                            <name>${projectDockerRegistry}/library/rabbitmq</name>-->
-<!--                            <run>-->
-<!--                                <ports>-->
-<!--                                    <port>${rabbitmq.ctrl.port}:15672</port>-->
-<!--                                    <port>${rabbitmq.node.port}:5672</port>-->
-<!--                                </ports>-->
-<!--                                <wait>-->
-<!--                                    <log>Server startup complete</log>-->
-<!--                                    <http>-->
-<!--                                        <url>http://${docker.host.address}:${rabbitmq.ctrl.port}</url>-->
-<!--                                    </http>-->
-<!--                                    <time>120000</time>-->
-<!--                                    <shutdown>500</shutdown>-->
-<!--                                </wait>-->
-<!--                                <log>-->
-<!--                                    <enabled>true</enabled>-->
-<!--                                </log>-->
-<!--                            </run>-->
-<!--                        </image>-->
+                        <image>
+                            <alias>rabbitmq</alias>
+                            <name>${projectDockerRegistry}/library/rabbitmq</name>
+                            <run>
+                                <ports>
+                                    <port>${rabbitmq.ctrl.port}:15672</port>
+                                    <port>${rabbitmq.node.port}:5672</port>
+                                </ports>
+                                <wait>
+                                    <log>Server startup complete</log>
+                                    <http>
+                                        <url>http://${docker.host.address}:${rabbitmq.ctrl.port}</url>
+                                    </http>
+                                    <time>120000</time>
+                                    <shutdown>500</shutdown>
+                                </wait>
+                                <log>
+                                    <enabled>true</enabled>
+                                </log>
+                            </run>
+                        </image>
 
                         <!-- Run the Localstack image. -->
                         <image>
-                            <alias>localstack</alias>
+                            <alias>sqs</alias>
                             <name>${projectDockerRegistry}/localstack/localstack</name>
                             <run>
                                 <ports>
-                                    <port>14566:4566</port>
+                                    <port>${sqs.ctrl.port}:4566</port>
                                 </ports>
                                 <env>
                                     <!--https://docs.localstack.cloud/references/logging/-->
@@ -378,12 +410,13 @@
                             </build>
                             <run>
                                 <ports>
-                                    <port>${worker.restport}:8080</port>
-                                    <port>${worker.adminport}:8081</port>
+                                    <port>${sqs.worker.restport}:8080</port>
+                                    <port>${sqs.worker.adminport}:8081</port>
                                 </ports>
                                 <env>
                                     <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
                                     <CAF_CONFIG_PATH>/config</CAF_CONFIG_PATH>
+                                    <CAF_MESSAGING_IMPLEMENTATION>${messaging.implementation}</CAF_MESSAGING_IMPLEMENTATION>
                                 </env>
                                 <volumes>
                                     <from>
@@ -392,21 +425,20 @@
                                     </from>
                                 </volumes>
                                 <links>
-                                    <link>localstack</link>
+                                    <link>${messaging.implementation}</link>
                                 </links>
                                 <log>
                                     <enabled>true</enabled>
                                 </log>
                                 <wait>
                                     <http>
-                                        <url>http://${docker.host.address}:${worker.restport}/health-check?type=READY</url>
+                                        <url>http://${docker.host.address}:${sqs.worker.restport}/health-check?type=READY</url>
                                     </http>
                                     <time>120000</time>
                                     <shutdown>500</shutdown>
                                 </wait>
                             </run>
                         </image>
-
                     </images>
                 </configuration>
             </plugin>
@@ -414,6 +446,14 @@
     </build>
 
     <profiles>
+        <profile>
+            <id>run-sqs</id>
+            <properties>
+                <skip-rabbit>true</skip-rabbit>
+                <skip-sqs>false</skip-sqs>
+                <messaging.implementation>sqs</messaging.implementation>
+            </properties>
+        </profile>
         <!-- profile to optionally disable build of a container, you can enable this profile, and run your tests against
         a fixed container without rebuilding each time. -->
         <profile>
@@ -448,6 +488,9 @@
                 <webdav.apache.port>28080</webdav.apache.port>
                 <worker.restport>8080</worker.restport>
                 <worker.adminport>8081</worker.adminport>
+                <sqs.worker.restport>8082</sqs.worker.restport>
+                <sqs.worker.adminport>8083</sqs.worker.adminport>
+                <sqs.ctrl.port>14566</sqs.ctrl.port>
             </properties>
         </profile>
         <profile>
