@@ -148,7 +148,6 @@
                         <id>sqs-implementation-testing</id>
                         <goals>
                             <goal>integration-test</goal>
-                            <goal>verify</goal>
                         </goals>
                         <configuration>
                             <skip>false</skip>
@@ -170,7 +169,6 @@
                         <id>rabbitmq-implementation-testing</id>
                         <goals>
                             <goal>integration-test</goal>
-                            <goal>verify</goal>
                         </goals>
                         <configuration>
                             <skip>false</skip>
@@ -186,8 +184,6 @@
                             <environmentVariables>
                                 <CAF_APPNAME>test/rabbitmq-worker-languagedetection</CAF_APPNAME>
                             </environmentVariables>
-                            <summaryFile>target/failsafe-reports/rabbitmq/failsafe-summary-rabbitmq.xml</summaryFile>
-                            <reportsDirectory>target/failsafe-reports/rabbitmq</reportsDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -198,7 +194,7 @@
                         <configuration>
                             <summaryFiles>
                                 <summaryFile>target/failsafe-reports/sqs/failsafe-summary-sqs.xml</summaryFile>
-                                <summaryFile>target/failsafe-reports/rabbitmq/failsafe-summary-rabbitmq.xml</summaryFile>
+                                <summaryFile>target/failsafe-reports/failsafe-summary.xml</summaryFile>
                             </summaryFiles>
                         </configuration>
                     </execution>
@@ -499,12 +495,6 @@
             </plugin>
         </plugins>
     </build>
-
-    <reporting>
-        <plugins>
-
-        </plugins>
-    </reporting>
 
     <profiles>
         <!-- profile to optionally disable build of a container, you can enable this profile, and run your tests against
