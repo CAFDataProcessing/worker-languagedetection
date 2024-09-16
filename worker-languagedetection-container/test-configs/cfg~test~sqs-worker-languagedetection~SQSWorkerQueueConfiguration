@@ -4,7 +4,7 @@
     "pausedQueue": "LanguageDetectionWorker-paused-1",
     "rejectedQueue": "worker-rejected",
     "longPollInterval": 20,
-    "maxNumberOfMessages": 1,
+    "maxNumberOfMessages": 10,
     "visibilityTimeout": 300,
     "messageRetentionPeriod": 1000,
     "maxDeliveries": 1000,

@@ -37,9 +37,6 @@
         <maven.deploy.skip>true</maven.deploy.skip>
         <test.data>${project.basedir}/test-data/input</test.data>
         <test.configs>${project.basedir}/test-configs</test.configs>
-        <skip-rabbit>false</skip-rabbit>
-        <skip-sqs>true</skip-sqs>
-        <messaging.implementation>rabbitmq</messaging.implementation>
     </properties>
 
     <!-- CAF standard worker container dependency, LanguageDetectionWorker dependency. -->
@@ -154,26 +151,29 @@
                             <goal>verify</goal>
                         </goals>
                         <configuration>
-                            <skip>${skip-sqs}</skip>
+                            <skip>false</skip>
                             <systemPropertyVariables>
                                 <!-- for test-framework-->
                                 <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>
                                 <sqs.ctrl.port>${sqs.ctrl.port}</sqs.ctrl.port>
                                 <sqs.hostname>sqs.us-east-1.localhost.localstack.cloud</sqs.hostname>
+                                <messaging.implementation>sqs</messaging.implementation>
                             </systemPropertyVariables>
                             <environmentVariables>
-                                <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
+                                <CAF_APPNAME>test/sqs-worker-languagedetection</CAF_APPNAME>
                             </environmentVariables>
+                            <summaryFile>target/failsafe-reports/sqs/failsafe-summary-sqs.xml</summaryFile>
+                            <reportsDirectory>target/failsafe-reports/sqs</reportsDirectory>
                         </configuration>
                     </execution>
                     <execution>
-                        <id>rabbit-implementation-testing</id>
+                        <id>rabbitmq-implementation-testing</id>
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
                         </goals>
                         <configuration>
-                            <skip>${skip-rabbit}</skip>
+                            <skip>false</skip>
                             <systemPropertyVariables>
                                 <!-- for test-framework-->
                                 <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>
@@ -181,10 +181,25 @@
                                 <worker.adminport>${worker.adminport}</worker.adminport>
                                 <rabbitmq.node.port>${rabbitmq.node.port}</rabbitmq.node.port>
                                 <rabbitmq.ctrl.port>${rabbitmq.ctrl.port}</rabbitmq.ctrl.port>
+                                <messaging.implementation>rabbitmq</messaging.implementation>
                             </systemPropertyVariables>
                             <environmentVariables>
-                                <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
+                                <CAF_APPNAME>test/rabbitmq-worker-languagedetection</CAF_APPNAME>
                             </environmentVariables>
+                            <summaryFile>target/failsafe-reports/rabbitmq/failsafe-summary-rabbitmq.xml</summaryFile>
+                            <reportsDirectory>target/failsafe-reports/rabbitmq</reportsDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>verify</id>
+                        <goals>
+                            <goal>verify</goal>
+                        </goals>
+                        <configuration>
+                            <summaryFiles>
+                                <summaryFile>target/failsafe-reports/sqs/failsafe-summary-sqs.xml</summaryFile>
+                                <summaryFile>target/failsafe-reports/rabbitmq/failsafe-summary-rabbitmq.xml</summaryFile>
+                            </summaryFiles>
                         </configuration>
                     </execution>
                 </executions>
@@ -194,7 +209,6 @@
                         <input.folder>${test.data}</input.folder>
                         <expected.folder>${test.data}</expected.folder>
                         <datastore.enabled>false</datastore.enabled>
-                        <messaging.implementation>${messaging.implementation}</messaging.implementation>
                     </systemPropertyVariables>
                     <environmentVariables>
                         <CAF_CONFIG_PATH>${test.configs}</CAF_CONFIG_PATH>
@@ -204,6 +218,7 @@
                     <!--<debugForkedProcess>true</debugForkedProcess>-->
                 </configuration>
             </plugin>
+
             <!--
                 Builds the Docker image for the LanguageDetectionWorker, starts RabbitMQ and assembles the configuration files
                 for running the integration tests.
@@ -353,9 +368,7 @@
                             </build>
                         </image>
 
-                        <!-- Configuration for the worker-languagedetection image -->
                         <image>
-                            <alias>worker-languagedetection</alias>
                             <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
                             <build>
                                 <from>${projectDockerRegistry}/cafapi/oraclelinux-jre21</from>
@@ -408,15 +421,21 @@
                                     </inline>
                                 </assembly>
                             </build>
+                        </image>
+
+                        <!-- Configuration for the rabbitmq-worker-languagedetection image -->
+                        <image>
+                            <alias>rabbitmq-worker-languagedetection</alias>
+                            <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
                             <run>
                                 <ports>
-                                    <port>${sqs.worker.restport}:8080</port>
-                                    <port>${sqs.worker.adminport}:8081</port>
+                                    <port>${worker.restport}:8080</port>
+                                    <port>${worker.adminport}:8081</port>
                                 </ports>
                                 <env>
-                                    <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
+                                    <CAF_APPNAME>test/rabbitmq-worker-languagedetection</CAF_APPNAME>
                                     <CAF_CONFIG_PATH>/config</CAF_CONFIG_PATH>
-                                    <CAF_MESSAGING_IMPLEMENTATION>${messaging.implementation}</CAF_MESSAGING_IMPLEMENTATION>
+                                    <CAF_MESSAGING_IMPLEMENTATION>rabbitmq</CAF_MESSAGING_IMPLEMENTATION>
                                 </env>
                                 <volumes>
                                     <from>
@@ -425,7 +444,43 @@
                                     </from>
                                 </volumes>
                                 <links>
-                                    <link>${messaging.implementation}</link>
+                                    <link>rabbitmq</link>
+                                </links>
+                                <log>
+                                    <enabled>true</enabled>
+                                </log>
+                                <wait>
+                                    <http>
+                                        <url>http://${docker.host.address}:${worker.restport}/health-check?type=READY</url>
+                                    </http>
+                                    <time>120000</time>
+                                    <shutdown>500</shutdown>
+                                </wait>
+                            </run>
+                        </image>
+
+                        <!-- Configuration for the sqs-worker-languagedetection image -->
+                        <image>
+                            <alias>sqs-worker-languagedetection</alias>
+                            <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
+                            <run>
+                                <ports>
+                                    <port>${sqs.worker.restport}:8080</port>
+                                    <port>${sqs.worker.adminport}:8081</port>
+                                </ports>
+                                <env>
+                                    <CAF_APPNAME>test/sqs-worker-languagedetection</CAF_APPNAME>
+                                    <CAF_CONFIG_PATH>/config</CAF_CONFIG_PATH>
+                                    <CAF_MESSAGING_IMPLEMENTATION>sqs</CAF_MESSAGING_IMPLEMENTATION>
+                                </env>
+                                <volumes>
+                                    <from>
+                                        <image>config</image>
+                                        <image>webdav</image>
+                                    </from>
+                                </volumes>
+                                <links>
+                                    <link>sqs</link>
                                 </links>
                                 <log>
                                     <enabled>true</enabled>
@@ -445,15 +500,13 @@
         </plugins>
     </build>
 
+    <reporting>
+        <plugins>
+
+        </plugins>
+    </reporting>
+
     <profiles>
-        <profile>
-            <id>run-sqs</id>
-            <properties>
-                <skip-rabbit>true</skip-rabbit>
-                <skip-sqs>false</skip-sqs>
-                <messaging.implementation>sqs</messaging.implementation>
-            </properties>
-        </profile>
         <!-- profile to optionally disable build of a container, you can enable this profile, and run your tests against
         a fixed container without rebuilding each time. -->
         <profile>
