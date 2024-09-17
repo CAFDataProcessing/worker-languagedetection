@@ -148,6 +148,7 @@
                         <id>sqs-implementation-testing</id>
                         <goals>
                             <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
                         <configuration>
                             <skip>false</skip>
@@ -169,6 +170,7 @@
                         <id>rabbitmq-implementation-testing</id>
                         <goals>
                             <goal>integration-test</goal>
+                            <goal>verify</goal>
                         </goals>
                         <configuration>
                             <skip>false</skip>
@@ -186,18 +188,18 @@
                             </environmentVariables>
                         </configuration>
                     </execution>
-                    <execution>
-                        <id>verify</id>
-                        <goals>
-                            <goal>verify</goal>
-                        </goals>
-                        <configuration>
-                            <summaryFiles>
-                                <summaryFile>target/failsafe-reports/sqs/failsafe-summary-sqs.xml</summaryFile>
-                                <summaryFile>target/failsafe-reports/failsafe-summary.xml</summaryFile>
-                            </summaryFiles>
-                        </configuration>
-                    </execution>
+<!--                    <execution>-->
+<!--                        <id>verify</id>-->
+<!--                        <goals>-->
+<!--                            <goal>verify</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <summaryFiles>-->
+<!--                                <summaryFile>target/failsafe-reports/sqs/failsafe-summary-sqs.xml</summaryFile>-->
+<!--                                <summaryFile>target/failsafe-reports/failsafe-summary.xml</summaryFile>-->
+<!--                            </summaryFiles>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
                 </executions>
                 <configuration>
                     <systemPropertyVariables>
