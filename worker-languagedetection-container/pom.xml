@@ -156,7 +156,6 @@
                                 <!-- for test-framework-->
                                 <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>
                                 <sqs.ctrl.port>${sqs.ctrl.port}</sqs.ctrl.port>
-                                <sqs.hostname>${docker.host.address}</sqs.hostname>
                                 <messaging.implementation>sqs</messaging.implementation>
                             </systemPropertyVariables>
                             <environmentVariables>
