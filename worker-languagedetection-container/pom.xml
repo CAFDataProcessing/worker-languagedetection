@@ -154,14 +154,12 @@
                             <skip>false</skip>
                             <systemPropertyVariables>
                                 <!-- for test-framework-->
-                                <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>
                                 <sqs.ctrl.port>${sqs.ctrl.port}</sqs.ctrl.port>
                                 <messaging.implementation>sqs</messaging.implementation>
                             </systemPropertyVariables>
                             <environmentVariables>
                                 <CAF_APPNAME>test/sqs-worker-languagedetection</CAF_APPNAME>
                             </environmentVariables>
-                            <reportsDirectory>target/failsafe-reports</reportsDirectory>
                             <reportNameSuffix>sqs</reportNameSuffix>
                         </configuration>
                     </execution>
@@ -175,7 +173,6 @@
                             <skip>false</skip>
                             <systemPropertyVariables>
                                 <!-- for test-framework-->
-                                <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>
                                 <worker.restport>${worker.restport}</worker.restport>
                                 <worker.adminport>${worker.adminport}</worker.adminport>
                                 <rabbitmq.node.port>${rabbitmq.node.port}</rabbitmq.node.port>
@@ -185,7 +182,6 @@
                             <environmentVariables>
                                 <CAF_APPNAME>test/rabbitmq-worker-languagedetection</CAF_APPNAME>
                             </environmentVariables>
-                            <reportsDirectory>target/failsafe-reports</reportsDirectory>
                             <reportNameSuffix>rabbitmq</reportNameSuffix>
                         </configuration>
                     </execution>
@@ -196,6 +192,7 @@
                         <input.folder>${test.data}</input.folder>
                         <expected.folder>${test.data}</expected.folder>
                         <datastore.enabled>false</datastore.enabled>
+                        <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>
                     </systemPropertyVariables>
                     <environmentVariables>
                         <CAF_CONFIG_PATH>${test.configs}</CAF_CONFIG_PATH>
