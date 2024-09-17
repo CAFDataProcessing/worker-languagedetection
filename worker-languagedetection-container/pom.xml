@@ -162,8 +162,8 @@
                             <environmentVariables>
                                 <CAF_APPNAME>test/sqs-worker-languagedetection</CAF_APPNAME>
                             </environmentVariables>
-                            <summaryFile>target/failsafe-reports/sqs/failsafe-summary-sqs.xml</summaryFile>
-                            <reportsDirectory>target/failsafe-reports/sqs</reportsDirectory>
+                            <reportsDirectory>target/failsafe-reports</reportsDirectory>
+                            <reportNameSuffix>sqs</reportNameSuffix>
                         </configuration>
                     </execution>
                     <execution>
@@ -186,6 +186,8 @@
                             <environmentVariables>
                                 <CAF_APPNAME>test/rabbitmq-worker-languagedetection</CAF_APPNAME>
                             </environmentVariables>
+                            <reportsDirectory>target/failsafe-reports</reportsDirectory>
+                            <reportNameSuffix>rabbitmq</reportNameSuffix>
                         </configuration>
                     </execution>
                 </executions>
