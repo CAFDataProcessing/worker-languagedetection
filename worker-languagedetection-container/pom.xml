@@ -330,7 +330,7 @@
                                 <env>
                                     <!--https://docs.localstack.cloud/references/logging/-->
                                     <LS_LOG>warn</LS_LOG>
-                                    <CAF_AWS_HOST>sqs.us-east-1.localhost.localstack.cloud</CAF_AWS_HOST>
+                                    <CAF_AWS_HOST>${docker.host.address}</CAF_AWS_HOST>
                                     <CAF_AWS_PORT>${sqs.ctrl.port}</CAF_AWS_PORT>
                                 </env>
                                 <wait>
