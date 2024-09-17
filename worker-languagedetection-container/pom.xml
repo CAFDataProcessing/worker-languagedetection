@@ -156,7 +156,7 @@
                                 <!-- for test-framework-->
                                 <worker.testing.usehttpdatastore>true</worker.testing.usehttpdatastore>
                                 <sqs.ctrl.port>${sqs.ctrl.port}</sqs.ctrl.port>
-                                <sqs.hostname>sqs.us-east-1.localhost.localstack.cloud</sqs.hostname>
+                                <sqs.hostname>${docker.host.address}</sqs.hostname>
                                 <messaging.implementation>sqs</messaging.implementation>
                             </systemPropertyVariables>
                             <environmentVariables>
@@ -188,18 +188,6 @@
                             </environmentVariables>
                         </configuration>
                     </execution>
-<!--                    <execution>-->
-<!--                        <id>verify</id>-->
-<!--                        <goals>-->
-<!--                            <goal>verify</goal>-->
-<!--                        </goals>-->
-<!--                        <configuration>-->
-<!--                            <summaryFiles>-->
-<!--                                <summaryFile>target/failsafe-reports/sqs/failsafe-summary-sqs.xml</summaryFile>-->
-<!--                                <summaryFile>target/failsafe-reports/failsafe-summary.xml</summaryFile>-->
-<!--                            </summaryFiles>-->
-<!--                        </configuration>-->
-<!--                    </execution>-->
                 </executions>
                 <configuration>
                     <systemPropertyVariables>
@@ -330,8 +318,6 @@
                                 <env>
                                     <!--https://docs.localstack.cloud/references/logging/-->
                                     <LS_LOG>warn</LS_LOG>
-                                    <CAF_AWS_HOST>${docker.host.address}</CAF_AWS_HOST>
-                                    <CAF_AWS_PORT>${sqs.ctrl.port}</CAF_AWS_PORT>
                                 </env>
                                 <wait>
                                     <log>Ready.</log>
