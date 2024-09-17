@@ -456,6 +456,7 @@
                                     <CAF_APPNAME>test/sqs-worker-languagedetection</CAF_APPNAME>
                                     <CAF_CONFIG_PATH>/config</CAF_CONFIG_PATH>
                                     <CAF_MESSAGING_IMPLEMENTATION>sqs</CAF_MESSAGING_IMPLEMENTATION>
+                                    <CAF_SQS_PUBLISHER_WAIT_TIMEOUT>0</CAF_SQS_PUBLISHER_WAIT_TIMEOUT>
                                 </env>
                                 <volumes>
                                     <from>

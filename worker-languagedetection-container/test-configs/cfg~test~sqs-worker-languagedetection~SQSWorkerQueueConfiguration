@@ -8,5 +8,6 @@
     "visibilityTimeout": 300,
     "messageRetentionPeriod": 1000,
     "maxDeliveries": 1000,
-    "maxInflightMessages": 120000
+    "maxInflightMessages": 120000,
+    "publisherWaitTimeout": 0
 }
