@@ -1,0 +1,3 @@
+{
+    "implementation": "${CAF_MESSAGING_IMPLEMENTATION:-this_should_get_ignored}"
+}

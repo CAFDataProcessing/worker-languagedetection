@@ -1,0 +1,8 @@
+{
+    "sqsProtocol": "http",
+    "sqsHost": "sqs",
+    "sqsPort": 4566,
+    "sqsRegion": "us-east-1",
+    "sqsAccessKey": "x",
+    "sqsSecretAccessKey": "x"
+}

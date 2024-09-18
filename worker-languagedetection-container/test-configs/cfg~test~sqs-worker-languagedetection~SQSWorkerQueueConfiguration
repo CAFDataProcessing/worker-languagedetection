@@ -1,0 +1,13 @@
+{
+    "inputQueue": "LanguageDetectionWorker-input-1",
+    "retryQueue": "LanguageDetectionWorker-input-1",
+    "pausedQueue": "LanguageDetectionWorker-paused-1",
+    "rejectedQueue": "worker-rejected",
+    "longPollInterval": 20,
+    "maxNumberOfMessages": 10,
+    "visibilityTimeout": 300,
+    "messageRetentionPeriod": 1000,
+    "maxDeliveries": 1000,
+    "maxInflightMessages": 120000,
+    "publisherWaitTimeout": 0
+}
