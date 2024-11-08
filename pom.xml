@@ -461,12 +461,6 @@
                 <groupId>io.dropwizard</groupId>
                 <artifactId>dropwizard-validation</artifactId>
                 <version>5.0.0-alpha.4</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.glassfish</groupId>
-                        <artifactId>jakarta.el</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>io.dropwizard.logback</groupId>
@@ -576,12 +570,12 @@
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy</artifactId>
-                <version>1.15.7</version>
+                <version>1.15.10</version>
             </dependency>
             <dependency>
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy-agent</artifactId>
-                <version>1.15.7</version>
+                <version>1.15.10</version>
             </dependency>
             <dependency>
                 <groupId>net.java.dev.jna</groupId>
@@ -616,7 +610,7 @@
             <dependency>
                 <groupId>org.checkerframework</groupId>
                 <artifactId>checker-qual</artifactId>
-                <version>3.48.1</version>
+                <version>3.48.2</version>
             </dependency>
             <dependency>
                 <groupId>org.codehaus.woodstox</groupId>
@@ -626,37 +620,37 @@
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-http</artifactId>
-                <version>12.0.14</version>
+                <version>12.1.0.alpha0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-io</artifactId>
-                <version>12.0.14</version>
+                <version>12.1.0.alpha0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-security</artifactId>
-                <version>12.0.14</version>
+                <version>12.1.0.alpha0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-server</artifactId>
-                <version>12.0.14</version>
+                <version>12.1.0.alpha0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-session</artifactId>
-                <version>12.0.14</version>
+                <version>12.1.0.alpha0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-util</artifactId>
-                <version>12.0.14</version>
+                <version>12.1.0.alpha0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty.ee10</groupId>
                 <artifactId>jetty-ee10-servlet</artifactId>
-                <version>12.0.14</version>
+                <version>12.1.0.alpha0</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty.toolchain.setuid</groupId>
@@ -722,12 +716,6 @@
                 <groupId>org.glassfish.jersey.ext</groupId>
                 <artifactId>jersey-bean-validation</artifactId>
                 <version>3.1.9</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.glassfish</groupId>
-                        <artifactId>jakarta.el</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.glassfish.jersey.ext</groupId>
@@ -931,8 +919,8 @@
                     <imageManagement>
                         <image>
                             <repository>${dockerHubPublic}/cafapi/oraclelinux-jre21</repository>
-                            <tag>1.1.0</tag>
-                            <digest>sha256:ed8093edcab86b8d35e3b6db21f7f136d36068cddd67a9ce728661b6266f3eb4</digest>
+                            <tag>1.1.1</tag>
+                            <digest>sha256:0b0656c185dd3ed99bc2d30e14bdca22e489ecf2860da03352be77a03e780409</digest>
                         </image>
                         <image>
                             <repository>${dockerHubPublic}/cloudesire/webdav</repository>
