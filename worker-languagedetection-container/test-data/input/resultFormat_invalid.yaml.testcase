@@ -25,4 +25,4 @@ expectedOutputData:
   result:
     failures:
     - failureId: "LNG-InvalidResultFormat"
-      failureMessage: "No enum constant com.github.cafdataprocessing.workers.languagedetection.LanguageDetectionResultFormat.JUNK"
+      failureMessage: "No enum constant com.hpe.caf.worker.languagedetection.LanguageDetectionResultFormat.JUNK"

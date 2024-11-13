@@ -13,7 +13,7 @@ Variety of documents in varying languages
 
 **Expected Result**
 
-The files are all processed and an "InvalidResultFormat" error is thrown with the message "No enum constant com.github.cafdataprocessing.workers.languagedetection.LanguageDetectionResultFormat.RESULT_FORMAT"
+The files are all processed and an "InvalidResultFormat" error is thrown with the message "No enum constant com.hpe.caf.worker.languagedetection.LanguageDetectionResultFormat.RESULT_FORMAT"
 
 **JIRA Link** - [CAF-3567](https://jira.autonomy.com/browse/CAF-3567)
 
