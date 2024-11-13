@@ -21,7 +21,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
+    <groupId>com.github.cafdataprocessing</groupId>
     <artifactId>worker-languagedetection-aggregator</artifactId>
     <version>5.3.0-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -167,44 +167,44 @@
                 <version>3.1.8</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
+                <groupId>com.github.cafapi</groupId>
                 <artifactId>caf-api</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
+                <groupId>com.github.cafapi.cipher</groupId>
                 <artifactId>cipher-null</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
+                <groupId>com.github.cafapi.codec</groupId>
                 <artifactId>codec-json</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
+                <groupId>com.github.cafapi.config</groupId>
                 <artifactId>config-caf</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
+                <groupId>com.github.cafapi.config</groupId>
                 <artifactId>config-decoder</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
+                <groupId>com.github.cafapi.config</groupId>
                 <artifactId>config-file</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
-                <artifactId>bootstrapconfig-system</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <groupId>com.github.cafapi.config</groupId>
+                <artifactId>config-system</artifactId>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
+                <groupId>com.github.cafapi.decoder</groupId>
                 <artifactId>decoder-js</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.logging</groupId>
@@ -222,67 +222,67 @@
                 <version>2.1.0-374</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
+                <groupId>com.github.cafapi.util</groupId>
                 <artifactId>util-moduleloader</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
+                <groupId>com.github.cafapi.util</groupId>
                 <artifactId>util-naming</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
+                <groupId>com.github.cafapi.util</groupId>
                 <artifactId>util-process-identifier</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
+                <groupId>com.github.cafapi.util</groupId>
                 <artifactId>util-ref</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafapi.common</groupId>
+                <groupId>com.github.cafapi.util</groupId>
                 <artifactId>util-secret</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.2.0-684</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
+                <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>language-detection</artifactId>
                 <version>5.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
+                <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>language-detection-cld2</artifactId>
                 <version>5.3.0-SNAPSHOT</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafdataprocessing.workers.document</groupId>
+                <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>worker-document</artifactId>
-                <version>7.0.0-SNAPSHOT</version>
+                <version>6.1.1-1480</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafdataprocessing.workers.document</groupId>
+                <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>worker-document-interface</artifactId>
-                <version>7.0.0-SNAPSHOT</version>
+                <version>6.1.1-1480</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafdataprocessing.workers.document</groupId>
+                <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>worker-document-shared</artifactId>
-                <version>7.0.0-SNAPSHOT</version>
+                <version>6.1.1-1480</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafdataprocessing.workers.document</groupId>
+                <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>worker-document-testing</artifactId>
-                <version>7.0.0-SNAPSHOT</version>
+                <version>6.1.1-1480</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafdataprocessing.workers.document</groupId>
+                <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>worker-document-utility</artifactId>
-                <version>7.0.0-SNAPSHOT</version>
+                <version>6.1.1-1480</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
+                <groupId>com.github.cafdataprocessing</groupId>
                 <artifactId>worker-languagedetection</artifactId>
                 <version>5.3.0-SNAPSHOT</version>
             </dependency>
@@ -290,62 +290,62 @@
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>standard-worker-container</artifactId>
                 <type>pom</type>
-                <version>9.0.0-SNAPSHOT</version>
+                <version>8.2.0-1283</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>util-rabbitmq</artifactId>
-                <version>9.0.0-SNAPSHOT</version>
+                <version>8.2.0-1283</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-api</artifactId>
-                <version>9.0.0-SNAPSHOT</version>
+                <version>8.2.0-1283</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-configs</artifactId>
-                <version>9.0.0-SNAPSHOT</version>
+                <version>8.2.0-1283</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-core</artifactId>
-                <version>9.0.0-SNAPSHOT</version>
+                <version>8.2.0-1283</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-default-configs</artifactId>
-                <version>9.0.0-SNAPSHOT</version>
+                <version>8.2.0-1283</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-queue-rabbit</artifactId>
-                <version>9.0.0-SNAPSHOT</version>
+                <version>8.2.0-1283</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-store-fs</artifactId>
-                <version>9.0.0-SNAPSHOT</version>
+                <version>8.2.0-1283</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-store-http</artifactId>
-                <version>9.0.0-SNAPSHOT</version>
+                <version>8.2.0-1283</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-tracking-report</artifactId>
-                <version>9.0.0-SNAPSHOT</version>
+                <version>8.2.0-1283</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework.testing</groupId>
                 <artifactId>workerframework-testing-integration</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.0.0-205</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework.testing</groupId>
                 <artifactId>workerframework-testing-util</artifactId>
-                <version>4.0.0-SNAPSHOT</version>
+                <version>3.0.0-205</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.findbugs</groupId>
