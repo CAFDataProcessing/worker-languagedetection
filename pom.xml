@@ -168,6 +168,11 @@
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.common</groupId>
+                <artifactId>bootstrapconfig-system</artifactId>
+                <version>4.0.1-694</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.cafapi.common</groupId>
                 <artifactId>caf-api</artifactId>
                 <version>4.0.1-694</version>
             </dependency>
@@ -183,11 +188,6 @@
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.common</groupId>
-                <artifactId>config-caf</artifactId>
-                <version>4.0.1-694</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cafapi.common</groupId>
                 <artifactId>config-decoder</artifactId>
                 <version>4.0.1-694</version>
             </dependency>
@@ -198,28 +198,13 @@
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.common</groupId>
-                <artifactId>bootstrapconfig-system</artifactId>
+                <artifactId>config-source</artifactId>
                 <version>4.0.1-694</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.common</groupId>
                 <artifactId>decoder-js</artifactId>
                 <version>4.0.1-694</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cafapi.logging</groupId>
-                <artifactId>caf-logging-common</artifactId>
-                <version>2.1.0-374</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cafapi.logging</groupId>
-                <artifactId>caf-logging-logback</artifactId>
-                <version>2.1.0-374</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.cafapi.logging</groupId>
-                <artifactId>caf-logging-logback-converters</artifactId>
-                <version>2.1.0-374</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafapi.common</groupId>
@@ -247,14 +232,19 @@
                 <version>4.0.1-694</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
-                <artifactId>language-detection</artifactId>
-                <version>6.0.0-SNAPSHOT</version>
+                <groupId>com.github.cafapi.logging</groupId>
+                <artifactId>caf-logging-common</artifactId>
+                <version>3.0.0-407</version>
             </dependency>
             <dependency>
-                <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
-                <artifactId>language-detection-cld2</artifactId>
-                <version>6.0.0-SNAPSHOT</version>
+                <groupId>com.github.cafapi.logging</groupId>
+                <artifactId>caf-logging-logback</artifactId>
+                <version>3.0.0-407</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.cafapi.logging</groupId>
+                <artifactId>caf-logging-logback-converters</artifactId>
+                <version>3.0.0-407</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafdataprocessing.workers.document</groupId>
@@ -280,6 +270,16 @@
                 <groupId>com.github.cafdataprocessing.workers.document</groupId>
                 <artifactId>worker-document-utility</artifactId>
                 <version>7.0.0-1496</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
+                <artifactId>language-detection</artifactId>
+                <version>6.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
+                <artifactId>language-detection-cld2</artifactId>
+                <version>6.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
@@ -355,7 +355,7 @@
             <dependency>
                 <groupId>com.google.errorprone</groupId>
                 <artifactId>error_prone_annotations</artifactId>
-                <version>2.35.1</version>
+                <version>2.36.0</version>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -385,7 +385,7 @@
             <dependency>
                 <groupId>com.rabbitmq</groupId>
                 <artifactId>amqp-client</artifactId>
-                <version>5.22.0</version>
+                <version>5.23.0</version>
             </dependency>
             <dependency>
                 <groupId>commons-codec</groupId>
@@ -395,7 +395,7 @@
             <dependency>
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.17.0</version>
+                <version>2.18.0</version>
             </dependency>
             <dependency>
                 <groupId>io.dropwizard</groupId>
