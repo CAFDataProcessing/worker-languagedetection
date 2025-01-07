@@ -74,12 +74,12 @@
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
-                <version>1.5.16</version>
+                <version>1.5.12</version>
             </dependency>
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
-                <version>1.5.16</version>
+                <version>1.5.12</version>
             </dependency>
             <dependency>
                 <groupId>com.beust</groupId>
@@ -390,7 +390,7 @@
             <dependency>
                 <groupId>commons-codec</groupId>
                 <artifactId>commons-codec</artifactId>
-                <version>1.17.1</version>
+                <version>1.17.2</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -919,8 +919,8 @@
                     <imageManagement>
                         <image>
                             <repository>${dockerHubPublic}/cafapi/oraclelinux-jre21</repository>
-                            <tag>1.1.4</tag>
-                            <digest>sha256:bc2af5c297ff3c6b5633e02cb644fc68a4c82f9cbdaed3151924e6b0cb5bca8d</digest>
+                            <tag>1.1.5</tag>
+                            <digest>sha256:e7a6c3a2b9254bb9d5f87d1ba8231e2f65ccf95186ebd75106a87c5b235c114b</digest>
                         </image>
                         <image>
                             <repository>${dockerHubPublic}/cloudesire/webdav</repository>
