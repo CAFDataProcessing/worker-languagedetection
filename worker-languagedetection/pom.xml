@@ -22,6 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>worker-languagedetection</artifactId>
+    <name>worker-languagedetection</name>
 
     <parent>
         <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>

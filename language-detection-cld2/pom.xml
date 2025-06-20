@@ -22,6 +22,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>language-detection-cld2</artifactId>
+    <name>language-detection-cld2</name>
 
     <parent>
         <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
