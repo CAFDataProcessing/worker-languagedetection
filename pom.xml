@@ -350,7 +350,7 @@
             <dependency>
                 <groupId>com.google.errorprone</groupId>
                 <artifactId>error_prone_annotations</artifactId>
-                <version>2.38.0</version>
+                <version>2.39.0</version>
             </dependency>
             <dependency>
                 <groupId>com.google.guava</groupId>
@@ -610,37 +610,37 @@
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-http</artifactId>
-                <version>12.0.22</version>
+                <version>12.0.23</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-io</artifactId>
-                <version>12.0.22</version>
+                <version>12.0.23</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-security</artifactId>
-                <version>12.0.22</version>
+                <version>12.0.23</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-server</artifactId>
-                <version>12.0.22</version>
+                <version>12.0.23</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-session</artifactId>
-                <version>12.0.22</version>
+                <version>12.0.23</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-util</artifactId>
-                <version>12.0.22</version>
+                <version>12.0.23</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty.ee10</groupId>
                 <artifactId>jetty-ee10-servlet</artifactId>
-                <version>12.0.22</version>
+                <version>12.0.23</version>
             </dependency>
             <dependency>
                 <groupId>org.eclipse.jetty.toolchain.setuid</groupId>
@@ -924,8 +924,8 @@
                     <imageManagement>
                         <image>
                             <repository>${dockerHubPublic}/cafapi/oraclelinux-jre21</repository>
-                            <tag>1.2.2</tag>
-                            <digest>sha256:abe12b402838323485bfbd23810d93b81e19aa0d84cfdd15f8ed773d8992064e</digest>
+                            <tag>1.3.0</tag>
+                            <digest>sha256:4534965678cf9e7ddb1688e69f6a831970d8bb56ab13c039f43ebe63cf4333f2</digest>
                         </image>
                         <image>
                             <repository>${dockerHubPublic}/cloudesire/webdav</repository>
