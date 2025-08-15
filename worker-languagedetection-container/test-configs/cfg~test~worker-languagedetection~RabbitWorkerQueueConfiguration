@@ -3,7 +3,6 @@
     "inputQueue": "LanguageDetectionWorker-input-1",
     "retryQueue": "LanguageDetectionWorker-input-1",
     "rejectedQueue": "LanguageDetectionWorker-rejected-1",
-    "missingOffloadedPayloadQueue":"LanguageDetectionWorker-missing-offload",
     "retryLimit": 2,
     "maxPriority": 32,
     "queueType": "quorum"
