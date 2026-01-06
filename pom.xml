@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright 2015-2025 Open Text.
+    Copyright 2015-2026 Open Text.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@
     </developers>
 
     <properties>
-        <copyrightYear>2025</copyrightYear>
+        <copyrightYear>2026</copyrightYear>
         <dockerHubOrganization>cafdataprocessing</dockerHubOrganization>
         <dockerCafDataProcessingOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafDataProcessingOrg>
         <dockerProjectVersion>${dockerVersionSeperator}${project.version}</dockerProjectVersion>
@@ -290,52 +290,52 @@
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>standard-worker-container</artifactId>
                 <type>pom</type>
-                <version>10.0.2-SNAPSHOT</version>
+                <version>10.0.2-1395</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>util-rabbitmq</artifactId>
-                <version>10.0.2-SNAPSHOT</version>
+                <version>10.0.2-1395</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-api</artifactId>
-                <version>10.0.2-SNAPSHOT</version>
+                <version>10.0.2-1395</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-configs</artifactId>
-                <version>10.0.2-SNAPSHOT</version>
+                <version>10.0.2-1395</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-core</artifactId>
-                <version>10.0.2-SNAPSHOT</version>
+                <version>10.0.2-1395</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-default-configs</artifactId>
-                <version>10.0.2-SNAPSHOT</version>
+                <version>10.0.2-1395</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-queue-rabbit</artifactId>
-                <version>10.0.2-SNAPSHOT</version>
+                <version>10.0.2-1395</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-store-fs</artifactId>
-                <version>10.0.2-SNAPSHOT</version>
+                <version>10.0.2-1395</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-store-http</artifactId>
-                <version>10.0.2-SNAPSHOT</version>
+                <version>10.0.2-1395</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework</groupId>
                 <artifactId>worker-tracking-report</artifactId>
-                <version>10.0.2-SNAPSHOT</version>
+                <version>10.0.2-1395</version>
             </dependency>
             <dependency>
                 <groupId>com.github.workerframework.testing</groupId>
