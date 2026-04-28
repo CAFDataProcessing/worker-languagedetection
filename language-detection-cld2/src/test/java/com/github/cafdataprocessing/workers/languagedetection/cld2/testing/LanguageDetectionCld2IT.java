@@ -222,8 +222,8 @@ public class LanguageDetectionCld2IT
         assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
         assertTrue(result.isReliable());
         final DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
-        assertEquals("tr", arr[0].getLanguageCode());
-        assertEquals("TURKISH", arr[0].getLanguageName());
+        assertEquals("az", arr[0].getLanguageCode());
+        assertEquals("AZERBAIJANI", arr[0].getLanguageName());
     }
 
     @Test
@@ -240,8 +240,8 @@ public class LanguageDetectionCld2IT
         assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
         assertTrue(result.isReliable());
         final DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
-        assertEquals("tr", arr[0].getLanguageCode());
-        assertEquals("TURKISH", arr[0].getLanguageName());
+        assertEquals("az", arr[0].getLanguageCode());
+        assertEquals("AZERBAIJANI", arr[0].getLanguageName());
     }
 
     @Test
