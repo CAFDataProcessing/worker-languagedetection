@@ -374,6 +374,7 @@
                                 <env>
                                     <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
                                     <CAF_CONFIG_PATH>/config</CAF_CONFIG_PATH>
+                                    <WORKER_LANGUAGEDETECTION_LOG_LEVEL>DEBUG</WORKER_LANGUAGEDETECTION_LOG_LEVEL>
                                 </env>
                                 <volumes>
                                     <from>
