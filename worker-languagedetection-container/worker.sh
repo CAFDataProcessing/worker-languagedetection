@@ -75,7 +75,7 @@ fi
 
 cd /maven
 exec java $CAF_WORKER_JAVA_OPTS \
-    -Dcld2.location=/maven/cld2native \
+    #-Dcld2.location=/maven/cld2native \
     -Dpolyglot.engine.WarnInterpreterOnly=false \
     -cp "*" \
     com.github.workerframework.core.WorkerApplication \

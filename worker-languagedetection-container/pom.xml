@@ -54,9 +54,13 @@
             <groupId>com.github.cafdataprocessing.workers.document</groupId>
             <artifactId>worker-document</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
             <artifactId>language-detection-cld2</artifactId>
+        </dependency>-->
+        <dependency>
+            <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
+            <artifactId>language-detection-tika</artifactId>
         </dependency>
         <dependency>
             <!--
@@ -334,13 +338,13 @@
                                                 </includes>
                                                 <fileMode>0755</fileMode>
                                             </fileSet>
-                                            <fileSet>
+                                            <!--<fileSet>
                                                 <directory>cld2native/linux</directory>
                                                 <outputDirectory>cld2native/linux</outputDirectory>
                                                 <includes>
                                                     <include>*.so</include>
                                                 </includes>
-                                            </fileSet>
+                                            </fileSet>-->
                                             <fileSet>
                                                 <lineEnding>unix</lineEnding>
                                                 <includes>
