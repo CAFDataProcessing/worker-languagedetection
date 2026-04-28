@@ -101,8 +101,8 @@ public final class TikaLanguageDetector implements LanguageDetector
             languageDetectorResult.setLanguageDetectorStatus(LanguageDetectorStatus.FAILED);
             languages.add(createUnknownLanguage());
             languageDetectorResult.setLanguages(languages);
-            LOGGER.info("Language detection completed in {} ms. Result: {} for text: {}",
-                (System.nanoTime() - startTime) / 1_000_000, languageDetectorResult, textBytes);
+            LOGGER.info("Language detection completed in {} ms. Result: {}",
+                (System.nanoTime() - startTime) / 1_000_000, languageDetectorResult);
             return languageDetectorResult;
         }
 
