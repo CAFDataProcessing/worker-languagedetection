@@ -30,6 +30,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.TestInfo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -39,6 +42,8 @@ import java.nio.charset.StandardCharsets;
  */
 public class LanguageDetectionCld2IT
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(LanguageDetectionCld2IT.class);
+
     private String filename;
     private LanguageDetectorProvider provider;
     private LanguageDetector detector;
@@ -56,8 +61,9 @@ public class LanguageDetectionCld2IT
      * @throws LanguageDetectorException
      */
     @BeforeEach
-    public void setup() throws LanguageDetectorException
+    public void setup(final TestInfo testInfo) throws LanguageDetectorException
     {
+        LOGGER.info("Starting test: {}", testInfo.getDisplayName());
         provider = new Cld2DetectorProvider();
         detector = provider.getLanguageDetector();
     }

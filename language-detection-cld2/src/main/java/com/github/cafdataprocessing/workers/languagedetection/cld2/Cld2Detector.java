@@ -83,7 +83,8 @@ public class Cld2Detector implements LanguageDetector
         } catch (LanguageDetectorException e) {
             languageDetectorResult.setLanguageDetectorStatus(LanguageDetectorStatus.FAILED);
         }
-        LOGGER.info("Language detection completed in {} ms", (System.nanoTime() - startTime) / 1_000_000);
+        LOGGER.info("Language detection completed in {} ms. Result: {} for text: {}",
+            (System.nanoTime() - startTime) / 1_000_000, languageDetectorResult, textBytes);
         return languageDetectorResult;
     }
 
