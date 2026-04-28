@@ -69,4 +69,17 @@ public class DetectedLanguage
     {
         this.confidencePercentage = confidencePercentage;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("DetectedLanguage [languageName=");
+        builder.append(languageName);
+        builder.append(", languageCode=");
+        builder.append(languageCode);
+        builder.append(", confidencePercentage=");
+        builder.append(confidencePercentage);
+        builder.append("]");
+        return builder.toString();
+    }
 }
