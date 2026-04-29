@@ -48,6 +48,7 @@ public class Cld2Detector implements LanguageDetector
     @Override
     public LanguageDetectorResult detectLanguage(byte[] textBytes, LanguageDetectorSettings settings)
     {
+        final long startTime = System.nanoTime();
         Objects.requireNonNull(textBytes);
         Objects.requireNonNull(settings);
 
@@ -79,6 +80,7 @@ public class Cld2Detector implements LanguageDetector
         } catch (LanguageDetectorException e) {
             languageDetectorResult.setLanguageDetectorStatus(LanguageDetectorStatus.FAILED);
         }
+        System.out.println("Language detection completed in " + (System.nanoTime() - startTime) + " ns, " + (System.nanoTime() - startTime) + " ms.");
         return languageDetectorResult;
     }
 
