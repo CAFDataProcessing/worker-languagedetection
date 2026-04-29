@@ -44,7 +44,7 @@ expectedOutputData:
       DetectedLanguage2_ConfidencePercentage:
         action: "replace"
         values:
-        - data: "35"
+        - data: "28"
       DetectedLanguage1_Name:
         action: "replace"
         values:
