@@ -51,15 +51,16 @@ public final class TikaLanguageDetector implements LanguageDetector
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TikaLanguageDetector.class);
     private final GibberishDetector gibberishDetector;
+    private final org.apache.tika.language.detect.LanguageDetector languageDetector;
 
-    public TikaLanguageDetector()
+    public TikaLanguageDetector() throws LanguageDetectorException
     {
-        gibberishDetector = GibberishDetectorFactory.createGibberishDetectorFromLocalFile(
-            "bigEnglish.txt",
-            "goodEnglish.txt",
-            "badEnglish.txt",
-            "abcdefghijklmnopqrstuvwxyz "
-        );
+        gibberishDetector = GibberishDetectorFactory.createGibberishDetector();
+        try {
+            languageDetector = org.apache.tika.language.detect.LanguageDetector.getDefaultLanguageDetector().loadModels();
+        } catch (final IOException e) {
+            throw new LanguageDetectorException("Unable to create TikaLanguageDetector", e);
+        }
     }
 
     /**
@@ -85,6 +86,7 @@ public final class TikaLanguageDetector implements LanguageDetector
         final ArrayList<DetectedLanguage> languages = new ArrayList<DetectedLanguage>();
 
         /*
+        // Using custom Gibberish Detector
         final TikaGibberishDetector.GibberishResult gibberish = TikaGibberishDetector.diagnose(text);
         if (gibberish.isGibberish) {
             LOGGER.info("Text appears to be gibberish: {}", gibberish);
@@ -95,6 +97,8 @@ public final class TikaLanguageDetector implements LanguageDetector
             return languageDetectorResult;
         }
         */
+
+        // Using paypal Gibberish Detector
         if (gibberishDetector.isGibberish(text)) {
             LOGGER.info("Text appears to be gibberish: {}", text);
             languageDetectorResult.setReliable(false);
@@ -107,9 +111,6 @@ public final class TikaLanguageDetector implements LanguageDetector
         }
 
         try {
-            final org.apache.tika.language.detect.LanguageDetector detector = org.apache.tika.language.detect.LanguageDetector
-                .getDefaultLanguageDetector().loadModels();
-
             final int numLangs = (settings.isDetectMultipleLanguages()) ? 3 : 1;
 
             final Collection<String> hints = settings.getHints().stream().filter(e -> !e.trim().isEmpty()).toList();
@@ -120,11 +121,11 @@ public final class TikaLanguageDetector implements LanguageDetector
                 hints.stream().limit(numLangs).forEach(e -> priors.put(e, probability - 0.1f));
                 if (!priors.isEmpty()) {
                     LOGGER.info("Prioritize these langauges: {}", priors);
-                    detector.setPriors(priors);
+                    languageDetector.setPriors(priors);
                 }
             }
 
-            final List<LanguageResult> results = detector.detectAll(text);
+            final List<LanguageResult> results = languageDetector.detectAll(text);
 
             results.stream()
                 .limit(numLangs)

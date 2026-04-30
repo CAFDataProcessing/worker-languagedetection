@@ -26,6 +26,11 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
@@ -745,5 +750,57 @@ public class TikaLanguageDetectorTest
     private static DetectedLanguage firstLanguage(final LanguageDetectorResult result)
     {
         return result.getLanguages().iterator().next();
+    }
+
+    @Test
+    public void testMultiThreadedDetection() throws Exception
+    {
+        final int threadCount = 10;
+        final int iterationsPerThread = 5;
+
+        final String englishText = "The quick brown fox jumps over the lazy dog. This is a sample English text for detection.";
+        final String frenchText = "Le renard brun rapide saute par-dessus le chien paresseux. Ceci est un texte en français.";
+        final String germanText = "Der schnelle braune Fuchs springt über den faulen Hund. Dies ist ein deutscher Text.";
+
+        final String[] texts = {englishText, frenchText, germanText};
+        final String[] expectedCodes = {"en", "fr", "de"};
+
+        final ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+        final List<Future<String>> futures = new ArrayList<>();
+
+        for (int t = 0; t < threadCount; t++) {
+            final int langIndex = t % texts.length;
+            futures.add(executor.submit(() -> {
+                final StringBuilder errors = new StringBuilder();
+                for (int i = 0; i < iterationsPerThread; i++) {
+                    final byte[] bytes = texts[langIndex].getBytes(StandardCharsets.UTF_8);
+                    final LanguageDetectorResult result = detector.detectLanguage(bytes, new LanguageDetectorSettings(false));
+                    if (result.getLanguageDetectorStatus() != LanguageDetectorStatus.COMPLETED) {
+                        errors.append(String.format("Thread %s iteration %d: expected COMPLETED but got %s%n",
+                            Thread.currentThread().getName(), i, result.getLanguageDetectorStatus()));
+                    } else {
+                        final String code = firstLanguage(result).getLanguageCode();
+                        if (!expectedCodes[langIndex].equals(code)) {
+                            errors.append(String.format("Thread %s iteration %d: expected '%s' but got '%s'%n",
+                                Thread.currentThread().getName(), i, expectedCodes[langIndex], code));
+                        }
+                    }
+                }
+                return errors.toString();
+            }));
+        }
+
+        executor.shutdown();
+
+        final StringBuilder allErrors = new StringBuilder();
+        for (final Future<String> future : futures) {
+            final String error = future.get();
+            if (!error.isEmpty()) {
+                allErrors.append(error);
+            }
+        }
+
+        assertTrue(allErrors.isEmpty(),
+            "Multi-threaded language detection produced errors:\n" + allErrors);
     }
 }

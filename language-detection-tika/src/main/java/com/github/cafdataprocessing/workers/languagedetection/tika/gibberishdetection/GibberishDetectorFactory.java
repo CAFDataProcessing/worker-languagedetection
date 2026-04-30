@@ -169,4 +169,12 @@ public final class GibberishDetectorFactory
         }
         return lines;
     }
+
+    public static GibberishDetector createGibberishDetector() {
+        return createGibberishDetectorFromLocalFile(
+            "bigEnglish.txt",
+            "goodEnglish.txt",
+            "badEnglish.txt",
+            "abcdefghijklmnopqrstuvwxyz ");
+    }
 }

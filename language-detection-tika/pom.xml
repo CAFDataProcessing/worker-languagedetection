@@ -47,11 +47,6 @@
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-parser-text-module</artifactId>
         </dependency>
-        <!--<dependency>
-            <groupId>org.apache.tika</groupId>
-            <artifactId>tika-langdetect-opennlp</artifactId>
-            <scope>runtime</scope>
-        </dependency>-->
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-langdetect-optimaize</artifactId>

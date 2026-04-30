@@ -16,6 +16,7 @@
 package com.github.cafdataprocessing.workers.languagedetection.tika;
 
 import com.github.cafdataprocessing.workers.languagedetection.LanguageDetector;
+import com.github.cafdataprocessing.workers.languagedetection.LanguageDetectorException;
 import com.github.cafdataprocessing.workers.languagedetection.LanguageDetectorProvider;
 
 /**
@@ -24,11 +25,12 @@ import com.github.cafdataprocessing.workers.languagedetection.LanguageDetectorPr
 public final class TikaDetectorProvider implements LanguageDetectorProvider
 {
     /**
-     * returns a new TikaLanguageDetector object
+     * Returns a new TikaLanguageDetector object
      *
-     * @return LanguageDetector
+     * @return LanguageDetector The tika language detector
+     * @throws LanguageDetectorException if the language detector cannot be created
      */
-    public LanguageDetector getLanguageDetector()
+    public LanguageDetector getLanguageDetector() throws LanguageDetectorException
     {
         return new TikaLanguageDetector();
     }
