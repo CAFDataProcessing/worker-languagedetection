@@ -23,6 +23,8 @@ import com.github.cafdataprocessing.workers.languagedetection.LanguageDetectorSe
 import com.github.cafdataprocessing.workers.languagedetection.LanguageDetectorStatus;
 import org.apache.commons.io.IOUtils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ import java.util.Objects;
  */
 public class Cld2Detector implements LanguageDetector
 {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Cld2Detector.class);
     public Cld2Detector()
     {
     }
@@ -48,6 +51,7 @@ public class Cld2Detector implements LanguageDetector
     @Override
     public LanguageDetectorResult detectLanguage(byte[] textBytes, LanguageDetectorSettings settings)
     {
+        final long startTime = System.nanoTime();
         Objects.requireNonNull(textBytes);
         Objects.requireNonNull(settings);
 
@@ -79,6 +83,8 @@ public class Cld2Detector implements LanguageDetector
         } catch (LanguageDetectorException e) {
             languageDetectorResult.setLanguageDetectorStatus(LanguageDetectorStatus.FAILED);
         }
+        LOGGER.info("Language detection completed in {} ns, {} ms. Result: {}",
+            (System.nanoTime() - startTime), (System.nanoTime() - startTime) / 1_000_000, languageDetectorResult);
         return languageDetectorResult;
     }
 
