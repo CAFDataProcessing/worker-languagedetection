@@ -117,7 +117,7 @@
                                 <artifactItem>
                                     <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
                                     <artifactId>cld2</artifactId>
-                                    <version>6.1.5-SNAPSHOT</version>
+                                    <version>${project.version}</version>
                                     <type>so</type>
                                     <classifier>native</classifier> <!-- Match the producer's classifier -->
                                     <overWrite>true</overWrite>
