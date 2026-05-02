@@ -74,18 +74,8 @@ public class Cld2Wrapper
         cld2Result.setEncoding_hint(Cld2Encoding.getValueFromString(settings.getEncodingHint()));
 
         try {
-            int result = cld2Library.DetectLanguageSummaryWithHints(
-                    inputBytes,
-                    inputBytes.length,
-                    true,
-                    cld2Result.getTld_hint(),
-                    cld2Result.getEncoding_hint(),
-                    cld2Result.getLanguage_hint(),
-                    cld2Result.getLanguage3(),
-                    cld2Result.getPercent3(),
-                    cld2Result.getTextBytes(),
-                    cld2Result.isReliable()
-                );
+            int result = cld2Library.DetectLanguageSummaryWithHints(inputBytes, inputBytes.length, true, cld2Result.getTld_hint(),
+                cld2Result.getEncoding_hint(), cld2Result.getLanguage_hint(), cld2Result.getLanguage3(), cld2Result.getPercent3(), cld2Result.getTextBytes(), cld2Result.isReliable());
 
             if (result == Cld2Language.UNKNOWN_LANGUAGE && !cld2Result.isReliable()[0]) {
                 cld2Result.setValid(false);
