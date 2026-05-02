@@ -107,9 +107,28 @@
                             </artifactItems>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>copy-cld2-library</id>
+                        <goals>
+                          <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
+                                    <artifactId>cld2</artifactId>
+                                    <version>6.1.5-SNAPSHOT</version>
+                                    <type>so</type>
+                                    <classifier>native</classifier> <!-- Match the producer's classifier -->
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/cld2native/linux</outputDirectory>
+                                    <destFileName>libcld2.so</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
-
             <!-- Process the local configuration files -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -335,7 +354,7 @@
                                                 <fileMode>0755</fileMode>
                                             </fileSet>
                                             <fileSet>
-                                                <directory>cld2native/linux</directory>
+                                                <directory>${project.build.directory}/cld2native/linux</directory>
                                                 <outputDirectory>cld2native/linux</outputDirectory>
                                                 <includes>
                                                     <include>*.so</include>
