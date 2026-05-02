@@ -42,7 +42,7 @@ public class Cld2Wrapper
     {
         System.setProperty("jna.library.path", System.getProperty("cld2.location", System.getenv("cld2.location")));
 
-        LOG.info("Library location: {}", System.getProperty("jna.library.path"));
+        LOG.debug("Library location: {}", System.getProperty("jna.library.path"));
 
         cld2Library = Native.load(
             ("linux/libcld2.so"),
@@ -52,8 +52,7 @@ public class Cld2Wrapper
             }}
         );
 
-        LOG.info("Loaded: {}", cld2Library);
-//        cld2Library = Native.load("libcld2", Cld2Library.class);
+        LOG.debug("Loaded: {}", cld2Library);
     }
 
     /**
@@ -94,7 +93,7 @@ public class Cld2Wrapper
 
             cld2Result.setLanguageCodes(getLanguageCodes(cld2Result.getLanguage3()));
             cld2Result.setLanguageNames(getLanguageNames(cld2Result.getLanguage3()));
-            LOG.info("Detected language; {}", cld2Result);
+            LOG.debug("Detected language: {}", cld2Result);
             return cld2Result;
         } catch (Throwable e) {
             LOG.error("Error detecting language", e);

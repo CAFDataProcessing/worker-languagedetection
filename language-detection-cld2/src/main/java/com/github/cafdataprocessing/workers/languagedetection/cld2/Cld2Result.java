@@ -16,6 +16,7 @@
 package com.github.cafdataprocessing.workers.languagedetection.cld2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Main result class of the Cld2 implementation of the language detector.
@@ -279,5 +280,36 @@ public class Cld2Result
     public void setValid(boolean valid)
     {
         this.valid = valid;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("Cld2Result [isPlainText=");
+        builder.append(isPlainText);
+        builder.append(", flags=");
+        builder.append(flags);
+        builder.append(", language3=");
+        builder.append(Arrays.toString(language3));
+        builder.append(", percent3=");
+        builder.append(Arrays.toString(percent3));
+        builder.append(", textBytes=");
+        builder.append(Arrays.toString(textBytes));
+        builder.append(", isReliable=");
+        builder.append(Arrays.toString(isReliable));
+        builder.append(", tld_hint=");
+        builder.append(tld_hint);
+        builder.append(", encoding_hint=");
+        builder.append(encoding_hint);
+        builder.append(", language_hint=");
+        builder.append(language_hint);
+        builder.append(", languageCodes=");
+        builder.append(Arrays.toString(languageCodes));
+        builder.append(", languageNames=");
+        builder.append(Arrays.toString(languageNames));
+        builder.append(", valid=");
+        builder.append(valid);
+        builder.append("]");
+        return builder.toString();
     }
 }
