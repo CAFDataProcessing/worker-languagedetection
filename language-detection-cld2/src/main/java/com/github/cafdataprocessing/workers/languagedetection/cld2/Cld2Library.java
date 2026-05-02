@@ -16,12 +16,20 @@
 package com.github.cafdataprocessing.workers.languagedetection.cld2;
 
 import com.sun.jna.Library;
+import com.sun.jna.FunctionMapper;
 
 /**
  * JNA Interface to access the C++ CLD2 methods
  */
 public interface Cld2Library extends Library
 {
+    final static FunctionMapper NAME_MAPPER = (library, method) -> {
+        if (method.getName().equals("DetectLanguageSummaryWithHints")) {
+            return "_ZN4CLD224ExtDetectLanguageSummaryEPKcibS1_iNS_8LanguageEPS2_PiS4_Pb";
+        }
+        return method.getName();
+    };
+
     /**
      * this is the method used in CLD2 to detect the language, passing in the hints and references (as java arrays) of the text buffer,
      * language3, percent3, text_bytes and is_reliable fields

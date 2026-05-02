@@ -17,8 +17,9 @@ package com.github.cafdataprocessing.workers.languagedetection.cld2;
 
 import com.github.cafdataprocessing.workers.languagedetection.LanguageDetectorException;
 import com.github.cafdataprocessing.workers.languagedetection.LanguageDetectorSettings;
+import com.sun.jna.Library;
 import com.sun.jna.Native;
-import com.sun.jna.Platform;
+import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,9 +42,17 @@ public class Cld2Wrapper
     {
         System.setProperty("jna.library.path", System.getProperty("cld2.location", System.getenv("cld2.location")));
 
-        LOG.debug("Library location: " + System.getProperty("jna.library.path"));
+        LOG.info("Library location: {}", System.getProperty("jna.library.path"));
 
-        cld2Library = Native.load((Platform.isWindows() ? "win64/libcld2.dll" : "linux/libcld2.so"), Cld2Library.class);
+        cld2Library = Native.load(
+            ("linux/libcld2.so"),
+            Cld2Library.class,
+            new HashMap<String, Object>() {{
+                put(Library.OPTION_FUNCTION_MAPPER, Cld2Library.NAME_MAPPER);
+            }}
+        );
+
+        LOG.info("Loaded: {}", cld2Library);
 //        cld2Library = Native.load("libcld2", Cld2Library.class);
     }
 
@@ -66,8 +75,18 @@ public class Cld2Wrapper
         cld2Result.setEncoding_hint(Cld2Encoding.getValueFromString(settings.getEncodingHint()));
 
         try {
-            int result = cld2Library.DetectLanguageSummaryWithHints(inputBytes, inputBytes.length, true, cld2Result.getTld_hint(),
-                                                                    cld2Result.getEncoding_hint(), cld2Result.getLanguage_hint(), cld2Result.getLanguage3(), cld2Result.getPercent3(), cld2Result.getTextBytes(), cld2Result.isReliable());
+            int result = cld2Library.DetectLanguageSummaryWithHints(
+                    inputBytes,
+                    inputBytes.length,
+                    true,
+                    cld2Result.getTld_hint(),
+                    cld2Result.getEncoding_hint(),
+                    cld2Result.getLanguage_hint(),
+                    cld2Result.getLanguage3(),
+                    cld2Result.getPercent3(),
+                    cld2Result.getTextBytes(),
+                    cld2Result.isReliable()
+                );
 
             if (result == Cld2Language.UNKNOWN_LANGUAGE && !cld2Result.isReliable()[0]) {
                 cld2Result.setValid(false);
@@ -75,8 +94,10 @@ public class Cld2Wrapper
 
             cld2Result.setLanguageCodes(getLanguageCodes(cld2Result.getLanguage3()));
             cld2Result.setLanguageNames(getLanguageNames(cld2Result.getLanguage3()));
+            LOG.info("Detected language; {}", cld2Result);
             return cld2Result;
         } catch (Throwable e) {
+            LOG.error("Error detecting language", e);
             throw new LanguageDetectorException("Language detection failed.\n", e);
         }
     }
