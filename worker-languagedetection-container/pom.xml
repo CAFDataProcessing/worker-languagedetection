@@ -119,7 +119,7 @@
                                     <artifactId>cld2</artifactId>
                                     <version>${project.version}</version>
                                     <type>so</type>
-                                    <classifier>native</classifier> <!-- Match the producer's classifier -->
+                                    <classifier>native</classifier>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${project.build.directory}/cld2native/linux</outputDirectory>
                                     <destFileName>libcld2.so</destFileName>
