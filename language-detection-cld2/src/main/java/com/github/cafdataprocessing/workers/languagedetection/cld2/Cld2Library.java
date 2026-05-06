@@ -25,7 +25,7 @@ import com.sun.jna.Pointer;
 public interface Cld2Library extends Library
 {
     final static FunctionMapper NAME_MAPPER = (library, method) -> {
-        if (method.getName().equals("ExtDetectLanguageSummary")) {
+        if (method.getName().equals("DetectLanguageSummaryWithHints")) {
             return "_ZN4CLD224ExtDetectLanguageSummaryEPKcibPKNS_8CLDHintsEiPNS_8LanguageEPiPdPSt6vectorINS_11ResultChunkESaISA_EES7_Pb";
         }
         return method.getName();
@@ -48,7 +48,7 @@ public interface Cld2Library extends Library
      *
      * @return Integer value corresponding to the top detected language in the CLD2 Language enum (see Cld2Language)
      */
-    int ExtDetectLanguageSummary(
+    int DetectLanguageSummaryWithHints(
         byte[] buffer,           // Arg 1: char*
         int buffer_length,       // Arg 2: int
         byte is_plain_text,      // Arg 3: bool (use byte to match C++ 1-byte bool)

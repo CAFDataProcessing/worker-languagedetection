@@ -89,7 +89,7 @@ public class Cld2Wrapper
             }
 
             // Ensure the buffer is null-terminated for CLD2 (C string requirement)
-            byte[] nullTerminatedInput = new byte[inputBytes.length + 1];
+            final byte[] nullTerminatedInput = new byte[inputBytes.length + 1];
             System.arraycopy(inputBytes, 0, nullTerminatedInput, 0, inputBytes.length);
             nullTerminatedInput[inputBytes.length] = 0;
 
@@ -102,7 +102,7 @@ public class Cld2Wrapper
 
             byte[] isReliableBytes = new byte[1];
 
-            int result = cld2Library.ExtDetectLanguageSummary(
+            int result = cld2Library.DetectLanguageSummaryWithHints(
                 nullTerminatedInput,
                 inputBytes.length,
                 (byte) 1,
