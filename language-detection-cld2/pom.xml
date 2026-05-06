@@ -49,7 +49,7 @@
                         <artifactId>cld2</artifactId>
                         <version>${project.version}</version>
                         <type>so</type>
-                        <classifier>native</classifier> <!-- Match the producer's classifier -->
+                        <classifier>native</classifier>
                         <overWrite>true</overWrite>
                         <outputDirectory>${project.build.directory}/cld2native/linux</outputDirectory>
                         <destFileName>libcld2.so</destFileName>
@@ -122,6 +122,11 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

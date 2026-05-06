@@ -80,4 +80,17 @@ public class LanguageDetectorResult
     {
         isReliable = reliable;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append("LanguageDetectorResult [languageDetectorStatus=");
+        builder.append(languageDetectorStatus);
+        builder.append(", languages=");
+        builder.append(languages);
+        builder.append(", isReliable=");
+        builder.append(isReliable);
+        builder.append("]");
+        return builder.toString();
+    }
 }

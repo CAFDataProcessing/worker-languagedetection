@@ -78,6 +78,11 @@ public class Cld2Result
     private int[] percent3;
 
     /**
+     * array for the normalized scores of the top 3 languages
+     */
+    private double[] normalizedScore3;
+
+    /**
      * output number of non-tag/letters-only text found
      */
     private int[] textBytes;
@@ -132,6 +137,7 @@ public class Cld2Result
         this.flags = 0;
         language3 = new int[]{Cld2Language.UNKNOWN_LANGUAGE, Cld2Language.UNKNOWN_LANGUAGE, Cld2Language.UNKNOWN_LANGUAGE};
         percent3 = new int[3];
+        normalizedScore3 = new double[3];
         textBytes = new int[1];
         isReliable = new boolean[1];
         tld_hint = null;
@@ -210,6 +216,11 @@ public class Cld2Result
     public void setPercent3(int[] percent3)
     {
         this.percent3 = percent3;
+    }
+
+    public double[] getNormalizedScores3()
+    {
+        return normalizedScore3;
     }
 
     public int[] getTextBytes()
@@ -293,6 +304,8 @@ public class Cld2Result
         builder.append(Arrays.toString(language3));
         builder.append(", percent3=");
         builder.append(Arrays.toString(percent3));
+        builder.append(", normalizedScore3=");
+        builder.append(Arrays.toString(normalizedScore3));
         builder.append(", textBytes=");
         builder.append(Arrays.toString(textBytes));
         builder.append(", isReliable=");

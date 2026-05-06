@@ -31,27 +31,30 @@
         <version>6.1.5-SNAPSHOT</version>
     </parent>
 
+    <properties>
+        <cld2.commit>b56fa78a2fe44ac2851bae5bf4f4693a0644da7b</cld2.commit>
+    </properties>
+
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-scm-plugin</artifactId>
-                <version>2.2.1</version>
+                <groupId>io.github.download-maven-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>checkout-cld2-source</id>
+                        <id>download-cld2-source</id>
                         <phase>generate-sources</phase>
                         <goals>
-                            <goal>checkout</goal>
+                            <goal>wget</goal>
                         </goals>
-                        <configuration>
-                            <connectionUrl>scm:git:https://github.com/CLD2Owners/cld2</connectionUrl>
-                            <scmVersion>b56fa78a2fe44ac2851bae5bf4f4693a0644da7b</scmVersion> <!--last commit on cld2 master branch-->
-                            <scmVersionType>revision</scmVersionType>
-                            <checkoutDirectory>${project.build.directory}/external-source</checkoutDirectory>
-                        </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <url>https://github.com/CLD2Owners/cld2/archive/${cld2.commit}.zip</url>
+                    <unpack>true</unpack>
+                    <outputDirectory>${project.build.directory}/external-source</outputDirectory>
+                    <outputFileName>cld2.zip</outputFileName>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -59,50 +62,36 @@
                 <executions>
                     <execution>
                         <id>compile-cld2-native</id>
-                        <phase>package</phase> <!-- Binds to the standard package phase -->
+                        <phase>package</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>g++</executable>
-                            <!-- Ensure this points to where the .cc files are -->
-                            <workingDirectory>${project.build.directory}/external-source/internal</workingDirectory>
+                            <executable>bash</executable>
+                            <workingDirectory>${project.build.directory}/external-source/cld2-${cld2.commit}/internal</workingDirectory>
                             <arguments>
-                              <argument>-O2</argument>
-                              <argument>-fPIC</argument>
-                              <argument>-shared</argument>
-                              <!-- CRITICAL: Fixes the 'narrowing' errors on modern compilers -->
-                              <argument>-Wno-narrowing</argument>
-                              <argument>cldutil.cc</argument>
-                              <argument>cldutil_shared.cc</argument>
-                              <argument>compact_lang_det.cc</argument>
-                              <argument>compact_lang_det_hint_code.cc</argument>
-                              <argument>compact_lang_det_impl.cc</argument>
-                              <argument>debug.cc</argument>
-                              <argument>fixunicodevalue.cc</argument>
-                              <argument>generated_entities.cc</argument>
-                              <argument>generated_language.cc</argument>
-                              <argument>generated_ulscript.cc</argument>
-                              <argument>getonescriptspan.cc</argument>
-                              <argument>lang_script.cc</argument>
-                              <argument>offsetmap.cc</argument>
-                              <argument>scoreonescriptspan.cc</argument>
-                              <argument>tote.cc</argument>
-                              <argument>utf8statetable.cc</argument>
-                              <argument>cld_generated_cjk_uni_prop_80.cc</argument>
-                              <argument>cld2_generated_cjk_compatible.cc</argument>
-                              <argument>cld_generated_cjk_delta_bi_4.cc</argument>
-                              <argument>generated_distinct_bi_0.cc</argument>
-                              <argument>cld2_generated_quadchrome_2.cc</argument>
-                              <argument>cld2_generated_deltaoctachrome.cc</argument>
-                              <argument>cld2_generated_distinctoctachrome.cc</argument>
-                              <argument>cld_generated_score_quad_octa_2.cc</argument>
-                              <!-- Output file at the root of the build directory -->
-                              <argument>-o</argument>
-                              <argument>${project.build.directory}/libcld2.so</argument>
+                                <argument>-c</argument>
+                                <argument>./compile_libs.sh &amp;&amp; mv ./libcld2.so ${project.build.directory}</argument>
                             </arguments>
+                            <environmentVariables>
+                                <CFLAGS>-O2 -Wno-narrowing</CFLAGS>
+                            </environmentVariables>
                         </configuration>
                     </execution>
+                    <!--<execution>
+                        <id>move-cld2-native</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>bash</executable>
+                            <arguments>
+                                <argument>-c</argument>
+                                <argument>mv ${project.build.directory}/external-source/cld2-${cld2.commit}/internal/libcld2.so ${project.build.directory}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>-->
                 </executions>
             </plugin>
             <plugin>
