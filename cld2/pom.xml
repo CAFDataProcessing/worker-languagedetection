@@ -74,7 +74,7 @@
                                 <argument>./compile_libs.sh &amp;&amp; mv ./libcld2.so ${project.build.directory}</argument>
                             </arguments>
                             <environmentVariables>
-                                <CFLAGS>-O2 -Wno-narrowing</CFLAGS>
+                                <CFLAGS>-O3 -Wno-narrowing</CFLAGS>
                             </environmentVariables>
                         </configuration>
                     </execution>
