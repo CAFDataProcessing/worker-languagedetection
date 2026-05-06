@@ -78,20 +78,6 @@
                             </environmentVariables>
                         </configuration>
                     </execution>
-                    <!--<execution>
-                        <id>move-cld2-native</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>bash</executable>
-                            <arguments>
-                                <argument>-c</argument>
-                                <argument>mv ${project.build.directory}/external-source/cld2-${cld2.commit}/internal/libcld2.so ${project.build.directory}</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>-->
                 </executions>
             </plugin>
             <plugin>
