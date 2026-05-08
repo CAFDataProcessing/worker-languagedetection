@@ -54,6 +54,7 @@
                     <unpack>true</unpack>
                     <outputDirectory>${project.build.directory}/external-source</outputDirectory>
                     <outputFileName>cld2.zip</outputFileName>
+                    <sha256>6d8681eadbb64d8fcd3c6c620e81bed16d99ff75627324d66ee2d54bf2b7d749</sha256>
                 </configuration>
             </plugin>
             <plugin>
