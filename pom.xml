@@ -61,7 +61,6 @@
         <dockerHubOrganization>cafdataprocessing</dockerHubOrganization>
         <dockerCafDataProcessingOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafDataProcessingOrg>
         <dockerProjectVersion>${dockerVersionSeperator}${project.version}</dockerProjectVersion>
-        <projectDockerRegistry>worker-languagedetection-${project.version}.project-registries.local</projectDockerRegistry>
     </properties>
 
     <dependencyManagement>
@@ -967,12 +966,12 @@
                 <plugin>
                     <groupId>com.github.cafapi.plugins.docker.versions</groupId>
                     <artifactId>docker-versions-maven-plugin</artifactId>
-                    <version>1.0.0-29</version>
+                    <version>2.0.1-64</version>
                 </plugin>
                 <plugin>
                     <groupId>io.fabric8</groupId>
                     <artifactId>docker-maven-plugin</artifactId>
-                    <version>0.45.1</version>
+                    <version>0.48.1</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -982,11 +981,12 @@
                 <artifactId>docker-versions-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
+                    <projectDockerRegistry>worker-languagedetection-${project.version}.project-registries.local</projectDockerRegistry>
                     <imageManagement>
                         <image>
                             <repository>${dockerHubPublic}/cafapi/oraclelinux-jre21</repository>
-                            <tag>2.1.9</tag>
-                            <digest>sha256:ad5e46626902502ae5e49ea5d39d81afeba7ba89939defde804c64c40163cff3</digest>
+                            <tag>2.2.0</tag>
+                            <digest>sha256:01f90619bf1b4b578fe6364a248da7fa87f1fda343b11ab4bd7686990a5bb892</digest>
                         </image>
                         <image>
                             <repository>${dockerHubPublic}/cloudesire/webdav</repository>
