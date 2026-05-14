@@ -17,8 +17,14 @@ package com.github.cafdataprocessing.workers.languagedetection.cld2;
 
 import com.github.cafdataprocessing.workers.languagedetection.LanguageDetectorException;
 import com.github.cafdataprocessing.workers.languagedetection.LanguageDetectorSettings;
+import com.sun.jna.Library;
 import com.sun.jna.Native;
-import com.sun.jna.Platform;
+import java.nio.ByteBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.CharsetDecoder;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +38,7 @@ public class Cld2Wrapper
     /**
      * JNA interface access class
      */
-    private Cld2Library cld2Library;
+    private Cld2Library.CppInterface cld2Library;
 
     /**
      * Using JNA to load the libcld2 library and use the cld2Library object as an access point
@@ -41,10 +47,17 @@ public class Cld2Wrapper
     {
         System.setProperty("jna.library.path", System.getProperty("cld2.location", System.getenv("cld2.location")));
 
-        LOG.debug("Library location: " + System.getProperty("jna.library.path"));
+        LOG.debug("Library location: {}", System.getProperty("jna.library.path"));
 
-        cld2Library = Native.load((Platform.isWindows() ? "win64/libcld2.dll" : "linux/libcld2.so"), Cld2Library.class);
-//        cld2Library = Native.load("libcld2", Cld2Library.class);
+        cld2Library = Native.load(
+            ("linux/libcld2.so"),
+            Cld2Library.CppInterface.class,
+            new HashMap<String, Object>() {{
+                put(Library.OPTION_FUNCTION_MAPPER, Cld2Library.NAME_MAPPER);
+            }}
+        );
+
+        LOG.debug("Loaded: {}", cld2Library);
     }
 
     /**
@@ -55,7 +68,8 @@ public class Cld2Wrapper
      * @return Cld2Result - Contains the languages and is handled by the Cld2 class to produce a LanguageDetectorResult
      * @throws LanguageDetectorException - Attempt to detect the language has been unsuccessful, causes LanguageDetectorException
      */
-    public Cld2Result detectLanguageSummaryWithHints(byte[] inputBytes, LanguageDetectorSettings settings) throws LanguageDetectorException
+    public Cld2Result detectLanguageSummaryWithHints(byte[] inputBytes, LanguageDetectorSettings settings)
+        throws LanguageDetectorException
     {
         Cld2Result cld2Result = new Cld2Result();
 
@@ -66,17 +80,50 @@ public class Cld2Wrapper
         cld2Result.setEncoding_hint(Cld2Encoding.getValueFromString(settings.getEncodingHint()));
 
         try {
-            int result = cld2Library.DetectLanguageSummaryWithHints(inputBytes, inputBytes.length, true, cld2Result.getTld_hint(),
-                                                                    cld2Result.getEncoding_hint(), cld2Result.getLanguage_hint(), cld2Result.getLanguage3(), cld2Result.getPercent3(), cld2Result.getTextBytes(), cld2Result.isReliable());
+            // Validate that input is valid UTF-8 - CLD2 will crash on non-UTF-8 input
+            if (!isValidUtf8(inputBytes)) {
+                LOG.warn("Input is not valid UTF-8, cannot detect language");
+                cld2Result.setValid(false);
+                cld2Result.setLanguageCodes(new String[]{"un", "un", "un"});
+                cld2Result.setLanguageNames(new String[]{"Unknown", "Unknown", "Unknown"});
+                return cld2Result;
+            }
 
-            if (result == Cld2Language.UNKNOWN_LANGUAGE && !cld2Result.isReliable()[0]) {
+            // Prepare the hints object
+            final CLDHints hints = new CLDHints();
+            hints.tld_hint = cld2Result.getTld_hint();
+            hints.content_language_hint = null;
+            hints.encoding_hint = cld2Result.getEncoding_hint();
+            hints.language_hint = cld2Result.getLanguage_hint();
+
+            byte[] isReliableBytes = new byte[1];
+
+            int result = cld2Library.DetectLanguageSummaryWithHints(
+                inputBytes,
+                inputBytes.length,
+                (byte) 1,
+                hints,
+                0,
+                cld2Result.getLanguage3(),
+                cld2Result.getPercent3(),
+                cld2Result.getNormalizedScores3(),
+                null,
+                cld2Result.getTextBytes(),
+                isReliableBytes);
+
+            final boolean finalIsReliable = isReliableBytes[0] != 0;
+            cld2Result.isReliable()[0] = finalIsReliable;
+
+            if (result == Cld2Language.UNKNOWN_LANGUAGE && !finalIsReliable) {
                 cld2Result.setValid(false);
             }
 
             cld2Result.setLanguageCodes(getLanguageCodes(cld2Result.getLanguage3()));
             cld2Result.setLanguageNames(getLanguageNames(cld2Result.getLanguage3()));
+            LOG.debug("Detected language: {}", cld2Result);
             return cld2Result;
         } catch (Throwable e) {
+            LOG.error("Error detecting language", e);
             throw new LanguageDetectorException("Language detection failed.\n", e);
         }
     }
@@ -110,5 +157,21 @@ public class Cld2Wrapper
             names[i] = cld2Library._ZN4CLD212LanguageNameENS_8LanguageE(lang3[i]);
         }
         return names;
+    }
+
+    /**
+     * Validate that the input bytes are valid UTF-8.
+     *
+     * @param inputBytes the input byte array
+     * @return true if the input is valid UTF-8, false otherwise
+     */
+    private boolean isValidUtf8(final byte[] inputBytes) {
+        final CharsetDecoder utf8Decoder = StandardCharsets.UTF_8.newDecoder();
+        try {
+            utf8Decoder.decode(ByteBuffer.wrap(inputBytes));
+            return true;
+        } catch (final CharacterCodingException e) {
+            return false;
+        }
     }
 }

@@ -27,11 +27,38 @@
     <parent>
         <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
         <artifactId>worker-languagedetection-aggregator</artifactId>
-        <version>6.1.5-SNAPSHOT</version>
+        <version>7.0.0-SNAPSHOT</version>
     </parent>
 
     <build>
         <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-dependency-plugin</artifactId>
+              <executions>
+                <execution>
+                  <id>copy-cld2-library</id>
+                  <phase>process-test-resources</phase>
+                  <goals>
+                    <goal>copy</goal>
+                  </goals>
+                  <configuration>
+                    <artifactItems>
+                      <artifactItem>
+                        <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
+                        <artifactId>cld2</artifactId>
+                        <version>${project.version}</version>
+                        <type>so</type>
+                        <classifier>linux64</classifier>
+                        <overWrite>true</overWrite>
+                        <outputDirectory>${project.build.directory}/cld2native/linux</outputDirectory>
+                        <destFileName>libcld2.so</destFileName>
+                      </artifactItem>
+                    </artifactItems>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -45,7 +72,7 @@
                 </executions>
                 <configuration>
                     <systemPropertyVariables>
-                        <cld2.location>${project.basedir}/cld2native</cld2.location>
+                        <cld2.location>${project.build.directory}/cld2native</cld2.location>
                     </systemPropertyVariables>
                 </configuration>
             </plugin>
@@ -95,6 +122,11 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

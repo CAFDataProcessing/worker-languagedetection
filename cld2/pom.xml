@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright 2015-2026 Open Text.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>cld2</artifactId>
+    <name>cld2</name>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
+        <artifactId>worker-languagedetection-aggregator</artifactId>
+        <version>7.0.0-SNAPSHOT</version>
+    </parent>
+
+    <properties>
+        <cld2.commit>b56fa78a2fe44ac2851bae5bf4f4693a0644da7b</cld2.commit>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.github.download-maven-plugin</groupId>
+                <artifactId>download-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>download-cld2-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>wget</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <url>https://github.com/CLD2Owners/cld2/archive/${cld2.commit}.zip</url>
+                    <unpack>true</unpack>
+                    <outputDirectory>${project.build.directory}/external-source</outputDirectory>
+                    <sha256>6d8681eadbb64d8fcd3c6c620e81bed16d99ff75627324d66ee2d54bf2b7d749</sha256>
+                    <alwaysVerifyChecksum>true</alwaysVerifyChecksum>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>compile-cld2-native</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <workingDirectory>${project.build.directory}/external-source/cld2-${cld2.commit}/internal</workingDirectory>
+                            <executable>bash</executable>
+                            <arguments>
+                                <argument>-c</argument>
+                                <argument>./compile_libs.sh &amp;&amp; mv ./libcld2.so ${project.build.directory}</argument>
+                            </arguments>
+                            <environmentVariables>
+                                <CFLAGS>-O3 -Wno-narrowing</CFLAGS>
+                            </environmentVariables>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-cld2-native-binary</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>${project.build.directory}/libcld2.so</file>
+                                    <type>so</type>
+                                    <classifier>linux64</classifier>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
