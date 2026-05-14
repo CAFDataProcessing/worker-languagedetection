@@ -1,2 +1,2 @@
 DISABLE_AUTOTAGGING=true
-SEPG_BUILD_ENV_IMAGE=cafapi/prereleases:buildenv-cpp-9.0.0-SNAPSHOT
+SEPG_BUILD_ENV_IMAGE=cafapi/buildenv-cpp:9.0.0
