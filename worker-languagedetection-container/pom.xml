@@ -119,7 +119,7 @@
                                     <artifactId>cld2</artifactId>
                                     <version>${project.version}</version>
                                     <type>so</type>
-                                    <classifier>native</classifier>
+                                    <classifier>linux64</classifier>
                                     <overWrite>true</overWrite>
                                     <outputDirectory>${project.build.directory}/cld2native/linux</outputDirectory>
                                     <destFileName>libcld2.so</destFileName>
@@ -129,6 +129,7 @@
                     </execution>
                 </executions>
             </plugin>
+
             <!-- Process the local configuration files -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

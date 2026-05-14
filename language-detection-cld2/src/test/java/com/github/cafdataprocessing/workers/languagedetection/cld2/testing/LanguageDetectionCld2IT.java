@@ -29,10 +29,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import org.junit.jupiter.api.TestInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -58,6 +58,7 @@ public class LanguageDetectionCld2IT
     /**
      * Set up the provider and detector
      *
+     * @param testInfo provides test information
      * @throws LanguageDetectorException
      */
     @BeforeEach
@@ -222,12 +223,12 @@ public class LanguageDetectionCld2IT
             """;
         final byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
 
-        final LanguageDetectorResult result = detector.detectLanguage(bytes, new LanguageDetectorSettings(false));
+        final LanguageDetectorResult langResult = detector.detectLanguage(bytes, new LanguageDetectorSettings(false));
 
-        assertNotNull(result);
-        assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
-        assertTrue(result.isReliable());
-        final DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
+        assertNotNull(langResult);
+        assertEquals(LanguageDetectorStatus.COMPLETED, langResult.getLanguageDetectorStatus());
+        assertTrue(langResult.isReliable());
+        final DetectedLanguage[] arr = langResult.getLanguages().toArray(new DetectedLanguage[1]);
         assertEquals("az", arr[0].getLanguageCode());
         assertEquals("AZERBAIJANI", arr[0].getLanguageName());
     }
@@ -240,12 +241,12 @@ public class LanguageDetectionCld2IT
             """;
         final byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
 
-        final LanguageDetectorResult result = detector.detectLanguage(bytes, new LanguageDetectorSettings(false));
+        final LanguageDetectorResult langResult = detector.detectLanguage(bytes, new LanguageDetectorSettings(false));
 
-        assertNotNull(result);
-        assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
-        assertTrue(result.isReliable());
-        final DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
+        assertNotNull(langResult);
+        assertEquals(LanguageDetectorStatus.COMPLETED, langResult.getLanguageDetectorStatus());
+        assertTrue(langResult.isReliable());
+        final DetectedLanguage[] arr = langResult.getLanguages().toArray(new DetectedLanguage[1]);
         assertEquals("az", arr[0].getLanguageCode());
         assertEquals("AZERBAIJANI", arr[0].getLanguageName());
     }
@@ -258,12 +259,12 @@ public class LanguageDetectionCld2IT
             """;
         final byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
 
-        final LanguageDetectorResult result = detector.detectLanguage(bytes, new LanguageDetectorSettings(false));
+        final LanguageDetectorResult langResult = detector.detectLanguage(bytes, new LanguageDetectorSettings(false));
 
-        assertNotNull(result);
-        assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
-        assertTrue(result.isReliable());
-        final DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
+        assertNotNull(langResult);
+        assertEquals(LanguageDetectorStatus.COMPLETED, langResult.getLanguageDetectorStatus());
+        assertTrue(langResult.isReliable());
+        final DetectedLanguage[] arr = langResult.getLanguages().toArray(new DetectedLanguage[1]);
         assertEquals("tr", arr[0].getLanguageCode());
         assertEquals("TURKISH", arr[0].getLanguageName());
     }
@@ -294,12 +295,12 @@ public class LanguageDetectionCld2IT
             """;
         final byte[] bytes = text.getBytes(StandardCharsets.UTF_8);
 
-        final LanguageDetectorResult result = detector.detectLanguage(bytes, new LanguageDetectorSettings(false));
+        final LanguageDetectorResult langResult = detector.detectLanguage(bytes, new LanguageDetectorSettings(false));
 
-        assertNotNull(result);
-        assertEquals(LanguageDetectorStatus.COMPLETED, result.getLanguageDetectorStatus());
-        assertTrue(result.isReliable());
-        final DetectedLanguage[] arr = result.getLanguages().toArray(new DetectedLanguage[1]);
+        assertNotNull(langResult);
+        assertEquals(LanguageDetectorStatus.COMPLETED, langResult.getLanguageDetectorStatus());
+        assertTrue(langResult.isReliable());
+        final DetectedLanguage[] arr = langResult.getLanguages().toArray(new DetectedLanguage[1]);
         assertEquals("tr", arr[0].getLanguageCode());
         assertEquals("TURKISH", arr[0].getLanguageName());
     }

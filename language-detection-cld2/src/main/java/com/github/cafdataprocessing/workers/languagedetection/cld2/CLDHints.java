@@ -19,18 +19,21 @@ import com.sun.jna.Structure;
 import java.util.Arrays;
 import java.util.List;
 
-public final class CLDHints extends Structure {
+public final class CLDHints extends Structure
+{
     public String content_language_hint;
     public String tld_hint;
     public int encoding_hint;
     public int language_hint;
 
-    public CLDHints() {
+    public CLDHints()
+    {
         super();
     }
 
     @Override
-    protected List<String> getFieldOrder() {
+    protected List<String> getFieldOrder()
+    {
         return Arrays.asList("content_language_hint", "tld_hint", "encoding_hint", "language_hint");
     }
 }

@@ -53,8 +53,8 @@
                     <url>https://github.com/CLD2Owners/cld2/archive/${cld2.commit}.zip</url>
                     <unpack>true</unpack>
                     <outputDirectory>${project.build.directory}/external-source</outputDirectory>
-                    <outputFileName>cld2.zip</outputFileName>
                     <sha256>6d8681eadbb64d8fcd3c6c620e81bed16d99ff75627324d66ee2d54bf2b7d749</sha256>
+                    <alwaysVerifyChecksum>true</alwaysVerifyChecksum>
                 </configuration>
             </plugin>
             <plugin>
@@ -68,8 +68,8 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>bash</executable>
                             <workingDirectory>${project.build.directory}/external-source/cld2-${cld2.commit}/internal</workingDirectory>
+                            <executable>bash</executable>
                             <arguments>
                                 <argument>-c</argument>
                                 <argument>./compile_libs.sh &amp;&amp; mv ./libcld2.so ${project.build.directory}</argument>
@@ -82,26 +82,26 @@
                 </executions>
             </plugin>
             <plugin>
-              <groupId>org.codehaus.mojo</groupId>
-              <artifactId>build-helper-maven-plugin</artifactId>
-              <executions>
-                <execution>
-                  <id>attach-cld2-native-binary</id>
-                  <phase>package</phase>
-                  <goals>
-                    <goal>attach-artifact</goal>
-                  </goals>
-                  <configuration>
-                    <artifacts>
-                      <artifact>
-                        <file>${project.build.directory}/libcld2.so</file>
-                        <type>so</type>
-                        <classifier>native</classifier>
-                      </artifact>
-                    </artifacts>
-                  </configuration>
-                </execution>
-              </executions>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-cld2-native-binary</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <file>${project.build.directory}/libcld2.so</file>
+                                    <type>so</type>
+                                    <classifier>linux64</classifier>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

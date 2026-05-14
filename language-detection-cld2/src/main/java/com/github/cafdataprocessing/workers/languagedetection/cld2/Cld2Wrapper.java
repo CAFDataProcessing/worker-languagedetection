@@ -20,6 +20,7 @@ import com.github.cafdataprocessing.workers.languagedetection.LanguageDetectorSe
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import java.nio.ByteBuffer;
+import java.nio.charset.CharacterCodingException;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
@@ -37,7 +38,7 @@ public class Cld2Wrapper
     /**
      * JNA interface access class
      */
-    private Cld2Library cld2Library;
+    private Cld2Library.CppInterface cld2Library;
 
     /**
      * Using JNA to load the libcld2 library and use the cld2Library object as an access point
@@ -50,7 +51,7 @@ public class Cld2Wrapper
 
         cld2Library = Native.load(
             ("linux/libcld2.so"),
-            Cld2Library.class,
+            Cld2Library.CppInterface.class,
             new HashMap<String, Object>() {{
                 put(Library.OPTION_FUNCTION_MAPPER, Cld2Library.NAME_MAPPER);
             }}
@@ -170,13 +171,11 @@ public class Cld2Wrapper
      * @return true if the input is valid UTF-8, false otherwise
      */
     private boolean isValidUtf8(final byte[] inputBytes) {
-        final CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder();
-        decoder.onMalformedInput(CodingErrorAction.REPORT);
-        decoder.onUnmappableCharacter(CodingErrorAction.REPORT);
+        final CharsetDecoder utf8Decoder = StandardCharsets.UTF_8.newDecoder();
         try {
-            decoder.decode(ByteBuffer.wrap(inputBytes));
+            utf8Decoder.decode(ByteBuffer.wrap(inputBytes));
             return true;
-        } catch (final Exception e) {
+        } catch (final CharacterCodingException e) {
             return false;
         }
     }
