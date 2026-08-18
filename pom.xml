@@ -64,7 +64,7 @@
         <opentelemetry.javaagent.version>2.29.0</opentelemetry.javaagent.version>
         <otel.javaagent.enabled>true</otel.javaagent.enabled>
         <otel.traces.exporter>otlp</otel.traces.exporter>
-        <otel.exporter.otlp.endpoint>http://${docker.host.address}:18889</otel.exporter.otlp.endpoint>
+        <otel.exporter.otlp.endpoint>http://${docker.host.address}:4317</otel.exporter.otlp.endpoint>
         <otel.service.name>worker-languagedetection</otel.service.name>
     </properties>
 
