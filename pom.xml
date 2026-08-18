@@ -61,6 +61,11 @@
         <dockerHubOrganization>cafdataprocessing</dockerHubOrganization>
         <dockerCafDataProcessingOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafDataProcessingOrg>
         <dockerProjectVersion>${dockerVersionSeperator}${project.version}</dockerProjectVersion>
+        <opentelemetry.javaagent.version>2.29.0</opentelemetry.javaagent.version>
+        <otel.javaagent.enabled>true</otel.javaagent.enabled>
+        <otel.traces.exporter>otlp</otel.traces.exporter>
+        <otel.exporter.otlp.endpoint>http://${docker.host.address}:18889</otel.exporter.otlp.endpoint>
+        <otel.service.name>worker-languagedetection</otel.service.name>
     </properties>
 
     <dependencyManagement>
@@ -625,6 +630,11 @@
                 <groupId>net.bytebuddy</groupId>
                 <artifactId>byte-buddy-agent</artifactId>
                 <version>1.18.11-jdk5</version>
+            </dependency>
+            <dependency>
+                <groupId>io.opentelemetry.javaagent</groupId>
+                <artifactId>opentelemetry-javaagent</artifactId>
+                <version>${opentelemetry.javaagent.version}</version>
             </dependency>
             <dependency>
                 <groupId>net.java.dev.jna</groupId>
