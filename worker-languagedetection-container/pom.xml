@@ -421,6 +421,7 @@
                                     <OTEL_SERVICE_NAME>${otel.service.name}</OTEL_SERVICE_NAME>
                                     <OTEL_TRACES_EXPORTER>${otel.traces.exporter}</OTEL_TRACES_EXPORTER>
                                     <OTEL_EXPORTER_OTLP_ENDPOINT>${otel.exporter.otlp.endpoint}</OTEL_EXPORTER_OTLP_ENDPOINT>
+                                    <OTEL_EXPORTER_OTLP_PROTOCOL>grpc</OTEL_EXPORTER_OTLP_PROTOCOL>
                                 </env>
                                 <volumes>
                                     <from>
