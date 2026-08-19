@@ -73,6 +73,24 @@ then
   echo "HEAP_DUMP_ON_OUT_OF_MEMORY_ERROR set: Updated CAF_WORKER_JAVA_OPTS: $CAF_WORKER_JAVA_OPTS"
 fi
 
+OTEL_AGENT_PATH="/maven/otel/opentelemetry-javaagent.jar"
+if [ -z "$OTEL_JAVAAGENT_ENABLED" ]
+then
+  export OTEL_JAVAAGENT_ENABLED=false
+  echo "OTEL_JAVAAGENT_ENABLED was not set - defaulting to false"
+fi
+
+if [ "$OTEL_JAVAAGENT_ENABLED" = "true" ]
+then
+  if [ -f "$OTEL_AGENT_PATH" ]
+  then
+    CAF_WORKER_JAVA_OPTS="${CAF_WORKER_JAVA_OPTS} -javaagent:${OTEL_AGENT_PATH}"
+    echo "OTEL_JAVAAGENT_ENABLED set: Updated CAF_WORKER_JAVA_OPTS: $CAF_WORKER_JAVA_OPTS"
+  else
+    echo "WARNING: OTEL_JAVAAGENT_ENABLED=true but agent not found at ${OTEL_AGENT_PATH}"
+  fi
+fi
+
 cd /maven
 exec java $CAF_WORKER_JAVA_OPTS \
     -Dcld2.location=/maven/cld2native \
