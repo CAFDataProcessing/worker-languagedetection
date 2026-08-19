@@ -74,6 +74,12 @@ then
 fi
 
 OTEL_AGENT_PATH="/maven/otel/opentelemetry-javaagent.jar"
+if [ -z "$OTEL_JAVAAGENT_ENABLED" ]
+then
+  export OTEL_JAVAAGENT_ENABLED=false
+  echo "OTEL_JAVAAGENT_ENABLED was not set - defaulting to false"
+fi
+
 if [ "$OTEL_JAVAAGENT_ENABLED" = "true" ]
 then
   if [ -f "$OTEL_AGENT_PATH" ]
