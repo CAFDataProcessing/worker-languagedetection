@@ -42,12 +42,6 @@ public final class OtelBodyCaptureWorkerApplication extends Application<WorkerCo
     }
 
     @Override
-    protected void bootstrapLogging()
-    {
-        delegate.bootstrapLogging();
-    }
-
-    @Override
     public void run(final WorkerConfiguration workerConfiguration, final Environment environment) throws Exception
     {
         environment.servlets()
