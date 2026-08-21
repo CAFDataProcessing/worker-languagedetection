@@ -58,6 +58,7 @@
 
     <properties>
         <copyrightYear>2026</copyrightYear>
+        <opentelemetry.javaagent.version>2.29.0</opentelemetry.javaagent.version>
         <dockerHubOrganization>cafdataprocessing</dockerHubOrganization>
         <dockerCafDataProcessingOrg>${dockerImagePrefix}${dockerHubOrganization}${dockerOrgSeperator}</dockerCafDataProcessingOrg>
         <dockerProjectVersion>${dockerVersionSeperator}${project.version}</dockerProjectVersion>
@@ -960,6 +961,7 @@
     <modules>
         <module>cld2</module>
         <module>worker-languagedetection</module>
+        <module>worker-languagedetection-otel-extension</module>
         <module>worker-languagedetection-container</module>
         <module>language-detection</module>
         <module>language-detection-cld2</module>
