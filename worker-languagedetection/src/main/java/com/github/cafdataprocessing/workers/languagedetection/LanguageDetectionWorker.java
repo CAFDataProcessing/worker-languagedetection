@@ -23,6 +23,8 @@ import com.github.cafdataprocessing.workers.document.model.Application;
 import com.github.cafdataprocessing.workers.document.model.Document;
 import com.github.cafdataprocessing.workers.document.model.Field;
 import com.github.cafdataprocessing.workers.document.model.HealthMonitor;
+import com.github.workerframework.api.WorkerTaskData;
+import io.opentelemetry.api.trace.Span;
 import com.google.common.base.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +34,7 @@ import static com.github.cafdataprocessing.workers.languagedetection.LanguageDet
 import static com.github.cafdataprocessing.workers.languagedetection.LanguageDetectionUtilities.addDetectedLanguageToDocument;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -43,6 +46,8 @@ import java.util.Locale;
 public final class LanguageDetectionWorker implements DocumentWorker
 {
     private static final Logger LOG = LoggerFactory.getLogger(LanguageDetectionWorker.class);
+    private static final int MAX_MESSAGE_BODY_BYTES = 4096;
+    private static final String RABBITMQ_BODY_ATTRIBUTE = "messaging.rabbitmq.message.body";
 
     private final LanguageDetectionWorkerConfiguration configuration;
     private final LanguageDetector languageDetector;
@@ -95,6 +100,8 @@ public final class LanguageDetectionWorker implements DocumentWorker
     @Override
     public void processDocument(final Document document) throws InterruptedException, DocumentWorkerTransientException
     {
+        captureRabbitMqMessageBody(document);
+
         final LanguageDetectionResultFormat resultFormat;
         try {
             resultFormat = getResultFormatToUse(document);
@@ -157,6 +164,27 @@ public final class LanguageDetectionWorker implements DocumentWorker
             //Thrown in the event that an input stream fails to close in one of the detect methods
             LOG.debug("Failed to close InputStream.");
         }
+    }
+
+    private static void captureRabbitMqMessageBody(final Document document)
+    {
+        final Span currentSpan = Span.current();
+        if (!currentSpan.getSpanContext().isValid()) {
+            return;
+        }
+
+        final WorkerTaskData workerTask = document.getTask().getService(WorkerTaskData.class);
+        if (workerTask == null) {
+            return;
+        }
+
+        final byte[] payloadBytes = workerTask.getData();
+        if (payloadBytes == null || payloadBytes.length == 0) {
+            return;
+        }
+
+        final String payload = new String(payloadBytes, 0, Math.min(payloadBytes.length, MAX_MESSAGE_BODY_BYTES), StandardCharsets.UTF_8);
+        currentSpan.setAttribute(RABBITMQ_BODY_ATTRIBUTE, payload);
     }
 
     private void detectLanguage(final Document document, final String fieldName, final boolean inMultiFieldMode,
