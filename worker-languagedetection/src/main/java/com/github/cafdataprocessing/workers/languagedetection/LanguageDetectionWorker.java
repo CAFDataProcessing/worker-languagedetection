@@ -24,7 +24,9 @@ import com.github.cafdataprocessing.workers.document.model.Document;
 import com.github.cafdataprocessing.workers.document.model.Field;
 import com.github.cafdataprocessing.workers.document.model.HealthMonitor;
 import com.github.workerframework.api.WorkerTaskData;
+import io.opentelemetry.api.GlobalOpenTelemetry;
 import io.opentelemetry.api.trace.Span;
+import io.opentelemetry.api.trace.SpanKind;
 import com.google.common.base.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -168,12 +170,12 @@ public final class LanguageDetectionWorker implements DocumentWorker
 
     private static void captureRabbitMqMessageBody(final Document document)
     {
-        final Span currentSpan = Span.current();
-        if (!currentSpan.getSpanContext().isValid()) {
+        final WorkerTaskData workerTask;
+        if (document.getTask() == null) {
             return;
+        } else {
+            workerTask = document.getTask().getService(WorkerTaskData.class);
         }
-
-        final WorkerTaskData workerTask = document.getTask().getService(WorkerTaskData.class);
         if (workerTask == null) {
             return;
         }
@@ -183,8 +185,25 @@ public final class LanguageDetectionWorker implements DocumentWorker
             return;
         }
 
-        final String payload = new String(payloadBytes, 0, Math.min(payloadBytes.length, MAX_MESSAGE_BODY_BYTES), StandardCharsets.UTF_8);
-        currentSpan.setAttribute(RABBITMQ_BODY_ATTRIBUTE, payload);
+        final String payload = new String(
+            payloadBytes, 0, Math.min(payloadBytes.length, MAX_MESSAGE_BODY_BYTES), StandardCharsets.UTF_8);
+
+        final Span currentSpan = Span.current();
+        if (currentSpan.isRecording()) {
+            // Consumer span is still active on this thread — set directly.
+            currentSpan.setAttribute(RABBITMQ_BODY_ATTRIBUTE, payload);
+        } else if (currentSpan.getSpanContext().isValid()) {
+            // The CAF framework dispatched processDocument() to a thread pool, so the consumer span
+            // is already ended. However, OTel executor instrumentation propagated the trace context
+            // to this thread — create a child span so the body is still linked to the same trace.
+            final Span bodySpan = GlobalOpenTelemetry.getTracer("worker-languagedetection")
+                .spanBuilder("rabbitmq.message.body")
+                .setSpanKind(SpanKind.INTERNAL)
+                .setAttribute(RABBITMQ_BODY_ATTRIBUTE, payload)
+                .startSpan();
+            bodySpan.end();
+        }
+        // If neither: no OTel context on this thread — body capture skipped.
     }
 
     private void detectLanguage(final Document document, final String fieldName, final boolean inMultiFieldMode,
