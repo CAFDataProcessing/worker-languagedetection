@@ -45,6 +45,9 @@ function set_default_crash_dump_file_path_if_not_set() {
 
 set_dropwizard_config_file_location_if_mounted
 
+OTEL_AGENT_PATH="/maven/otel/opentelemetry-javaagent.jar"
+OTEL_EXTENSION_PATH="/maven/otel/worker-languagedetection-otel-extension.jar"
+
 # If the CAF_APPNAME and CAF_CONFIG_PATH environment variables are not set, then use the
 # JavaScript-encoded config files that are built into the container
 if [ -z "$CAF_APPNAME" ] && [ -z "$CAF_CONFIG_PATH" ];
@@ -73,11 +76,24 @@ then
   echo "HEAP_DUMP_ON_OUT_OF_MEMORY_ERROR set: Updated CAF_WORKER_JAVA_OPTS: $CAF_WORKER_JAVA_OPTS"
 fi
 
+if [ "$OTEL_JAVAAGENT_ENABLED" = "true" ]
+then
+  if [ -f "$OTEL_AGENT_PATH" ]
+  then
+    CAF_WORKER_JAVA_OPTS="${CAF_WORKER_JAVA_OPTS} -javaagent:${OTEL_AGENT_PATH}"
+    if [ -f "$OTEL_EXTENSION_PATH" ]
+    then
+      CAF_WORKER_JAVA_OPTS="${CAF_WORKER_JAVA_OPTS} -Dotel.javaagent.extensions=${OTEL_EXTENSION_PATH}"
+    fi
+    echo "OTEL_JAVAAGENT_ENABLED set: Updated CAF_WORKER_JAVA_OPTS: $CAF_WORKER_JAVA_OPTS"
+  fi
+fi
+
 cd /maven
 exec java $CAF_WORKER_JAVA_OPTS \
     -Dcld2.location=/maven/cld2native \
     -Dpolyglot.engine.WarnInterpreterOnly=false \
     -cp "*" \
-    com.github.workerframework.core.WorkerApplication \
+    com.github.workerframework.core.OtelBodyCaptureWorkerApplication \
     server \
     ${dropwizardConfig}
