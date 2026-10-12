@@ -92,6 +92,26 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
+                        <id>copy-otel-javaagent</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>io.opentelemetry.javaagent</groupId>
+                                    <artifactId>opentelemetry-javaagent</artifactId>
+                                    <version>${opentelemetry.javaagent.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/otel</outputDirectory>
+                                    <destFileName>opentelemetry-javaagent.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                    <execution>
                         <id>process-config-files</id>
                         <goals>
                             <goal>unpack</goal>
@@ -333,6 +353,13 @@
                             <name>${dockerCafDataProcessingOrg}worker-languagedetection${dockerProjectVersion}</name>
                             <build>
                                 <from>${projectDockerRegistry}/cafapi/oraclelinux-jre25</from>
+                                <env>
+                                    <OTEL_JAVAAGENT_ENABLED>${otel.javaagent.enabled}</OTEL_JAVAAGENT_ENABLED>
+                                    <OTEL_TRACES_EXPORTER>${otel.traces.exporter}</OTEL_TRACES_EXPORTER>
+                                    <OTEL_EXPORTER_OTLP_ENDPOINT>${otel.exporter.otlp.endpoint}</OTEL_EXPORTER_OTLP_ENDPOINT>
+                                    <OTEL_EXPORTER_OTLP_PROTOCOL>grpc</OTEL_EXPORTER_OTLP_PROTOCOL>
+                                    <OTEL_SERVICE_NAME>${otel.service.name}</OTEL_SERVICE_NAME>
+                                </env>
                                 <!-- The entry point will be the worker.sh executable. -->
                                 <cmd>
                                     <exec>
@@ -359,6 +386,13 @@
                                                 <outputDirectory>cld2native/linux</outputDirectory>
                                                 <includes>
                                                     <include>*.so</include>
+                                                </includes>
+                                            </fileSet>
+                                            <fileSet>
+                                                <directory>${project.build.directory}/otel</directory>
+                                                <outputDirectory>otel</outputDirectory>
+                                                <includes>
+                                                    <include>opentelemetry-javaagent.jar</include>
                                                 </includes>
                                             </fileSet>
                                             <fileSet>
@@ -390,6 +424,11 @@
                                 <env>
                                     <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
                                     <CAF_CONFIG_PATH>/config</CAF_CONFIG_PATH>
+                                    <OTEL_JAVAAGENT_ENABLED>${otel.javaagent.enabled}</OTEL_JAVAAGENT_ENABLED>
+                                    <OTEL_SERVICE_NAME>${otel.service.name}</OTEL_SERVICE_NAME>
+                                    <OTEL_TRACES_EXPORTER>${otel.traces.exporter}</OTEL_TRACES_EXPORTER>
+                                    <OTEL_EXPORTER_OTLP_ENDPOINT>${otel.exporter.otlp.endpoint}</OTEL_EXPORTER_OTLP_ENDPOINT>
+                                    <OTEL_EXPORTER_OTLP_PROTOCOL>grpc</OTEL_EXPORTER_OTLP_PROTOCOL>
                                 </env>
                                 <volumes>
                                     <from>
