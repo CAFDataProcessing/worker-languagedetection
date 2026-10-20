@@ -127,6 +127,34 @@
                             </artifactItems>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>copy-otel-artifacts</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>io.opentelemetry.javaagent</groupId>
+                                    <artifactId>opentelemetry-javaagent</artifactId>
+                                    <version>${opentelemetry.javaagent.version}</version>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/otel</outputDirectory>
+                                    <destFileName>opentelemetry-javaagent.jar</destFileName>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.github.cafdataprocessing.workers.languagedetection</groupId>
+                                    <artifactId>worker-languagedetection-otel-extension</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/otel</outputDirectory>
+                                    <destFileName>worker-languagedetection-otel-extension.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 
@@ -212,7 +240,7 @@
                     <!-- Build the container in compile phase. -->
                     <execution>
                         <id>build-docker-container</id>
-                        <phase>compile</phase>
+                        <phase>package</phase>
                         <goals>
                             <goal>build</goal>
                         </goals>
@@ -362,6 +390,13 @@
                                                 </includes>
                                             </fileSet>
                                             <fileSet>
+                                                <directory>${project.build.directory}/otel</directory>
+                                                <outputDirectory>otel</outputDirectory>
+                                                <includes>
+                                                    <include>*.jar</include>
+                                                </includes>
+                                            </fileSet>
+                                            <fileSet>
                                                 <lineEnding>unix</lineEnding>
                                                 <includes>
                                                     <include>worker.yaml</include>
@@ -390,6 +425,12 @@
                                 <env>
                                     <CAF_APPNAME>test/worker-languagedetection</CAF_APPNAME>
                                     <CAF_CONFIG_PATH>/config</CAF_CONFIG_PATH>
+                                    <OTEL_JAVAAGENT_ENABLED>${otel.javaagent.enabled}</OTEL_JAVAAGENT_ENABLED>
+                                    <OTEL_SERVICE_NAME>${otel.service.name}</OTEL_SERVICE_NAME>
+                                    <OTEL_TRACES_EXPORTER>${otel.traces.exporter}</OTEL_TRACES_EXPORTER>
+                                    <OTEL_EXPORTER_OTLP_ENDPOINT>${otel.exporter.otlp.endpoint}</OTEL_EXPORTER_OTLP_ENDPOINT>
+                                    <OTEL_INSTRUMENTATION_HTTP_SERVER_EMIT_EXPERIMENTAL_TELEMETRY>true</OTEL_INSTRUMENTATION_HTTP_SERVER_EMIT_EXPERIMENTAL_TELEMETRY>
+                                    <OTEL_EXPORTER_OTLP_PROTOCOL>grpc</OTEL_EXPORTER_OTLP_PROTOCOL>
                                 </env>
                                 <volumes>
                                     <from>
